@@ -1,0 +1,11 @@
+<h2>PLAN FIT</h2>
+
+<ul>
+  <li>Acceso a solo la sede de inscripción</li>
+  <li>Acceso sólo a maquinas de Cardio y Musculación</li>
+  <li>No puedes invitar, pausar la suscripción ni asistir a clases colectivas</li>
+  <li>Coste: $23.900 CLP mensual</li>
+</ul>
+
+<h3>Revisa el contrato completo:</h3>
+<p><a href="https://assets.smartfit.com.br/attachments/bd66acd2c2fe52d81917a5d9de0d5ae8c032e4fa/store/b8d7f56e4cbed276649ba9b03885d15c71d3c2d9ae39e3aff86dd04082ba/file.pdf">Haz clic aquí para ver el PDF oficial</a>.</p>

@@ -1,0 +1,11 @@
+<h2>Objetos de Valor</h2>
+
+<ul>
+  <li>No se recomienda traer objetos de valor al gimnasio</li>
+  <li>Los lockers no garantizan seguridad total</li>
+  <li>SmartFit no se hace responsable por pérdidas o robos</li>
+  <li>Usa candado propio y siempre vigila tus pertenencias</li>
+</ul>
+
+<h3>Revisa el contrato completo:</h3>
+<p><a href="https://assets.smartfit.com.br/attachments/d91577e4543669ea4175fae01eca7235dd1ba7ec/store/4de542022ef3886cfb8fe21772bc0b162c51613692aa6bc4ae3bad9b1b0c/file.pdf">Haz clic aquí para ver el PDF oficial</a>.</p>

@@ -1,0 +1,134 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+  padding: 30px;
+}
+
+/* Encabezado */
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #222;
+}
+
+.intro {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: #666;
+}
+
+/* Botones */
+#botones-container {
+  text-align: center;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+#botones-container button {
+  padding: 10px 15px;
+  background-color: #ffb300;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#botones-container button:hover {
+  background-color: #ffa000;
+}
+
+/* Contenido principal */
+#contenido-container {
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 10px;
+  min-height: 200px;
+  margin-bottom: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+#contenido {
+  white-space: pre-wrap;
+  line-height: 15px;
+}
+
+/* Sección de resumen general */
+#resumen-general {
+  margin-top: 40px;
+}
+
+#resumen-general h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Slice */
+
+.card-slider {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: auto;
+}
+
+.card-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  /*width: max-content; /* Asegura que se ajuste al contenido */
+}
+
+.card {
+  flex: 0 0 33.33%;
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 10px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card {
+    min-width: 100%;
+  }
+}
+
+.card .emoji {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

@@ -1,0 +1,12 @@
+<h2>Reglamento SmartFit</h2>
+
+<ul>
+  <li>Uso obligatorio de toalla y ropa deportiva adecuada</li>
+  <li>No se permite entrenar descalzo ni sin camiseta</li>
+  <li>Evita guardar puestos o usar el celular mientras ocupas maquinas</li>
+  <li>El uso correcto del equipo es responsabilidad del usuario</li>
+  <li>Respeta al personal y otros usuarios</li>
+</ul>
+
+<h3>Revisa el reglamento completo:</h3>
+<p><a href="https://assets.smartfit.com.br/attachments/a10ebc1665d795c8f30f1550656e68d487f9e5b8/store/c7347854addee9da88ccfb94d1f618319002e17b319e1a62b67724b0352d/file.pdf">Haz clic aquí para ver el PDF oficial</a>.</p>

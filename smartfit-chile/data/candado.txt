@@ -1,0 +1,11 @@
+<h2>Candado</h2>
+
+<ul>
+  <li>Es obligatorio traer tu propio candado</li>
+  <li>No se prestan candados en el gimnasio</li>
+  <li>Los lockers son de uso diario (no dejar cosas guardadas)</li>
+  <li>Al finalziar la jornada, se cortan candados que sigan puestos</li>
+</ul>
+
+<h3>Revisa el contrato completo:</h3>
+<p><a href="https://assets.smartfit.com.br/attachments/d91577e4543669ea4175fae01eca7235dd1ba7ec/store/4de542022ef3886cfb8fe21772bc0b162c51613692aa6bc4ae3bad9b1b0c/file.pdf">Haz clic aquí para ver el PDF oficial</a>.</p>

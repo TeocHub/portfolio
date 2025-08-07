@@ -1,0 +1,12 @@
+<h2>PLAN SMART</h2>
+
+<ul>
+  <li>Acceso a solo la sede de inscripción</li>
+  <li>Acceso a equipos, pesas y clases colectivas</li>
+  <li>Puedes cambiarte de sede (pagando la diferencia)</li>
+  <li>No puedes invitar ni pausar la suscripción</li>
+  <li>Coste: $26.900 CLP mensual</li>
+</ul>
+
+<h3>Revisa el contrato completo:</h3>
+<p><a href="https://assets.smartfit.com.br/attachments/d2c7673935b1219b6aa8695e22d18276aec4e8da/store/560bc47002d573968a519594698db69724394a2778cc6f0b7a91f0aa56a6/file.pdf">Haz clic aquí para ver el PDF oficial</a>.</p>

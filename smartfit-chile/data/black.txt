@@ -1,0 +1,12 @@
+<h2>PLAN BLACK</h2>
+
+<ul>
+  <li>Acceso a cualquier sede de Smart Fit en Chile y el extranjero.</li>
+  <li>Puedes invitar a un acompañante 5 veces al mes.</li>
+  <li>Entrenamiento ilimitado con acceso a equipos y clases</li>
+  <li>Hasta 30 días de pausa por año</li>
+  <li>Coste: $34.500 CLP mensual</li>
+</ul>
+
+<h3>Revisa el contrato completo:</h3>
+<p><a href="https://assets.smartfit.com.br/attachments/84cb44e1105fc026ad3868a777cb2c983cad799e/store/1bda7eedd723eff9a8246feac10e153637c23e6ae8a87438da3dc5d03cd9/file.pdf">Haz clic aquí para ver el PDF oficial</a>.</p>

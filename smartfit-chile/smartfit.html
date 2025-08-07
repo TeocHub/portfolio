@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reglamentos SmartFit</title>
+  <link rel="stylesheet" href="smartfit.css">
+</head>
+<body>
+  <header>
+    <h1>Reglamentos y Contratos - SmartFit</h1>
+    <p class="intro">Explora y comprende los principales términos de uso, beneficios, normas y condiciones de los planes SmartFit.</p>
+  </header>
+
+  <!-- Resumen general tipo carrusel -->
+  <section id="resumen-general">
+    <h2>Resumen General de SmartFit</h2>
+    <p class="intro">A continuación se resumen los aspectos clave de cada documento para que conozcas tus derechos, deberes y beneficios.</p>
+
+    <div class="card-slider">
+      <div class="card-track">
+        <div class="card">
+          <div class="emoji">📄</div>
+          <h3>Contrato Black</h3>
+          <p>Compromiso anual con beneficios premium: acceso a múltiples sedes, acompañante gratis, y uso de equipos de masaje. Permanencia de 12 meses obligatoria.</p>
+        </div>
+        <div class="card">
+          <div class="emoji">💼</div>
+          <h3>Plan Smart</h3>
+          <p>Alternativa flexible sin permanencia fija. Acceso al gimnasio según condiciones locales. Ideal para usuarios frecuentes pero sin compromiso largo.</p>
+        </div>
+        <div class="card">
+          <div class="emoji">📱</div>
+          <h3>Plan Fit</h3>
+          <p>Acceso básico a través de la app. Requiere el uso de la plataforma FitApp. Menor costo, sin extras, pero funcional para rutinas simples.</p>
+        </div>
+        <div class="card">
+          <div class="emoji">📜</div>
+          <h3>Reglamento General</h3>
+          <p>Normas de convivencia, higiene, uso de máquinas y conducta. Prohíbe grabar sin permiso y exige respeto a horarios y personal.</p>
+        </div>
+        <div class="card">
+          <div class="emoji">🎒</div>
+          <h3>Objetos Personales</h3>
+          <p>SmartFit no se responsabiliza por pérdidas. Se recomienda no dejar objetos de valor y utilizar lockers con precaución.</p>
+        </div>
+        <div class="card">
+          <div class="emoji">🔒</div>
+          <h3>Uso de Candados</h3>
+          <p>No está permitido dejar candados fuera del horario de atención. Serán removidos sin previo aviso por el personal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Botones para cambiar texto -->
+<section id="botones-container">
+  <button onclick="cargarTexto('data/black')">📄 Contrato Black</button>
+  <button onclick="cargarTexto('data/smart')">💼 Plan Smart</button>
+  <button onclick="cargarTexto('data/fit')">📱 Plan Fit</button>
+  <button onclick="cargarTexto('data/reglamento')">📜 Reglamento General</button>
+  <button onclick="cargarTexto('data/objetos')">🎒 Objetos Personales</button>
+  <button onclick="cargarTexto('data/candado')">🔒 Uso de Candados</button>
+</section>
+
+<!-- Contenido principal -->
+<main id="contenido-container">
+  <div id="contenido">Preciona uno de los botones para ver lo importante de cada sección.</div>
+</main>
+
+  <script src="smartfit.js" defer></script>
+</body>
+</html>
