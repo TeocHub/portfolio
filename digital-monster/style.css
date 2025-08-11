@@ -85,3 +85,29 @@ footer {
     /* Color del footer en un gris claro */
     color: #bbb;
 }
+
+/* Estilos para los enlaces de redes sociales */
+.social-links {
+    display: flex;
+    justify-content: center;
+    /* Añade espacio entre los elementos flexibles */
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.social-links a {
+    /* Eliminamos el padding y otros estilos de botón que no necesitamos para los logos */
+    padding: 0;
+    background-color: transparent;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Estilos para las imágenes SVG dentro de los enlaces */
+.social-links a img {
+    width: 40px; /* Ajusta este valor al tamaño que desees */
+    height: 40px;
+}
+
+.social-links a:hover {
+    transform: scale(1.1); /* Un efecto de zoom al pasar el cursor */
+}
