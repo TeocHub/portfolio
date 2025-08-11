@@ -1,0 +1,206 @@
+/* Estilos Generales */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #dc3545; /* Rojo */
+    --secondary-color: #6c757d;
+    --background-color: #f8f9fa;
+    --line-color: #e9ecef;
+    --text-color: #343a40;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.header {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 3rem 1rem;
+    margin-bottom: 2rem;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Estilos de Sección */
+.section {
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--line-color);
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: center; /* Centramos el título de la sección */
+}
+
+.section-description {
+    font-style: italic;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+    text-align: center; /* Centramos también la descripción para que se vea mejor */
+}
+
+/* Estilos de Tarjeta */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.card {
+    background-color: #fff;
+    padding: 1.5rem;
+    border: 1px solid var(--line-color);
+    border-radius: 12px;
+    flex: 1 1 250px; /* Hacemos las tarjetas más cuadradas */
+    max-width: 300px;
+    aspect-ratio: 1 / 1; /* Mantiene la relación de aspecto 1:1 (cuadrada) */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    color: var(--primary-color);
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    text-align: center; /* Centramos el título de la tarjeta */
+}
+
+.card-description {
+    font-size: 0.9rem;
+    flex-grow: 1;
+}
+
+.card-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: auto;
+}
+
+.card-button:hover {
+    background-color: #c82333; /* Un rojo más oscuro */
+}
+
+/* Estilos para la línea separadora (ya no se usa en el diseño, pero se mantiene la clase para evitar errores) */
+.line {
+    display: none;
+}
+
+/* Estilos para información adicional */
+.additional-info {
+    background-color: #f7e7e9; /* Un fondo rosado suave para la información adicional */
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    border-left: 4px solid var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    /* Se añade flexbox para alinear el contenido */
+    display: flex;
+    flex-direction: column;
+}
+
+.additional-info h4 {
+    color: #c82333;
+    margin-top: 0;
+}
+
+.additional-info ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.additional-info li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.additional-info li::before {
+    content: "•";
+    color: var(--primary-color);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+.additional-info .card-button {
+    align-self: flex-end; /* Alinea el botón a la derecha dentro del contenedor flex */
+    margin-top: 1rem;
+}
+
+/* Estilos para el estado oculto */
+.hidden {
+    display: none;
+}
+
+/* Estilos del resumen/conclusión */
+.conclusion {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #e7f7e9; /* Un fondo verde suave para la conclusión */
+    border-radius: 8px;
+    border-left: 4px solid #8bc34a;
+}
+
+.conclusion p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .card-container {
+        flex-direction: column;
+    }
+
+    .card {
+        max-width: 100%;
+        aspect-ratio: auto;
+        height: auto;
+    }
+}

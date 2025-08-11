@@ -1,12 +1,12 @@
 :root {
-    --primary-color: #007bff;
+    --primary-color: #dc3545; /* Rojo */
     --secondary-color: #6c757d;
     --background-color: #f8f9fa;
     --text-color: #343a40;
     --light-text-color: #fff;
     --border-color: #dee2e6;
     --card-bg-color: #ffffff;
-    --button-bg-color: #0056b3;
+    --button-bg-color: #c82333; /* Rojo más oscuro para el hover */
 }
 
 body {
@@ -138,11 +138,11 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    transition: transform 0.3s ease; /* Asegura la transición */
+    transition: transform 0.3s ease;
 }
 
 .concept-item:hover {
-    transform: translateY(-5px); /* Se ha añadido esta línea para la animación */
+    transform: translateY(-5px);
 }
 
 .concept-item h4 {
