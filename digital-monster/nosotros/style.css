@@ -1,20 +1,83 @@
+/* Importar fuentes de Google Fonts */
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #121212;
-  color: #ffffff;
-  font-family: 'Arial', sans-serif;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    color: #f4f4f4; /* Color de texto claro para fondo oscuro */
+    background-color: #121212; /* Fondo negro oscuro */
 }
 
-.container {
-  max-width: 600px;
-  padding: 20px;
-  border: 2px dashed #fff;
-  border-radius: 10px;
-  background-color: #1e1e1e;
+header {
+    background-color: #1a1a1a; /* Un negro un poco más claro para el header */
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Sombra más oscura */
+}
+
+.logo {
+    width: 150px; /* Ajusta el tamaño de tu logo */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #f4f4f4; /* Color de texto claro para los enlaces */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #b763c8; /* Color morado de tu marca para el hover */
+}
+
+main {
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+section {
+    background-color: #1a1a1a; /* Fondo de las secciones en negro claro */
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.perfil {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.perfil img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #d156d1; /* Un borde morado que hace juego con los títulos */
+}
+
+.perfil-texto {
+    flex: 1;
+}
+
+h1, h2, h3 {
+    color: #d156d1; /* Un color morado brillante para todos los títulos */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Sombra para que destaquen */
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #1a1a1a; /* Fondo del footer en negro claro */
+    color: #f4f4f4;
 }
