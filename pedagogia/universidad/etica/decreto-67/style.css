@@ -39,7 +39,7 @@ body {
 }
 
 .hero-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Roboto', serif;
     font-size: 3rem;
     margin-bottom: 0.5rem;
 }
@@ -50,7 +50,7 @@ body {
 
 /* Títulos de Sección */
 .section-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Roboto', serif;
     font-size: 2.5rem;
     color: var(--primary-color);
     text-align: center;
@@ -77,7 +77,7 @@ body {
 }
 
 .card-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Roboto', serif;
     font-size: 1.5rem;
     color: var(--secondary-color);
     margin-bottom: 1rem;
@@ -143,7 +143,7 @@ body {
     background-color: var(--secondary-color);
     color: #fff;
     cursor: pointer;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Roboto', serif;
     font-size: 1.25rem;
     transition: background-color 0.3s ease;
 }
