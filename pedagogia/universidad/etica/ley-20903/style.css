@@ -1,0 +1,147 @@
+:root {
+    --primary-color: #004d40;
+    --secondary-color: #00796b;
+    --accent-color: #004d40; /* Este es el cambio principal, ahora usa el color solicitado */
+    --background-color: #f0f4f7;
+    --text-color: #333;
+    --card-bg: #fff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: var(--card-bg);
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 1rem auto 0;
+}
+
+main {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+section {
+    background: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 3rem 0;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.card {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    flex: 1 0 45%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.card h3 {
+    color: var(--secondary-color);
+    margin-top: 0;
+}
+
+.toggle-btn {
+    background-color: var(--accent-color);
+    color: var(--card-bg);
+    border: none;
+    padding: 10px 15px;
+    margin-top: auto;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-btn:hover {
+    background-color: #003a2e; /* Se ha cambiado el color de hover a un tono más oscuro de #004d40 */
+}
+
+.hidden-info {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+.conceptos-claves {
+    margin-top: 2.5rem;
+}
+
+.conceptos-claves h3 {
+    color: var(--primary-color);
+    border-left: 4px solid var(--accent-color);
+    padding-left: 10px;
+}
+
+.conceptos-claves ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.conceptos-claves li {
+    background: var(--card-bg);
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    .card-container {
+        flex-direction: column;
+    }
+    .card {
+        flex-basis: auto;
+    }
+}
