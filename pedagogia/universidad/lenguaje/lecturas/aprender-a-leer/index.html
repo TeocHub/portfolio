@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprender a Leer: Capítulo 1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <h1 class="nav-title">Aprender a Leer</h1>
+        </nav>
+    </header>
+    
+    <main class="main-content">
+        <section class="intro-section">
+            <h2 class="section-title">Resumen y Análisis del Capítulo 1</h2>
+            <p class="description">
+                El texto explora la naturaleza de la escritura, su relación con el cerebro y las diferencias entre los sistemas de escritura. También detalla cómo el cerebro se adapta y se especializa para la lectura, destacando conceptos clave como la conciencia fonológica y el reciclaje neuronal.
+            </p>
+        </section>
+
+        <section class="cards-section">
+            <h3 class="section-subtitle">Información Clave</h3>
+            <div class="cards-container">
+                <div class="card">
+                    <h4>Granularidad y Transparencia de la Escritura</h4>
+                    <p>
+                        Los sistemas de escritura se diferencian por la granularidad (el tamaño de las unidades que codifican) y la transparencia (la regularidad de la correspondencia entre grafemas y fonemas). El español es una lengua con alta transparencia, lo que facilita la lectura.
+                    </p>
+                    <button class="toggle-button" onclick="toggleContent('granularidad-info')">Más información</button>
+                    <div id="granularidad-info" class="hidden-content">
+                        <p>La escritura china utiliza un símbolo para palabras enteras (baja granularidad), mientras que la japonesa (hiragana) usa símbolos para sílabas. El español, italiano y francés se basan en fonemas (granularidad pequeña). La transparencia se refiere a la regularidad de la relación entre grafemas y fonemas; el español es muy transparente, a diferencia del francés o inglés.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h4>Reciclaje Neuronal y la Caja de Letras</h4>
+                    <p>
+                        Aprender a leer no es un proceso natural. El cerebro reutiliza o "recicla" una región específica de la corteza visual, originalmente utilizada para reconocer objetos y rostros, para especializarse en el reconocimiento de letras y palabras.
+                    </p>
+                    <button class="toggle-button" onclick="toggleContent('reciclaje-info')">Más información</button>
+                    <div id="reciclaje-info" class="hidden-content">
+                        <p>Esta teoría del reciclaje neuronal explica cómo una parte de la corteza visual se convierte en el "área de la forma visual de las palabras" (también llamada "caja de letras del cerebro"), donde se codifican los conocimientos visuales sobre letras y sus combinaciones. La lectura compite con otras funciones visuales en esta área.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>Conciencia Fonológica</h4>
+                    <p>
+                        Es la habilidad de tomar conciencia de que el lenguaje hablado está compuesto por sonidos elementales (fonemas). Es una competencia fundamental para el aprendizaje de la lectura.
+                    </p>
+                    <button class="toggle-button" onclick="toggleContent('conciencia-info')">Más información</button>
+                    <div id="conciencia-info" class="hidden-content">
+                        <p>El aprendizaje del alfabeto requiere que el niño focalice su atención en los fonemas. Juegos lingüísticos, como rimas y canciones, ayudan a acelerar esta adquisición. La lectura no es algo natural, sino que se aprende a través de un proceso consciente que hace accesibles estas estructuras del lenguaje oral.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="concepts-section">
+            <h3 class="section-subtitle">Conceptos Claves y Definiciones</h3>
+            <div class="concepts-container">
+                <div class="concept-item">
+                    <h4>🗣️ Fonemas</h4>
+                    <p>Las unidades más pequeñas e indivisibles del habla.</p>
+                </div>
+                <div class="concept-item">
+                    <h4>✍️ Grafemas</h4>
+                    <p>Letras o combinaciones de letras que representan los fonemas en el lenguaje escrito. Los dígrafos como "ch", "ll" y "rr" son ejemplos de grafemas complejos en español.</p>
+                </div>
+                <div class="concept-item">
+                    <h4>🧬 Morfemas</h4>
+                    <p>Elementos de sentido dentro de las palabras, como raíces, prefijos y sufijos. El reconocimiento de morfemas ayuda a identificar el significado de las palabras.</p>
+                </div>
+                <div class="concept-item">
+                    <h4>👂 Conciencia Fonológica</h4>
+                    <p>La habilidad de descomponer el habla en sus sonidos elementales. Es fundamental para la decodificación en la lectura.</p>
+                </div>
+                <div class="concept-item">
+                    <h4>🧠 Reciclaje Neuronal</h4>
+                    <p>La teoría que explica cómo el cerebro reutiliza una región de la corteza visual, dedicada a reconocer objetos, para especializarse en la identificación de letras y palabras escritas durante el aprendizaje de la lectura.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="extra-info-section">
+            <h3 class="section-subtitle">Vías de Lectura</h3>
+            <div class="info-item">
+                <h4>Dos Vías para la Decodificación</h4>
+                <p>Todos los buenos lectores usan dos vías para decodificar la escritura: el pasaje de las letras a los sonidos (la ruta fonológica) y el pasaje de la escritura al significado (la ruta morfológica).</p>
+            </div>
+            
+            <h3 class="section-subtitle">El Cerebro antes de la Lectura</h3>
+            <div class="info-item">
+                <h4>Lenguaje Hablado vs. Lectura</h4>
+                <p>El cerebro del bebé ya está organizado para procesar el lenguaje hablado, pero la lectura es una actividad artificial que requiere que el cerebro tome conciencia de las estructuras del lenguaje oral para vincularlas con el código visual de las letras.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
