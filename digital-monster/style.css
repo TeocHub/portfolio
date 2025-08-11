@@ -24,14 +24,14 @@ body {
     margin: 1rem;
 }
 .logo {
-    width: 150px;
-    margin-bottom: 1.5rem;
+    width: 250px;
+    margin-bottom: 0rem;
 }
 h1 {
     font-size: 2.5rem;
     /* Título en color morado */
     color: #8a2be2;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0rem;
 }
 h2 {
     font-size: 1.2rem;
@@ -45,7 +45,7 @@ p {
     /* Párrafos en color blanco */
     color: #fff;
     max-width: 600px;
-    margin: 0 auto 2rem auto;
+    margin: 0 auto 0rem auto;
 }
 .portfolio-links {
     list-style: none;
