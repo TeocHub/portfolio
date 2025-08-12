@@ -111,3 +111,8 @@ footer {
 .social-links a:hover {
     transform: scale(1.1); /* Un efecto de zoom al pasar el cursor */
 }
+
+.a {
+  text-decoration: none;
+  color: #8a2be2; /* O el color que desees */
+}
