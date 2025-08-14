@@ -1,0 +1,12 @@
+{
+  "nombre": "Caleb",
+  "imagen": "caleb_imagen.jpg",
+  "imagen_fondo": "planeta-caleb.png",
+  "descripcion": "**Caleb** es el *protagonista* de Firelights",
+  "tabla_info": {
+    "Primera aparición": "Firelights capítulo 2",
+    "Raza": "Actuatico",
+    "Género": "Masculino",
+    "Pareja": "Asher"
+  }
+}

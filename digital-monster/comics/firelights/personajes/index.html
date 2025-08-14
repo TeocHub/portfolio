@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki de Personajes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main-layout">
+        <div class="personajes-lista-container">
+            <header>
+                <h1>Personajes de Firelights</h1>
+            </header>
+            <nav>
+                <ul id="lista-personajes">
+                    <li><a href="#" data-personaje="Asher">Asher</a></li>
+                    <li><a href="#" data-personaje="Caleb">Caleb</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <main class="personajes-info-container">
+            <p id="mensaje-bienvenida">Haz clic en un personaje para ver su información.</p>
+
+            <div id="contenido-personaje" style="display: none;">
+                <h1 id="nombre-personaje"></h1>
+                <div class="wiki-content">
+                    <div class="infobox-group"> <div class="personaje-imagen-container">
+                            <img id="personaje-imagen" src="" alt="Imagen del personaje">
+                        </div>
+                        <aside class="infobox" id="infobox-container"></aside>
+                    </div>
+                    <section class="main-text">
+                        <p id="descripcion-personaje"></p>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

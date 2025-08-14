@@ -1,0 +1,12 @@
+{
+  "nombre": "Asher",
+  "imagen": "asher_imagen.jpg",
+  "imagen_fondo": "planeta-asher.png",
+  "descripcion": "**Asher** es el *protagonista* de Firelights",
+  "tabla_info": {
+    "Primera aparición": "Firelights capítulo 1",
+    "Raza": "Actuatico",
+    "Género": "Masculino",
+    "Pareja": "Caleb"
+  }
+}
