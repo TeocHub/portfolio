@@ -2,11 +2,13 @@
   "nombre": "Caleb",
   "imagen": "caleb_imagen.jpg",
   "imagen_fondo": "planeta-caleb.png",
-  "descripcion": "**Caleb** es el *protagonista* de Firelights",
+  "descripcion": "**Caleb** es el *protagonista* de Firelights \n\n**Personalidad:** Caleb suele ser protector con las personas que les hes importante, reservado, rencoroso e inseguro",
   "tabla_info": {
-    "Primera aparición": "Firelights capítulo 2",
-    "Raza": "Actuatico",
+    "Edad": "20",
+    "Primera aparición": "Firelights capítulo 1",
+    "Raza": "Minero",
     "Género": "Masculino",
-    "Pareja": "Asher"
+    "Pareja": "Asher",
+    "Ocupación": "Jefe del pueblo minero"
   }
 }

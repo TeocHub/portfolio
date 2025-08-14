@@ -2,11 +2,13 @@
   "nombre": "Asher",
   "imagen": "asher_imagen.jpg",
   "imagen_fondo": "planeta-asher.png",
-  "descripcion": "**Asher** es el *protagonista* de Firelights",
+  "descripcion": "**Asher** es el *protagonista* de Firelights \n\n**Personalidad:** Asher aparenta ser optimista, aunque en el fondo es inseguro. Es diplomático y complaciente",
   "tabla_info": {
+    "Edad": "23",
     "Primera aparición": "Firelights capítulo 1",
     "Raza": "Actuatico",
     "Género": "Masculino",
-    "Pareja": "Caleb"
+    "Pareja": "Caleb",
+    "Ocupación": "Líder de la empresa"
   }
 }
