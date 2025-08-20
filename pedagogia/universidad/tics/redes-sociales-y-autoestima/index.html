@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="/portfolio/pedagogia/universidad/UA.svg" type="image/svg+xml">
     <!-- Chosen Palette: Calm Harmony Neutrals -->
     <!-- Application Structure Plan: Se ha diseñado una SPA de desplazamiento vertical con una estructura temática que guía al usuario desde el problema hasta la solución. Comienza con una introducción (El Espejo Digital) que explica cómo se distorsiona la realidad. Sigue con un dashboard (Impacto en Cifras) para visualizar los datos clave. Luego, explora los efectos psicológicos (Riesgos y Consecuencias) mediante tarjetas interactivas. Finalmente, ofrece soluciones prácticas (Estrategias y Apoyo) en una sección con pestañas para cada audiencia (padres, escuela, apoyo). Esta estructura narrativa es más atractiva y digerible que la de un informe académico, facilitando la comprensión y la retención de la información clave. -->
     <!-- Visualization & Content Choices: Se utilizan tarjetas de estadísticas para datos clave, un gráfico de barras de Chart.js para comparar la salud mental entre usuarios y un gráfico de dona para mostrar los factores de riesgo. Los conceptos psicológicos complejos se presentan en un acordeón interactivo para evitar la sobrecarga de información. Las recomendaciones se organizan en pestañas para una fácil navegación por parte de la audiencia objetivo. Estas elecciones priorizan la claridad, la interactividad y la facilidad de uso, transformando datos densos en una experiencia de aprendizaje visual. -->
@@ -46,6 +45,10 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
+            padding: 0 1rem;
+        }
+        .accordion-content.active {
+            padding: 1rem;
         }
     </style>
 </head>
@@ -177,13 +180,6 @@
         </section>
     </main>
 
-    <footer class="bg-[#5E503F] text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>Esta aplicación interactiva se basa en el informe "La Percepción de la Realidad en Redes Sociales y su Impacto en la Autoestima de Jóvenes Chilenos (12-14 años)".</p>
-            <p class="text-sm mt-2 opacity-75">El objetivo es divulgar conocimiento científico de forma accesible para docentes, apoderados y estudiantes.</p>
-        </div>
-    </footer>
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const data = {
@@ -228,7 +224,7 @@
             const accordionContainer = document.getElementById('accordion-container');
             data.risks.forEach((risk, index) => {
                 const item = document.createElement('div');
-                item.className = 'border border-gray-200 rounded-lg bg-white';
+                item.className = 'border border-gray-200 rounded-lg bg-white overflow-hidden'; // Añadir overflow-hidden
                 item.innerHTML = `
                     <button class="accordion-btn w-full text-left p-4 flex justify-between items-center font-semibold text-[#5E503F] hover:bg-gray-50 transition-colors">
                         <span>${risk.title}</span>
@@ -236,8 +232,8 @@
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </span>
                     </button>
-                    <div class="accordion-content px-4 pb-4 text-gray-600">
-                        <p>${risk.content}</p>
+                    <div class="accordion-content">
+                        <p class="px-4 pb-4 text-gray-600">${risk.content}</p>
                     </div>
                 `;
                 accordionContainer.appendChild(item);
@@ -248,12 +244,15 @@
                 if (button) {
                     const content = button.nextElementSibling;
                     const icon = button.querySelector('span:last-child');
+                    
                     const allContents = accordionContainer.querySelectorAll('.accordion-content');
                     const allIcons = accordionContainer.querySelectorAll('.accordion-btn span:last-child');
 
+                    // Cerrar todos los acordeones abiertos
                     allContents.forEach(c => {
                         if (c !== content) {
                             c.style.maxHeight = null;
+                            c.classList.remove('active');
                         }
                     });
                     allIcons.forEach(i => {
@@ -262,12 +261,11 @@
                         }
                     });
                     
-                    icon.classList.toggle('rotate-180');
-                    if (content.style.maxHeight) {
-                        content.style.maxHeight = null;
-                    } else {
-                        content.style.maxHeight = content.scrollHeight + "px";
-                    }
+                    // Abrir o cerrar el acordeón actual
+                    const isActive = content.style.maxHeight && content.style.maxHeight !== '0px';
+                    icon.classList.toggle('rotate-180', !isActive);
+                    content.classList.toggle('active', !isActive);
+                    content.style.maxHeight = isActive ? null : content.scrollHeight + "px";
                 }
             });
 
