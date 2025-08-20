@@ -1,5 +1,0 @@
-title: Blog
-description: Este es un Test
-author: Tomás
-baseurl: "/portfolio/blog"
-permalink: "/:title.html"
