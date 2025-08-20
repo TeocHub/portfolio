@@ -8,19 +8,15 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="/portfolio/pedagogia/universidad/UA.svg" type="image/svg+xml">
-    <!-- Chosen Palette: Calm Harmony Neutrals -->
-    <!-- Application Structure Plan: Se ha diseñado una SPA de desplazamiento vertical con una estructura temática que guía al usuario desde el problema hasta la solución. Comienza con una introducción (El Espejo Digital) que explica cómo se distorsiona la realidad. Sigue con un dashboard (Impacto en Cifras) para visualizar los datos clave. Luego, explora los efectos psicológicos (Riesgos y Consecuencias) mediante tarjetas interactivas. Finalmente, ofrece soluciones prácticas (Estrategias y Apoyo) en una sección con pestañas para cada audiencia (padres, escuela, apoyo). Esta estructura narrativa es más atractiva y digerible que la de un informe académico, facilitando la comprensión y la retención de la información clave. -->
-    <!-- Visualization & Content Choices: Se utilizan tarjetas de estadísticas para datos clave, un gráfico de barras de Chart.js para comparar la salud mental entre usuarios y un gráfico de dona para mostrar los factores de riesgo. Los conceptos psicológicos complejos se presentan en un acordeón interactivo para evitar la sobrecarga de información. Las recomendaciones se organizan en pestañas para una fácil navegación por parte de la audiencia objetivo. Estas elecciones priorizan la claridad, la interactividad y la facilidad de uso, transformando datos densos en una experiencia de aprendizaje visual. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F8F7F4;
             color: #5E503F;
         }
-        .chart-container {
+        /* Estilo para los contenedores de gráficos, asegurando un tamaño y responsividad adecuados */
+       .chart-container {
             position: relative;
             width: 100%;
             max-width: 600px;
@@ -30,35 +26,48 @@
             max-height: 400px;
         }
         @media (min-width: 768px) {
-            .chart-container {
+           .chart-container {
                 height: 350px;
             }
         }
-        .nav-link.active {
+        /* Estilo para los enlaces de navegación activos */
+       .nav-link.active {
             font-weight: 700;
             color: #D98C7A;
         }
-        .tab-btn.active {
+        /* Estilo para los botones de pestaña activos */
+       .tab-btn.active {
             background-color: #A3B18A;
             color: #F8F7F4;
         }
-        .accordion-content {
+        /* Estilo para el contenido del acordeón, oculto por defecto */
+       .accordion-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
             padding: 0 1rem;
         }
-        .accordion-content.active {
+        /* Estilo para el contenido del acordeón activo */
+       .accordion-content.active {
             padding: 1rem;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased bg-[#F8F7F4]">
 
-    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+    <!-- Encabezado y barra de navegación -->
+    <header class="bg-white/90 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <div class="text-xl font-bold text-[#5E503F]">
-                Autoestima Digital
+            <div class="flex items-center">
+                <div class="text-xl font-bold text-[#5E503F] mr-4">Autoestima Digital</div>
+                <!-- Botón de podcast con estilos visuales mejorados -->
+                <button id="audioToggleButton" class="bg-[#D98C7A] text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-[#C47C6A] transition-colors flex items-center">
+                    <svg id="playIcon" class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                    <svg id="pauseIcon" class="w-5 h-5 mr-2 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                    <span id="audioButtonText">Escuchar Podcast</span>
+                </button>
+                <!-- Archivo de audio con la extensión correcta .m4a -->
+                <audio id="podcastAudio" src="podcast_sobre_autoestima_juvenil.m4a" preload="auto"></audio>
             </div>
             <div class="hidden md:flex space-x-8">
                 <a href="#realidad" class="nav-link text-gray-600 hover:text-[#D98C7A] transition-colors">La Realidad Digital</a>
@@ -70,7 +79,8 @@
     </header>
 
     <main>
-        <section class="py-20 md:py-32 bg-[#EAE7DC]">
+        <!-- Sección de inicio con fondo contrastante -->
+        <section class="py-20 md:py-32 bg-[#F8F7F4]">
             <div class="container mx-auto px-6 text-center">
                 <h1 class="text-4xl md:text-6xl font-bold text-[#5E503F] mb-4">El Reflejo en la Pantalla</h1>
                 <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-700">
@@ -79,7 +89,8 @@
             </div>
         </section>
 
-        <section id="realidad" class="py-16 md:py-24">
+        <!-- Sección 1 con fondo claro -->
+        <section id="realidad" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold text-[#5E503F]">El Espejo Digital: ¿Qué es real?</h2>
@@ -88,14 +99,14 @@
                     </p>
                 </div>
                 <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="bg-white p-8 rounded-lg shadow-md">
-                        <h3 class="text-2xl font-bold text-[#A3B18A] mb-4">Contenido Curado: La "Vida Perfecta"</h3>
+                    <div class="bg-[#F8F7F4] p-8 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-bold text-[#5E503F] mb-4">Contenido Curado: La "Vida Perfecta"</h3>
                         <p class="text-gray-700 leading-relaxed">
                             En redes sociales, se suelen mostrar solo los "mejores momentos": éxitos, viajes y apariencias perfectas. Esta selección oculta el esfuerzo, los fracasos y la normalidad del día a día. A diferencia de la publicidad tradicional, estos estándares son establecidos por pares y amigos, lo que hace que la comparación social sea mucho más personal y directa, generando la sensación de que "la vida de todos es mejor que la mía".
                         </p>
                     </div>
-                    <div class="bg-white p-8 rounded-lg shadow-md">
-                        <h3 class="text-2xl font-bold text-[#A3B18A] mb-4">Algoritmos y Burbujas de Información</h3>
+                    <div class="bg-[#F8F7F4] p-8 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-bold text-[#5E503F] mb-4">Algoritmos y Burbujas de Información</h3>
                         <p class="text-gray-700 leading-relaxed">
                             Los algoritmos personalizan el contenido que vemos basándose en nuestras interacciones previas. Esto crea "burbujas" que nos exponen solo a ideas y contenidos similares a los nuestros, reforzando sesgos y limitando la exposición a la diversidad. Para un adolescente en formación, esto puede distorsionar su percepción del mundo, haciéndolo parecer más simple y polarizado de lo que realmente es, sin que sea consciente de esta manipulación silenciosa.
                         </p>
@@ -104,7 +115,8 @@
             </div>
         </section>
 
-        <section id="impacto" class="py-16 md:py-24 bg-[#EAE7DC]">
+        <!-- Sección 2 con fondo contrastante -->
+        <section id="impacto" class="py-16 md:py-24 bg-[#F8F7F4]">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold text-[#5E503F]">Impacto en Cifras</h2>
@@ -147,7 +159,8 @@
             </div>
         </section>
 
-        <section id="riesgos" class="py-16 md:py-24">
+        <!-- Sección 3 con fondo claro -->
+        <section id="riesgos" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold text-[#5E503F]">Riesgos y Consecuencias Psicológicas</h2>
@@ -160,7 +173,8 @@
             </div>
         </section>
 
-        <section id="estrategias" class="py-16 md:py-24 bg-[#EAE7DC]">
+        <!-- Sección 4 con fondo contrastante -->
+        <section id="estrategias" class="py-16 md:py-24 bg-[#F8F7F4]">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold text-[#5E503F]">Estrategias y Apoyo</h2>
@@ -181,19 +195,38 @@
         </section>
     </main>
 
+    <!-- Pie de página -->
+    <footer class="bg-[#5E503F] text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>Esta aplicación interactiva se basa en el informe "La Percepción de la Realidad en Redes Sociales y su Impacto en la Autoestima de Jóvenes Chilenos (12-14 años)".</p>
+            <p class="text-sm mt-2 opacity-75">El objetivo es divulgar conocimiento científico de forma accesible para docentes, apoderados y estudiantes.</p>
+        </div>
+    </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const data = {
                 risks: [
-                    { title: "Comparación Social y Estándares Irreales", content: "La exposición constante a vidas y apariencias idealizadas genera sentimientos de insuficiencia. Los jóvenes comparan su realidad con la 'versión editada' de otros, lo que resulta en frustración y una autovaloración negativa." },
-                    { title: "Ciberacoso", content: "El acoso en línea, a través de humillaciones, exclusión o amenazas, tiene efectos devastadores. Aumenta el estrés, la ansiedad y la depresión, erosionando directamente la autoestima. Cerca del 20% de los jóvenes reporta haberlo sufrido." },
-                    { title: "Adicción y Validación Externa", content: "El diseño de las redes puede generar dependencia. La búsqueda constante de 'me gusta' y comentarios positivos hace que la autoestima dependa de la validación externa, en lugar de construirse sobre valores y capacidades internas." },
-                    { title: "Miedo a Perderse Algo (FOMO)", content: "El 'Fear of Missing Out' es la ansiedad de sentir que otros viven experiencias más gratificantes. Esta necesidad de estar siempre conectado genera estrés crónico e insatisfacción con la propia vida." },
-                    { title: "Impacto en la Imagen Corporal", content: "La presión por alcanzar ideales de belleza irreales, a menudo retocados digitalmente, es especialmente dañina. Conduce a una alta insatisfacción corporal, que es un pilar de la autoestima, y puede derivar en trastornos alimentarios." }
+                    {
+                        title: "Comparación Social y Estándares Irreales",
+                        content: "La exposición constante a vidas perfectas genera sentimientos de insuficiencia y baja autoestima. Los jóvenes se comparan con estas representaciones idealizadas, lo que a menudo desemboca en sentimientos de inadecuación y frustración con su propia vida."
+                    },
+                    {
+                        title: "Ciberacoso",
+                        content: "Esta forma de intimidación y rechazo social en entornos digitales profundiza la vulnerabilidad emocional de los jóvenes, contribuyendo a la ansiedad, la depresión y una disminución significativa de la autoestima. Se estima que el 20% de los jóvenes ha experimentado ciberacoso."
+                    },
+                    {
+                        title: "Adicción a Redes Sociales",
+                        content: "El uso problemático de las redes sociales puede crear una dependencia psicológica. Esto interfiere con el desarrollo de una identidad positiva, ya que se prioriza la validación externa sobre la autoaceptación, lo que puede llevar a una obsesión constante por el teléfono y los 'me gusta'."
+                    },
+                    {
+                        title: "Miedo a Perderse Algo (FOMO)",
+                        content: "Las redes sociales pueden exacerbar el 'Fear of Missing Out' (FOMO), una ansiedad persistente por perderse experiencias gratificantes que otros están teniendo. Esta necesidad constante de estar conectado genera estrés crónico y una sensación de insatisfacción con la propia vida."
+                    }
                 ],
                 strategies: {
                     padres: `
-                        <h3 class="text-2xl font-bold text-[#A3B18A] mb-4">Rol de Padres y Apoderados</h3>
+                        <h3 class="text-2xl font-bold text-[#5E503F] mb-4">Rol de Padres y Apoderados</h3>
                         <ul class="list-disc list-inside space-y-3 text-gray-700">
                             <li><strong>Mediación Activa:</strong> Acompañar, no solo vigilar. Conversar sobre lo que ven y hacen en línea, fomentando el pensamiento crítico en lugar de solo imponer reglas.</li>
                             <li><strong>Comunicación Abierta:</strong> Crear un ambiente de confianza para que los hijos se sientan cómodos compartiendo experiencias negativas, como el ciberacoso.</li>
@@ -202,7 +235,7 @@
                         </ul>
                     `,
                     escuela: `
-                        <h3 class="text-2xl font-bold text-[#A3B18A] mb-4">Educación y Alfabetización Mediática</h3>
+                        <h3 class="text-2xl font-bold text-[#5E503F] mb-4">Educación y Alfabetización Mediática</h3>
                         <ul class="list-disc list-inside space-y-3 text-gray-700">
                             <li><strong>Fomentar el Pensamiento Crítico:</strong> Enseñar a los estudiantes a analizar la información, diferenciar hechos de opiniones y entender cómo funcionan los algoritmos y la publicidad.</li>
                             <li><strong>Integración Transversal:</strong> La alfabetización digital no debe ser una materia aislada, sino integrarse en distintas asignaturas para abordar sus aspectos sociales y psicológicos.</li>
@@ -211,7 +244,7 @@
                         </ul>
                     `,
                     apoyo: `
-                        <h3 class="text-2xl font-bold text-[#A3B18A] mb-4">Intervenciones y Apoyo Psicológico</h3>
+                        <h3 class="text-2xl font-bold text-[#5E503F] mb-4">Intervenciones y Apoyo Psicológico</h3>
                         <ul class="list-disc list-inside space-y-3 text-gray-700">
                             <li><strong>Identificar Señales de Alerta:</strong> Docentes y padres deben estar atentos a cambios de comportamiento, como aislamiento, irritabilidad, o caída en el rendimiento académico.</li>
                             <li><strong>Validar sus Sentimientos:</strong> No minimizar las experiencias negativas que ocurren en línea. Lo que pasa en el mundo digital tiene un impacto real en sus emociones.</li>
@@ -225,7 +258,7 @@
             const accordionContainer = document.getElementById('accordion-container');
             data.risks.forEach((risk, index) => {
                 const item = document.createElement('div');
-                item.className = 'border border-gray-200 rounded-lg bg-white overflow-hidden'; // Añadir overflow-hidden
+                item.className = 'border border-gray-200 rounded-lg bg-white overflow-hidden';
                 item.innerHTML = `
                     <button class="accordion-btn w-full text-left p-4 flex justify-between items-center font-semibold text-[#5E503F] hover:bg-gray-50 transition-colors">
                         <span>${risk.title}</span>
@@ -249,7 +282,6 @@
                     const allContents = accordionContainer.querySelectorAll('.accordion-content');
                     const allIcons = accordionContainer.querySelectorAll('.accordion-btn span:last-child');
 
-                    // Cerrar todos los acordeones abiertos
                     allContents.forEach(c => {
                         if (c !== content) {
                             c.style.maxHeight = null;
@@ -262,7 +294,6 @@
                         }
                     });
                     
-                    // Abrir o cerrar el acordeón actual
                     const isActive = content.style.maxHeight && content.style.maxHeight !== '0px';
                     icon.classList.toggle('rotate-180', !isActive);
                     content.classList.toggle('active', !isActive);
@@ -330,10 +361,10 @@
             new Chart(usageTimeCtx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Uso > 4h/día (Baja Autoestima)', 'Uso < 2h/día (Alta Autoestima)'],
+                    labels: ['Uso Excesivo (Baja Autoestima)', 'Uso Moderado (Alta Autoestima)'],
                     datasets: [{
                         label: 'Impacto en Autoestima',
-                        data: [50, 50],
+                        data: [60, 40],
                         backgroundColor: ['#D98C7A', '#A3B18A'],
                         hoverOffset: 4
                     }]
@@ -378,8 +409,35 @@
                     }
                 });
             });
+
+            // Lógica para el botón de audio
+            const podcastAudio = document.getElementById('podcastAudio');
+            const audioToggleButton = document.getElementById('audioToggleButton');
+            const playIcon = document.getElementById('playIcon');
+            const pauseIcon = document.getElementById('pauseIcon');
+            const audioButtonText = document.getElementById('audioButtonText');
+
+            audioToggleButton.addEventListener('click', () => {
+                if (podcastAudio.paused) {
+                    podcastAudio.play();
+                    playIcon.classList.add('hidden');
+                    pauseIcon.classList.remove('hidden');
+                    audioButtonText.textContent = 'Pausar Podcast';
+                } else {
+                    podcastAudio.pause();
+                    playIcon.classList.remove('hidden');
+                    pauseIcon.classList.add('hidden');
+                    audioButtonText.textContent = 'Escuchar Podcast';
+                }
+            });
+
+            // Opcional: Reiniciar el estado del botón si el audio termina
+            podcastAudio.addEventListener('ended', () => {
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                audioButtonText.textContent = 'Escuchar Podcast';
+            });
         });
     </script>
-
 </body>
 </html>
