@@ -1,5 +1,5 @@
 title: Blog
 description: 
 author: Tomás
-baseurl: "/portfolio/blog"
+baseurl: "portfolio/blog"
 permalink: "/:title.html"
