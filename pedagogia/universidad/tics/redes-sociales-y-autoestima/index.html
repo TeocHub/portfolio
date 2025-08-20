@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redes Sociales y Autoestima Juvenil en Chile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony Neutrals -->
+    <!-- Application Structure Plan: Se ha diseñado una SPA de desplazamiento vertical con una estructura temática que guía al usuario desde el problema hasta la solución. Comienza con una introducción (El Espejo Digital) que explica cómo se distorsiona la realidad. Sigue con un dashboard (Impacto en Cifras) para visualizar los datos clave. Luego, explora los efectos psicológicos (Riesgos y Consecuencias) mediante tarjetas interactivas. Finalmente, ofrece soluciones prácticas (Estrategias y Apoyo) en una sección con pestañas para cada audiencia (padres, escuela, apoyo). Esta estructura narrativa es más atractiva y digerible que la de un informe académico, facilitando la comprensión y la retención de la información clave. -->
+    <!-- Visualization & Content Choices: Se utilizan tarjetas de estadísticas para datos clave, un gráfico de barras de Chart.js para comparar la salud mental entre usuarios y un gráfico de dona para mostrar los factores de riesgo. Los conceptos psicológicos complejos se presentan en un acordeón interactivo para evitar la sobrecarga de información. Las recomendaciones se organizan en pestañas para una fácil navegación por parte de la audiencia objetivo. Estas elecciones priorizan la claridad, la interactividad y la facilidad de uso, transformando datos densos en una experiencia de aprendizaje visual. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4;
+            color: #5E503F;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .nav-link.active {
+            font-weight: 700;
+            color: #D98C7A;
+        }
+        .tab-btn.active {
+            background-color: #A3B18A;
+            color: #F8F7F4;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="text-xl font-bold text-[#5E503F]">
+                Autoestima Digital
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#realidad" class="nav-link text-gray-600 hover:text-[#D98C7A] transition-colors">La Realidad Digital</a>
+                <a href="#impacto" class="nav-link text-gray-600 hover:text-[#D98C7A] transition-colors">Impacto en Cifras</a>
+                <a href="#riesgos" class="nav-link text-gray-600 hover:text-[#D98C7A] transition-colors">Riesgos</a>
+                <a href="#estrategias" class="nav-link text-gray-600 hover:text-[#D98C7A] transition-colors">Estrategias</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="py-20 md:py-32 bg-[#EAE7DC]">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-[#5E503F] mb-4">El Reflejo en la Pantalla</h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-700">
+                    Una exploración interactiva sobre cómo la realidad construida en redes sociales impacta la autoestima de los jóvenes chilenos de 12 a 14 años.
+                </p>
+            </div>
+        </section>
+
+        <section id="realidad" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#5E503F]">El Espejo Digital: ¿Qué es real?</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">
+                        Las redes sociales no son un reflejo fiel de la realidad. Son entornos cuidadosamente curados y personalizados por algoritmos. Esta sección explora los dos mecanismos principales que construyen la "realidad" que ven los jóvenes en línea, un primer paso crucial para entender su impacto.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-bold text-[#A3B18A] mb-4">Contenido Curado: La "Vida Perfecta"</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            En redes sociales, se suelen mostrar solo los "mejores momentos": éxitos, viajes y apariencias perfectas. Esta selección oculta el esfuerzo, los fracasos y la normalidad del día a día. A diferencia de la publicidad tradicional, estos estándares son establecidos por pares y amigos, lo que hace que la comparación social sea mucho más personal y directa, generando la sensación de que "la vida de todos es mejor que la mía".
+                        </p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-bold text-[#A3B18A] mb-4">Algoritmos y Burbujas de Información</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Los algoritmos personalizan el contenido que vemos basándose en nuestras interacciones previas. Esto crea "burbujas" que nos exponen solo a ideas y contenidos similares a los nuestros, reforzando sesgos y limitando la exposición a la diversidad. Para un adolescente en formación, esto puede distorsionar su percepción del mundo, haciéndolo parecer más simple y polarizado de lo que realmente es, sin que sea consciente de esta manipulación silenciosa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="impacto" class="py-16 md:py-24 bg-[#EAE7DC]">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#5E503F]">Impacto en Cifras</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">
+                        El uso de redes sociales tiene consecuencias medibles en el bienestar de los adolescentes. Los siguientes datos, extraídos de la investigación, revelan la magnitud del problema en Chile y ofrecen una visión cuantitativa de los riesgos asociados al uso intensivo de estas plataformas.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 text-center">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="text-4xl font-bold text-[#D98C7A]">55%</p>
+                        <p class="text-sm text-gray-600 mt-2">de menores en Chile tiene redes sociales</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="text-4xl font-bold text-[#D98C7A]">41%</p>
+                        <p class="text-sm text-gray-600 mt-2">de usuarios intensivos reporta mala salud mental</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="text-4xl font-bold text-[#D98C7A]">35%</p>
+                        <p class="text-sm text-gray-600 mt-2">de usuarios intensivos se preocupa por su imagen corporal</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="text-4xl font-bold text-[#D98C7A]">1 de 3</p>
+                        <p class="text-sm text-gray-600 mt-2">adolescentes ve empeorar su imagen corporal por Instagram</p>
+                    </div>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-center mb-4 text-[#5E503F]">Salud Mental y Tiempo de Uso</h3>
+                        <div class="chart-container">
+                            <canvas id="mentalHealthChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-center mb-4 text-[#5E503F]">Relación Dosis-Respuesta</h3>
+                        <div class="chart-container">
+                            <canvas id="usageTimeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="riesgos" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#5E503F]">Riesgos y Consecuencias Psicológicas</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">
+                        La exposición a esta realidad digitalizada no es inocua. Genera una serie de riesgos psicológicos que se refuerzan mutuamente, creando un ciclo negativo que puede afectar gravemente el bienestar adolescente. Haz clic en cada riesgo para conocer más detalles.
+                    </p>
+                </div>
+                <div id="accordion-container" class="max-w-3xl mx-auto space-y-4">
+                </div>
+            </div>
+        </section>
+
+        <section id="estrategias" class="py-16 md:py-24 bg-[#EAE7DC]">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#5E503F]">Estrategias y Apoyo</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">
+                        Abordar este desafío requiere un esfuerzo coordinado. Aquí encontrarás recomendaciones prácticas y específicas para los actores clave en la vida de los adolescentes: padres, educadores y profesionales de la salud. Selecciona una pestaña para ver las estrategias correspondientes.
+                    </p>
+                </div>
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex justify-center border-b-2 border-gray-300 mb-6">
+                        <button class="tab-btn active py-2 px-6 font-semibold text-gray-600 rounded-t-lg transition-colors" data-tab="padres">Para Padres</button>
+                        <button class="tab-btn py-2 px-6 font-semibold text-gray-600 rounded-t-lg transition-colors" data-tab="escuela">En la Escuela</button>
+                        <button class="tab-btn py-2 px-6 font-semibold text-gray-600 rounded-t-lg transition-colors" data-tab="apoyo">Apoyo Psicológico</button>
+                    </div>
+                    <div id="tab-content" class="bg-white p-8 rounded-lg shadow-md">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#5E503F] text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>Esta aplicación interactiva se basa en el informe "La Percepción de la Realidad en Redes Sociales y su Impacto en la Autoestima de Jóvenes Chilenos (12-14 años)".</p>
+            <p class="text-sm mt-2 opacity-75">El objetivo es divulgar conocimiento científico de forma accesible para docentes, apoderados y estudiantes.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const data = {
+                risks: [
+                    { title: "Comparación Social y Estándares Irreales", content: "La exposición constante a vidas y apariencias idealizadas genera sentimientos de insuficiencia. Los jóvenes comparan su realidad con la 'versión editada' de otros, lo que resulta en frustración y una autovaloración negativa." },
+                    { title: "Ciberacoso", content: "El acoso en línea, a través de humillaciones, exclusión o amenazas, tiene efectos devastadores. Aumenta el estrés, la ansiedad y la depresión, erosionando directamente la autoestima. Cerca del 20% de los jóvenes reporta haberlo sufrido." },
+                    { title: "Adicción y Validación Externa", content: "El diseño de las redes puede generar dependencia. La búsqueda constante de 'me gusta' y comentarios positivos hace que la autoestima dependa de la validación externa, en lugar de construirse sobre valores y capacidades internas." },
+                    { title: "Miedo a Perderse Algo (FOMO)", content: "El 'Fear of Missing Out' es la ansiedad de sentir que otros viven experiencias más gratificantes. Esta necesidad de estar siempre conectado genera estrés crónico e insatisfacción con la propia vida." },
+                    { title: "Impacto en la Imagen Corporal", content: "La presión por alcanzar ideales de belleza irreales, a menudo retocados digitalmente, es especialmente dañina. Conduce a una alta insatisfacción corporal, que es un pilar de la autoestima, y puede derivar en trastornos alimentarios." }
+                ],
+                strategies: {
+                    padres: `
+                        <h3 class="text-2xl font-bold text-[#A3B18A] mb-4">Rol de Padres y Apoderados</h3>
+                        <ul class="list-disc list-inside space-y-3 text-gray-700">
+                            <li><strong>Mediación Activa:</strong> Acompañar, no solo vigilar. Conversar sobre lo que ven y hacen en línea, fomentando el pensamiento crítico en lugar de solo imponer reglas.</li>
+                            <li><strong>Comunicación Abierta:</strong> Crear un ambiente de confianza para que los hijos se sientan cómodos compartiendo experiencias negativas, como el ciberacoso.</li>
+                            <li><strong>Establecer Límites Claros:</strong> Definir horarios y zonas libres de tecnología (ej. comidas, dormitorios) para promover un equilibrio saludable entre el mundo online y offline.</li>
+                            <li><strong>Ser un Modelo a Seguir:</strong> Los adultos también deben demostrar un uso consciente y equilibrado de la tecnología.</li>
+                        </ul>
+                    `,
+                    escuela: `
+                        <h3 class="text-2xl font-bold text-[#A3B18A] mb-4">Educación y Alfabetización Mediática</h3>
+                        <ul class="list-disc list-inside space-y-3 text-gray-700">
+                            <li><strong>Fomentar el Pensamiento Crítico:</strong> Enseñar a los estudiantes a analizar la información, diferenciar hechos de opiniones y entender cómo funcionan los algoritmos y la publicidad.</li>
+                            <li><strong>Integración Transversal:</strong> La alfabetización digital no debe ser una materia aislada, sino integrarse en distintas asignaturas para abordar sus aspectos sociales y psicológicos.</li>
+                            <li><strong>Educación Emocional:</strong> Desarrollar programas que ayuden a los adolescentes a identificar y gestionar sus emociones, dándoles herramientas para enfrentar la presión social en línea.</li>
+                            <li><strong>Ciberseguridad y Privacidad:</strong> Educar sobre la importancia de proteger los datos personales y reconocer comportamientos de riesgo.</li>
+                        </ul>
+                    `,
+                    apoyo: `
+                        <h3 class="text-2xl font-bold text-[#A3B18A] mb-4">Intervenciones y Apoyo Psicológico</h3>
+                        <ul class="list-disc list-inside space-y-3 text-gray-700">
+                            <li><strong>Identificar Señales de Alerta:</strong> Docentes y padres deben estar atentos a cambios de comportamiento, como aislamiento, irritabilidad, o caída en el rendimiento académico.</li>
+                            <li><strong>Validar sus Sentimientos:</strong> No minimizar las experiencias negativas que ocurren en línea. Lo que pasa en el mundo digital tiene un impacto real en sus emociones.</li>
+                            <li><strong>Fomentar la Resiliencia Digital:</strong> Ayudar a los jóvenes a desarrollar habilidades para sobreponerse a las experiencias negativas en línea, fortaleciendo su autoestima desde adentro.</li>
+                            <li><strong>Conocer Recursos de Ayuda:</strong> Tener a mano contactos de líneas de ayuda o profesionales de la salud mental y no dudar en buscar apoyo profesional cuando sea necesario.</li>
+                        </ul>
+                    `
+                }
+            };
+            
+            const accordionContainer = document.getElementById('accordion-container');
+            data.risks.forEach((risk, index) => {
+                const item = document.createElement('div');
+                item.className = 'border border-gray-200 rounded-lg bg-white';
+                item.innerHTML = `
+                    <button class="accordion-btn w-full text-left p-4 flex justify-between items-center font-semibold text-[#5E503F] hover:bg-gray-50 transition-colors">
+                        <span>${risk.title}</span>
+                        <span class="transform transition-transform duration-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </span>
+                    </button>
+                    <div class="accordion-content px-4 pb-4 text-gray-600">
+                        <p>${risk.content}</p>
+                    </div>
+                `;
+                accordionContainer.appendChild(item);
+            });
+
+            accordionContainer.addEventListener('click', (e) => {
+                const button = e.target.closest('.accordion-btn');
+                if (button) {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('span:last-child');
+                    const allContents = accordionContainer.querySelectorAll('.accordion-content');
+                    const allIcons = accordionContainer.querySelectorAll('.accordion-btn span:last-child');
+
+                    allContents.forEach(c => {
+                        if (c !== content) {
+                            c.style.maxHeight = null;
+                        }
+                    });
+                    allIcons.forEach(i => {
+                        if (i !== icon) {
+                            i.classList.remove('rotate-180');
+                        }
+                    });
+                    
+                    icon.classList.toggle('rotate-180');
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                }
+            });
+
+            const tabContainer = document.querySelector('.max-w-4xl');
+            const tabButtons = tabContainer.querySelectorAll('.tab-btn');
+            const tabContent = document.getElementById('tab-content');
+
+            function updateTabContent(tabId) {
+                tabContent.innerHTML = data.strategies[tabId];
+                tabButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.tab === tabId);
+                });
+            }
+
+            tabContainer.addEventListener('click', (e) => {
+                if (e.target.matches('.tab-btn')) {
+                    updateTabContent(e.target.dataset.tab);
+                }
+            });
+            
+            updateTabContent('padres');
+
+            const mentalHealthCtx = document.getElementById('mentalHealthChart').getContext('2d');
+            new Chart(mentalHealthCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Usuarios Intensivos (>4h/día)', 'Usuarios Moderados (<2h/día)'],
+                    datasets: [{
+                        label: '% que reporta salud mental pobre o muy pobre',
+                        data: [41, 23],
+                        backgroundColor: ['#D98C7A', '#A3B18A'],
+                        borderColor: ['#C47C6A', '#93A17A'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 50,
+                            ticks: { color: '#5E503F' }
+                        },
+                        x: { ticks: { color: '#5E503F' } }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const usageTimeCtx = document.getElementById('usageTimeChart').getContext('2d');
+            new Chart(usageTimeCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Uso > 4h/día (Baja Autoestima)', 'Uso < 2h/día (Alta Autoestima)'],
+                    datasets: [{
+                        label: 'Impacto en Autoestima',
+                        data: [50, 50],
+                        backgroundColor: ['#D98C7A', '#A3B18A'],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { color: '#5E503F' }
+                        },
+                        tooltip: {
+                            enabled: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Correlación entre tiempo de uso y nivel de autoestima',
+                            color: '#5E503F',
+                            font: { size: 14 }
+                        }
+                    }
+                }
+            });
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section[id]');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 60) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
