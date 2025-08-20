@@ -1,10 +1,12 @@
 :root {
-    --primary-color: #0056b3;
-    --secondary-color: #555;
+    --primary-color: #198754; /* Un verde similar al ejemplo */
+    --secondary-color: #6c757d;
     --background-color: #f8f9fa;
     --text-color: #333;
     --link-color: #007bff;
     --link-hover-color: #0056b3;
+    --card-bg-color: #fff;
+    --card-border-color: #e9ecef;
 }
 
 body {
@@ -19,7 +21,7 @@ body {
 
 header {
     text-align: center;
-    border-bottom: 2px solid #e9ecef;
+    border-bottom: 2px solid var(--card-border-color);
     padding-bottom: 20px;
     margin-bottom: 40px;
 }
@@ -39,58 +41,72 @@ main {
     padding: 20px 0;
 }
 
-.post {
-    background-color: #fff;
-    padding: 25px;
+.post-card {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--card-border-color);
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    display: flex;
+    flex-direction: column;
 }
 
-.post:hover {
-    transform: translateY(-5px);
+.post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-.post h2 {
-    font-size: 1.8em;
+.post-card h2 {
+    font-size: 1.5em;
     margin-top: 0;
     margin-bottom: 10px;
+    color: var(--primary-color); /* Título verde */
 }
 
-.post h2 a {
+.post-card h2 a {
     text-decoration: none;
-    color: var(--text-color);
+    color: inherit; /* Hereda el color del h2 */
     transition: color 0.2s ease;
 }
 
-.post h2 a:hover {
+.post-card h2 a:hover {
     color: var(--link-color);
 }
 
-.post-meta {
+.post-card .post-meta {
     color: var(--secondary-color);
-    font-size: 0.9em;
+    font-size: 0.85em;
     margin-bottom: 15px;
 }
 
-.read-more {
+.post-card .post-excerpt p {
+    margin-bottom: 20px;
+}
+
+.post-card .read-more-container {
+    text-align: right; /* Coloca el "Leer más..." a la derecha */
+    margin-top: 10px;
+}
+
+.post-card .read-more {
     text-decoration: none;
     color: var(--link-color);
     font-weight: bold;
-    display: inline-block;
-    margin-top: 10px;
     transition: color 0.2s ease;
+    font-size: 0.9em;
 }
 
-.read-more:hover {
+.post-card .read-more:hover {
     color: var(--link-hover-color);
 }
 
 footer {
     text-align: center;
-    border-top: 1px solid #e9ecef;
+    border-top: 1px solid var(--card-border-color);
     padding-top: 20px;
     margin-top: 40px;
     color: var(--secondary-color);
+    font-size: 0.9em;
 }
