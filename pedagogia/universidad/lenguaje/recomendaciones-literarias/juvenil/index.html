@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Lectura para Jóvenes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF5;
+            color: #4A4A4A;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:justify-between items-center py-4 space-y-4 md:space-y-0">
+                <div class="flex items-center space-x-2">
+                    <h1 class="text-xl font-bold text-gray-800">Guía de Lectura para Jóvenes</h1>
+                    <!-- Botón único para reproducir/pausar -->
+                    <div class="flex items-center gap-2 ml-4">
+                        <button id="play-pause-btn" class="bg-[#C43A31] hover:bg-[#E05A51] text-white font-bold py-2 px-3 rounded-full transition duration-300 transform hover:scale-105 shadow-lg flex items-center gap-1">
+                            <svg id="play-icon" class="icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display: block;"><path d="M8 5v14l11-7z"/></svg>
+                            <svg id="pause-icon" class="icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                            <span id="play-pause-text" class="text-sm hidden md:inline">Reproducir</span>
+                        </button>
+                    </div>
+                </div>
+                <nav class="flex items-center space-x-8">
+                    <a href="#explorar" class="text-gray-600 hover:text-[#C43A31] transition">Explorar</a>
+                    <a href="#estadisticas" class="text-gray-600 hover:text-[#C43A31] transition">Estadísticas</a>
+                    <a href="#metodologia" class="text-gray-600 hover:text-[#C43A31] transition">Metodología</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="py-16 md:py-24 text-center bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-[#8B1A15]">Guía de Lectura para Jóvenes</h2>
+                <p class="mt-6 text-lg text-gray-600">
+                    Esta guía ofrece una selección selecta de autores y obras para jóvenes y adultos jóvenes. Cada recomendación ha sido cuidadosamente filtrada para garantizar no solo calidad literaria, sino también la integridad ética de los autores, creando un espacio seguro para la lectura.
+                </p>
+            </div>
+        </section>
+
+        <section id="explorar" class="py-16 md:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold text-[#8B1A15]">Explora las Recomendaciones</h3>
+                    <p class="mt-4 text-gray-600">Usa los filtros para encontrar autores y obras que se ajusten a tus intereses.</p>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-4 mb-8 sticky top-20 bg-[#FDFBF5]/90 backdrop-blur-sm z-20 py-4 px-2 rounded-lg border border-gray-200">
+                    <div class="flex-1">
+                        <label for="genre-filter" class="block text-sm font-medium text-gray-700">Género / Tema</label>
+                        <select id="genre-filter" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-[#C43A31] focus:border-[#C43A31] sm:text-sm rounded-md">
+                            <option value="all">Todos los géneros</option>
+                        </select>
+                    </div>
+                    <div class="flex-1">
+                        <label for="audience-filter" class="block text-sm font-medium text-gray-700">Público Objetivo</label>
+                        <select id="audience-filter" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-[#C43A31] focus:border-[#C43A31] sm:text-sm rounded-md">
+                            <option value="all">Todas las edades</option>
+                        </select>
+                    </div>
+                    <div class="flex-1">
+                        <label for="type-filter" class="block text-sm font-medium text-gray-700">Tipo</label>
+                        <select id="type-filter" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-[#C43A31] focus:border-[#C43A31] sm:text-sm rounded-md">
+                            <option value="all">Clásicos y Contemporáneos</option>
+                            <option value="Clásico">Clásicos</option>
+                            <option value="Contemporáneo">Contemporáneos</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="author-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                </div>
+
+                <div id="show-more-container" class="flex flex-col items-center mt-8">
+                    <button id="show-more-btn" class="bg-[#C43A31] hover:bg-[#E05A51] text-white font-bold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
+                        Mostrar más
+                    </button>
+                    <p id="all-authors-msg" class="hidden text-center text-gray-500 mt-4">¡Todos los autores mostrados!</p>
+                </div>
+
+                 <div id="no-results" class="text-center py-12 text-gray-500 hidden">
+                    <p class="text-xl">No se encontraron autores que coincidan con tu búsqueda.</p>
+                    <p class="mt-2">Intenta ajustar los filtros.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="estadisticas" class="py-16 md:py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold text-[#8B1A15]">Estadísticas de la Guía</h3>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Estas visualizaciones ofrecen un resumen de la distribución de los autores recomendados en esta guía, ayudando a entender el balance y enfoque de nuestra selección seleccionada.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h4 class="text-xl font-semibold text-center mb-4">Distribución por Género</h4>
+                        <div class="chart-container">
+                            <canvas id="genreChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold text-center mb-4">Distribución por Público Objetivo</h4>
+                        <div class="chart-container">
+                            <canvas id="audienceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="metodologia" class="py-16 md:py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold text-[#8B1A15]">Nuestra Metodología de Selección</h3>
+                    <p class="mt-4 text-gray-600">La transparencia es fundamental. Aquí explicamos los criterios rigurosos utilizados para seleccionar y excluir autores, asegurando una guía confiable y éticamente sólida.</p>
+                </div>
+                <div id="accordion-container" class="space-y-4">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="author-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div id="modal-content" class="relative bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 md:p-8 transform scale-95 transition-all duration-300">
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const authorData = [
+        { type: 'Clásico', author: 'Antoine de Saint-Exupéry', works: 'El Principito', genre: 'Fábula', audience: 'Todas las edades', comment: 'Una obra atemporal sobre la amistad y la sabiduría infantil.' },
+        { type: 'Clásico', author: 'Mary Shelley', works: 'Frankenstein', genre: 'Ciencia Ficción', audience: '+12 años', comment: 'Pionera del género. Explora la ciencia y la moralidad.' },
+        { type: 'Clásico', author: 'Julio Verne', works: 'Viaje al centro de la Tierra', genre: 'Aventura', audience: '+12 años', comment: 'Un clásico de aventuras con un ritmo ágil y sorprendentes eventos.' },
+        { type: 'Clásico', author: 'J.R.R. Tolkien', works: 'El Hobbit', genre: 'Fantasía', audience: '+10 años', comment: 'La puerta de entrada al universo de la fantasía moderna.' },
+        { type: 'Clásico', author: 'Lois Lowry', works: 'El dador', genre: 'Distopía', audience: '+12 años', comment: 'Una lectura crucial para reflexionar sobre la libertad y la censura.' },
+        { type: 'Clásico', author: 'J.D. Salinger', works: 'El guardián entre el centeno', genre: 'Ficción Social', audience: '+15 años', comment: 'Un icono de la rebelión adolescente, que aborda la transición a la vida adulta.' },
+        { type: 'Clásico', author: 'Ernest Hemingway', works: 'El viejo y el mar', genre: 'Ficción', audience: '+12 años', comment: 'Un relato de lucha y dignidad, escrito con lenguaje simple y poderoso.' },
+        { type: 'Clásico', author: 'Herman Melville', works: 'Moby Dick', genre: 'Aventura', audience: '+12 años', comment: 'Obra maestra de la literatura universal que simboliza la obsesión humana.' },
+        { type: 'Clásico', author: 'Isaac Asimov', works: 'Yo, Robot', genre: 'Ciencia Ficción', audience: '+12 años', comment: 'Clásico que introduce las leyes de la robótica.' },
+        { type: 'Contemporáneo', author: 'Suzanne Collins', works: 'Los Juegos del Hambre', genre: 'Distopía', audience: '+12 años', comment: 'Una saga que explora temas de guerra, opresión y resiliencia.' },
+        { type: 'Contemporáneo', author: 'Rick Riordan', works: 'Percy Jackson y los dioses del Olimpo', genre: 'Fantasía', audience: '+10 años', comment: 'Revitalizó la mitología griega con un toque moderno y humor.' },
+        { type: 'Contemporáneo', author: 'Laura Gallego', works: 'Memorias de Idhún, Donde los árboles cantan', genre: 'Fantasía', audience: '+12 años', comment: 'Una de las autoras españolas más influyentes del género.' },
+        { type: 'Contemporáneo', author: 'Carlos Ruiz Zafón', works: 'El Príncipe de la Niebla', genre: 'Misterio', audience: '+12 años', comment: 'Un maestro del misterio que crea atmósferas envolventes.' },
+        { type: 'Contemporáneo', author: 'Leigh Bardugo', works: 'Seis de cuervos', genre: 'Fantasía', audience: '+15 años', comment: 'Creadora de un universo complejo con personajes moralmente ambiguos.' },
+        { type: 'Contemporáneo', author: 'Marie Lu', works: 'Warcross, Legend', genre: 'Ciencia Ficción', audience: '+12 años', comment: 'Historias trepidantes con experiencia del mundo de los videojuegos.' },
+        { type: 'Contemporáneo', author: 'Neal Shusterman', works: 'Desconexión, Scythe', genre: 'Distopía', audience: '+12 años', comment: 'Aborda temas éticos complejos de forma provocadora y reflexiva.' },
+        { type: 'Contemporáneo', author: 'Holly Jackson', works: 'A Good Girl\'s Guide to Murder', genre: 'Misterio', audience: '+12 años', comment: 'Un misterio juvenil bien construido y lleno de intriga.' },
+        { type: 'Contemporáneo', author: 'Alice Kellen', works: 'El mapa de los anhelos, Nosotros en la luna', genre: 'Romance', audience: '+18 años', comment: 'Una voz clave del romance en español, con historias de gran sensibilidad.' },
+        { type: 'Contemporáneo', author: 'María Martínez', works: 'Tú y otros desastres naturales', genre: 'Romance', audience: '+18 años', comment: 'Populares historias que exploran emociones y relaciones complejas.' },
+        { type: 'Contemporáneo', author: 'Joana Marcús', works: 'Saga Meses a tu lado', genre: 'Romance', audience: '+18 años', comment: 'Un fenómeno editorial surgido de plataformas digitales.' },
+        { type: 'Contemporáneo', author: 'Andrea Longarela', works: 'Los veranos olvidados', genre: 'Romance', audience: '+16 años', comment: 'Novelas llenas de ternura que exploran el amor y la amistad.' },
+        { type: 'Contemporáneo', author: 'Jenny Han', works: 'A todos los chicos de los que me enamoré', genre: 'Romance', audience: '+12 años', comment: 'Relatos icónicos sobre el primer amor y las relaciones adolescentes.' },
+        { type: 'Contemporáneo', author: 'Alice Oseman', works: 'Heartstopper', genre: 'Novela Gráfica', audience: '+12 años', comment: 'Historia dulce y empática sobre el romance juvenil queer.' },
+        { type: 'Contemporáneo', author: 'Eloy Moreno', works: 'Invisible', genre: 'Ficción Social', audience: '+12 años', comment: 'Un libro fundamental para abordar el tema del acoso escolar.' },
+        { type: 'Contemporáneo', author: 'R.J. Palacio', works: 'Wonder', genre: 'Ficción Social', audience: '+12 años', comment: 'Una novela conmovedora sobre la empatía y la aceptación de las diferencias.' },
+        { type: 'Contemporáneo', author: 'Jordi Sierra i Fabra', works: 'Campos de fresas, El joven Lennon', genre: 'Ficción Social', audience: '+12 años', comment: 'Autor prolífico con una obra diversa y un enfoque en la superación personal.' },
+        { type: 'Contemporáneo', author: 'Iria G. Parente & Selene M. Pascual', works: 'El eco del destino', genre: 'Fantasía', audience: '+12 años', comment: 'Dupla de autoras españolas que abordan la diversidad y la amistad.' },
+        { type: 'Contemporáneo', author: 'John Green', works: 'Bajo la misma estrella', genre: 'Ficción Social', audience: '+15 años', comment: 'Conmovedora historia que aborda la enfermedad y las emociones complejas.' },
+        { type: 'Contemporáneo', author: 'Mercedes Ron', works: 'Saga Culpables', genre: 'Romance', audience: '+18 años', comment: 'Fenómeno literario surgido en plataformas digitales.' },
+        { type: 'Contemporáneo', author: 'Nando López', works: 'La edad de la ira', genre: 'Ficción Social', audience: '+15 años', comment: 'Explora los desafíos de la adolescencia y la identidad de forma cruda.' },
+        { type: 'Contemporáneo', author: 'Pedro Mañas', works: 'Serie Prisioneros del más allá', genre: 'Misterio', audience: '+10 años', comment: 'Narrativa original y con humor que explora lo fantástico en lo cotidiano.' },
+        { type: 'Contemporáneo', author: 'Care Santos', works: 'Trilogía Mentira', genre: 'Misterio', audience: '+12 años', comment: 'Autora galardonada que aborda temas complejos con gran sensibilidad.' },
+        { type: 'Contemporáneo', author: 'Rick Yancey', works: 'La quinta ola, Ready Player One', genre: 'Ciencia Ficción', audience: '+13 años', comment: 'Historias post-apocalípticas y de realidad virtual que desafían al lector.' },
+        { type: 'Contemporáneo', author: 'David Lozano', works: 'Donde la tierra termina', genre: 'Fantasía', audience: '+12 años', comment: 'Autor de fantasía y misterio que ha sido galardonado por su obra.' },
+        { type: 'Contemporáneo', author: 'Begoña Oro', works: 'Tú tan cáncer y yo tan virgo', genre: 'Romance', audience: '+12 años', comment: 'Historias románticas con un toque de humor y originalidad.' },
+        { type: 'Contemporáneo', author: 'Nnedi Okorafor', works: 'Akata Witch', genre: 'Fantasía', audience: '+12 años', comment: 'Combina fantasía con mitología y cultura de África occidental.' },
+        { type: 'Contemporáneo', author: 'Gabriel García Márquez', works: 'Cien años de soledad', genre: 'Ficción', audience: '+15 años', comment: 'Una introducción perfecta al realismo mágico para adolescentes.' },
+        { type: 'Contemporáneo', author: 'Madeleine L\'Engle', works: 'Una arruga en el tiempo', genre: 'Ciencia Ficción', audience: '+10 años', comment: 'Una novela clásica que combina la ciencia con un viaje fantástico.' },
+        { type: 'Contemporáneo', author: 'Christopher Paolini', works: 'Eragon', genre: 'Fantasía', audience: '+12 años', comment: 'Un clásico del género de fantasía con dragones y héroes.' },
+        { type: 'Contemporáneo', author: 'Adam Silvera', works: 'Más feliz que nunca', genre: 'Ficción Social', audience: '+16 años', comment: 'Aborda la salud mental y las relaciones con una perspectiva emocional.' },
+        { type: 'Contemporáneo', author: 'Sara Farizan', works: 'If You Could Be Mine', genre: 'Ficción Social', audience: '+16 años', comment: 'Explora la identidad y el amor en contextos culturales complejos.' },
+        { type: 'Contemporáneo', author: 'Cassandra Clare', works: 'Ciudad de Hueso', genre: 'Fantasía', audience: '+12 años', comment: 'Un universo de cazadores de sombras y criaturas míticas, perfecto para la fantasía urbana.' },
+        { type: 'Contemporáneo', author: 'Sarah Dessen', works: 'El destino se viste de negro', genre: 'Ficción Social', audience: '+14 años', comment: 'Una voz icónica en la ficción juvenil que explora las relaciones y la identidad.' },
+        { type: 'Contemporáneo', author: 'Markus Zusak', works: 'El ladrón de libros', genre: 'Ficción Histórica', audience: '+12 años', comment: 'Una novela conmovedora y única narrada por la Muerte.' }
+    ];
+
+    // La información de las imágenes del usuario se ha consolidado aquí.
+    const accordionData = [
+        { title: 'Gestión de lo "Debatible": Un Enfoque Matizado', content: 'La interpretación del término "cosas debatibles" requiere un análisis diferenciado. Las controversias se manifiestan en tres categorías: 1) Mala conducta personal o acusaciones de abuso (exclusión categórica). 2) Opiniones personales o posturas ideológicas polémicas (exclusión por naturaleza divisiva). 3) Controversia relacionada con el contenido de la obra, como la "romanticización del abuso" (exclusión para mantener un espacio seguro). Se ha realizado una investigación rigurosa para distinguir estas controversias de las críticas literarias normales o casos de homonimia.' },
+        { title: 'Exclusiones Notables y Aclaraciones', content: 'Para mantener la transparencia, se listan autores populares excluidos. Estas exclusiones responden directamente a la solicitud de evitar material "debatible" y priorizar la seguridad y el respeto al lector joven. Se detallan las razones de manera transparente, buscando informar, no juzgar el valor artístico de las obras.<ul><li><strong>Neil Gaiman:</strong> Alegaciones creíbles de conducta personal inapropiada.</li><li><strong>Pablo Neruda:</strong> Confesión de abuso y maltrato documentado.</li><li><strong>J.K. Rowling:</strong> Controversia pública prolongada y \'debatible\'.</li><li><strong>Orson Scott Card:</strong> Activismo anti-derechos LGTB.</li><li><strong>Jay Asher:</strong> Acusaciones de acoso.</li><li><strong>Colleen Hoover, Anna Todd, y Sarah J. Maas:</strong> Críticas sobre la "romanticización del abuso" en sus obras.</li><li><strong>Joana Marcús:</strong> Controversia por plagio y gestión de la polémica.</li><li><strong>Mercedes Ron:</strong> Temática \'debatible\' centrada en relaciones tóxicas.</li><li><strong>Cassandra Clare:</strong> Autor en el límite. Se incluyen sus obras ya que la controversia es manejable y se puede advertir al lector.</li></ul>' },
+    ];
+
+    const grid = document.getElementById('author-grid');
+    const genreFilter = document.getElementById('genre-filter');
+    const audienceFilter = document.getElementById('audience-filter');
+    const typeFilter = document.getElementById('type-filter');
+    const noResults = document.getElementById('no-results');
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const allAuthorsMsg = document.getElementById('all-authors-msg');
+    const modal = document.getElementById('author-modal');
+    const modalContent = document.getElementById('modal-content');
+
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    const playPauseText = document.getElementById('play-pause-text');
+    
+    // Usar una URL de audio de marcador de posición para evitar errores de CORS
+    // o de archivo no encontrado. Reemplaza esta URL con la tuya.
+    const podcastAudio = new Audio('podcast.m4a');
+    let isPlaying = false;
+    let hasPlayed = false;
+
+    playPauseBtn.addEventListener('click', () => {
+        if (!hasPlayed) {
+            playPauseBtn.classList.remove('bg-[#C43A31]', 'hover:bg-[#E05A51]');
+            playPauseBtn.classList.add('bg-gray-400');
+            playPauseText.textContent = 'Cargando...';
+            podcastAudio.play().then(() => {
+                isPlaying = true;
+                hasPlayed = true;
+                playPauseBtn.classList.remove('bg-gray-400');
+                playPauseBtn.classList.add('bg-[#E05A51]');
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+                playPauseText.textContent = 'Pausar';
+            }).catch(error => {
+                console.error("Error al reproducir el audio:", error);
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'none';
+                playPauseBtn.disabled = true;
+                playPauseText.textContent = 'Error al reproducir';
+                playPauseBtn.classList.remove('bg-gray-400');
+                playPauseBtn.classList.add('bg-red-500');
+            });
+        } else if (isPlaying) {
+            podcastAudio.pause();
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+            playPauseText.textContent = 'Reproducir';
+            playPauseBtn.classList.remove('bg-[#E05A51]');
+            playPauseBtn.classList.add('bg-[#C43A31]');
+        } else {
+            podcastAudio.play();
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'block';
+            playPauseText.textContent = 'Pausar';
+            playPauseBtn.classList.remove('bg-[#C43A31]');
+            playPauseBtn.classList.add('bg-[#E05A51]');
+        }
+        isPlaying = !isPlaying;
+    });
+
+    podcastAudio.addEventListener('ended', () => {
+        isPlaying = false;
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+        playPauseText.textContent = 'Reproducir';
+        playPauseBtn.classList.remove('bg-[#E05A51]');
+        playPauseBtn.classList.add('bg-[#C43A31]');
+    });
+
+    const genres = [...new Set(authorData.map(a => a.genre.split(', ')[0]))].sort();
+    const audiences = [...new Set(authorData.map(a => a.audience))].sort((a, b) => {
+        const numA = parseInt(a.replace(/\D/g, '')) || 0;
+        const numB = parseInt(b.replace(/\D/g, '')) || 0;
+        if (a === 'Todas las edades') return -1;
+        if (b === 'Todas las edades') return 1;
+        return numA - numB;
+    });
+
+    genres.forEach(g => {
+        const option = document.createElement('option');
+        option.value = g;
+        option.textContent = g;
+        genreFilter.appendChild(option);
+    });
+
+    audiences.forEach(a => {
+        const option = document.createElement('option');
+        option.value = a;
+        option.textContent = a;
+        audienceFilter.appendChild(option);
+    });
+
+    let filteredAuthors = [];
+    let authorsToShow = 8; // Muestra 2 filas por defecto (4 por fila)
+
+    function renderAuthors() {
+        grid.innerHTML = '';
+        const authorsToDisplay = filteredAuthors.slice(0, authorsToShow);
+
+        if (authorsToDisplay.length === 0 && filteredAuthors.length > 0) {
+            noResults.classList.add('hidden');
+        } else if (filteredAuthors.length === 0) {
+             noResults.classList.remove('hidden');
+        } else {
+            noResults.classList.add('hidden');
+        }
+
+        authorsToDisplay.forEach(author => {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer transform hover:-translate-y-1';
+            card.innerHTML = `
+                <div class="p-6">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-[#C43A31]">${author.genre}</p>
+                    <h3 class="text-xl font-bold mt-2 text-gray-800">${author.author}</h3>
+                    <p class="text-sm text-gray-500 mt-1 truncate">Obra clave: ${author.works.split(',')[0]}</p>
+                </div>
+                <div class="px-6 pb-4 border-t border-gray-100">
+                    <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">${author.audience}</span>
+                </div>
+            `;
+            card.addEventListener('click', () => openModal(author));
+            grid.appendChild(card);
+        });
+        
+        // Muestra u oculta el botón "Mostrar más" y el mensaje
+        if (authorsToShow >= filteredAuthors.length) {
+            showMoreBtn.classList.add('hidden');
+            if (filteredAuthors.length > 0) {
+                allAuthorsMsg.classList.remove('hidden');
+            }
+        } else {
+            showMoreBtn.classList.remove('hidden');
+            allAuthorsMsg.classList.add('hidden');
+        }
+    }
+
+    function filterAndRender() {
+        const selectedGenre = genreFilter.value;
+        const selectedAudience = audienceFilter.value;
+        const selectedType = typeFilter.value;
+
+        filteredAuthors = authorData.filter(author => {
+            const genreMatch = selectedGenre === 'all' || author.genre.includes(selectedGenre);
+            const audienceMatch = selectedAudience === 'all' || author.audience === selectedAudience;
+            const typeMatch = selectedType === 'all' || author.type === selectedType;
+            return genreMatch && audienceMatch && typeMatch;
+        });
+        
+        authorsToShow = 8; // Reinicia el contador al filtrar
+        renderAuthors();
+    }
+
+    function handleShowMore() {
+        authorsToShow += 8; // Aumenta en 2 filas
+        renderAuthors();
+    }
+
+    function openModal(author) {
+        modalContent.innerHTML = `
+            <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="text-center mb-6">
+                <h2 class="text-3xl font-bold text-gray-800">${author.author}</h2>
+                <p class="text-md text-[#C43A31] font-semibold mt-1">${author.genre}</p>
+            </div>
+            <div class="space-y-4 text-left">
+                <div>
+                    <h4 class="font-semibold text-gray-700">Obras Clave Recomendadas</h4>
+                    <p class="text-gray-600">${author.works}</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-700">Público Objetivo</h4>
+                    <p class="text-gray-600">${author.audience}</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-700">Comentario Editorial</h4>
+                    <p class="text-gray-600 leading-relaxed">${author.comment}</p>
+                </div>
+            </div>
+        `;
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('close-modal').addEventListener('click', closeModal);
+    }
+
+    function closeModal() {
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        document.body.style.overflow = '';
+    }
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape" && !modal.classList.contains('opacity-0')) {
+            closeModal();
+        }
+    });
+
+    genreFilter.addEventListener('change', filterAndRender);
+    audienceFilter.addEventListener('change', filterAndRender);
+    typeFilter.addEventListener('change', filterAndRender);
+    showMoreBtn.addEventListener('click', handleShowMore);
+    
+    function setupCharts() {
+        const genreCounts = authorData.reduce((acc, author) => {
+            const primaryGenre = author.genre.split(', ')[0];
+            acc[primaryGenre] = (acc[primaryGenre] || 0) + 1;
+            return acc;
+        }, {});
+
+        const audienceCounts = authorData.reduce((acc, author) => {
+            acc[author.audience] = (acc[author.audience] || 0) + 1;
+            return acc;
+        }, {});
+        
+        const sortedAudiences = Object.keys(audienceCounts).sort((a, b) => {
+            const numA = parseInt(a.replace(/\D/g, '')) || 0;
+            const numB = parseInt(b.replace(/\D/g, '')) || 0;
+            if (a === 'Todas las edades') return -1;
+            if (b === 'Todas las edades') return 1;
+            return numA - numB;
+        });
+        const sortedAudienceData = sortedAudiences.map(key => audienceCounts[key]);
+
+        const genrePalette = ['#C43A31', '#F4A261', '#E76F51', '#E9C46A', '#A88C7D', '#CDB4DB', '#FFC8DD', '#BDE0FE'];
+
+        const genreCtx = document.getElementById('genreChart').getContext('2d');
+        new Chart(genreCtx, {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(genreCounts),
+                datasets: [{
+                    data: Object.values(genreCounts),
+                    backgroundColor: genrePalette,
+                    borderColor: '#FDFBF5',
+                    borderWidth: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += context.parsed;
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        const audienceCtx = document.getElementById('audienceChart').getContext('2d');
+        new Chart(audienceCtx, {
+            type: 'bar',
+            data: {
+                labels: sortedAudiences,
+                datasets: [{
+                    label: 'Número de Autores',
+                    data: sortedAudienceData,
+                    backgroundColor: '#C43A31',
+                    borderColor: '#A32B25',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                           stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function setupAccordion() {
+        const container = document.getElementById('accordion-container');
+        accordionData.forEach((item, index) => {
+            const accordionItem = document.createElement('div');
+            accordionItem.className = 'border border-gray-200 rounded-lg';
+            accordionItem.innerHTML = `
+                <button class="w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-[#C43A31] focus-visible:ring-opacity-75">
+                    <span class="font-semibold text-gray-800">${item.title}</span>
+                    <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="content p-4 bg-white text-gray-600 leading-relaxed hidden">
+                    <div>${item.content}</div>
+                </div>
+            `;
+            container.appendChild(accordionItem);
+
+            const button = accordionItem.querySelector('button');
+            const content = accordionItem.querySelector('.content');
+            const icon = accordionItem.querySelector('svg');
+
+            button.addEventListener('click', () => {
+                const isHidden = content.classList.contains('hidden');
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180', !isHidden);
+            });
+        });
+    }
+    
+    // Llamada inicial para cargar el contenido
+    filterAndRender();
+    setupCharts();
+    setupAccordion();
+});
+</script>
+</body>
+</html>
