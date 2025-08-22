@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía para Lectura Infantil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="/portfolio/pedagogia/universidad/UA.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Biblioteca Serena (Warm neutrals like stone/beige with muted teal and terracotta accents) -->
+    <!-- Application Structure Plan: A single-page, non-linear application with a top navigation bar for quick access. The structure prioritizes user tasks: 1) 'Guía por Etapa' for immediate age-based recommendations via interactive tabs. 2) 'Explora los Autores' with a paginated, filterable grid of cards and click-to-reveal details for deep dives. 3) An interactive 'Clásicos vs. Contemporáneos' radar chart for dynamic comparison, now with a much larger dataset. 4) 'Criterios de Selección' in an accordion for digestible principles. This task-oriented flow is more intuitive and engaging for a parent or educator than the report's original linear format and handles a larger volume of content gracefully via pagination. -->
+    <!-- Visualization & Content Choices: 1) Author Comparison: The static table is transformed into an interactive Radar Chart (Chart.js) to allow users to dynamically compare selected authors across key dimensions, promoting active analysis with an expanded list. 2) Author Directory: Presented as a filterable grid of cards with a 'show more' button (HTML/Tailwind/JS) to handle the increased content volume without cluttering the page, with modals for detailed info. 3) Reading Stages: Interactive tabs (HTML/Tailwind/JS) are used to segment recommendations, directly addressing the primary user goal of finding age-appropriate content. All choices prioritize interaction and clarity over static text. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F4; /* stone-100 */
+            color: #292524; /* stone-800 */
+        }
+        .chart-container {
+            position: relative;
+            height: 50vh;
+            max-height: 500px;
+            width: 100%;
+            max-width: 700px;
+            margin: auto;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+        .nav-link:hover {
+            color: #B91C1C; /* red-700 */
+        }
+        .active-tab {
+            background-color: #DC2626; /* red-600 */
+            color: white;
+        }
+        .author-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .author-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .custom-select-btn::after {
+            content: '▼';
+            margin-left: 0.5rem;
+        }
+        .custom-select-btn.open::after {
+            content: '▲';
+        }
+        .checkbox-label {
+            display: block;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .checkbox-label:hover {
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        .checkbox-label input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+        .checkbox-label.disabled {
+            color: #94a3b8; /* slate-400 */
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold text-red-700">Guía para Lectura Infantil</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#etapas" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-700">Guía por Etapa</a>
+                        <a href="#autores" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-700">Explora Autores</a>
+                        <a href="#comparativa" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-700">Análisis Comparativo</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <section id="hero" class="text-center mb-20">
+            <h2 class="text-4xl font-bold tracking-tight text-stone-900 sm:text-5xl">Guía para Lectura Infantil</h2>
+            <p class="mt-6 text-lg leading-8 text-stone-600 max-w-3xl mx-auto">Una pequeña recopilación de autores clasicos y contemporaneos por etapa del desarrollo lector. Con esta página podrás descubrir qué autores y textos usar para fomentar el amor por la lectura.</p>
+        </section>
+
+        <section id="etapas" class="mb-20">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-stone-900">Guía de Lectura por Etapa</h3>
+                <p class="mt-4 text-md text-stone-600 max-w-2xl mx-auto">Selecciona una etapa para ver sus características y las recomendaciones de autores y obras más adecuadas. El objetivo es acompañar al niño en su viaje lector, ofreciendo los libros correctos en el momento justo.</p>
+            </div>
+            <div id="etapas-tabs" class="flex justify-center mb-8 space-x-2 sm:space-x-4"></div>
+            <div id="etapas-content" class="bg-white p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-500"></div>
+        </section>
+
+        <section id="autores" class="mb-20">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-stone-900">Explora los Autores</h3>
+                <p class="mt-4 text-md text-stone-600 max-w-2xl mx-auto">Filtra entre autores clásicos y contemporáneos, y haz clic en cada uno para descubrir su estilo, obras clave y el valor que aportan a la formación de jóvenes lectores. Es un directorio para conocer a los arquitectos de la imaginación infantil.</p>
+            </div>
+            <div id="autores-filters" class="flex justify-center mb-8 space-x-4"></div>
+            <div id="autores-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"></div>
+            <div class="flex justify-center mt-8">
+                <button id="show-more-btn" class="px-6 py-3 bg-red-600 text-white font-semibold rounded-full shadow-lg hover:bg-red-700 transition-colors duration-300">Mostrar más</button>
+            </div>
+        </section>
+
+        <section id="comparativa" class="mb-20">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-stone-900">Análisis Comparativo Interactivo</h3>
+                <p class="mt-4 text-md text-stone-600 max-w-2xl mx-auto">Compara las características de diferentes autores en un gráfico dinámico. Selecciona hasta tres autores para visualizar sus enfoques en temas, estilo y pedagogía, y entender mejor la evolución de la literatura infantil.</p>
+            </div>
+            <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6 relative">
+                    <label class="font-semibold">Selecciona autores a comparar:</label>
+                    <div class="relative w-full max-w-md">
+                        <button id="comparison-select-btn" class="custom-select-btn w-full px-4 py-2 text-sm text-stone-700 bg-white border border-stone-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 text-left flex justify-between items-center">
+                            Selecciona hasta 3 autores
+                        </button>
+                        <div id="comparison-select-dropdown" class="hidden absolute top-full left-0 mt-1 w-full bg-white border border-stone-300 rounded-md shadow-lg z-10"></div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="author-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        <div id="modal-content" class="bg-white rounded-lg shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative">
+            <button id="close-modal" class="absolute top-4 right-4 text-stone-500 hover:text-stone-800">&times;</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const appData = {
+                etapas: [
+                    {
+                        id: 'pre-lectores',
+                        nombre: 'Pre-Lectores (0-5 años)',
+                        descripcion: 'En esta fase, el enfoque es el desarrollo de la conciencia fonológica y el vocabulario a través de la lectura en voz alta. Los libros con ritmo, musicalidad e ilustraciones vibrantes son ideales. La comprensión depende en gran medida del apoyo visual.',
+                        recomendaciones: [
+                            { autor: 'Anna Llenas', obra: 'El Monstruo de Colores', tema: 'Emociones' },
+                            { autor: 'Sam McBratney', obra: 'Adivina cuánto te quiero', tema: 'Afecto familiar' },
+                            { autor: 'Varios', obra: 'Colección "Ya leo a"', tema: 'Clásicos adaptados' },
+                            { autor: 'Édouard Manceau', obra: 'Amor', tema: 'Afecto' }
+                        ]
+                    },
+                    {
+                        id: 'primeros-lectores',
+                        nombre: 'Primeros Lectores (6-8 años)',
+                        descripcion: 'Los niños comienzan a leer por sí mismos. Necesitan textos con estructuras sencillas, repeticiones y apoyo visual que complemente la historia. Las series con capítulos cortos son excelentes para fomentar la autonomía y el hábito lector.',
+                        recomendaciones: [
+                            { autor: 'Begoña Oro', obra: 'La Pandilla de la Ardilla', tema: 'Aventuras y amistad' },
+                            { autor: 'Pedro Mañas', obra: 'Princesas Dragón', tema: 'Fantasía y empoderamiento' },
+                            { autor: 'Elvira Lindo', obra: 'Manolito Gafotas', tema: 'Humor y vida cotidiana' },
+                            { autor: 'Dr. Seuss', obra: 'El gato en el sombrero', tema: 'Imaginación y fonética' }
+                        ]
+                    },
+                    {
+                        id: 'lectores-fluidos',
+                        nombre: 'Lectores Fluidos (9+ años)',
+                        descripcion: 'Los lectores pueden abordar narrativas más complejas. Es el momento de introducir géneros como la fantasía, la ciencia ficción y la novela de aventuras, con un desarrollo más profundo de personajes y tramas para mantener el interés.',
+                        recomendaciones: [
+                            { autor: 'Ursula K. Le Guin', obra: 'Un mago de Terramar', tema: 'Fantasía' },
+                            { autor: 'Roald Dahl', obra: 'Matilda', tema: 'Realismo mágico y crítica social' },
+                            { autor: 'Chris Van Allsburg', obra: 'Jumanji', tema: 'Misterio y fantasía' },
+                            { autor: 'C.S. Lewis', obra: 'Las Crónicas de Narnia', tema: 'Alta fantasía' }
+                        ]
+                    }
+                ],
+                autores: [
+                    { id: 1, nombre: 'Dr. Seuss', tipo: 'Clásico', tagline: 'El innovador pedagógico del absurdo', descripcion: 'Revolucionó la literatura infantil con rimas, ritmos pegadizos y mundos alocados. Su objetivo era fomentar la lectura usando palabras sencillas e ilustraciones imaginativas, convirtiendo el aprendizaje en un juego.', obras: ['El gato en el sombrero', 'Huevos verdes con jamón', 'El Lorax'], valor: 'Fomenta la fluidez lectora a través de la diversión y la repetición fonética. Aborda temas sociales como la responsabilidad ambiental y los prejuicios de forma accesible.' },
+                    { id: 2, nombre: 'Chris Van Allsburg', tipo: 'Clásico', tagline: 'El maestro del realismo mágico y el suspenso', descripcion: 'Su estilo distintivo se basa en un realismo casi fotográfico, usando carbón y lápices para crear atmósferas envolventes. Busca que "los eventos de la historia pudieran realmente suceder", infundiendo lo extraño con credibilidad.', obras: ['Jumanji', 'El Expreso Polar', 'Los misterios del señor Burdick'], valor: 'Desarrolla la alfabetización visual y la inmersión. Demuestra que los libros infantiles pueden abordar la complejidad emocional y el suspenso de forma sofisticada.' },
+                    { id: 3, nombre: 'Roald Dahl', tipo: 'Clásico', tagline: 'El genio del humor negro y la crítica social', descripcion: 'Aportó un tono irreverente y una aguda crítica a la autoridad adulta a través de personajes infantiles memorables y resilientes. Sus historias combinan fantasía, aventura y una dosis de oscuridad.', obras: ['Matilda', 'Charlie y la fábrica de chocolate', 'Las Brujas'], valor: 'Estimula el pensamiento crítico y la empatía hacia los desvalidos. Valida los sentimientos de los niños frente a la injusticia del mundo adulto.' },
+                    { id: 4, nombre: 'Maurice Sendak', tipo: 'Clásico', tagline: 'El explorador de la psicología infantil', descripcion: 'Con su obra maestra "Donde viven los monstruos", desafió la idea de que los libros infantiles debían ser siempre reconfortantes. Exploró emociones complejas como la ira y el miedo, mostrando la imaginación como un refugio.', obras: ['Donde viven los monstruos', 'La cocina de noche'], valor: 'Aborda la complejidad psicológica infantil, permitiendo a los niños reconocer y procesar sus propias emociones. Legitimó la exploración de temas difíciles en la literatura infantil.' },
+                    { id: 5, nombre: 'Anna Llenas', tipo: 'Contemporáneo', tagline: 'La arquitecta de la inteligencia emocional', descripcion: 'Creó una herramienta esencial para la educación emocional con "El Monstruo de Colores". Su obra asocia emociones complejas con colores simples, facilitando que los niños las identifiquen, definan y manejen.', obras: ['El Monstruo de Colores', 'Vacío', 'Topito Terremoto'], valor: 'Ofrece una herramienta práctica para padres y educadores en la gestión de emociones. Representa la tendencia de la literatura infantil como recurso para el desarrollo personal.' },
+                    { id: 6, nombre: 'Begoña Oro', tipo: 'Contemporáneo', tagline: 'La constructora de hábitos lectores', descripcion: 'Pilar de la literatura para primeros lectores en España, ha creado series exitosas como "La Pandilla de la Ardilla". Su modelo de personajes recurrentes crea un "efecto cadena" que engancha al lector y facilita la transición a la lectura independiente.', obras: ['Serie: La Pandilla de la Ardilla', 'Serie: El Dragón de las Letras'], valor: 'Facilita la transición a la lectura independiente a través de la familiaridad y el cariño por los personajes. Fomenta el hábito lector de manera lúdica.' },
+                    { id: 7, nombre: 'Pedro Mañas', tipo: 'Contemporáneo', tagline: 'El narrador de la fantasía con propósito', descripcion: 'Conocido por series como "Anna Kadabra" y "Princesas Dragón", utiliza la fantasía y el humor para abordar temas relevantes como la amistad, el empoderamiento femenino y problemas complejos como el acoso escolar.', obras: ['Serie: Anna Kadabra', 'Serie: Princesas Dragón', 'Un lobo dentro'], valor: 'Desarrolla la fluidez lectora a través de tramas atractivas mientras integra la exploración de problemas del mundo real de manera accesible y empoderadora.' },
+                    { id: 8, nombre: 'C.S. Lewis', tipo: 'Clásico', tagline: 'El arquitecto de mundos de fantasía y alegoría', descripcion: 'Creador de Narnia, usó la fantasía para explorar temas complejos de la fe, la moralidad y la redención de una forma que resonara con los jóvenes lectores. Su prosa es clara y su imaginación, sin límites.', obras: ['Las Crónicas de Narnia', 'El sobrino del mago', 'El león, la bruja y el armario'], valor: 'Introduce la alta fantasía y la alegoría. Fomenta la discusión sobre la moral, el bien y el mal, y la perseverancia a través de historias épicas.' },
+                    { id: 9, nombre: 'Ursula K. Le Guin', tipo: 'Contemporáneo', tagline: 'La humanista de la ciencia ficción', descripcion: 'Autora de la célebre saga de "Terramar", Ursula K. Le Guin es una maestra de la fantasía que trasciende el género. Sus historias, profundamente filosóficas, exploran el equilibrio, el poder y la complejidad del ser humano, y han influido a generaciones de escritores.', obras: ['Un mago de Terramar', 'Las tumbas de Atuan', 'La costa más lejana'], valor: 'Fomenta el pensamiento crítico y la exploración de temas complejos de forma sutil y poética. Sus obras son un puente ideal entre la fantasía juvenil y la literatura adulta.' },
+                    { id: 10, nombre: 'Antoine de Saint-Exupéry', tipo: 'Clásico', tagline: 'El poeta y filósofo de la infancia perdida', descripcion: 'Su obra maestra, El Principito, es un clásico atemporal que explora la soledad, la amistad, el amor y la pérdida, a través de los ojos de un niño. Su estilo es poético y sus ilustraciones son icónicas.', obras: ['El Principito'], valor: 'Ofrece una profunda reflexión filosófica sobre la vida y la condición humana, accesible para lectores de todas las edades.' },
+                    { id: 11, nombre: 'Lewis Carroll', tipo: 'Clásico', tagline: 'El maestro del sinsentido y la lógica invertida', descripcion: 'A través de Alicia en el País de las Maravillas, desafió las convenciones narrativas y el lenguaje. Su obra es un juego de lógica, imaginación y humor que estimula la creatividad y el pensamiento lateral.', obras: ['Las aventuras de Alicia en el País de las Maravillas', 'A través del espejo'], valor: 'Desarrolla el pensamiento abstracto y la creatividad. Demuestra la flexibilidad y el poder del lenguaje.' },
+                    { id: 12, nombre: 'Beatrix Potter', tipo: 'Clásico', tagline: 'La pintora de la naturaleza y el costumbrismo', descripcion: 'Sus historias del conejo Peter son un pilar de la literatura infantil. Con ilustraciones detalladas y textos sencillos, humaniza a los animales y presenta lecciones morales sutiles sobre la obediencia y la curiosidad.', obras: ['El cuento de Peter Rabbit'], valor: 'Fomenta la apreciación por la naturaleza y la estética visual. Introduce lecciones morales de forma suave y didáctica.' },
+                    { id: 13, nombre: 'Astrid Lindgren', tipo: 'Clásico', tagline: 'La defensora de la libertad y el juego', descripcion: 'Con personajes como Pippi Calzaslargas, Lindgren creó figuras rebeldes y fuertes que desafiaron las normas de su época. Sus historias celebran la independencia, la imaginación y la alegría de ser niño.', obras: ['Pippi Calzaslargas', 'Ronja, la hija del bandolero'], valor: 'Promueve la independencia, la curiosidad y la no conformidad. Aboga por los derechos de la infancia y la libertad de expresión.' },
+                    { id: 14, nombre: 'J.R.R. Tolkien', tipo: 'Clásico', tagline: 'El creador de mundos, mitos y héroes', descripcion: 'Aunque más conocido por El Señor de los Anillos, El Hobbit es una de las grandes aventuras de la literatura infantil. Su capacidad para crear un universo completo con sus propias lenguas, historia y mitología es inigualable.', obras: ['El Hobbit'], valor: 'Introduce el concepto de fantasía épica y la construcción de mundos. Fomenta la paciencia y la inmersión en narrativas complejas.' },
+                    { id: 15, nombre: 'Philip Pullman', tipo: 'Contemporáneo', tagline: 'El explorador de la moralidad y la autoridad', descripcion: 'Con la trilogía La materia oscura, Pullman desafió las ideas tradicionales de la religión y el destino. Sus libros son intelectualmente densos pero accesibles, mezclando la fantasía con la física cuántica.', obras: ['Luces del Norte'], valor: 'Estimula el pensamiento crítico y la exploración de temas complejos como la libertad y el poder. Considerado un puente hacia la literatura adulta.' },
+                    { id: 16, nombre: 'Rick Riordan', tipo: 'Contemporáneo', tagline: 'El renovador de la mitología para la era digital', descripcion: 'Con la serie de Percy Jackson, Riordan hizo que la mitología griega y romana fuera accesible y emocionante para una nueva generación. Sus historias son rápidas, llenas de acción y humor.', obras: ['Percy Jackson y el ladrón del rayo'], valor: 'Inspira el interés por la mitología, la historia y la cultura clásica de forma divertida y moderna. Fomenta la lectura de series.' },
+                    { id: 17, nombre: 'Frances Hodgson Burnett', tipo: 'Clásico', tagline: 'La cronista de la resiliencia y el poder de la imaginación', descripcion: 'Sus novelas, como "El jardín secreto", son una oda a la curación emocional, el crecimiento personal y la importancia de la naturaleza y el amor. Sus historias han tocado el corazón de generaciones de lectores, demostrando que incluso en las circunstancias más difíciles se puede encontrar la luz.', obras: ['El jardín secreto', 'La princesita', 'El pequeño lord'], valor: 'Ofrece lecciones inmortales sobre la resiliencia, la bondad y la importancia de la conexión humana. Sus obras son un refugio de esperanza y un estímulo para el alma.' },
+                    { id: 18, nombre: 'Jeff Kinney', tipo: 'Contemporáneo', tagline: 'El cronista del humor adolescente y los cómics', descripcion: 'Con El Diario de Greg, Kinney revolucionó la literatura para jóvenes con un formato híbrido entre novela y cómic. Capturó la voz y las ansiedades de la preadolescencia de una forma humorística y relatable.', obras: ['Diario de Greg'], valor: 'Engancha a los lectores reacios y demuestra que la lectura puede ser divertida y visual. Ofrece un retrato auténtico de la vida escolar.' },
+                    { id: 19, nombre: 'Dav Pilkey', tipo: 'Contemporáneo', tagline: 'El creador del humor tonto y los cómics para niños', descripcion: 'Con Capitán Calzoncillos, Pilkey creó una serie que celebra el humor irreverente y tonto. Usa cómics y "fliporamas" para mantener el interés de los lectores que se distraen fácilmente.', obras: ['Capitán Calzoncillos'], valor: 'Un gancho infalible para los lectores reacios. Demuestra que el humor y la simplicidad son herramientas poderosas para la alfabetización.' },
+                    { id: 20, nombre: 'Holly Black', tipo: 'Contemporáneo', tagline: 'La maestra de la fantasía urbana y los cuentos de hadas oscuros', descripcion: 'Especializada en la fantasía moderna, Black a menudo sitúa a los personajes de cuentos de hadas en contextos urbanos y explora temas como la identidad, el poder y la moralidad en mundos mágicos y peligrosos.', obras: ['Las Crónicas de Spiderwick', 'El príncipe cruel'], valor: 'Ofrece una visión moderna y oscura de la fantasía, atrayendo a lectores que buscan historias con personajes complejos y moralidad ambigua.' },
+                    { id: 21, nombre: 'P.L. Travers', tipo: 'Clásico', tagline: 'La creadora de la niñera más misteriosa', descripcion: 'Mary Poppins es un personaje enigmático y severo, una figura que contrasta con la visión idealizada de la infancia. La magia en sus historias es sutil y a menudo acompañada de una lección de vida.', obras: ['Mary Poppins'], valor: 'Enseña sobre la disciplina, la imaginación y la importancia de ver el mundo desde una perspectiva diferente. Un clásico con lecciones atemporales.' },
+                    { id: 22, nombre: 'E.B. White', tipo: 'Clásico', tagline: 'El cronista de la amistad y la naturaleza', descripcion: 'Sus historias como "La telaraña de Carlota" son un pilar de la literatura infantil. Aborda temas de amistad, muerte y lealtad con una sensibilidad y sencillez que resuenan en niños y adultos.', obras: ['La telaraña de Carlota', 'Stuart Little', 'La trompeta del cisne'], valor: 'Fomenta la empatía y una comprensión profunda de la vida y el ciclo de la naturaleza. Un clásico que fomenta la lectura para toda la vida.' },
+                    { id: 23, nombre: 'A.A. Milne', tipo: 'Clásico', tagline: 'El maestro de la inocencia y la imaginación', descripcion: 'Creador de Winnie-the-Pooh, Milne construyó un mundo de fantasía basado en los juegos de su hijo. Sus historias son una oda a la inocencia de la infancia y la importancia de la amistad.', obras: ['Winnie-the-Pooh'], valor: 'Captura la esencia de la amistad y la imaginación infantil, ofreciendo un refugio de calma y seguridad en el mundo.' },
+                    { id: 24, nombre: 'L. Frank Baum', tipo: 'Clásico', tagline: 'El pionero de la fantasía estadounidense', descripcion: 'Su obra "El maravilloso mago de Oz" fue una de las primeras fantasías modernas en Estados Unidos. Sus historias están llenas de personajes estrafalarios y aventuras imaginativas, alejándose de las moralinas típicas de su época.', obras: ['El maravilloso mago de Oz'], valor: 'Introduce la fantasía como un género de evasión pura y exploración imaginativa. Un viaje atemporal de autodescubrimiento.' },
+                    { id: 25, nombre: 'Jules Verne', tipo: 'Clásico', tagline: 'El visionario de la ciencia ficción', descripcion: 'Aunque sus obras son a menudo consideradas para adultos, su estilo de aventura es perfecto para lectores jóvenes. Sus viajes a la Luna o al centro de la Tierra inspiraron a generaciones de científicos y soñadores.', obras: ['Veinte mil leguas de viaje submarino', 'La vuelta al mundo en 80 días'], valor: 'Fomenta el interés por la ciencia, la tecnología y la exploración. Un puente entre la ficción y la realidad para mentes curiosas.' },
+                    { id: 26, nombre: 'Lucy Maud Montgomery', tipo: 'Clásico', tagline: 'La cronista del crecimiento y la vida en la naturaleza', descripcion: 'Con "Ana de las Tejas Verdes", creó una heroína rebelde y romántica que cautivó a los lectores. Su obra es una celebración de la imaginación, la naturaleza y la vida rural.', obras: ['Ana de las Tejas Verdes'], valor: 'Una historia atemporal sobre la aceptación, el autodescubrimiento y la importancia de la imaginación. Perfecta para lectores que buscan una conexión emocional profunda.' },
+                    { id: 27, nombre: 'Kenneth Grahame', tipo: 'Clásico', tagline: 'El poeta de la naturaleza y la amistad', descripcion: 'Su libro "El viento en los sauces" es una obra maestra de la literatura animal. A través de animales con personalidad humana, explora temas como el hogar, la aventura y la lealtad.', obras: ['El viento en los sauces'], valor: 'Un clásico poético que fomenta el aprecio por la naturaleza y los valores de la amistad. Un libro para ser leído y releído.' },
+                    { id: 28, nombre: 'Rudyard Kipling', tipo: 'Clásico', tagline: 'El narrador de la selva y las fábulas animales', descripcion: 'Sus "Libros de la selva" son una colección de historias que exploran la ley de la naturaleza y la civilización humana. A pesar de su controversia, sus historias son fascinantes.', obras: ['El libro de la selva'], valor: 'Introduce el formato de fábula con una perspectiva salvaje y épica. Un libro que fomenta la reflexión sobre el lugar del ser humano en la naturaleza.' },
+                    { id: 29, nombre: 'Robert Louis Stevenson', tipo: 'Clásico', tagline: 'El maestro de la aventura y la intriga', descripcion: 'Con "La isla del tesoro", creó un arquetipo de la novela de aventuras. Su prosa es rápida y sus personajes son memorables, perfectos para sumergir a los jóvenes lectores en el género de la aventura.', obras: ['La isla del tesoro', 'El extraño caso del Dr. Jekyll y Mr. Hyde'], valor: 'Un clásico de la aventura que introduce conceptos como la moralidad, la avaricia y el coraje en un formato emocionante y lleno de acción.' },
+                    { id: 30, nombre: 'Mark Twain', tipo: 'Clásico', tagline: 'El padre de la novela juvenil estadounidense', descripcion: 'Sus novelas de Tom Sawyer y Huckleberry Finn son un retrato de la infancia en la América del siglo XIX. Su estilo es humorístico y directo, perfecto para un lector joven.', obras: ['Las aventuras de Tom Sawyer', 'Las aventuras de Huckleberry Finn'], valor: 'Introduce la novela de aventuras y explora temas de libertad, amistad y crítica social en un formato accesible y entretenido.' },
+                    { id: 31, nombre: 'Jordi Sierra i Fabra', tipo: 'Contemporáneo', tagline: 'El prolífico narrador de historias', descripcion: 'Autor de más de 400 libros, es uno de los autores más importantes de la literatura juvenil en español. Sus obras abarcan una amplia variedad de géneros, desde la ciencia ficción hasta el realismo social, con un enfoque en temas de actualidad.', obras: ['Campos de fresas', 'El asesinato del profesor de matemáticas'], valor: 'Un puente ideal para jóvenes lectores en español. Sus historias son relevantes, rápidas y conectan con las preocupaciones de los adolescentes.' },
+                    { id: 32, nombre: 'Pam Muñoz Ryan', tipo: 'Contemporáneo', tagline: 'La narradora de la resiliencia y la historia', descripcion: 'Con "Esperanza renace", ha escrito una novela histórica que explora temas como la migración y la superación de la adversidad. Sus obras son un reflejo de la historia y la cultura de las comunidades latinas.', obras: ['Esperanza renace', 'El sueño de la pulga'], valor: 'Introduce la novela histórica de una forma accesible y emocional. Un libro que fomenta la empatía y la comprensión de diferentes culturas.' },
+                    { id: 33, nombre: 'Jacqueline Wilson', tipo: 'Contemporáneo', tagline: 'La voz de la infancia británica', descripcion: 'Sus novelas exploran la realidad de la vida familiar contemporánea en Reino Unido, con personajes que enfrentan el divorcio, las familias ensambladas y el acoso. Su estilo es directo y realista, perfecto para lectores jóvenes.', obras: ['La historia de Tracy Beaker'], valor: 'Un retrato honesto y sin rodeos de la vida real. Ofrece a los jóvenes lectores una forma de entender y procesar las dificultades de la vida.' },
+                    { id: 34, nombre: 'Julia Donaldson', tipo: 'Contemporáneo', tagline: 'La reina de las rimas y los cuentos ilustrados', descripcion: 'Con "El Grúfalo", Donaldson ha creado un clásico instantáneo. Su estilo de rima y ritmo es perfecto para la lectura en voz alta. Su trabajo fomenta la fluidez lectora y el amor por el sonido de las palabras.', obras: ['El Grúfalo', 'La oruga glotona', 'Un mapache en mi mochila'], valor: 'Fomenta el amor por la lectura en voz alta. Sus historias son perfectas para desarrollar la conciencia fonológica y el vocabulario en los más pequeños.' },
+                    { id: 35, nombre: 'Mo Willems', tipo: 'Contemporáneo', tagline: 'El maestro del humor y la emoción con trazos sencillos', descripcion: 'Sus libros de la serie "No dejes que la paloma conduzca el autobús" son una oda a la simplicidad y el humor. Sus ilustraciones minimalistas y el uso de onomatopeyas y diálogos sencillos son un gancho infalible.', obras: ['No dejes que la paloma conduzca el autobús'], valor: 'Un autor ideal para lectores reacios. Su estilo visual y humorístico demuestra que la lectura puede ser una actividad divertida y accesible.' },
+                    { id: 36, nombre: 'Cornelia Funke', tipo: 'Contemporáneo', tagline: 'La narradora de la fantasía que cobra vida', descripcion: 'Con "Corazón de tinta", Funke creó un mundo donde las palabras y los personajes de los libros pueden saltar a la realidad. Su obra es una celebración de la magia de la lectura y el poder de la imaginación.', obras: ['Corazón de tinta', 'El jinete del dragón'], valor: 'Celebra la lectura y la imaginación. Un libro que es una declaración de amor a las historias y al poder de la ficción.' },
+                    { id: 37, nombre: 'Louis Sachar', tipo: 'Contemporáneo', tagline: 'El maestro del realismo mágico y el misterio', descripcion: 'Con "Hoyos", Sachar teje una trama compleja y llena de misterio, humor y realismo mágico. Su estilo es único y sus personajes son memorables.', obras: ['Hoyos', 'El chico del último banco'], valor: 'Un libro que es a la vez un thriller, un misterio y un cuento moral. Fomenta el pensamiento crítico y la capacidad de seguir una trama compleja.' },
+                    { id: 38, nombre: 'Sonia Fernández-Vidal', tipo: 'Contemporáneo', tagline: 'La divulgadora de la ciencia en la ficción', descripcion: 'Con "La puerta de los tres cerrojos", Fernández-Vidal utiliza la fantasía para explicar conceptos complejos de la física cuántica. Su obra es una forma divertida de introducir a los jóvenes en el mundo de la ciencia.', obras: ['La puerta de los tres cerrojos'], valor: 'Un libro que demuestra que la ciencia es tan emocionante como la fantasía. Un puente entre la ficción y el conocimiento científico.' },
+                    { id: 39, nombre: 'María Gripe', tipo: 'Clásico', tagline: 'La exploradora de los misterios y la psicología', descripcion: 'Sus novelas, como "La hija del espantapájaros", son cuentos profundos y a menudo oscuros que exploran la identidad, la soledad y la búsqueda de uno mismo. Su estilo es poético y melancólico.', obras: ['La hija del espantapájaros', 'El túnel de las tinieblas'], valor: 'Ofrece una visión profunda de la psicología infantil y los misterios de la vida. Un libro para lectores que buscan una historia con un mensaje más profundo.' },
+                    { id: 40, nombre: 'Kate DiCamillo', tipo: 'Contemporáneo', tagline: 'La cronista de la esperanza y la conexión humana', descripcion: 'Sus historias como "El tigre que bajó al jardín" son conmovedoras y esperanzadoras. Sus obras están llenas de personajes solitarios que encuentran su lugar en el mundo a través de la conexión con otros.', obras: ['El tigre que bajó al jardín', 'Flora y Ulises'], valor: 'Fomenta la empatía y la resiliencia, y enseña que la esperanza y la bondad pueden encontrarse incluso en las situaciones más difíciles.' }
+                ],
+                comparisonData: {
+                    labels: ['Innovación Pedagógica', 'Complejidad Emocional', 'Fantasía vs. Realismo', 'Rol de la Ilustración', 'Enfoque en Valores Sociales'],
+                    datasets: {
+                        'Dr. Seuss': [5, 2, 5, 4, 4],
+                        'Chris Van Allsburg': [2, 4, 4, 5, 2],
+                        'Roald Dahl': [3, 4, 4, 3, 5],
+                        'Maurice Sendak': [4, 5, 5, 5, 3],
+                        'Anna Llenas': [5, 5, 1, 4, 4],
+                        'Begoña Oro': [4, 2, 2, 3, 3],
+                        'Pedro Mañas': [3, 3, 5, 3, 4],
+                        'C.S. Lewis': [3, 4, 5, 2, 5],
+                        'Ursula K. Le Guin': [5, 5, 5, 3, 5],
+                        'Antoine de Saint-Exupéry': [5, 5, 5, 5, 5],
+                        'Lewis Carroll': [5, 4, 5, 4, 2],
+                        'Beatrix Potter': [2, 3, 1, 5, 4],
+                        'Astrid Lindgren': [4, 3, 3, 3, 5],
+                        'J.R.R. Tolkien': [3, 5, 5, 4, 4],
+                        'Philip Pullman': [5, 5, 5, 2, 5],
+                        'Rick Riordan': [4, 3, 5, 2, 4],
+                        'Frances Hodgson Burnett': [3, 5, 3, 4, 5],
+                        'Jeff Kinney': [5, 2, 1, 4, 2],
+                        'Dav Pilkey': [5, 1, 1, 5, 2],
+                        'Holly Black': [4, 4, 5, 3, 4],
+                        'P.L. Travers': [3, 4, 3, 3, 5],
+                        'E.B. White': [2, 5, 2, 3, 5],
+                        'A.A. Milne': [4, 5, 4, 5, 4],
+                        'L. Frank Baum': [3, 4, 5, 3, 4],
+                        'Jules Verne': [4, 3, 5, 1, 4],
+                        'Lucy Maud Montgomery': [2, 5, 3, 2, 5],
+                        'Kenneth Grahame': [2, 4, 3, 4, 4],
+                        'Rudyard Kipling': [3, 3, 4, 3, 5],
+                        'Robert Louis Stevenson': [2, 4, 4, 2, 3],
+                        'Mark Twain': [4, 4, 3, 2, 5],
+                        'Jordi Sierra i Fabra': [4, 3, 2, 1, 5],
+                        'Pam Muñoz Ryan': [3, 4, 2, 2, 5],
+                        'Jacqueline Wilson': [4, 4, 1, 2, 5],
+                        'Julia Donaldson': [5, 3, 2, 5, 3],
+                        'Mo Willems': [5, 4, 1, 5, 2],
+                        'Cornelia Funke': [4, 4, 5, 3, 4],
+                        'Louis Sachar': [5, 5, 3, 3, 4],
+                        'Sonia Fernández-Vidal': [4, 3, 5, 2, 4],
+                        'María Gripe': [3, 5, 3, 2, 5],
+                        'Kate DiCamillo': [4, 5, 3, 3, 5]
+                    }
+                }
+            };
+
+            const etapasTabsContainer = document.getElementById('etapas-tabs');
+            const etapasContentContainer = document.getElementById('etapas-content');
+            const autoresFiltersContainer = document.getElementById('autores-filters');
+            const autoresGridContainer = document.getElementById('autores-grid');
+            const showMoreBtn = document.getElementById('show-more-btn');
+            const authorModal = document.getElementById('author-modal');
+            const modalContent = document.getElementById('modal-content');
+            const closeModalButton = document.getElementById('close-modal');
+            const comparisonSelectBtn = document.getElementById('comparison-select-btn');
+            const comparisonSelectDropdown = document.getElementById('comparison-select-dropdown');
+
+            let activeEtapa = appData.etapas[0].id;
+            let activeFilter = 'todos';
+            let selectedAuthors = [];
+            let visibleAuthorsLimit = 16; // Initially show 16 authors (4 rows of 4)
+
+            function renderEtapas() {
+                etapasTabsContainer.innerHTML = appData.etapas.map(etapa => `
+                    <button data-id="${etapa.id}" class="etapa-tab px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base font-semibold rounded-full transition-colors duration-300 ${etapa.id === activeEtapa ? 'active-tab' : 'bg-white text-stone-700 hover:bg-red-100'}">
+                        ${etapa.nombre}
+                    </button>
+                `).join('');
+
+                const etapaData = appData.etapas.find(e => e.id === activeEtapa);
+                etapasContentContainer.innerHTML = `
+                    <p class="text-stone-600 mb-6">${etapaData.descripcion}</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        ${etapaData.recomendaciones.map(r => `
+                            <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                                <h4 class="font-bold text-red-800">${r.obra}</h4>
+                                <p class="text-sm text-stone-700">por ${r.autor}</p>
+                                <p class="text-xs text-stone-500 mt-1">Género/Tema: ${r.tema}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+
+                document.querySelectorAll('.etapa-tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        activeEtapa = tab.dataset.id;
+                        renderEtapas();
+                    });
+                });
+            }
+
+            function renderAutores() {
+                const filteredAutores = appData.autores.filter(autor => 
+                    activeFilter === 'todos' || autor.tipo.toLowerCase() === activeFilter
+                );
+                
+                const visibleAutores = filteredAutores.slice(0, visibleAuthorsLimit);
+                autoresGridContainer.innerHTML = visibleAutores.map(autor => `
+                    <div class="author-card bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer" data-id="${autor.id}">
+                        <div class="p-6">
+                            <h4 class="text-lg font-bold text-red-800">${autor.nombre}</h4>
+                            <p class="text-sm text-stone-600 mt-1">${autor.tagline}</p>
+                            <span class="inline-block bg-${autor.tipo === 'Clásico' ? 'red-100' : 'red-300'} text-${autor.tipo === 'Clásico' ? 'red-800' : 'red-900'} text-xs font-semibold mt-4 px-2.5 py-0.5 rounded-full">${autor.tipo}</span>
+                        </div>
+                    </div>
+                `).join('');
+                
+                showMoreBtn.classList.toggle('hidden', visibleAutores.length >= filteredAutores.length);
+                if (visibleAuthorsLimit >= filteredAutores.length) {
+                    showMoreBtn.textContent = 'Mostrar menos';
+                } else {
+                    showMoreBtn.textContent = 'Mostrar más';
+                }
+
+                document.querySelectorAll('.author-card').forEach(card => {
+                    card.addEventListener('click', () => showAuthorModal(card.dataset.id));
+                });
+            }
+
+            function renderAutoresFilters() {
+                const filters = ['todos', 'clásico', 'contemporáneo'];
+                autoresFiltersContainer.innerHTML = filters.map(filter => `
+                    <button data-filter="${filter}" class="autor-filter px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-300 ${filter === activeFilter ? 'active-tab' : 'bg-white text-stone-700 hover:bg-red-100'}">
+                        ${filter.charAt(0).toUpperCase() + filter.slice(1)}
+                    </button>
+                `).join('');
+
+                document.querySelectorAll('.autor-filter').forEach(button => {
+                    button.addEventListener('click', () => {
+                        activeFilter = button.dataset.filter;
+                        visibleAuthorsLimit = 16; // Reset limit on filter change
+                        renderAutoresFilters();
+                        renderAutores();
+                    });
+                });
+            }
+
+            showMoreBtn.addEventListener('click', () => {
+                const filteredAutores = appData.autores.filter(autor => activeFilter === 'todos' || autor.tipo.toLowerCase() === activeFilter);
+                if (visibleAuthorsLimit >= filteredAutores.length) {
+                    visibleAuthorsLimit = 16;
+                } else {
+                    visibleAuthorsLimit = filteredAutores.length;
+                }
+                renderAutores();
+            });
+            
+            function showAuthorModal(id) {
+                const autor = appData.autores.find(a => a.id == id);
+                modalContent.innerHTML = `
+                    <button id="close-modal-inner" class="absolute top-4 right-4 text-stone-500 hover:text-stone-800 text-3xl leading-none">&times;</button>
+                    <h3 class="text-3xl font-bold text-red-800 mb-2">${autor.nombre}</h3>
+                    <p class="text-md text-stone-600 italic mb-4">${autor.tagline}</p>
+                    <p class="text-stone-700 mb-6">${autor.descripcion}</p>
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-stone-800 mb-2">Obras Destacadas:</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-1">
+                            ${autor.obras.map(obra => `<li>${obra}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-stone-800 mb-2">Valor Pedagógico:</h4>
+                        <p class="text-stone-700">${autor.valor}</p>
+                    </div>
+                `;
+                authorModal.classList.remove('hidden');
+                authorModal.classList.add('flex');
+                document.getElementById('close-modal-inner').addEventListener('click', hideAuthorModal);
+            }
+
+            function hideAuthorModal() {
+                authorModal.classList.add('hidden');
+                authorModal.classList.remove('flex');
+            }
+
+            closeModalButton.addEventListener('click', hideAuthorModal);
+            authorModal.addEventListener('click', (e) => {
+                if (e.target === authorModal) {
+                    hideAuthorModal();
+                }
+            });
+
+            const ctx = document.getElementById('comparisonChart').getContext('2d');
+            let comparisonChart;
+            
+            function renderComparisonChart() {
+                const datasets = selectedAuthors.map((authorName, index) => {
+                    const colors = [
+                        'rgba(239, 68, 68, 0.6)', // red-500
+                        'rgba(248, 113, 113, 0.6)', // red-400
+                        'rgba(252, 165, 165, 0.6)' // red-300
+                    ];
+                    const borderColors = [
+                        'rgba(185, 28, 28, 1)',
+                        'rgba(220, 38, 38, 1)',
+                        'rgba(249, 115, 22, 1)'
+                    ];
+                    return {
+                        label: authorName,
+                        data: appData.comparisonData.datasets[authorName],
+                        backgroundColor: colors[index % colors.length],
+                        borderColor: borderColors[index % borderColors.length],
+                        borderWidth: 2,
+                        pointBackgroundColor: borderColors[index % borderColors.length]
+                    };
+                });
+                
+                if (comparisonChart) {
+                    comparisonChart.destroy();
+                }
+
+                comparisonChart = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: appData.comparisonData.labels,
+                        datasets: datasets
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: {
+                                    color: 'rgba(0, 0, 0, 0.1)'
+                                },
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.1)'
+                                },
+                                pointLabels: {
+                                    font: {
+                                        size: 12
+                                    },
+                                    color: '#44403c' // stone-700
+                                },
+                                suggestedMin: 0,
+                                suggestedMax: 5,
+                                ticks: {
+                                    stepSize: 1,
+                                    backdropColor: 'rgba(255, 255, 255, 0.75)'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        label += context.formattedValue;
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            function updateSelectButtonText() {
+                if (selectedAuthors.length === 0) {
+                    comparisonSelectBtn.textContent = 'Selecciona hasta 3 autores';
+                } else {
+                    comparisonSelectBtn.textContent = selectedAuthors.join(', ');
+                }
+            }
+
+            function renderComparisonDropdown() {
+                comparisonSelectDropdown.innerHTML = Object.keys(appData.comparisonData.datasets).map(autorNombre => `
+                    <label class="checkbox-label flex items-center">
+                        <input type="checkbox" name="author-checkbox" value="${autorNombre}" class="rounded text-red-600 focus:ring-red-500" data-author-name="${autorNombre}" ${selectedAuthors.includes(autorNombre) ? 'checked' : ''}>
+                        <span>${autorNombre}</span>
+                    </label>
+                `).join('');
+
+                const checkboxes = document.querySelectorAll('#comparison-select-dropdown input[type="checkbox"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', (e) => {
+                        const authorName = e.target.value;
+                        if (e.target.checked) {
+                            if (selectedAuthors.length < 3) {
+                                selectedAuthors.push(authorName);
+                            } else {
+                                e.target.checked = false; 
+                                e.target.disabled = true;
+                                e.target.parentElement.classList.add('disabled');
+                                return;
+                            }
+                        } else {
+                            selectedAuthors = selectedAuthors.filter(name => name !== authorName);
+                        }
+                        
+                        updateCheckboxStates();
+                        updateSelectButtonText();
+                        renderComparisonChart();
+                    });
+                });
+                updateCheckboxStates();
+            }
+
+            function updateCheckboxStates() {
+                const checkboxes = document.querySelectorAll('#comparison-select-dropdown input[type="checkbox"]');
+                const isMaxSelected = selectedAuthors.length >= 3;
+                checkboxes.forEach(checkbox => {
+                    if (isMaxSelected && !checkbox.checked) {
+                        checkbox.disabled = true;
+                        checkbox.parentElement.classList.add('disabled');
+                    } else {
+                        checkbox.disabled = false;
+                        checkbox.parentElement.classList.remove('disabled');
+                    }
+                });
+            }
+
+            comparisonSelectBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                comparisonSelectDropdown.classList.toggle('hidden');
+                comparisonSelectBtn.classList.toggle('open');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!comparisonSelectBtn.contains(e.target) && !comparisonSelectDropdown.contains(e.target)) {
+                    comparisonSelectDropdown.classList.add('hidden');
+                    comparisonSelectBtn.classList.remove('open');
+                }
+            });
+
+            renderEtapas();
+            renderAutoresFilters();
+            renderAutores();
+            renderComparisonDropdown();
+            updateSelectButtonText();
+            renderComparisonChart();
+        });
+    </script>
+</body>
+</html>
