@@ -10,10 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" href="/portfolio/pedagogia/universidad/UA.svg" type="image/svg+xml">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Biblioteca Serena (Warm neutrals like stone/beige with muted teal and terracotta accents) -->
-    <!-- Application Structure Plan: A single-page, non-linear application with a top navigation bar for quick access. The structure prioritizes user tasks: 1) 'Guía por Etapa' for immediate age-based recommendations via interactive tabs. 2) 'Explora los Autores' with a paginated, filterable grid of cards and click-to-reveal details for deep dives. 3) An interactive 'Clásicos vs. Contemporáneos' radar chart for dynamic comparison, now with a much larger dataset. 4) 'Criterios de Selección' in an accordion for digestible principles. This task-oriented flow is more intuitive and engaging for a parent or educator than the report's original linear format and handles a larger volume of content gracefully via pagination. -->
-    <!-- Visualization & Content Choices: 1) Author Comparison: The static table is transformed into an interactive Radar Chart (Chart.js) to allow users to dynamically compare selected authors across key dimensions, promoting active analysis with an expanded list. 2) Author Directory: Presented as a filterable grid of cards with a 'show more' button (HTML/Tailwind/JS) to handle the increased content volume without cluttering the page, with modals for detailed info. 3) Reading Stages: Interactive tabs (HTML/Tailwind/JS) are used to segment recommendations, directly addressing the primary user goal of finding age-appropriate content. All choices prioritize interaction and clarity over static text. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -75,8 +71,20 @@
     <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <div class="flex-shrink-0">
+                <div class="flex-shrink-0 flex items-center space-x-4">
                     <h1 class="text-xl font-bold text-red-700">Guía para Lectura Infantil</h1>
+                    <div class="flex items-center space-x-2">
+                        <audio id="podcast-audio" src="podcast.m4a" preload="auto"></audio>
+                        <button id="podcast-btn" class="flex items-center space-x-2 px-4 py-2 rounded-full bg-red-600 text-white font-semibold hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                            <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                            </svg>
+                            <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 011-1v4a1 1 01-1 1V7z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Reproducir Podcast</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
@@ -283,6 +291,11 @@
             const closeModalButton = document.getElementById('close-modal');
             const comparisonSelectBtn = document.getElementById('comparison-select-btn');
             const comparisonSelectDropdown = document.getElementById('comparison-select-dropdown');
+            const podcastAudio = document.getElementById('podcast-audio');
+            const podcastBtn = document.getElementById('podcast-btn');
+            const playIcon = document.getElementById('play-icon');
+            const pauseIcon = document.getElementById('pause-icon');
+            const podcastText = document.getElementById('podcast-text');
 
             let activeEtapa = appData.etapas[0].id;
             let activeFilter = 'todos';
@@ -555,6 +568,19 @@
                 if (!comparisonSelectBtn.contains(e.target) && !comparisonSelectDropdown.contains(e.target)) {
                     comparisonSelectDropdown.classList.add('hidden');
                     comparisonSelectBtn.classList.remove('open');
+                }
+            });
+            
+            // Lógica para el botón de podcast
+            podcastBtn.addEventListener('click', () => {
+                if (podcastAudio.paused) {
+                    podcastAudio.play();
+                    playIcon.classList.add('hidden');
+                    pauseIcon.classList.remove('hidden');
+                } else {
+                    podcastAudio.pause();
+                    playIcon.classList.remove('hidden');
+                    pauseIcon.classList.add('hidden');
                 }
             });
 
