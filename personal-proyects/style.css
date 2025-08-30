@@ -1,0 +1,124 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    color: #333;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.profile-column {
+    width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-weight: 600;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: #007BFF;
+    margin: 0 10px;
+    font-weight: 400;
+}
+
+.stories-column {
+    flex-grow: 1;
+    margin-left: 320px;
+    padding: 20px;
+}
+
+.stories-grid {
+    display: grid;
+    /* Ajuste para 5 recuadros por fila */
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.story-card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.story-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+}
+
+.story-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    background-color: #eee;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.story-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.story-content h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.story-content p {
+    font-size: 0.9em;
+    color: #666;
+    height: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+.read-button {
+    display: block;
+    width: calc(100% - 30px);
+    text-align: center;
+    padding: 12px 15px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.read-button:hover {
+    background-color: #0056b3;
+}

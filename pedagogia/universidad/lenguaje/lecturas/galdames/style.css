@@ -1,0 +1,193 @@
+:root {
+    --primary-color: #dc3545; /* Rojo */
+    --secondary-color: #6c757d;
+    --background-color: #f8f9fa;
+    --text-color: #343a40;
+    --light-text-color: #fff;
+    --border-color: #dee2e6;
+    --card-bg-color: #ffffff;
+    --button-bg-color: #c82333; /* Rojo más oscuro para el hover */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 1.5rem 0;
+    text-align: center;
+}
+
+.nav-title {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.section-title, .section-subtitle {
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    font-size: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-top: 2rem;
+}
+
+.description {
+    text-align: center;
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.card {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h4 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.toggle-button {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+    background-color: var(--button-bg-color);
+}
+
+.hidden-content {
+    display: none;
+    margin-top: 1rem;
+    text-align: left;
+    background-color: #f1f1f1;
+    padding: 1rem;
+    border-left: 3px solid var(--primary-color);
+    transition: all 0.3s ease-in-out;
+}
+
+.hidden-content.active {
+    display: block;
+}
+
+/* Sección de Conceptos Clave */
+.concepts-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.concept-item {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+    width: 250px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.concept-item:hover {
+    transform: translateY(-5px);
+}
+
+.concept-item h4 {
+    margin: 0 0 0.5rem;
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+}
+
+.concept-item p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.extra-info-section {
+    margin-top: 2rem;
+}
+
+.info-item {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.info-item h4 {
+    margin-top: 0;
+    color: var(--secondary-color);
+}
+
+.footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    background-color: var(--secondary-color);
+    color: var(--light-text-color);
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .card {
+        width: 90%;
+    }
+}
