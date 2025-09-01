@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta: Manual de Escritura Creativa para Educación Básica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="/portfolio/pedagogia/universidad/UA.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Teal Accent -->
+    <!-- Application Structure Plan: Se diseñó una estructura de aplicación de una sola página con desplazamiento vertical, dividida en secciones temáticas claras (Diagnóstico, Propuesta, Prototipo, Fundamentación, Impacto). Esta arquitectura abandona el formato lineal del informe para priorizar un flujo de usuario intuitivo: primero se presenta el problema con datos visuales (el "porqué"), luego la solución general (el "qué") y finalmente el detalle interactivo del manual (el "cómo"). Este enfoque dashboard permite al usuario (docentes, directivos, académicos) captar rápidamente la esencia de la propuesta y profundizar en las secciones de su interés, como el prototipo interactivo, que es el núcleo de la aplicación. La navegación superior fija facilita el acceso directo a cada sección, mejorando la usabilidad. -->
+    <!-- Visualization & Content Choices: 
+    1. Datos de Competencia Lectora (Informe) -> Goal: Informar y crear urgencia -> Viz/Presentation: Gráfico de barras comparativo -> Interaction: Tooltips con datos precisos al pasar el mouse -> Justification: Un gráfico de barras es más impactante y fácil de digerir que texto con cifras, mostrando la brecha de rendimiento de forma inmediata. -> Library/Method: Chart.js (Canvas).
+    2. Fases del Proceso de Escritura (Informe) -> Goal: Organizar y explicar el prototipo -> Viz/Presentation: Diagrama de proceso interactivo con botones para cada fase -> Interaction: Clic en cada botón para mostrar/ocultar dinámicamente el contenido detallado de esa fase (descripción, ejemplos, habilidades). -> Justification: Transforma una larga descripción textual en una herramienta de exploración activa, permitiendo al usuario "navegar" por el manual propuesto de forma no lineal y enfocada. -> Library/Method: Vanilla JS (manipulación del DOM), HTML/Tailwind para la estructura.
+    3. Marco Teórico (Informe) -> Goal: Organizar texto académico denso -> Viz/Presentation: Componente de acordeón colapsable. -> Interaction: Clic en cada título para expandir y leer el contenido. -> Justification: Evita abrumar al usuario con un "muro de texto", manteniendo la interfaz limpia y permitiendo el acceso progresivo a la información teórica. -> Library/Method: Vanilla JS (manipulación de clases CSS), HTML/Tailwind.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #fdfcfb;
+            color: #4a4a4a;
+        }
+        h1, h2, h3 {
+            font-family: 'Merriweather', serif;
+            color: #2c3e50;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #14b8a6;
+            border-bottom-color: #14b8a6;
+        }
+        .process-tab.active {
+            background-color: #0d9488;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-700">
+
+    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-teal-700">Escritura Creativa Chile</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#diagnostico" class="nav-link font-semibold pb-1">Diagnóstico</a>
+                <a href="#propuesta" class="nav-link font-semibold pb-1">Propuesta</a>
+                <a href="#manual" class="nav-link font-semibold pb-1">El Manual</a>
+                <a href="#fundamentacion" class="nav-link font-semibold pb-1">Fundamentación</a>
+                <a href="#impacto" class="nav-link font-semibold pb-1">Impacto</a>
+            </div>
+            <div class="md:hidden">
+                <select id="mobile-nav" class="border border-gray-300 rounded-md p-2 bg-white text-sm">
+                    <option value="#diagnostico">Diagnóstico</option>
+                    <option value="#propuesta">Propuesta</option>
+                    <option value="#manual">El Manual</option>
+                    <option value="#fundamentacion">Fundamentación</option>
+                    <option value="#impacto">Impacto</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 md:py-16">
+
+        <section class="text-center mb-16 md:mb-24">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">Un Manual de Escritura Creativa para la Educación Básica en Chile</h1>
+            <p class="text-lg md:text-xl text-stone-600 max-w-3xl mx-auto">Una propuesta didáctica centrada en el proceso de escritura para potenciar la expresión, la creatividad y el pensamiento crítico en las aulas chilenas.</p>
+        </section>
+
+        <section id="diagnostico" class="mb-16 md:mb-24 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center mb-2">El Diagnóstico</h2>
+            <p class="text-center text-stone-600 mb-8 max-w-2xl mx-auto">
+                La propuesta nace de una necesidad urgente: los bajos índices de competencia lectora y de producción de textos en Chile. Datos consistentes de pruebas nacionales e internacionales revelan una brecha significativa que requiere nuevas herramientas pedagógicas.
+            </p>
+            <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-200">
+                <h3 class="text-xl font-bold text-center mb-4">Competencia Lectora en Chile vs. Promedio OCDE</h3>
+                <p class="text-center text-sm text-stone-500 mb-4">(Nivel 2 o superior, Prueba PISA)</p>
+                <div class="chart-container">
+                    <canvas id="pisaChart"></canvas>
+                </div>
+                <p class="text-sm text-stone-600 mt-4 text-center max-w-xl mx-auto">Este gráfico ilustra la diferencia en el porcentaje de estudiantes que alcanzan al menos el nivel básico de competencia lectora. La brecha evidencia un desafío estructural en cómo se enseña a leer y, por extensión, a escribir.</p>
+            </div>
+        </section>
+
+        <section id="propuesta" class="mb-16 md:mb-24 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center mb-2">La Propuesta: Un Nuevo Enfoque</h2>
+             <p class="text-center text-stone-600 mb-8 max-w-2xl mx-auto">
+                Se propone la creación de un manual de escritura creativa que se aleje del enfoque tradicional centrado en el producto final y la gramática. En su lugar, el manual se enfoca en el <span class="font-bold text-teal-700">proceso de la escritura</span> como eje didáctico.
+            </p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-200 transition-all duration-300 hover:scale-105 hover:shadow-xl text-center">
+                    <div class="text-4xl mb-4 text-teal-600">✍️</div>
+                    <h3 class="text-xl font-bold mb-2">Foco en el Proceso</h3>
+                    <p class="text-stone-600">Acompaña al estudiante a través de las etapas de investigar, planificar, escribir, revisar y publicar, valorando cada paso como una instancia de aprendizaje.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-200 transition-all duration-300 hover:scale-105 hover:shadow-xl text-center">
+                    <div class="text-4xl mb-4 text-teal-600">💡</div>
+                    <h3 class="text-xl font-bold mb-2">Creatividad y Expresión</h3>
+                    <p class="text-stone-600">Ofrece un espacio para que los estudiantes exploren su voz, sus ideas y emociones, utilizando la escritura como un medio de autodescubrimiento y comunicación.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-200 transition-all duration-300 hover:scale-105 hover:shadow-xl text-center">
+                    <div class="text-4xl mb-4 text-teal-600">🤝</div>
+                    <h3 class="text-xl font-bold mb-2">Desarrollo de Habilidades</h3>
+                    <p class="text-stone-600">Más allá de la redacción, fomenta habilidades blandas clave como la resolución de problemas, la empatía, la resiliencia y la colaboración.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="manual" class="mb-16 md:mb-24 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center mb-2">Explora el Manual</h2>
+            <p class="text-center text-stone-600 mb-8 max-w-2xl mx-auto">
+                El manual se estructura en cinco fases interconectadas que guían al estudiante en su viaje como escritor. Haz clic en cada fase para descubrir su enfoque didáctico, ejemplos de actividades y las habilidades que desarrolla.
+            </p>
+            <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8" id="process-tabs">
+                <button data-tab="investigacion" class="process-tab active font-semibold py-2 px-4 rounded-full bg-white shadow-sm border border-stone-200 transition-all duration-300">1. Investigación</button>
+                <button data-tab="planificacion" class="process-tab font-semibold py-2 px-4 rounded-full bg-white shadow-sm border border-stone-200 transition-all duration-300">2. Planificación</button>
+                <button data-tab="textualizacion" class="process-tab font-semibold py-2 px-4 rounded-full bg-white shadow-sm border border-stone-200 transition-all duration-300">3. Textualización</button>
+                <button data-tab="revision" class="process-tab font-semibold py-2 px-4 rounded-full bg-white shadow-sm border border-stone-200 transition-all duration-300">4. Revisión</button>
+                <button data-tab="publicacion" class="process-tab font-semibold py-2 px-4 rounded-full bg-white shadow-sm border border-stone-200 transition-all duration-300">5. Publicación</button>
+            </div>
+
+            <div id="process-content" class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-stone-200 min-h-[300px]">
+            </div>
+        </section>
+
+        <section id="fundamentacion" class="mb-16 md:mb-24 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center mb-8">Fundamentación Teórica y Metodológica</h2>
+            <div class="max-w-3xl mx-auto space-y-4" id="accordion-container">
+            </div>
+        </section>
+
+        <section id="impacto" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-center mb-2">Aportes e Impacto Potencial</h2>
+            <p class="text-center text-stone-600 mb-8 max-w-2xl mx-auto">
+                Este manual no es solo un recurso; es una intervención pedagógica que busca redefinir la enseñanza de la escritura en Chile, con aportes concretos en múltiples niveles.
+            </p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-200 transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                    <h3 class="font-bold text-xl mb-2 text-teal-700">Aporte Teórico</h3>
+                    <p class="text-stone-600">Integra el modelo de procesos de escritura (Didactext) con la didáctica de la escritura creativa, generando un marco conceptual robusto y adaptado a la realidad chilena.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-200 transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                    <h3 class="font-bold text-xl mb-2 text-teal-700">Aporte Metodológico</h3>
+                    <p class="text-stone-600">Ofrece una secuencia didáctica clara y flexible, con actividades concretas que los docentes pueden implementar directamente en el aula para guiar el proceso escritor.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-200 transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                    <h3 class="font-bold text-xl mb-2 text-teal-700">Aporte Práctico</h3>
+                    <p class="text-stone-600">Constituye un material de alto valor para estudiantes y profesores, llenando un vacío en los recursos pedagógicos actuales y fomentando una cultura de escritura en las escuelas.</p>
+                </div>
+            </div>
+             <div class="mt-12 text-center bg-teal-50 border-l-4 border-teal-500 text-teal-800 p-6 rounded-r-lg max-w-3xl mx-auto">
+                <p class="font-semibold">En última instancia, el objetivo es formar no solo mejores escritores, sino también ciudadanos más reflexivos, creativos y capaces de comunicar sus ideas para construir una sociedad mejor.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-4 text-center text-sm">
+            <p>Propuesta Académica de Manual de Escritura Creativa | Desarrollado como un prototipo interactivo.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const data = {
+                pisa: {
+                    labels: ['Chile', 'Promedio OCDE'],
+                    data: [73, 84], 
+                },
+                process: {
+                    investigacion: {
+                        title: 'Fase 1: Investigación - La Chispa de la Idea',
+                        description: 'En esta etapa inicial, el objetivo es despertar la curiosidad y enseñar a los estudiantes a encontrar inspiración en su entorno. Se les motiva a ser observadores, a leer, a conversar y a hacerse preguntas. No se trata de buscar respuestas, sino de coleccionar ideas, imágenes y sensaciones que servirán como materia prima para sus historias.',
+                        activities: [
+                            '<strong>Diario de observación:</strong> Anotar tres cosas curiosas vistas durante el día.',
+                            '<strong>Lluvia de ideas a partir de un objeto:</strong> ¿Qué historias podría contar una vieja llave encontrada en el patio?',
+                            '<strong>Entrevista a un familiar:</strong> Descubrir una anécdota de su infancia y tomar notas.'
+                        ],
+                        skills: 'Curiosidad, capacidad de observación, pensamiento divergente, empatía.'
+                    },
+                    planificacion: {
+                        title: 'Fase 2: Planificación - El Mapa del Tesoro',
+                        description: 'Aquí se aprende que las grandes historias no surgen de la nada, sino de un plan. Se entregan herramientas sencillas para estructurar las ideas recolectadas: esquemas, mapas conceptuales, perfiles de personajes o una simple secuencia de eventos. El objetivo es dar forma al caos inicial, creando una guía que evite el bloqueo del "papel en blanco".',
+                        activities: [
+                            '<strong>El esqueleto de la historia:</strong> Definir el inicio, el nudo y el desenlace en tres oraciones.',
+                            '<strong>Ficha de personaje:</strong> Crear un "carnet de identidad" para el protagonista (nombre, miedo, deseo).',
+                            '<strong>Mapa de lugares:</strong> Dibujar el escenario principal de la historia.'
+                        ],
+                        skills: 'Organización, pensamiento estructural, planificación, toma de decisiones.'
+                    },
+                    textualizacion: {
+                        title: 'Fase 3: Textualización - Dejando Fluir las Palabras',
+                        description: 'Esta es la fase de la escritura propiamente tal, pero con un enfoque liberador. Se anima a los estudiantes a escribir un primer borrador sin preocuparse por la perfección, la ortografía o la gramática. La meta es volcar las ideas planificadas en el papel, dándoles vida y voz. Es un acto de valentía y creación pura, donde se valora la fluidez sobre la corrección.',
+                        activities: [
+                            '<strong>Escritura cronometrada:</strong> Escribir sin parar durante 10 minutos sobre el tema planificado.',
+                            '<strong>Diálogos vivos:</strong> Enfocarse solo en escribir la conversación entre dos personajes.',
+                            '<strong>Describe con los cinco sentidos:</strong> Escribir un párrafo sobre el escenario usando la vista, el oído, el olfato, el gusto y el tacto.'
+                        ],
+                        skills: 'Fluidez, creatividad, superación del perfeccionismo, resiliencia.'
+                    },
+                    revision: {
+                        title: 'Fase 4: Revisión - Puliendo el Diamante',
+                        description: 'Con el primer borrador listo, comienza el trabajo del artesano. La revisión se presenta no como una corrección de errores, sino como una oportunidad de mejorar la historia. Se enseña a leer con "ojos de escritor", a preguntarse: ¿Se entiende la idea? ¿Puedo usar una palabra más potente? ¿El final es emocionante? Se promueve la auto-revisión y la retroalimentación entre pares.',
+                        activities: [
+                            '<strong>La caza de palabras repetidas:</strong> Usar un lápiz de color para marcar las palabras que se usan demasiado.',
+                            '<strong>Leer en voz alta:</strong> Descubrir frases que no suenan bien o que son difíciles de entender.',
+                            '<strong>Intercambio con un compañero:</strong> Recibir una sugerencia constructiva (qué fue lo que más le gustó y qué parte no entendió).'
+                        ],
+                        skills: 'Pensamiento crítico, autoevaluación, capacidad de recibir críticas, atención al detalle.'
+                    },
+                    publicacion: {
+                        title: 'Fase 5: Publicación - Compartiendo Mi Creación',
+                        description: 'La escritura cobra sentido cuando se comparte. Esta fase final celebra el esfuerzo y le da un propósito al texto. Publicar no significa necesariamente imprimir un libro; puede ser leer el cuento al curso, crear un blog, grabar un audiolibro o simplemente hacer una "exposición de historias" en el mural de la sala. El objetivo es cerrar el ciclo, sentir el orgullo del trabajo terminado y conectar con una audiencia.',
+                        activities: [
+                            '<strong>Círculo de lectura:</strong> Cada estudiante comparte su texto final con un grupo pequeño.',
+                            '<strong>Mural de cuentos:</strong> Ilustrar la historia y exhibirla en el pasillo de la escuela.',
+                            '<strong>Creación de un e-book del curso:</strong> Compilar todas las historias en un PDF para compartir con las familias.'
+                        ],
+                        skills: 'Confianza, habilidades de comunicación, orgullo por el trabajo propio, conexión con la comunidad.'
+                    }
+                },
+                accordion: [
+                    {
+                        title: 'Crítica al Sistema Educativo Actual',
+                        content: 'Los materiales didácticos vigentes en Chile, si bien han avanzado, tienden a enfocarse en la escritura funcional y en el dominio de la gramática normativa. La escritura creativa es a menudo relegada a un rol secundario o tratada como una actividad puntual, sin un andamiaje metodológico claro. Esto limita la capacidad de los estudiantes para ver la escritura como una herramienta de expresión personal y desarrollo del pensamiento.'
+                    },
+                    {
+                        title: 'El Modelo de Procesos de Escritura (Didactext)',
+                        content: 'Este manual se fundamenta en modelos sociocognitivos como el propuesto por el grupo Didactext. Este enfoque concibe la escritura no como un producto final, sino como un proceso recursivo y complejo que involucra subprocesos de planificación, textualización y revisión. Al hacer visibles estas etapas, se dota al estudiante de estrategias metacognitivas para gestionar su propia escritura, pasando de ser un mero "transcriptor" a un autor consciente de sus decisiones.'
+                    },
+                    {
+                        title: 'El Valor de la Escritura Creativa',
+                        content: 'Autores y pedagogos, desde Gianni Rodari hasta Brandon Sanderson, enfatizan que la escritura creativa es un "gimnasio" para la mente. No solo mejora la competencia comunicativa, sino que desarrolla habilidades blandas cruciales: la empatía (al ponerse en el lugar de los personajes), la resolución de problemas (al estructurar una trama coherente), la resiliencia (al enfrentar y reescribir borradores) y la creatividad. Es un vehículo para procesar emociones y comprender el mundo.'
+                    }
+                ]
+            };
+
+            const pisaCtx = document.getElementById('pisaChart').getContext('2d');
+            new Chart(pisaCtx, {
+                type: 'bar',
+                data: {
+                    labels: data.pisa.labels,
+                    datasets: [{
+                        label: '% de Estudiantes en Nivel 2 o Superior',
+                        data: data.pisa.data,
+                        backgroundColor: [
+                            'rgba(20, 184, 166, 0.6)',
+                            'rgba(107, 114, 128, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(13, 148, 136, 1)',
+                            'rgba(55, 65, 81, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const processTabsContainer = document.getElementById('process-tabs');
+            const processContentContainer = document.getElementById('process-content');
+
+            function updateProcessContent(tabKey) {
+                const content = data.process[tabKey];
+                if (!content) return;
+
+                processContentContainer.innerHTML = `
+                    <h3 class="text-2xl font-bold mb-4">${content.title}</h3>
+                    <p class="mb-6">${content.description}</p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold text-lg mb-2 text-teal-700">Ejemplos de Actividades</h4>
+                            <ul class="list-disc list-inside space-y-2 text-stone-600">
+                                ${content.activities.map(act => `<li>${act}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 p-4 rounded-lg">
+                             <h4 class="font-bold text-lg mb-2 text-teal-700">Habilidades Desarrolladas</h4>
+                             <p class="text-teal-900">${content.skills}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            processTabsContainer.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    const tabKey = e.target.dataset.tab;
+                    
+                    processTabsContainer.querySelectorAll('.process-tab').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    
+                    e.target.classList.add('active');
+                    updateProcessContent(tabKey);
+                }
+            });
+            
+            updateProcessContent('investigacion');
+
+            const accordionContainer = document.getElementById('accordion-container');
+            data.accordion.forEach((item, index) => {
+                const accordionItem = document.createElement('div');
+                accordionItem.className = 'border border-stone-200 rounded-lg bg-white overflow-hidden';
+                accordionItem.innerHTML = `
+                    <button class="accordion-toggle w-full text-left p-4 flex justify-between items-center font-bold text-lg hover:bg-stone-50 transition">
+                        <span>${item.title}</span>
+                        <span class="transform transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-4 pt-0 text-stone-600">
+                            ${item.content}
+                        </div>
+                    </div>
+                `;
+                accordionContainer.appendChild(accordionItem);
+            });
+
+            accordionContainer.addEventListener('click', e => {
+                const toggle = e.target.closest('.accordion-toggle');
+                if (toggle) {
+                    const content = toggle.nextElementSibling;
+                    const icon = toggle.querySelector('span:last-child');
+                    
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        document.querySelectorAll('.accordion-content').forEach(c => {
+                            c.style.maxHeight = null;
+                            c.previousElementSibling.querySelector('span:last-child').style.transform = 'rotate(0deg)';
+                        });
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                }
+            });
+
+            const mobileNav = document.getElementById('mobile-nav');
+            mobileNav.addEventListener('change', () => {
+                window.location.href = mobileNav.value;
+            });
+            
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
