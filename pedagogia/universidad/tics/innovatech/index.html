@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título ajustado -->
+    <title>Innovatech - Edición Ciberseguridad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Paleta de Colores del Afiche:
+           - Fondo Principal: #0a0a2a (Muy Oscuro, casi negro)
+           - Acento (Cian/Neón): #00ffff
+           - Acento (Naranja Quemado): #e34c26
+        */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a2a; /* Fondo Principal Oscuro */
+            color: #e5e7eb; /* Texto Gris Claro */
+        }
+        .header-bg {
+            /* ATENCIÓN: El nombre de la imagen de fondo ahora es 'fondo.jpg' */
+            background-image: linear-gradient(180deg, rgba(10, 10, 42, 0.9), rgba(10, 10, 42, 0.7)), url('fondo.jpg'); 
+            background-size: cover;
+            background-position: center;
+        }
+        .text-accent-neon {
+            color: #00ffff;
+        }
+        .bg-accent-neon {
+            background-color: #00ffff;
+        }
+        .hover\:bg-accent-neon:hover {
+            background-color: #00ffff;
+            color: #0a0a2a;
+        }
+        .border-accent-neon {
+            border-color: #00ffff;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navegación (Header) -->
+    <header class="sticky top-0 z-50 bg-[#0a0a2a] bg-opacity-95 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#hero" class="text-2xl font-extrabold tracking-widest text-white">INNOVATECH<span class="text-accent-neon">.</span></a>
+                </div>
+
+                <!-- Menú Desktop -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-sm font-medium text-gray-300 hover:text-accent-neon transition duration-300">Sobre el Summit</a>
+                    <a href="#agenda" class="text-sm font-medium text-gray-300 hover:text-accent-neon transition duration-300">Agenda</a>
+                    <a href="#industries" class="text-sm font-medium text-gray-300 hover:text-accent-neon transition duration-300">Sectores</a>
+                    <a href="#tickets" class="px-4 py-1.5 text-sm font-bold rounded-full bg-[#e34c26] hover:bg-opacity-80 transition duration-300 text-white">¡REGÍSTRATE AHORA!</a>
+                </nav>
+
+                <!-- Botón Menú Móvil -->
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menú Móvil (Oculto por defecto) -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800">Sobre el Summit</a>
+                <a href="#agenda" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800">Agenda</a>
+                <a href="#industries" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800">Sectores</a>
+                <a href="#tickets" class="block px-3 py-2 rounded-md text-base font-bold text-white bg-[#e34c26] text-center">¡REGÍSTRATE AHORA!</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sección HERO -->
+    <section id="hero" class="header-bg py-24 sm:py-32 text-center border-b border-gray-800">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="text-accent-neon text-lg font-semibold tracking-wider mb-2">
+                14, 15 y 16 de Noviembre de 2025 • Centro Cultural Estación Mapocho
+            </p>
+            <!-- Nombre del evento ajustado -->
+            <h1 class="text-5xl sm:text-7xl font-extrabold leading-tight text-white mb-6">
+                Innovatech
+            </h1>
+            <p class="text-2xl sm:text-3xl font-light text-gray-300 mb-10">
+                <span class="text-[#e34c26] font-bold">EDICIÓN CYBER-RESILIENCE:</span> Ciberseguridad para un futuro conectado.
+            </p>
+
+            <p class="text-xl italic font-medium text-white mb-8">
+                "Protege lo que creas. La innovación comienza con la seguridad."
+            </p>
+
+            <a href="#tickets" class="inline-block px-10 py-4 text-lg font-bold rounded-full bg-accent-neon text-[#0a0a2a] shadow-2xl hover:opacity-90 transition duration-300 transform hover:scale-105">
+                ¡Asegura tu Cupo!
+            </a>
+        </div>
+    </section>
+
+    <!-- Sección Sobre el Summit (About) -->
+    <section id="about" class="py-20 sm:py-28 bg-[#101030]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-extrabold text-white mb-6 text-center">
+                El Epicentro Global de la Tecnología y el Arte
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <!-- Markdown corregido y nombre del evento corregido -->
+                    <p class="text-gray-300 text-lg">
+                        Innovatech es la cumbre anual que reúne a líderes de la industria, desarrolladores, artistas y visionarios para trazar el futuro digital. Este año, bajo el lema Cyber-Resilience, exploraremos cómo la seguridad digital actúa como la base irrompible de toda innovación.
+                    </p>
+                    <p class="text-gray-400">
+                        Descubre los últimos avances en IA, robótica y desarrollo de videojuegos, pero con una perspectiva crucial: cómo proteger estos avances contra las amenazas digitales.
+                    </p>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                        <!-- Markdown corregido -->
+                        <li>+50 Speakers Internacionales</li>
+                        <li>Exposición de Arte Digital Inmersiva</li>
+                        <li>Área de Networking y Stands B2B/B2C</li>
+                        <li>Talleres Prácticos de Ciberdefensa</li>
+                    </ul>
+                </div>
+                <div class="relative flex justify-center">
+                    <!-- Representación simple y geométrica del tema Ciberseguridad (Texto DEFEND eliminado) -->
+                    <svg class="w-full max-w-sm h-auto text-accent-neon" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="25" y="25" width="150" height="150" rx="15" stroke="currentColor" stroke-width="8" stroke-dasharray="10 5"/>
+                        <circle cx="100" cy="100" r="10" fill="currentColor"/>
+                        <path d="M100 30L100 70M100 130L100 170M30 100L70 100M130 100L170 100" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                        <rect x="70" y="70" width="60" height="60" rx="5" fill="#e34c26"/>
+                        <path d="M75 100L90 115L125 85" stroke="#0a0a2a" stroke-width="5" stroke-linecap="round"/>
+                        <!-- El texto DEFEND ha sido eliminado para simplificar y cumplir con el requisito -->
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Industrias/Sectores -->
+    <section id="industries" class="py-20 sm:py-28 bg-[#0a0a2a] border-t border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-extrabold text-white mb-4">
+                Sectores que Impulsan el Futuro
+            </h2>
+            <p class="text-gray-400 text-lg mb-12">
+                Descubre stands y conferencias enfocadas en la aplicación práctica de la seguridad en:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Tarjeta 1: Videojuegos -->
+                <div class="p-6 bg-[#101030] rounded-xl shadow-lg border border-gray-700 hover:border-accent-neon transition duration-300">
+                    <div class="text-4xl mb-4 text-[#e34c26]">🎮</div>
+                    <h3 class="text-xl font-bold text-white mb-2">Videojuegos & Entretenimiento</h3>
+                    <p class="text-gray-400 text-sm">Innovación en desarrollo de juegos, protección de IP y seguridad en plataformas multijugador.</p>
+                </div>
+
+                <!-- Tarjeta 2: Logística -->
+                <div class="p-6 bg-[#101030] rounded-xl shadow-lg border border-gray-700 hover:border-accent-neon transition duration-300">
+                    <div class="text-4xl mb-4 text-[#e34c26]">🚚</div>
+                    <h3 class="text-xl font-bold text-white mb-2">Logística & Supply Chain</h3>
+                    <p class="text-gray-400 text-sm">Blockchain, IoT, seguridad de datos en rutas de suministro y automatización de almacenes.</p>
+                </div>
+
+                <!-- Tarjeta 3: Medicina -->
+                <div class="p-6 bg-[#101030] rounded-xl shadow-lg border border-gray-700 hover:border-accent-neon transition duration-300">
+                    <div class="text-4xl mb-4 text-[#e34c26]">⚕️</div>
+                    <h3 class="text-xl font-bold text-white mb-2">Medicina & Bio-Tech</h3>
+                    <p class="text-gray-400 text-sm">Telemedicina segura, protección de datos de pacientes (HIPAA) y avances en biotecnología.</p>
+                </div>
+
+                <!-- Tarjeta 4: Empresas -->
+                <div class="p-6 bg-[#101030] rounded-xl shadow-lg border border-gray-700 hover:border-accent-neon transition duration-300">
+                    <div class="text-4xl mb-4 text-[#e34c26]">💼</div>
+                    <h3 class="text-xl font-bold text-white mb-2">Innovación Empresarial</h3>
+                    <p class="text-gray-400 text-sm">Transformación digital B2B, automatización de procesos y defensa contra amenazas corporativas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Agenda (Placeholder simple) -->
+    <section id="agenda" class="py-20 sm:py-28 bg-[#101030]">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-extrabold text-white mb-4">
+                Agenda Destacada
+            </h2>
+            <!-- Párrafo simplificado -->
+            <p class="text-gray-400 text-lg mb-12">
+                Tres días de contenido de alto impacto. Conoce un adelanto de los temas centrales a continuación.
+            </p>
+
+            <div class="space-y-6 text-left">
+                <div class="bg-[#0a0a2a] p-5 rounded-lg border-l-4 border-accent-neon">
+                    <!-- Markdown corregido -->
+                    <p class="text-sm text-gray-400">Día 1: 14 de Noviembre</p>
+                    <h3 class="text-xl font-bold text-white">KEYNOTE: La IA como Arma y Escudo en Ciberseguridad.</h3>
+                    <p class="text-gray-300 text-sm mt-1">Plenaria Central / 9:30 AM</p>
+                </div>
+                <div class="bg-[#0a0a2a] p-5 rounded-lg border-l-4 border-[#e34c26]">
+                    <!-- Markdown corregido -->
+                    <p class="text-sm text-gray-400">Día 2: 15 de Noviembre</p>
+                    <h3 class="text-xl font-bold text-white">Exposición Artística: "Mi Identidad es un Archivo"</h3>
+                    <p class="text-gray-300 text-sm mt-1">Galería Principal / Todo el día</p>
+                </div>
+                <div class="bg-[#0a0a2a] p-5 rounded-lg border-l-4 border-accent-neon">
+                    <!-- Markdown corregido -->
+                    <p class="text-sm text-gray-400">Día 3: 16 de Noviembre</p>
+                    <h3 class="text-xl font-bold text-white">Taller Práctico: Configura tu Resiliencia Digital (BYOD)</h3>
+                    <p class="text-gray-300 text-sm mt-1">Sala de Workshops / 2:00 PM</p>
+                </div>
+            </div>
+
+            <!-- El texto se ha movido al enlace y se ha añadido un mensaje modal al hacer clic -->
+            <a href="#" onclick="showMessage('¡Atención! El cronograma completo estará disponible para descarga en las próximas semanas. Estén atentos.')" class="mt-10 inline-block text-accent-neon font-semibold hover:underline">
+                Cronograma Completo (Disponible Próximamente)
+            </a>
+        </div>
+    </section>
+
+
+    <!-- Sección Registro (Tickets) -->
+    <section id="tickets" class="py-20 sm:py-28 bg-[#0a0a2a] border-t border-gray-800 text-center">
+        <div class="max-w-2xl mx-auto px-4">
+            <h2 class="text-5xl font-extrabold text-white mb-4">
+                ¡Sé Parte del Futuro!
+            </h2>
+            <p class="text-gray-300 text-xl mb-10">
+                Asegura tu pase para la cumbre tecnológica más importante del año y eleva tu nivel de ciber-resiliencia.
+            </p>
+
+            <div class="bg-[#101030] p-8 rounded-xl shadow-2xl space-y-4">
+                <!-- Precio ajustado a $19 USD -->
+                <h3 class="text-3xl font-bold text-accent-neon">Pase General - $19 USD</h3>
+                <p class="text-gray-400">Acceso a las 3 jornadas, todas las conferencias y área de exposición.</p>
+                <button onclick="showMessage('¡Gracias por tu interés! El formulario de registro se abrirá pronto.')" class="w-full py-3 text-lg font-bold rounded-lg bg-[#e34c26] text-white hover:bg-opacity-90 transition duration-300">
+                    PRE-REGISTRO ABRIRÁ PRONTO
+                </button>
+            </div>
+            <p class="text-xs text-gray-500 mt-4">Organiza: Digital Monster.</p>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-[#0a0a2a] py-8 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500">
+            <p>&copy; 2025 Innovatech. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal para mensajes (Sustituto de alert()) -->
+    <div id="custom-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center z-[100]">
+        <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full">
+            <h3 id="modal-title" class="text-xl font-bold text-[#0a0a2a] mb-3"></h3>
+            <p id="modal-message" class="text-gray-700 mb-4"></p>
+            <button onclick="closeModal()" class="w-full py-2 bg-[#e34c26] text-white font-semibold rounded-lg hover:opacity-90 transition duration-300">
+                Cerrar
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Funcionalidad para el menú móvil
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Cierra el menú móvil al hacer clic en un enlace (si está abierto)
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Funcionalidad para el Modal (Sustituto de alert())
+        function showMessage(message, title = "Información") {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerText = message;
+            document.getElementById('custom-modal').classList.remove('hidden');
+            document.getElementById('custom-modal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+            document.getElementById('custom-modal').classList.remove('flex');
+        }
+
+        // Script para desplazamiento suave (smooth scrolling)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                // Si el enlace tiene un onclick definido (como el del programa), no hacemos scroll al elemento, solo mostramos el modal.
+                if (!this.getAttribute('onclick')) {
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
