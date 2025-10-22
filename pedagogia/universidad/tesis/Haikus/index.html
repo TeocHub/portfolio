@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Líneas Aleatorias</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .controls { margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        label, select, button { margin-right: 10px; margin-bottom: 10px; display: inline-block; }
+        #resultDisplay { margin-top: 25px; padding: 15px; border: 2px solid #007bff; border-radius: 5px; background-color: #e9f5ff; white-space: pre-wrap; font-size: 1.1em; }
+    </style>
+</head>
+<body>
+
+    <h1>Generador de Líneas Aleatorias</h1>
+
+    <div class="controls">
+        <label for="selectColegio">Colegio:</label>
+        <select id="selectColegio" onchange="updateFilters()">
+            <option value="">Cargando Colegios...</option>
+        </select>
+
+        <label for="selectCurso">Curso:</label>
+        <select id="selectCurso" disabled>
+            <option value="">Selecciona un Curso</option>
+        </select>
+
+        <label for="selectAnio">Año:</label>
+        <select id="selectAnio" disabled>
+            <option value="">Selecciona un Año</option>
+        </select>
+
+        <button onclick="generateResponse()">Generar Línea Aleatoria 🚀</button>
+    </div>
+
+    <div id="resultDisplay">
+        Esperando la carga de datos...
+    </div>
+
+    <script>
+        // =========================================================
+        // CONFIGURACIÓN Y VARIABLES GLOBALES
+        // =========================================================
+        let ALL_SHEET_DATA = []; // Almacenará todos los datos de la hoja
+        const SPREADSHEET_ID = '1xNkHeq_UGz0M9OdkKjuNabO2XXZ2Toz71h8g5_5L0yU'; 
+        const API_KEY = 'AIzaSyCgPf4Vqdkdb2pDwduWaNm5SOTU4bnU4ok';
+        const RANGE = 'Haikus!A2:F'; // Asume que los datos están en 'Hoja1' y empiezan en la fila 2
+        const API_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${API_KEY}`;
+
+
+        // =========================================================
+        // FUNCIONES AUXILIARES
+        // =========================================================
+        /**
+         * Crea las opciones de un select a partir de un array de valores únicos.
+         * @param {string} selectId - ID del elemento select a actualizar.
+         * @param {Array<string>} values - Array de valores únicos para las opciones.
+         * @param {string} defaultText - Texto de la opción por defecto.
+         */
+        function populateSelectOptions(selectId, values, defaultText) {
+            const select = document.getElementById(selectId);
+            select.innerHTML = `<option value="">${defaultText}</option>`; // Resetear y añadir default
+
+            // Si no hay valores, deshabilitar y salir
+            if (values.length === 0) {
+                select.disabled = true;
+                return;
+            }
+
+            select.disabled = false;
+    
+            // Generar opciones
+            values.forEach(value => {
+                const option = document.createElement('option');
+                option.value = value;
+                option.textContent = value;
+                select.appendChild(option);
+            });
+        }
+
+        /**
+        * Obtiene todos los datos del rango especificado en formato JSON.
+         * (Mantiene la lógica anterior)
+         */
+        async function getSheetData() {
+            try {
+                const response = await fetch(API_URL);
+        
+                if (!response.ok) {
+                    throw new Error(`Error en la petición API: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                return data.values || [];
+            } catch (error) {
+                console.error("❌ Error al obtener datos de Google Sheets:", error);
+                document.getElementById('resultDisplay').innerText = 
+                    `Error de conexión o configuración. Revisa la consola para más detalles.`;
+                return [];
+            }
+        }
+
+
+        // =========================================================
+        // LÓGICA DE FILTRADO EN CASCADA
+        // =========================================================
+        /**
+        * Inicializa la aplicación: carga todos los datos y llena el select de Colegios.
+        */
+        async function initializeApp() {
+            const display = document.getElementById('resultDisplay');
+            display.innerText = "Cargando datos de la hoja de cálculo... ⏳";
+            
+            ALL_SHEET_DATA = await getSheetData();
+            
+            if (ALL_SHEET_DATA.length === 0) {
+                display.innerText = "Error: No se pudo cargar ningún dato. Revisa tu API Key y Spreadsheet ID.";
+                return;
+            }
+            
+            // 1. Obtener todos los colegios únicos (Columna A, Índice 0)
+            const uniqueColegios = new Set();
+            ALL_SHEET_DATA.forEach(row => {
+                if (row[0]) uniqueColegios.add(row[0].trim());
+            });
+            
+            const sortedColegios = Array.from(uniqueColegios).sort();
+
+            // 2. Poblar el select de Colegios
+            populateSelectOptions('selectColegio', sortedColegios, 'Selecciona un Colegio');
+
+            // 3. Informar al usuario
+            display.innerText = "Datos cargados. Selecciona los filtros para generar la línea.";
+        }
+
+        /**
+        * Actualiza las opciones de los selects de Curso y Año basándose en el Colegio seleccionado.
+        */
+        function updateFilters() {
+            const selectColegio = document.getElementById('selectColegio').value;
+            const selectCurso = document.getElementById('selectCurso');
+            const selectAnio = document.getElementById('selectAnio');
+            
+            // Siempre resetear Curso y Año
+            selectCurso.innerHTML = '<option value="">Selecciona un Curso</option>';
+            selectAnio.innerHTML = '<option value="">Selecciona un Año</option>';
+            selectCurso.disabled = true;
+            selectAnio.disabled = true;
+
+            if (!selectColegio) {
+                return; 
+            }
+
+            // 1. Filtrar los datos solo por el Colegio seleccionado
+            const dataForColegio = ALL_SHEET_DATA.filter(row => row[0].trim() === selectColegio);
+            
+            // 2. Extraer valores únicos de Curso (Índice 1) y Año (Índice 2)
+            const uniqueCursos = new Set();
+            const uniqueAnios = new Set();
+            
+            dataForColegio.forEach(row => {
+                if (row[1]) uniqueCursos.add(row[1].trim());
+                // El año (Columna C)
+                if (row[2]) {
+                    // Asumimos que la Marca Temporal contiene el año, o solo es el año
+                    const anio = String(row[2]).substring(0, 4); // Tomamos los primeros 4 caracteres (ej: "2024")
+                    if (!isNaN(parseInt(anio))) uniqueAnios.add(anio.trim());
+                }
+            });
+            
+            // 3. Poblar Curso
+            const sortedCursos = Array.from(uniqueCursos).sort((a, b) => {
+                // Intenta ordenar numéricamente primero, si no, alfabéticamente
+                const numA = parseInt(a);
+                const numB = parseInt(b);
+                if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+                return a.localeCompare(b);
+            });
+            populateSelectOptions('selectCurso', sortedCursos, 'Selecciona un Curso');
+
+            // 4. Poblar Año
+            const sortedAnios = Array.from(uniqueAnios).sort((a, b) => b - a); // Orden descendente (más reciente primero)
+            populateSelectOptions('selectAnio', sortedAnios, 'Selecciona un Año');
+        }
+
+
+        // =========================================================
+        // LÓGICA DE GENERACIÓN (Mantiene la lógica anterior)
+        // =========================================================
+
+        /**
+        * Filtra los datos según los criterios de selección del usuario.
+        */
+        function filterData(allData, colegio, curso, anio) {
+            if (!allData || allData.length === 0) return [];
+
+            return allData.filter(row => {
+                // A=0, B=1, C=2, D=3, E=4, F=5
+                const rowColegio = row[0].trim();
+                const rowCurso = row[1].trim();
+                const rowAnioFull = row[2]; 
+                const rowAnio = String(rowAnioFull).substring(0, 4); // Extraer solo el año de la marca temporal
+
+                const matchesColegio = rowColegio === colegio;
+                const matchesCurso = rowCurso === curso;
+                const matchesAnio = rowAnio === anio; 
+
+                return matchesColegio && matchesCurso && matchesAnio;
+            });
+        }
+
+        /**
+        * Selecciona 2 líneas de 5 sílabas y 1 línea de 7 sílabas, de forma aleatoria y única.
+        */
+        function selectRandomLines(filteredData) {
+            const lines5 = filteredData.filter(row => String(row[4]).trim() === '5');
+            const lines7 = filteredData.filter(row => String(row[4]).trim() === '7');
+
+            if (lines5.length < 2) {
+                return `⚠️ Sólo hay ${lines5.length} líneas disponibles con 5 sílabas. Necesitamos 2.`;
+            }
+            if (lines7.length < 1) {
+                return `⚠️ Sólo hay ${lines7.length} líneas disponibles con 7 sílabas. Necesitamos 1.`;
+            }
+            
+            function getRandomUniqueElements(arr, count) {
+                const shuffled = [...arr].sort(() => 0.5 - Math.random());
+                return shuffled.slice(0, count);
+            }
+
+            const selected5Syllables = getRandomUniqueElements(lines5, 2);
+            const selected7Syllables = getRandomUniqueElements(lines7, 1);
+
+            const finalLines = [
+                selected5Syllables[0][5], // Línea 1 (5 sílabas)
+                selected5Syllables[1][5], // Línea 2 (5 sílabas)
+                selected7Syllables[0][5]  // Línea 3 (7 sílabas)
+            ];
+            
+            return finalLines.sort(() => 0.5 - Math.random()); 
+        }
+
+
+        /**
+        * Función principal que se activa al hacer clic en el botón.
+        */
+        async function generateResponse() {
+            const display = document.getElementById('resultDisplay');
+            
+            if (ALL_SHEET_DATA.length === 0) {
+                display.innerText = "Error: Datos no cargados. Inténtalo de nuevo.";
+                return;
+            }
+
+            // 1. Obtener los valores de los filtros
+            const colegio = document.getElementById('selectColegio').value;
+            const curso = document.getElementById('selectCurso').value;
+            const anio = document.getElementById('selectAnio').value;
+            
+            if (!colegio || !curso || !anio) {
+                display.innerText = "⚠️ Por favor, selecciona Colegio, Curso y Año antes de generar la respuesta.";
+                return;
+            }
+            
+            display.innerText = "Filtrando y seleccionando líneas... 🔄";
+
+            // 2. Filtrar los datos utilizando la variable global
+            const filtered = filterData(ALL_SHEET_DATA, colegio, curso, anio);
+            
+            if (filtered.length === 0) {
+                display.innerText = "😔 No se encontraron líneas que coincidan con la selección de filtros.";
+                return;
+            }
+
+            // 3. Seleccionar las 3 líneas aleatorias
+            const finalResult = selectRandomLines(filtered);
+
+            // 4. Mostrar el resultado
+            if (typeof finalResult === 'string') {
+                display.innerText = finalResult;
+            } else {
+                const responseText = finalResult.join(' '); 
+                display.innerText = "✨ Línea aleatoria generada: \n\n" + responseText;
+            }
+        }
+
+        // Iniciar la aplicación al cargar la ventana
+        window.onload = initializeApp;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bases Curriculares</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #004a7c;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: #003350;
+        }
+        nav ul li {
+            position: relative;
+        }
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: #005f99;
+        }
+        .container {
+            padding: 2em;
+        }
+        .subject-section {
+            display: none;
+            background-color: white;
+            padding: 2em;
+            margin-top: 1em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .subject-section.active {
+            display: block;
+        }
+        h2 {
+            color: #004a7c;
+        }
+        h3 {
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 0.5em;
+            margin-top: 1.5em;
+            color: #333;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 1.5em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Bases Curriculares - Objetivos de Aprendizaje</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#" onclick="showSection('lenguaje')">Lenguaje</a></li>
+        <li><a href="#" onclick="showSection('matematica')">Matemática</a></li>
+        <li><a href="#" onclick="showSection('historia')">Historia</a></li>
+        <li><a href="#" onclick="showSection('ingles')">Inglés</a></li>
+        <li><a href="#" onclick="showSection('educacion-fisica')">Educación Física</a></li>
+        <li><a href="#" onclick="showSection('musica')">Música</a></li>
+        <li><a href="#" onclick="showSection('artes')">Artes</a></li>
+        <li><a href="#" onclick="showSection('tecnologia')">Tecnología</a></li>
+        <li><a href="#" onclick="showSection('orientacion')">Orientación</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <div id="lenguaje" class="subject-section active">
+        <h2>Lenguaje y Comunicación</h2>
+        
+        <h3>7° Básico</h3>
+        <ul>
+            <li>**OA 3:** Analizar las narraciones leídas para enriquecer su comprensión, considerando: el o los conflictos de la historia y las motivaciones de los personajes, la relación entre el ambiente y las acciones, los diversos tipos de narradores y la presencia de estereotipos y prejuicios en el relato.</li>
+            <li>**OA 4:** Analizar los poemas leídos para profundizar su comprensión, considerando: el lenguaje poético y la presencia de figuras literarias, las imágenes que evoca el lenguaje poético, y la actitud lírica y el hablante lírico.</li>
+            <li>**OA 5:** Analizar aspectos relevantes de textos expositivos, como su organización, la selección de ideas clave, el uso de elementos de apoyo y el análisis crítico de la información.</li>
+            <li>**OA 6:** Analizar las argumentaciones y posturas de textos periodísticos, considerando el uso de hechos y opiniones, así como las motivaciones del enunciador.</li>
+            <li>**OA 7:** Reflexionar sobre las diferentes perspectivas y puntos de vista presentes en los textos, y las formas en que se presentan.</li>
+            <li>**OA 8:** Producir textos orales, escritos o audiovisuales coherentes para comunicar análisis e interpretaciones.</li>
+        </ul>
+
+        <h3>8° Básico</h3>
+        <ul>
+            <li>**OA 3:** Analizar las narraciones leídas para enriquecer su comprensión, considerando la influencia de los conflictos y motivaciones en las acciones, el efecto del ambiente en los personajes, y la presencia de estereotipos, creencias y prejuicios en el relato.</li>
+            <li>**OA 4:** Analizar los poemas leídos para profundizar su comprensión, considerando el lenguaje poético y las figuras literarias, el significado de los símbolos y tópicos literarios, y las creencias y prejuicios presentes en el texto.</li>
+            <li>**OA 5:** Analizar aspectos relevantes de textos expositivos, considerando su organización, la selección de ideas clave, el uso de elementos de apoyo y el análisis crítico de la información.</li>
+            <li>**OA 6:** Evaluar la información y las argumentaciones presentes en textos periodísticos, como noticias, crónicas y reportajes, considerando la forma en que se presentan los hechos.</li>
+            <li>**OA 7:** Reflexionar sobre las diferentes perspectivas y puntos de vista presentes en los textos, y las formas en que se presentan.</li>
+            <li>**OA 8:** Producir textos orales, escritos o audiovisuales coherentes y cohesionados para comunicar análisis e interpretaciones de textos.</li>
+        </ul>
+        
+        <h3>1° Medio</h3>
+        <ul>
+            <li>**OA 3:** Analizar obras dramáticas leídas o vistas para enriquecer su comprensión, considerando el conflicto dramático, la acción dramática y la evolución de los personajes.</li>
+            <li>**OA 4:** Analizar los poemas leídos o escuchados para profundizar su comprensión, considerando el lenguaje poético y las figuras literarias, los símbolos y tópicos literarios, y la relación con el mundo actual.</li>
+            <li>**OA 5:** Analizar textos expositivos de la cultura y la sociedad, con el propósito de investigar, considerando la organización, las ideas centrales y el uso de la argumentación.</li>
+            <li>**OA 6:** Evaluar la información y las argumentaciones presentes en textos periodísticos, como noticias, crónicas y reportajes, considerando la forma en que se presentan los hechos.</li>
+        </ul>
+
+        <h3>2° Medio</h3>
+        <ul>
+            <li>**OA 3:** Analizar obras dramáticas leídas o vistas para enriquecer su comprensión, considerando el conflicto dramático, la acción dramática y la evolución de los personajes.</li>
+            <li>**OA 4:** Analizar los poemas leídos o escuchados para profundizar su comprensión, considerando el lenguaje poético y las figuras literarias, los símbolos y tópicos literarios, y la relación con el mundo actual.</li>
+            <li>**OA 5:** Analizar textos expositivos de la cultura y la sociedad, con el propósito de investigar, considerando la organización, las ideas centrales y el uso de la argumentación.</li>
+            <li>**OA 6:** Evaluar la información y las argumentaciones presentes en textos periodísticos, como noticias, crónicas y reportajes, considerando la forma en que se presentan los hechos.</li>
+        </ul>
+
+        <h3>3° Medio</h3>
+        <ul>
+            <li>**OA 3:** Analizar críticamente textos de diversa procedencia y de distintos géneros discursivos.</li>
+            <li>**OA 4:** Investigar sobre diversos temas para enriquecer sus lecturas y análisis, o para responder interrogantes.</li>
+            <li>**OA 5:** Producir textos de diversa procedencia y de distintos géneros discursivos.</li>
+            <li>**OA 6:** Interactuar con otras personas de forma oral y escrita.</li>
+        </ul>
+
+        <h3>4° Medio</h3>
+        <ul>
+            <li>**OA 3:** Analizar críticamente textos de diversa procedencia y de distintos géneros discursivos.</li>
+            <li>**OA 4:** Investigar sobre diversos temas para enriquecer sus lecturas y análisis, o para responder interrogantes.</li>
+            <li>**OA 5:** Producir textos de diversa procedencia y de distintos géneros discursivos.</li>
+            <li>**OA 6:** Interactuar con otras personas de forma oral y escrita.</li>
+        </ul>
+    </div>
+    
+    <div id="matematica" class="subject-section">
+        <h2>Matemática</h2>
+        
+        <h3>7° Básico</h3>
+        <ul>
+            <li>**OA 1:** Explicar la multiplicación y la división de fracciones, de forma concreta, pictórica y simbólica.</li>
+            <li>**OA 2:** Explicar la división de números enteros, de forma concreta, pictórica y simbólica.</li>
+            <li>**OA 3:** Explicar el concepto de potencia, de forma concreta, pictórica y simbólica.</li>
+            <li>**OA 4:** Explicar el concepto de raíz cuadrada, de forma concreta, pictórica y simbólica.</li>
+            <li>**OA 5:** Explicar el concepto de porcentaje, de forma concreta, pictórica y simbólica.</li>
+        </ul>
+        
+        <h3>8° Básico</h3>
+        <ul>
+            <li>**OA 1:** Calcular el área de cubos y paralelepípedos, de forma concreta, pictórica y simbólica.</li>
+            <li>**OA 2:** Calcular el volumen de cubos y paralelepípedos, de forma concreta, pictórica y simbólica.</li>
+            <li>**OA 3:** Explicar la multiplicación y la división de números decimales, de forma concreta, pictórica y simbólica.</li>
+            <li>**OA 4:** Explicar la división de números enteros, de forma concreta, pictórica y simbólica.</li>
+            <li>**OA 5:** Explicar el concepto de potencia, de forma concreta, pictórica y simbólica.</li>
+        </ul>
+        
+        <h3>3° Medio</h3>
+        <ul>
+            <li>**OA 1:** Utilizar modelos matemáticos, de forma manuscrita y con uso de herramientas tecnológicas, para fundamentar decisiones en situaciones de variación.</li>
+            <li>**OA 2:** Utilizar modelos matemáticos, de forma manuscrita y con uso de herramientas tecnológicas, para fundamentar decisiones en situaciones de variación.</li>
+            <li>**OA 3:** Utilizar modelos matemáticos, de forma manuscrita y con uso de herramientas tecnológicas, para fundamentar decisiones en situaciones de variación.</li>
+        </ul>
+        
+        <h3>4° Medio</h3>
+        <ul>
+            <li>**OA 1:** Fundamentar decisiones en el ámbito financiero y económico personal o comunitario, a partir de modelos que consideren porcentajes, tasas de interés e índices económicos.</li>
+            <li>**OA 2:** Fundamentar decisiones en situaciones de incerteza, a partir del análisis crítico de datos estadísticos y con base en los modelos binomial y normal.</li>
+            <li>**OA 3:** Construir modelos de situaciones o fenómenos de crecimiento, decrecimiento y periódicos que involucren funciones potencias de exponente entero y trigonométricas sen(x) y cos(x), de forma manuscrita, con uso de herramientas tecnológicas y promoviendo la búsqueda, selección, contrastación y verificación de información en ambientes digitales y redes sociales.</li>
+            <li>**OA 4:** Resolver problemas de geometría euclidiana que involucran relaciones métricas entre ángulos, arcos, cuerdas y secantes en la circunferencia, de forma manuscrita y con uso de herramientas tecnológicas.</li>
+        </ul>
+    </div>
+    
+    <div id="historia" class="subject-section">
+        <h2>Historia, Geografía y Ciencias Sociales</h2>
+        
+        <h3>7° Básico</h3>
+        <ul>
+            <li>**OA 1:** Analizar el concepto de ciudadanía, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 2:** Analizar el concepto de democracia, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 3:** Analizar el concepto de república, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 4:** Analizar el concepto de estado de derecho, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 5:** Analizar el concepto de derechos humanos, considerando las transformaciones históricas que ha tenido.</li>
+        </ul>
+        
+        <h3>8° Básico</h3>
+        <ul>
+            <li>**OA 1:** Analizar el concepto de ciudadanía, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 2:** Analizar el concepto de democracia, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 3:** Analizar el concepto de república, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 4:** Analizar el concepto de estado de derecho, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 5:** Analizar el concepto de derechos humanos, considerando las transformaciones históricas que ha tenido.</li>
+        </ul>
+        
+        <h3>1° Medio</h3>
+        <ul>
+            <li>**OA 1:** Analizar el concepto de globalización, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 2:** Analizar el concepto de economía global, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 3:** Analizar el concepto de cambio climático, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 4:** Analizar el concepto de desastres socio-naturales, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 5:** Analizar el concepto de conflictos internacionales, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 6:** Analizar el concepto de ideología, considerando las transformaciones históricas que ha tenido.</li>
+        </ul>
+        
+        <h3>2° Medio</h3>
+        <ul>
+            <li>**OA 1:** Analizar el concepto de globalización, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 2:** Analizar el concepto de economía global, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 3:** Analizar el concepto de cambio climático, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 4:** Analizar el concepto de desastres socio-naturales, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 5:** Analizar el concepto de conflictos internacionales, considerando las transformaciones históricas que ha tenido.</li>
+            <li>**OA 6:** Analizar el concepto de ideología, considerando las transformaciones históricas que ha tenido.</li>
+        </ul>
+        
+        <h3>3° Medio</h3>
+        <ul>
+            <li>**OA 1:** Investigar las transformaciones políticas, económicas y sociales que han provocado los movimientos migratorios contemporáneos.</li>
+            <li>**OA 2:** Investigar algunos aspectos de la economía global actual, como cambios en la producción y en el mercado del trabajo.</li>
+            <li>**OA 3:** Explicar el cambio climático como fenómeno global, incluyendo controversias sobre sus múltiples causas.</li>
+            <li>**OA 4:** Analizar, por medio de la investigación, desastres socio-naturales, considerando amenazas naturales.</li>
+            <li>**OA 5:** Analizar algunos conflictos internacionales que involucran a Estados nacionales.</li>
+        </ul>
+        
+        <h3>4° Medio</h3>
+        <ul>
+            <li>**OA 1:** Investigar las transformaciones políticas, económicas y sociales que han provocado los movimientos migratorios contemporáneos en distintas regiones del mundo, considerando múltiples causas, principales características, impactos en la sociedad de origen y de destino, y los desafíos para las sociedades y los Estados nacionales.</li>
+            <li>**OA 2:** Investigar algunos aspectos de la economía global actual, como cambios en la producción y en el mercado del trabajo, el rol del comercio mundial y del mercado financiero, y nuevas formas de consumo, aplicando conceptos de la economía.</li>
+            <li>**OA 3:** Explicar el cambio climático como fenómeno global, incluyendo controversias sobre sus múltiples causas, los grados de responsabilidad de distintos actores y sus principales consecuencias para la población.</li>
+            <li>**OA 4:** Analizar, por medio de la investigación, desastres socio-naturales, considerando amenazas naturales, el papel de la sociedad y el Estado en la prevención y gestión del riesgo, factores que inciden en la vulnerabilidad de la población y avances de Chile y otros países en la materia.</li>
+            <li>**OA 6:** Analizar algunos conflictos internacionales que involucran a Estados nacionales, sociedades o grupos, explicando sus contextos y posibilidades de resolución y aplicando conceptos de la ciencia política como poder, soberanía, ideología, derechos humanos, opinión pública, entre otros.</li>
+        </ul>
+    </div>
+    
+    <div id="ingles" class="subject-section">
+        <h2>Inglés</h2>
+        
+        <h3>7° Básico</h3>
+        <ul>
+            <li>**OA 1:** Comprender textos orales y escritos en inglés.</li>
+            <li>**OA 2:** Producir textos orales y escritos en inglés.</li>
+            <li>**OA 3:** Utilizar el conocimiento del inglés en la comprensión y producción de textos orales y escritos.</li>
+            <li>**OA 4:** Producir textos orales y escritos breves y claros.</li>
+        </ul>
+        
+        <h3>8° Básico</h3>
+        <ul>
+            <li>**OA 1:** Comprender textos orales y escritos en inglés.</li>
+            <li>**OA 2:** Producir textos orales y escritos en inglés.</li>
+            <li>**OA 3:** Utilizar el conocimiento del inglés en la comprensión y producción de textos orales y escritos.</li>
+            <li>**OA 4:** Producir textos orales y escritos breves y claros.</li>
+        </ul>
+        
+        <h3>1° Medio</h3>
+        <ul>
+            <li>**OA 1:** Comprender información relevante para un propósito específico en textos orales y escritos en contextos relacionados con sus intereses e inquietudes, con el fin de conocer las maneras en que otras culturas abordan dichos contextos.</li>
+            <li>**OA 2:** Producir y comprender con fluidez textos orales y escritos breves y claros en situaciones comunicativas que involucren otras visiones de mundo y la propia, con el fin de interactuar y tomar conciencia de su propia identidad.</li>
+            <li>**OA 3:** Utilizar su conocimiento del inglés en la comprensión y producción de textos orales y escritos claros, con el fin de construir una postura personal crítica en contextos relacionados con sus intereses e inquietudes.</li>
+        </ul>
+        
+        <h3>2° Medio</h3>
+        <ul>
+            <li>**OA 1:** Comprender información relevante para un propósito específico en textos orales y escritos en contextos relacionados con sus intereses e inquietudes.</li>
+            <li>**OA 2:** Producir y comprender con fluidez textos orales y escritos breves y claros en situaciones comunicativas.</li>
+            <li>**OA 3:** Utilizar su conocimiento del inglés en la comprensión y producción de textos orales y escritos claros.</li>
+        </ul>
+        
+        <h3>3° Medio</h3>
+        <ul>
+            <li>**OA 1:** Comprender información relevante para un propósito específico en textos orales y escritos en contextos relacionados con sus intereses e inquietudes, con el fin de conocer las maneras en que otras culturas abordan dichos contextos.</li>
+            <li>**OA 3:** Utilizar su conocimiento del inglés en la comprensión y producción de textos orales y escritos claros, con el fin de construir una postura personal crítica en contextos relacionados con sus intereses e inquietudes.</li>
+            <li>**OA 4:** Producir y comprender con fluidez textos orales y escritos breves y claros en situaciones comunicativas que involucren otras visiones de mundo y la propia, con el fin de interactuar y tomar conciencia de su propia identidad.</li>
+        </ul>
+        
+        <h3>4° Medio</h3>
+        <ul>
+            <li>**OA 1:** Comprender información relevante para un propósito específico en textos orales y escritos en contextos relacionados con sus intereses e inquietudes, con el fin de conocer las maneras en que otras culturas abordan dichos contextos.</li>
+            <li>**OA 3:** Utilizar su conocimiento del inglés en la comprensión y producción de textos orales y escritos claros, con el fin de construir una postura personal crítica en contextos relacionados con sus intereses e inquietudes.</li>
+            <li>**OA 4:** Producir y comprender con fluidez textos orales y escritos claros en situaciones comunicativas que involucren otras visiones de mundo y la propia, con el fin de interactuar y tomar conciencia de su propia identidad.</li>
+        </ul>
+    </div>
+    
+    <div id="educacion-fisica" class="subject-section">
+        <h2>Educación Física y Salud</h2>
+        
+        <h3>7° Básico</h3>
+        <ul>
+            <li>**OA 1:** Desarrollar habilidades motrices especializadas en una variedad de actividades físicas que sean de su interés y en diferentes entornos.</li>
+            <li>**OA 2:** Crear y aplicar planes de entrenamiento para mejorar su condición física, considerando sus características personales y funcionales.</li>
+            <li>**OA 3:** Evaluar la aplicación de programas y proyectos deportivos, recreativos y socioculturales.</li>
+            <li>**OA 4:** Promover el bienestar, el autocuidado, la vida activa y la alimentación saludable en su comunidad.</li>
+        </ul>
+        
+        <h3>8° Básico</h3>
+        <ul>
+            <li>**OA 1:** Evaluar individual y colectivamente las habilidades motrices especializadas utilizadas en una variedad de actividades físicas que sean de su interés y en diferentes entornos.</li>
+            <li>**OA 2:** Aplicar responsablemente un plan de entrenamiento para mejorar su rendimiento físico, considerando sus características personales y funcionales.</li>
+            <li>**OA 3:** Evaluar el impacto de variados programas y proyectos deportivos, recreativos y socioculturales que promuevan de manera colectiva el bienestar, el autocuidado, la vida activa y la alimentación saludable en su comunidad.</li>
+            <li>**OA 4:** Promover el bienestar, el autocuidado, la vida activa y la alimentación saludable en su comunidad.</li>
+        </ul>
+        
+        <h3>1° Medio</h3>
+        <ul>
+            <li>**OA 1:** Evaluar individual y colectivamente las habilidades motrices especializadas utilizadas en una variedad de actividades físicas que sean de su interés y en diferentes entornos.</li>
+            <li>**OA 2:** Aplicar responsablemente un plan de entrenamiento para mejorar su rendimiento físico, considerando sus características personales y funcionales.</li>
+            <li>**OA 3:** Evaluar el impacto de variados programas y proyectos deportivos, recreativos y socioculturales que promuevan de manera colectiva el bienestar, el autocuidado, la vida activa y la alimentación saludable en su comunidad.</li>
+            <li>**OA 4:** Promover el bienestar, el autocuidado, la vida activa y la alimentación saludable en su comunidad.</li>
+        </ul>
+        
+        <h3>2° Medio</h3>
+        <ul>
+            <li>**OA 1:** Evaluar individual y colectivamente las habilidades motrices especializadas utilizadas en una variedad de actividades físicas que sean de su interés y en diferentes entornos.</li>
+            <li>**OA 2:** Aplicar responsablemente un plan de entrenamiento para mejorar su rendimiento físico, considerando sus características personales y funcionales.</li>
+            <li>**OA 3:** Evaluar el impacto de variados programas y proyectos deportivos, recreativos y socioculturales que promuevan de manera colectiva el bienestar, el autocuidado, la vida activa y la alimentación saludable en su comunidad.</li>
+            <li>**OA 4:** Promover el bienestar, el autocuidado, la vida activa y la alimentación saludable en su comunidad.</li>
+        </ul>
+        
+        <h3>3° Medio</h3>
+        <ul>
+            <li>**OA 1:** Evaluar individual y colectivamente las habilidades motrices especializadas utilizadas en una variedad de actividades físicas que sean de su interés y en diferentes entornos.</li>
+            <li>**OA 2:** Aplicar responsablemente un plan de entrenamiento para mejorar su rendimiento físico, considerando sus características personales y funcionales.</li>
+            <li>**OA 3:** Evaluar el impacto de variados programas y proyectos deportivos, recreativos y socioculturales que promuevan de manera colectiva el bienestar, el autocuidado, la vida activa y la alimentación saludable en su comunidad.</li>
+            <li>**OA 4:** Promover el bienestar, el autocuidado, la vida activa y la alimentación saludable en su comunidad.</li>
+        </ul>
+        
+        <h3>4° Medio</h3>
+        <ul>
+            <li>**OA 1:** Evaluar individual y colectivamente las habilidades motrices especializadas utilizadas en una variedad de actividades físicas que sean de su interés y en diferentes entornos.</li>
+            <li>**OA 3:** Aplicar responsablemente un plan de entrenamiento para mejorar su rendimiento físico, considerando sus características personales y funcionales.</li>
+            <li>**OA 4:** Evaluar el impacto de variados programas y proyectos deportivos, recreativos y socioculturales que promuevan de manera colectiva el bienestar, el autocuidado, la vida activa y la alimentación saludable en su comunidad, considerando la diversidad de las personas.</li>
+        </ul>
+    </div>
+    
+    <div id="musica" class="subject-section">
+        <h2>Música</h2>
+        
+        <h3>7° Básico</h3>
+        <ul>
+            <li>**OA 1:** Valorar críticamente manifestaciones y obras musicales de Chile y el mundo presentes en la tradición oral, escrita y popular, comunicando sus fundamentos mediante medios verbales, visuales, sonoros y corporales.</li>
+            <li>**OA 2:** Analizar e interpretar repertorio musical diverso, tanto vocal como instrumental.</li>
+            <li>**OA 3:** Cantar y tocar repertorio diverso sobre la base de una selección personal, desarrollando habilidades tales como manejo de estilo, fluidez, capacidad de proponer y dirigir, identificación de voces y funciones en un grupo.</li>
+            <li>**OA 4:** Evaluar críticamente el rol de la música en la construcción y preservación de identidades y culturas.</li>
+        </ul>
+        
+        <h3>8° Básico</h3>
+        <ul>
+            <li>**OA 1:** Valorar críticamente manifestaciones y obras musicales de Chile y el mundo presentes en la tradición oral, escrita y popular, comunicando sus fundamentos mediante medios verbales, visuales, sonoros y corporales.</li>
+            <li>**OA 2:** Analizar e interpretar repertorio musical diverso, tanto vocal como instrumental.</li>
+            <li>**OA 3:** Cantar y tocar repertorio diverso sobre la base de una selección personal.</li>
+            <li>**OA 4:** Evaluar críticamente el rol de la música en la construcción y preservación de identidades y culturas.</li>
+        </ul>
+        
+        <h3>1° Medio</h3>
+        <ul>
+            <li>**OA 1:** Valorar críticamente manifestaciones y obras musicales de Chile y el mundo presentes en la tradición oral, escrita y popular, comunicando sus fundamentos mediante medios verbales, visuales, sonoros y corporales.</li>
+            <li>**OA 2:** Analizar e interpretar repertorio musical diverso, tanto vocal como instrumental.</li>
+            <li>**OA 3:** Cantar y tocar repertorio diverso sobre la base de una selección personal.</li>
+            <li>**OA 4:** Evaluar críticamente el rol de la música en la construcción y preservación de identidades y culturas.</li>
+        </ul>
+        
+        <h3>2° Medio</h3>
+        <ul>
+            <li>**OA 1:** Valorar críticamente manifestaciones y obras musicales de Chile y el mundo presentes en la tradición oral, escrita y popular, comunicando sus fundamentos mediante medios verbales, visuales, sonoros y corporales.</li>
+            <li>**OA 2:** Analizar e interpretar repertorio musical diverso, tanto vocal como instrumental.</li>
+            <li>**OA 3:** Cantar y tocar repertorio diverso sobre la base de una selección personal.</li>
+            <li>**OA 4:** Evaluar críticamente el rol de la música en la construcción y preservación de identidades y culturas.</li>
+        </ul>
+        
+        <h3>3° Medio</h3>
+        <ul>
+            <li>**OA 1:** Analizar críticamente, con medios verbales, visuales y sonoros, obras y manifestaciones musicales de géneros, estilos y periodos diversos.</li>
+            <li>**OA 3:** Cantar y tocar repertorio diverso sobre la base de una selección personal, desarrollando habilidades tales como manejo de estilo, fluidez, capacidad de proponer y dirigir.</li>
+            <li>**OA 7:** Evaluar la relevancia de la música, destacando el singular sentido que esta cumple en la construcción y preservación de identidades y culturas.</li>
+        </ul>
+        
+        <h3>4° Medio</h3>
+        <ul>
+            <li>**OA 1:** Valorar críticamente manifestaciones y obras musicales de Chile y el mundo presentes en la tradición oral, escrita y popular, comunicando sus fundamentos mediante medios verbales, visuales, sonoros y corporales.</li>
+            <li>**OA 3:** Cantar y tocar repertorio diverso sobre la base de una selección personal, desarrollando habilidades tales como manejo de estilo, fluidez, capacidad de proponer y dirigir, identificación de voces y funciones en un grupo, entre otras.</li>
+            <li>**OA 7:** Valorar críticamente el rol de los medios de registro y transmisión en la evolución de la música en diferentes periodos y espacios históricos.</li>
+        </ul>
+    </div>
+    
+    <div id="artes" class="subject-section">
+        <h2>Artes Visuales</h2>
+        
+        <h3>7° Básico</h3>
+        <ul>
+            <li>**OA 1:** Crear proyectos visuales basados en la apreciación estética de manifestaciones artísticas.</li>
+            <li>**OA 2:** Crear trabajos y proyectos visuales basados en diferentes desafíos creativos, investigando el manejo de materiales y procedimientos.</li>
+            <li>**OA 3:** Analizar la apreciación estética de manifestaciones artísticas.</li>
+            <li>**OA 4:** Argumentar juicios críticos referidos a la valoración de diversas manifestaciones visuales.</li>
+        </ul>
+        
+        <h3>8° Básico</h3>
+        <ul>
+            <li>**OA 1:** Crear proyectos visuales basados en la apreciación estética de manifestaciones artísticas.</li>
+            <li>**OA 2:** Crear trabajos y proyectos visuales basados en diferentes desafíos creativos, investigando el manejo de materiales y procedimientos.</li>
+            <li>**OA 3:** Analizar la apreciación estética de manifestaciones artísticas.</li>
+            <li>**OA 4:** Argumentar juicios críticos referidos a la valoración de diversas manifestaciones visuales.</li>
+        </ul>
+        
+        <h3>1° Medio</h3>
+        <ul>
+            <li>**OA 1:** Crear proyectos visuales basados en la valoración crítica de manifestaciones estéticas.</li>
+            <li>**OA 2:** Crear trabajos y proyectos visuales basados en diferentes desafíos creativos, investigando el manejo de materiales sustentables en procedimientos de escultura y diseño.</li>
+            <li>**OA 3:** Analizar la apreciación estética de manifestaciones artísticas.</li>
+            <li>**OA 4:** Argumentar juicios críticos referidos a la valoración de diversas manifestaciones visuales.</li>
+        </ul>
+        
+        <h3>2° Medio</h3>
+        <ul>
+            <li>**OA 1:** Crear proyectos visuales basados en la valoración crítica de manifestaciones estéticas referidas a problemáticas sociales y juveniles, en el espacio público y en diferentes contextos.</li>
+            <li>**OA 2:** Crear trabajos y proyectos visuales basados en diferentes desafíos creativos, investigando el manejo de materiales sustentables en procedimientos de escultura y diseño.</li>
+            <li>**OA 4:** Argumentar juicios críticos referidos a la valoración de diversas manifestaciones visuales, configurando una selección personal de criterios estéticos.</li>
+            <li>**OA 6:** Implementar propuestas de difusión hacia la comunidad de trabajos y proyectos de arte, en el contexto escolar o local, de forma directa o virtual, contemplando las manifestaciones visuales a exponer, el espacio, el montaje, el público y el aporte a la comunidad, entre otros.</li>
+        </ul>
+        
+        <h3>3° Medio</h3>
+        <ul>
+            <li>**OA 1:** Crear proyectos visuales basados en la valoración crítica de manifestaciones estéticas referidas a problemáticas sociales y juveniles, en el espacio público y en diferentes contextos.</li>
+            <li>**OA 2:** Crear trabajos y proyectos visuales basados en diferentes desafíos creativos, investigando el manejo de materiales sustentables en procedimientos de escultura y diseño.</li>
+            <li>**OA 4:** Argumentar juicios críticos referidos a la valoración de diversas manifestaciones visuales, configurando una selección personal de criterios estéticos.</li>
+        </ul>
+        
+        <h3>4° Medio</h3>
+        <ul>
+            <li>**OA 1:** Crear proyectos visuales basados en la valoración crítica de manifestaciones estéticas referidas a problemáticas sociales y juveniles, en el espacio público y en diferentes contextos.</li>
+            <li>**OA 2:** Crear trabajos y proyectos visuales basados en diferentes desafíos creativos, investigando el manejo de materiales sustentables en procedimientos de escultura y diseño.</li>
+            <li>**OA 4:** Argumentar juicios críticos referidos a la valoración de diversas manifestaciones visuales, configurando una selección personal de criterios estéticos.</li>
+        </ul>
+    </div>
+    
+    <div id="tecnologia" class="subject-section">
+        <h2>Tecnología</h2>
+        
+        <h3>7° Básico</h3>
+        <ul>
+            <li>**OA 1:** Explicar el concepto de tecnología, considerando sus transformaciones históricas.</li>
+            <li>**OA 2:** Explicar el concepto de tecnología, considerando sus transformaciones históricas.</li>
+            <li>**OA 3:** Explicar el concepto de tecnología, considerando sus transformaciones históricas.</li>
+            <li>**OA 4:** Explicar el concepto de tecnología, considerando sus transformaciones históricas.</li>
+        </ul>
+        
+        <h3>8° Básico</h3>
+        <ul>
+            <li>**OA 1:** Explicar el concepto de tecnología, considerando sus transformaciones históricas.</li>
+            <li>**OA 2:** Explicar el concepto de tecnología, considerando sus transformaciones históricas.</li>
+            <li>**OA 3:** Explicar el concepto de tecnología, considerando sus transformaciones históricas.</li>
+            <li>**OA 4:** Explicar el concepto de tecnología, considerando sus transformaciones históricas.</li>
+        </ul>
+        
+        <h3>1° Medio</h3>
+        <ul>
+            <li>**OA 1:** Explicar el concepto de tecnología, considerando sus transformaciones históricas.</li>
+            <li>**OA 2:** Explicar el concepto de tecnología, considerando sus transformaciones históricas.</li>
+            <li>**OA 3:** Explicar el concepto de tecnología, considerando sus transformaciones históricas.</li>
+            <li>**OA 4:** Explicar el concepto de tecnología, considerando sus transformaciones históricas.</li>
+        </ul>
+        
+        <h3>2° Medio</h3>
+        <ul>
+            <li>**OA 1:** Explicar el concepto de tecnología, considerando sus transformaciones históricas.</li>
+            <li>**OA 2:** Explicar el concepto de tecnología, considerando sus transformaciones históricas.</li>
+            <li>**OA 3:** Explicar el concepto de tecnología, considerando sus transformaciones históricas.</li>
+            <li>**OA 4:** Explicar el concepto de tecnología, considerando sus transformaciones históricas.</li>
+        </ul>
+        
+        <h3>3° Medio</h3>
+        <ul>
+            <li>**OA 2:** Proponer soluciones que apunten a resolver necesidades de reducción de efectos perjudiciales relacionados con el uso de recursos energéticos y materiales en una perspectiva de sustentabilidad.</li>
+            <li>**OA 4:** Comunicar propuestas de soluciones de reducción de efectos perjudiciales proyectando posibles escenarios de cambio y sus impactos.</li>
+            <li>**OA 6:** Inferir, basándose en la evolución de los productos tecnológicos y los entornos, los efectos positivos o negativos que estos han tenido en la sociedad.</li>
+        </ul>
+        
+        <h3>4° Medio</h3>
+        <ul>
+            <li>**OA 2:** Proponer soluciones que apunten a resolver necesidades de reducción de efectos perjudiciales relacionados con el uso de recursos energéticos y materiales en una perspectiva de sustentabilidad, utilizando herramientas TIC colaborativas de producción, edición, publicación y comunicación.</li>
+            <li>**OA 4:** Comunicar propuestas de soluciones de reducción de efectos perjudiciales proyectando posibles escenarios de cambio y sus impactos, utilizando herramientas TIC, considerando diferentes tipos de objetivos y audiencias, teniendo en cuenta aspectos éticos y aplicando normas de cuidado y seguridad.</li>
+            <li>**OA 6:** Proyectar escenarios de posibles impactos positivos o negativos de las innovaciones tecnológicas actuales en ámbitos personales, sociales, ambientales, legales, económicos u otros.</li>
+        </ul>
+    </div>
+    
+    <div id="orientacion" class="subject-section">
+        <h2>Orientación</h2>
+        
+        <h3>7° Básico</h3>
+        <ul>
+            <li>**OA 1:** Desarrollar habilidades para la resolución de conflictos interpersonales y la toma de decisiones, aplicando estrategias para prevenir y enfrentar situaciones de riesgo y violencia.</li>
+            <li>**OA 2:** Fortalecer el desarrollo socioemocional de los estudiantes, a través de la promoción de la empatía, el autoconocimiento y la autorregulación emocional.</li>
+            <li>**OA 3:** Desarrollar habilidades para el manejo de la información y la comunicación, considerando el uso ético de las tecnologías y la prevención de riesgos en línea.</li>
+            <li>**OA 4:** Fortalecer el desarrollo de la autonomía y la responsabilidad, a través de la planificación de metas personales y la gestión de proyectos.</li>
+        </ul>
+        
+        <h3>8° Básico</h3>
+        <ul>
+            <li>**OA 1:** Desarrollar habilidades para la resolución de conflictos interpersonales y la toma de decisiones, aplicando estrategias para prevenir y enfrentar situaciones de riesgo y violencia.</li>
+            <li>**OA 2:** Fortalecer el desarrollo socioemocional de los estudiantes, a través de la promoción de la empatía, el autoconocimiento y la autorregulación emocional.</li>
+            <li>**OA 3:** Desarrollar habilidades para el manejo de la información y la comunicación, considerando el uso ético de las tecnologías y la prevención de riesgos en línea.</li>
+            <li>**OA 4:** Fortalecer el desarrollo de la autonomía y la responsabilidad, a través de la planificación de metas personales y la gestión de proyectos.</li>
+        </ul>
+        
+        <h3>1° Medio</h3>
+        <ul>
+            <li>**OA 1:** Desarrollar habilidades para la resolución de conflictos interpersonales y la toma de decisiones, aplicando estrategias para prevenir y enfrentar situaciones de riesgo y violencia.</li>
+            <li>**OA 2:** Fortalecer el desarrollo socioemocional de los estudiantes, a través de la promoción de la empatía, el autoconocimiento y la autorregulación emocional.</li>
+            <li>**OA 3:** Desarrollar habilidades para el manejo de la información y la comunicación, considerando el uso ético de las tecnologías y la prevención de riesgos en línea.</li>
+            <li>**OA 4:** Fortalecer el desarrollo de la autonomía y la responsabilidad, a través de la planificación de metas personales y la gestión de proyectos.</li>
+        </ul>
+        
+        <h3>2° Medio</h3>
+        <ul>
+            <li>**OA 1:** Desarrollar habilidades para la resolución de conflictos interpersonales y la toma de decisiones, aplicando estrategias para prevenir y enfrentar situaciones de riesgo y violencia.</li>
+            <li>**OA 2:** Fortalecer el desarrollo socioemocional de los estudiantes, a través de la promoción de la empatía, el autoconocimiento y la autorregulación emocional.</li>
+            <li>**OA 3:** Desarrollar habilidades para el manejo de la información y la comunicación, considerando el uso ético de las tecnologías y la prevención de riesgos en línea.</li>
+            <li>**OA 4:** Fortalecer el desarrollo de la autonomía y la responsabilidad, a través de la planificación de metas personales y la gestión de proyectos.</li>
+        </ul>
+        
+        <h3>3° Medio</h3>
+        <ul>
+            <li>**OA 1:** Desarrollar habilidades para la resolución de conflictos interpersonales y la toma de decisiones, aplicando estrategias para prevenir y enfrentar situaciones de riesgo y violencia.</li>
+            <li>**OA 2:** Fortalecer el desarrollo socioemocional de los estudiantes, a través de la promoción de la empatía, el autoconocimiento y la autorregulación emocional.</li>
+            <li>**OA 3:** Desarrollar habilidades para el manejo de la información y la comunicación, considerando el uso ético de las tecnologías y la prevención de riesgos en línea.</li>
+            <li>**OA 4:** Fortalecer el desarrollo de la autonomía y la responsabilidad, a través de la planificación de metas personales y la gestión de proyectos.</li>
+        </ul>
+        
+        <h3>4° Medio</h3>
+        <ul>
+            <li>**OA 1:** Desarrollar habilidades para la resolución de conflictos interpersonales y la toma de decisiones, aplicando estrategias para prevenir y enfrentar situaciones de riesgo y violencia.</li>
+            <li>**OA 2:** Fortalecer el desarrollo socioemocional de los estudiantes, a través de la promoción de la empatía, el autoconocimiento y la autorregulación emocional.</li>
+            <li>**OA 3:** Desarrollar habilidades para el manejo de la información y la comunicación, considerando el uso ético de las tecnologías y la prevención de riesgos en línea.</li>
+            <li>**OA 4:** Fortalecer el desarrollo de la autonomía y la responsabilidad, a través de la planificación de metas personales y la gestión de proyectos.</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.subject-section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById(sectionId).classList.add('active');
+    }
+</script>
+
+</body>
+</html>
