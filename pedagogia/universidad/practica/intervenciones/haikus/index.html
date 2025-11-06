@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Haikus Escolares</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #6c9bd1;
+            --accent-color: #f39c12;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem 0;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--white);
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.2);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-form {
+            background-color: var(--accent-color);
+            margin-left: 1rem;
+        }
+
+        .btn-form:hover {
+            background-color: #e67e22;
+        }
+
+        .haiku-container {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            margin-top: 2rem;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .haiku-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .haiku-lines {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            line-height: 2;
+            color: var(--text-color);
+        }
+
+        .haiku-line {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .haiku-line:hover {
+            transform: scale(1.05);
+            color: var(--primary-color);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: var(--primary-color);
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            background-color: var(--white);
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            border-left: 4px solid #2ecc71;
+        }
+
+        .notification.error {
+            border-left: 4px solid #e74c3c;
+        }
+
+        .notification.info {
+            border-left: 4px solid var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1>Generador de Haikus Escolares</h1>
+                    <p class="subtitle">Crea hermosos haikus con las líneas de tus estudiantes</p>
+                </div>
+                <button class="btn btn-form" id="formButton">
+                    <i class="fas fa-edit"></i> Formulario
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <h2>Selecciona Colegio y Curso</h2>
+                <div class="form-group">
+                    <label for="schoolSelect">Colegio</label>
+                    <select id="schoolSelect">
+                        <option value="">Cargando colegios...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="courseSelect">Curso</label>
+                    <select id="courseSelect" disabled>
+                        <option value="">Selecciona primero un colegio</option>
+                    </select>
+                </div>
+                <button class="btn" id="generateButton">
+                    <i class="fas fa-magic"></i> Generar Haiku
+                </button>
+            </div>
+
+            <div class="loading" id="loadingIndicator">
+                <div class="spinner"></div>
+                <p>Generando haiku...</p>
+            </div>
+
+            <div class="haiku-container" id="haikuContainer">
+                <h3 class="haiku-title" id="haikuTitle"></h3>
+                <div class="haiku-lines">
+                    <div class="haiku-line" id="line1"></div>
+                    <div class="haiku-line" id="line2"></div>
+                    <div class="haiku-line" id="line3"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // ===============================================================
+        // ======== ZONA DE CONFIGURACIÓN - EDITA AQUÍ ==================
+        // ===============================================================
+        
+        // CONFIGURACIÓN DE GOOGLE SHEETS API
+        const CONFIG = {
+            // Reemplaza estos valores con los tuyos:
+            API_KEY: 'AIzaSyCgPf4Vqdkdb2pDwduWaNm5SOTU4bnU4ok', // ← PON TU API KEY AQUÍ
+            SPREADSHEET_ID: '1xNkHeq_UGz0M9OdkKjuNabO2XXZ2Toz71h8g5_5L0yU', // ← PON TU SPREADSHEET ID AQUÍ
+            RANGE: 'Haikus!A:E', // ← Cambia si tu hoja tiene otro nombre o rango
+            FORM_URL: 'https://forms.gle/6tbdbEpeAsFuebX19' // ← PON URL DE TU FORMULARIO AQUÍ
+        };
+        
+        // ===============================================================
+        // ======== FIN DE LA ZONA DE CONFIGURACIÓN =====================
+        // ===============================================================
+        
+        // Función para mostrar notificaciones
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type} show`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // ===============================================================
+        // ======== FUNCIÓN PARA CONECTAR CON GOOGLE SHEETS =============
+        // ===============================================================
+        
+        async function getDataFromGoogleSheets() {
+            // Construir la URL de la API
+            const URL = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SPREADSHEET_ID}/values/${CONFIG.RANGE}?key=${CONFIG.API_KEY}`;
+            
+            try {
+                // Mostrar indicador de carga
+                showNotification('Cargando datos desde Google Sheets...', 'info');
+                
+                // Hacer la petición a la API
+                const response = await fetch(URL);
+                
+                // Verificar si la respuesta es exitosa
+                if (!response.ok) {
+                    throw new Error(`Error en la API: ${response.status} - ${response.statusText}`);
+                }
+                
+                // Obtener los datos
+                const data = await response.json();
+                
+                // Verificar si hay datos
+                if (!data.values || data.values.length === 0) {
+                    throw new Error('No se encontraron datos en la hoja de cálculo');
+                }
+                
+                // La primera fila son los encabezados, la omitimos
+                const rows = data.values.slice(1);
+                
+                // Convertir los datos al formato que necesita la aplicación
+                const formattedData = rows.map((row, index) => {
+                    // Validar que la fila tenga suficientes columnas
+                    if (row.length < 5) {
+                        console.warn(`Fila ${index + 2} incompleta:`, row);
+                        return null;
+                    }
+                    
+                    return {
+                        colegio: row[0] || '',
+                        curso: row[1] || '',
+                        nombre: row[2] || '',
+                        silabas: parseInt(row[3]) || 0,
+                        linea: row[4] || ''
+                    };
+                }).filter(item => item !== null); // Filtrar filas nulas
+                
+                showNotification('Datos cargados correctamente', 'success');
+                return formattedData;
+                
+            } catch (error) {
+                console.error('Error al obtener datos de Google Sheets:', error);
+                
+                // Mensajes de error específicos
+                if (error.message.includes('403')) {
+                    showNotification('Error de autenticación. Verifica tu API Key y los permisos de la hoja.', 'error');
+                } else if (error.message.includes('404')) {
+                    showNotification('Hoja de cálculo no encontrada. Verifica el Spreadsheet ID.', 'error');
+                } else if (error.message.includes('400')) {
+                    showNotification('Rango inválido. Verifica el nombre de la hoja y el rango.', 'error');
+                } else {
+                    showNotification(`Error: ${error.message}`, 'error');
+                }
+                
+                // Devolver array vacío en caso de error
+                return [];
+            }
+        }
+
+        // Función para poblar el selector de colegios
+        async function populateSchools() {
+            try {
+                const data = await getDataFromGoogleSheets();
+                
+                if (data.length === 0) {
+                    document.getElementById('schoolSelect').innerHTML = 
+                        '<option value="">No hay datos disponibles</option>';
+                    return;
+                }
+                
+                // Obtener lista única de colegios
+                const schools = [...new Set(data.map(item => item.colegio).filter(s => s))];
+                
+                const schoolSelect = document.getElementById('schoolSelect');
+                schoolSelect.innerHTML = '<option value="">Selecciona un colegio</option>';
+                
+                schools.forEach(school => {
+                    const option = document.createElement('option');
+                    option.value = school;
+                    option.textContent = school;
+                    schoolSelect.appendChild(option);
+                });
+                
+                // Guardar los datos para uso posterior
+                window.sheetData = data;
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('Error al cargar los colegios', 'error');
+            }
+        }
+
+        // Función para poblar el selector de cursos según el colegio seleccionado
+        function populateCourses() {
+            const schoolSelect = document.getElementById('schoolSelect');
+            const courseSelect = document.getElementById('courseSelect');
+            const selectedSchool = schoolSelect.value;
+            
+            if (!selectedSchool) {
+                courseSelect.disabled = true;
+                courseSelect.innerHTML = '<option value="">Selecciona primero un colegio</option>';
+                return;
+            }
+            
+            // Filtrar cursos por colegio seleccionado
+            const courses = [...new Set(window.sheetData
+                .filter(item => item.colegio === selectedSchool)
+                .map(item => item.curso)
+                .filter(c => c))];
+            
+            courseSelect.disabled = false;
+            courseSelect.innerHTML = '<option value="">Selecciona un curso</option>';
+            
+            courses.forEach(course => {
+                const option = document.createElement('option');
+                option.value = course;
+                option.textContent = course;
+                courseSelect.appendChild(option);
+            });
+        }
+
+        // Función para generar un haiku aleatorio
+        function generateHaiku() {
+            const schoolSelect = document.getElementById('schoolSelect');
+            const courseSelect = document.getElementById('courseSelect');
+            const selectedSchool = schoolSelect.value;
+            const selectedCourse = courseSelect.value;
+            
+            if (!selectedSchool || !selectedCourse) {
+                showNotification('Por favor, selecciona un colegio y un curso', 'error');
+                return;
+            }
+            
+            // Filtrar datos según la selección
+            const filteredData = window.sheetData.filter(item => 
+                item.colegio === selectedSchool && item.curso === selectedCourse
+            );
+            
+            // Separar líneas por número de sílabas
+            const lines5 = filteredData.filter(item => item.silabas === 5);
+            const lines7 = filteredData.filter(item => item.silabas === 7);
+            
+            // Verificar si hay suficientes líneas para crear un haiku
+            if (lines5.length < 2) {
+                showNotification(`Se necesitan al menos 2 líneas de 5 sílabas. Solo hay ${lines5.length}`, 'error');
+                return;
+            }
+            
+            if (lines7.length < 1) {
+                showNotification(`Se necesita al menos 1 línea de 7 sílabas. Solo hay ${lines7.length}`, 'error');
+                return;
+            }
+            
+            // Mostrar indicador de carga
+            document.getElementById('loadingIndicator').style.display = 'block';
+            document.getElementById('haikuContainer').style.display = 'none';
+            
+            // Simular tiempo de carga para mejor UX
+            setTimeout(() => {
+                // Seleccionar líneas aleatorias sin repetir
+                const availableLines5 = [...lines5];
+                const line1 = availableLines5.splice(Math.floor(Math.random() * availableLines5.length), 1)[0];
+                const line3 = availableLines5.splice(Math.floor(Math.random() * availableLines5.length), 1)[0];
+                const line2 = lines7[Math.floor(Math.random() * lines7.length)];
+                
+                // Ocultar indicador de carga
+                document.getElementById('loadingIndicator').style.display = 'none';
+                
+                // Mostrar haiku
+                document.getElementById('haikuTitle').textContent = 
+                    `Haiku por ${line1.nombre}, ${line2.nombre} y ${line3.nombre}`;
+                document.getElementById('line1').textContent = line1.linea;
+                document.getElementById('line2').textContent = line2.linea;
+                document.getElementById('line3').textContent = line3.linea;
+                
+                document.getElementById('haikuContainer').style.display = 'flex';
+                
+                showNotification('Haiku generado exitosamente', 'success');
+            }, 800);
+        }
+
+        // ===============================================================
+        // ======== FUNCIÓN PARA REDIRIGIR AL FORMULARIO ================
+        // ===============================================================
+        
+        function goToForm() {
+            if (!CONFIG.FORM_URL || CONFIG.FORM_URL.includes('XXXXXXXX')) {
+                showNotification('URL del formulario no configurada', 'error');
+                return;
+            }
+            
+            showNotification('Redirigiendo al formulario...', 'info');
+            
+            // Redirigir al formulario
+            setTimeout(() => {
+                window.location.href = CONFIG.FORM_URL;
+            }, 500);
+        }
+
+        // ===============================================================
+        // ======== INICIALIZACIÓN DE LA APLICACIÓN =====================
+        // ===============================================================
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Verificar si la configuración está completa
+            if (CONFIG.API_KEY.includes('XXXXXXXX')) {
+                showNotification('ADVERTENCIA: Debes configurar tu API Key en el código', 'error');
+            }
+            
+            if (CONFIG.SPREADSHEET_ID.includes('XXXXXXXX')) {
+                showNotification('ADVERTENCIA: Debes configurar tu Spreadsheet ID en el código', 'error');
+            }
+            
+            if (CONFIG.FORM_URL.includes('XXXXXXXX')) {
+                showNotification('ADVERTENCIA: Debes configurar la URL de tu formulario en el código', 'error');
+            }
+            
+            // Cargar datos iniciales
+            populateSchools();
+            
+            // Configurar event listeners
+            document.getElementById('schoolSelect').addEventListener('change', populateCourses);
+            document.getElementById('generateButton').addEventListener('click', generateHaiku);
+            document.getElementById('formButton').addEventListener('click', goToForm);
+        });
+    </script>
+</body>
+</html>
