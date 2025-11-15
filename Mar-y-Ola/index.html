@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <h1>Gestión de Tienda</h1>
+    </header>
+
+    <nav class="tab-nav">
+        <button class="tab-button active" onclick="showTab('pos-tab')">Punto de Venta</button>
+        <button class="tab-button" onclick="showTab('members-tab')">Socios</button>
+        <button class="tab-button" onclick="showTab('inventory-tab')">Inventario</button>
+    </nav>
+
+    <main>
+        <!-- PESTAÑA PUNTO DE VENTA -->
+        <section id="pos-tab" class="tab-content active">
+            <h2>Realizar Venta</h2>
+            <div class="pos-container">
+                <div class="pos-actions">
+                    <div class="form-group">
+                        <label for="product-id">ID del Producto:</label>
+                        <input type="text" id="product-id" placeholder="Ej: PROD001">
+                        <button onclick="addToCart()">Agregar a la Venta</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-rut">RUT del Socio (Opcional):</label>
+                        <input type="text" id="customer-rut" placeholder="Ej: 12.345.678-9">
+                    </div>
+                    <div class="form-group">
+                        <label for="coupon-code">Código de Descuento (Opcional):</label>
+                        <input type="text" id="coupon-code" placeholder="Ej: VERANO10">
+                        <button onclick="applyCoupon()">Aplicar</button>
+                        <span id="coupon-status"></span>
+                    </div>
+                </div>
+                
+                <div class="cart-summary">
+                    <h3>Resumen de Venta</h3>
+                    <table id="cart-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Producto</th>
+                                <th>Precio Unit.</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-items">
+                            <!-- Los productos se agregarán aquí dinámicamente -->
+                        </tbody>
+                    </table>
+                    <div class="totals">
+                        <p>Subtotal: <span id="subtotal">$0</span></p>
+                        <p>Descuento: <span id="discount">$0</span></p>
+                        <h3>Total: <span id="total">$0</span></h3>
+                    </div>
+                    <div class="cart-actions">
+                        <button class="button-cancel" onclick="cancelSale()">Cancelar Venta</button>
+                        <button class="button-confirm" onclick="confirmSale()">Realizar Venta</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA SOCIOS -->
+        <section id="members-tab" class="tab-content">
+            <h2>Gestión de Socios</h2>
+            <div class="two-column-layout">
+                <div class="form-container">
+                    <h3>Buscar Socio</h3>
+                    <div class="form-group">
+                        <input type="text" id="search-rut" placeholder="Ingresa el RUT a buscar">
+                        <button onclick="searchMember()">Buscar</button>
+                    </div>
+                    <div id="member-search-result"></div>
+                </div>
+                <div class="form-container">
+                    <h3>Inscribir Nuevo Socio</h3>
+                    <form id="new-member-form" onsubmit="addMember(event)">
+                        <div class="form-group"><label>RUT:</label><input type="text" id="new-rut" required></div>
+                        <div class="form-group"><label>Nombre:</label><input type="text" id="new-name" required></div>
+                        <div class="form-group"><label>Fecha de Cumpleaños:</label><input type="date" id="new-birthday" required></div>
+                        <button type="submit">Inscribir</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA INVENTARIO -->
+        <section id="inventory-tab" class="tab-content">
+            <h2>Gestión de Inventario</h2>
+            <div class="inventory-controls">
+                 <button onclick="loadInventory()">Actualizar Inventario</button>
+            </div>
+            <table id="inventory-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Stock Actual</th>
+                        <th>Stock Mínimo</th>
+                        <th>Estado</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody id="inventory-items">
+                    <!-- El inventario se cargará aquí -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
