@@ -1,6 +1,6 @@
 // --- CONFIGURACIÓN ---
 // PEGA LA NUEVA URL DE TU APLICACIÓN WEB DE APPS SCRIPT AQUÍ
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxGr_KqrCRx4Cxa09BYY5Mf5DxOLm-APRoRGPiV45MetYT-_avuANtK796ZNqzQtowqAw/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbydZ3oOiGAMcO7twbBbpYjf_uu3okrFrTeS08OBPb7LrMmSr8q64DbswZmHhhND4VrMVQ/exec';
 
 // Tu API Key y Spreadsheet ID todavía son necesarios para LEER datos (inventario, socios)
 const SPREADSHEET_ID = '14Lq_gAVKeWFf-F7AqJ0uNfmBS8jv7C5V93xs3WlIM_Y';
