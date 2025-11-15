@@ -232,6 +232,17 @@
         .notification.info {
             border-left: 4px solid var(--primary-color);
         }
+
+        .selectors-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
     </style>
 </head>
 <body>
@@ -252,18 +263,26 @@
     <main>
         <div class="container">
             <div class="card">
-                <h2>Selecciona Colegio y Curso</h2>
-                <div class="form-group">
-                    <label for="schoolSelect">Colegio</label>
-                    <select id="schoolSelect">
-                        <option value="">Cargando colegios...</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="courseSelect">Curso</label>
-                    <select id="courseSelect" disabled>
-                        <option value="">Selecciona primero un colegio</option>
-                    </select>
+                <h2>Selecciona Colegio, Año y Curso</h2>
+                <div class="selectors-row">
+                    <div class="form-group">
+                        <label for="schoolSelect">Colegio</label>
+                        <select id="schoolSelect">
+                            <option value="">Cargando colegios...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="yearSelect">Año</label>
+                        <select id="yearSelect" disabled>
+                            <option value="">Selecciona primero un colegio</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="courseSelect">Curso</label>
+                        <select id="courseSelect" disabled>
+                            <option value="">Selecciona primero un colegio y año</option>
+                        </select>
+                    </div>
                 </div>
                 <button class="btn" id="generateButton">
                     <i class="fas fa-magic"></i> Generar Haiku
@@ -298,7 +317,7 @@
             // Reemplaza estos valores con los tuyos:
             API_KEY: 'AIzaSyCgPf4Vqdkdb2pDwduWaNm5SOTU4bnU4ok', // ← PON TU API KEY AQUÍ
             SPREADSHEET_ID: '1xNkHeq_UGz0M9OdkKjuNabO2XXZ2Toz71h8g5_5L0yU', // ← PON TU SPREADSHEET ID AQUÍ
-            RANGE: 'Haikus!A:E', // ← Cambia si tu hoja tiene otro nombre o rango
+            RANGE: 'Haikus!A:F', // ← Cambiado para incluir la columna de fecha (columna F)
             FORM_URL: 'https://forms.gle/6tbdbEpeAsFuebX19' // ← PON URL DE TU FORMULARIO AQUÍ
         };
         
@@ -315,6 +334,37 @@
             setTimeout(() => {
                 notification.classList.remove('show');
             }, 3000);
+        }
+
+        // Función para extraer el año de una fecha en formato dd-mm-yyyy
+        function extractYear(dateString) {
+            if (!dateString) return '';
+            
+            // Intentar diferentes formatos de fecha
+            // Formato dd-mm-yyyy
+            if (dateString.includes('-')) {
+                const parts = dateString.split('-');
+                if (parts.length === 3) {
+                    return parts[2]; // El año es la tercera parte
+                }
+            }
+            
+            // Formato dd/mm/yyyy
+            if (dateString.includes('/')) {
+                const parts = dateString.split('/');
+                if (parts.length === 3) {
+                    return parts[2]; // El año es la tercera parte
+                }
+            }
+            
+            // Si el formato no coincide, intentar extraer un número de 4 dígitos
+            const yearMatch = dateString.match(/\b(20\d{2})\b/);
+            if (yearMatch) {
+                return yearMatch[1];
+            }
+            
+            // Si no se puede determinar, devolver la cadena original
+            return dateString;
         }
 
         // ===============================================================
@@ -351,17 +401,23 @@
                 // Convertir los datos al formato que necesita la aplicación
                 const formattedData = rows.map((row, index) => {
                     // Validar que la fila tenga suficientes columnas
-                    if (row.length < 5) {
+                    if (row.length < 6) {
                         console.warn(`Fila ${index + 2} incompleta:`, row);
                         return null;
                     }
+                    
+                    // Extraer el año de la fecha (columna F, índice 5)
+                    const fecha = row[5] || '';
+                    const año = extractYear(fecha);
                     
                     return {
                         colegio: row[0] || '',
                         curso: row[1] || '',
                         nombre: row[2] || '',
                         silabas: parseInt(row[3]) || 0,
-                        linea: row[4] || ''
+                        linea: row[4] || '',
+                        fecha: fecha,
+                        año: año
                     };
                 }).filter(item => item !== null); // Filtrar filas nulas
                 
@@ -420,21 +476,62 @@
             }
         }
 
-        // Función para poblar el selector de cursos según el colegio seleccionado
-        function populateCourses() {
+        // Función para poblar el selector de años según el colegio seleccionado
+        function populateYears() {
             const schoolSelect = document.getElementById('schoolSelect');
+            const yearSelect = document.getElementById('yearSelect');
             const courseSelect = document.getElementById('courseSelect');
             const selectedSchool = schoolSelect.value;
             
             if (!selectedSchool) {
+                yearSelect.disabled = true;
+                yearSelect.innerHTML = '<option value="">Selecciona primero un colegio</option>';
                 courseSelect.disabled = true;
-                courseSelect.innerHTML = '<option value="">Selecciona primero un colegio</option>';
+                courseSelect.innerHTML = '<option value="">Selecciona primero un colegio y año</option>';
                 return;
             }
             
-            // Filtrar cursos por colegio seleccionado
-            const courses = [...new Set(window.sheetData
+            // Filtrar años por colegio seleccionado
+            const years = [...new Set(window.sheetData
                 .filter(item => item.colegio === selectedSchool)
+                .map(item => item.año)
+                .filter(y => y))];
+            
+            // Ordenar años de forma descendente (más reciente primero)
+            years.sort((a, b) => b - a);
+            
+            yearSelect.disabled = false;
+            yearSelect.innerHTML = '<option value="">Selecciona un año</option>';
+            
+            years.forEach(year => {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearSelect.appendChild(option);
+            });
+            
+            // Resetear el selector de cursos
+            courseSelect.disabled = true;
+            courseSelect.innerHTML = '<option value="">Selecciona primero un colegio y año</option>';
+        }
+
+        // Función para poblar el selector de cursos según el colegio y año seleccionados
+        function populateCourses() {
+            const schoolSelect = document.getElementById('schoolSelect');
+            const yearSelect = document.getElementById('yearSelect');
+            const courseSelect = document.getElementById('courseSelect');
+            const selectedSchool = schoolSelect.value;
+            const selectedYear = yearSelect.value;
+            
+            if (!selectedSchool || !selectedYear) {
+                courseSelect.disabled = true;
+                courseSelect.innerHTML = '<option value="">Selecciona primero un colegio y año</option>';
+                return;
+            }
+            
+            // Filtrar cursos por colegio y año seleccionados
+            const courses = [...new Set(window.sheetData
+                .filter(item => item.colegio === selectedSchool && item.año === selectedYear)
                 .map(item => item.curso)
                 .filter(c => c))];
             
@@ -452,18 +549,22 @@
         // Función para generar un haiku aleatorio
         function generateHaiku() {
             const schoolSelect = document.getElementById('schoolSelect');
+            const yearSelect = document.getElementById('yearSelect');
             const courseSelect = document.getElementById('courseSelect');
             const selectedSchool = schoolSelect.value;
+            const selectedYear = yearSelect.value;
             const selectedCourse = courseSelect.value;
             
-            if (!selectedSchool || !selectedCourse) {
-                showNotification('Por favor, selecciona un colegio y un curso', 'error');
+            if (!selectedSchool || !selectedYear || !selectedCourse) {
+                showNotification('Por favor, selecciona un colegio, un año y un curso', 'error');
                 return;
             }
             
             // Filtrar datos según la selección
             const filteredData = window.sheetData.filter(item => 
-                item.colegio === selectedSchool && item.curso === selectedCourse
+                item.colegio === selectedSchool && 
+                item.año === selectedYear && 
+                item.curso === selectedCourse
             );
             
             // Separar líneas por número de sílabas
@@ -498,7 +599,7 @@
                 
                 // Mostrar haiku
                 document.getElementById('haikuTitle').textContent = 
-                    `Haiku por ${line1.nombre}, ${line2.nombre} y ${line3.nombre}`;
+                    `Haiku por ${line1.nombre}, ${line2.nombre} y ${line3.nombre} (${selectedYear})`;
                 document.getElementById('line1').textContent = line1.linea;
                 document.getElementById('line2').textContent = line2.linea;
                 document.getElementById('line3').textContent = line3.linea;
@@ -550,7 +651,8 @@
             populateSchools();
             
             // Configurar event listeners
-            document.getElementById('schoolSelect').addEventListener('change', populateCourses);
+            document.getElementById('schoolSelect').addEventListener('change', populateYears);
+            document.getElementById('yearSelect').addEventListener('change', populateCourses);
             document.getElementById('generateButton').addEventListener('click', generateHaiku);
             document.getElementById('formButton').addEventListener('click', goToForm);
         });

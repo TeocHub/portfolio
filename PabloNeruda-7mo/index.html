@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Haikus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a4c93; /* Morado vibrante */
+            --secondary-color: #8e7cc3; /* Lila suave */
+            --accent-color: #17a2b8; /* Verde azulado (teal) */
+            --text-color: #333;
+            --light-bg: #f4f4f9; /* Un gris muy claro y suave */
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 2.5rem 0;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        main {
+            flex: 1;
+            padding: 3rem 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center; /* Centra el botón */
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: var(--accent-color); /* Usa el color acentuado para el botón principal */
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            margin: 2rem auto;
+        }
+
+        .btn:hover {
+            background-color: #138496; /* Un tono más oscuro del teal al pasar el mouse */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .haiku-container {
+            display: none;
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, #ffffff 0%, #e9ecef 100%);
+            border-radius: 15px;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+            width: 100%;
+            border: 1px solid #dee2e6;
+        }
+
+        .haiku-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .haiku-lines {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            line-height: 2.2;
+            color: var(--text-color);
+        }
+
+        .haiku-line {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .haiku-line:hover {
+            transform: scale(1.05);
+            color: var(--accent-color);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border-left-color: var(--accent-color); /* El spinner ahora usa el color acentuado */
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            background-color: var(--white);
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            border-left: 4px solid #28a745; /* Verde para éxito */
+        }
+
+        .notification.error {
+            border-left: 4px solid #dc3545; /* Rojo para error */
+        }
+
+        .notification.info {
+            border-left: 4px solid var(--accent-color); /* Teal para info */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Generador de Haikus</h1>
+            <p class="subtitle">Pablo Neruda - 7mo 2025</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <button class="btn" id="generateButton">
+                <i class="fas fa-magic"></i> Generar Haiku
+            </button>
+
+            <div class="loading" id="loadingIndicator">
+                <div class="spinner"></div>
+                <p>Generando haiku...</p>
+            </div>
+
+            <div class="haiku-container" id="haikuContainer">
+                <h3 class="haiku-title" id="haikuTitle"></h3>
+                <div class="haiku-lines">
+                    <div class="haiku-line" id="line1"></div>
+                    <div class="haiku-line" id="line2"></div>
+                    <div class="haiku-line" id="line3"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container" style="text-align: center; padding: 1rem 0; font-size: 0.9rem; color: #666;">
+            &ast; Esta página cuenta con las líneas creadas por los estudiantes del Pablo Neruda 7mo del 2025.
+        </div>
+    </footer>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
