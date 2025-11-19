@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuerpo Saludable - Guía para Jóvenes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-heartbeat"></i> Mi Cuerpo Saludable</h1>
+        <p class="subtitle">Guía completa para un estilo de vida saludable a los 14 años</p>
+    </header>
+
+    <nav>
+        <ul class="nav-tabs">
+            <li class="nav-tab active" onclick="switchTab('inicio')">
+                <i class="fas fa-home"></i> Inicio
+            </li>
+            <li class="nav-tab" onclick="switchTab('alimentacion')">
+                <i class="fas fa-apple-alt"></i> Alimentación
+            </li>
+            <li class="nav-tab" onclick="switchTab('ejercicios')">
+                <i class="fas fa-running"></i> Ejercicios
+            </li>
+            <li class="nav-tab" onclick="switchTab('drogas')">
+                <i class="fas fa-ban"></i> Alcohol y Drogas
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Tab Inicio -->
+        <div id="inicio" class="tab-content active">
+            <div class="card animate-on-scroll">
+                <h2><i class="fas fa-star"></i> ¡Bienvenido a tu guía de salud!</h2>
+                <p>Esta página está diseñada especialmente para ti, que tienes 14 años y estás en una etapa crucial de tu desarrollo. Aquí encontrarás todo lo que necesitas saber para mantener un cuerpo y mente sanos.</p>
+                
+                <div class="img-container">
+                    <img src="images/inicio.jpg" alt="Jóvenes saludables">
+                </div>
+
+                <h3>¿Por qué es importante cuidarte ahora?</h3>
+                <p>A los 14 años, tu cuerpo está experimentando muchos cambios. Es el momento perfecto para crear <span class="tooltip">hábitos saludables
+                    <span class="tooltip-text">Costumbres que benefician tu salud física y mental a largo plazo</span>
+                </span> que te acompañarán toda la vida.</p>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3><i class="fas fa-utensils"></i> Alimentación</h3>
+                        <p>Descubre cómo una dieta balanceada te da energía para todo el día.</p>
+                        <button class="btn btn-primary" onclick="switchTab('alimentacion')">Ver más</button>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-dumbbell"></i> Ejercicio</h3>
+                        <p>Conoce los ejercicios perfectos para tu edad y condición física.</p>
+                        <button class="btn btn-primary" onclick="switchTab('ejercicios')">Ver más</button>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-shield-alt"></i> Prevención</h3>
+                        <p>Aprende a decir NO a lo que daña tu cuerpo y tu futuro.</p>
+                        <button class="btn btn-primary" onclick="switchTab('drogas')">Ver más</button>
+                    </div>
+                </div>
+
+                <div class="toggle-content">
+                    <button class="toggle-btn" onclick="toggleContent('extra-info')">
+                        <i class="fas fa-plus-circle"></i> ¿Sabías que...?
+                    </button>
+                    <div id="extra-info" class="hidden-content">
+                        <p>🏃‍♂️ Los adolescentes que hacen ejercicio regularmente tienen mejor rendimiento escolar.</p>
+                        <p>🥦 Una buena alimentación mejora tu estado de ánimo y concentración.</p>
+                        <p>😴 Dormir 8-10 horas por noche es esencial para tu desarrollo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card animate-on-scroll">
+                <h2><i class="fas fa-chart-line"></i> Tu progreso de salud</h2>
+                <p>¡Mide tu progreso semanal!</p>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%">75% - ¡Muy bien!</div>
+                </div>
+                
+                <button class="btn btn-success" onclick="openModal()">
+                    <i class="fas fa-trophy"></i> Ver metas semanales
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab Alimentación -->
+        <div id="alimentacion" class="tab-content">
+            <div class="card animate-on-scroll">
+                <h2><i class="fas fa-apple-alt"></i> Alimentación Balanceada</h2>
+                <p>Una buena alimentación es la base de tu energía y salud. A los 14 años necesitas nutrientes específicos para crecer fuerte y sano.</p>
+
+                <div class="img-container">
+                    <img src="images/piramide.jpg" alt="Comida saludable">
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3><i class="fas fa-bread-slice"></i> Grupo de los carbohidratos</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Los carbohidratos son tu principal fuente de energía. Incluye:</p>
+                            <ul>
+                                <li>Arroz integral (1 taza por comida)</li>
+                                <li>Pan integral (2-3 rebanadas al día)</li>
+                                <li>Pasta (1 porción al día)</li>
+                                <li>Papas o camotes (moderación)</li>
+                            </ul>
+                            <p><strong>Consejo:</strong> Prefiere siempre versiones integrales.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3><i class="fas fa-egg"></i> Proteínas esenciales</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Las proteínas construyen tus músculos y tejidos:</p>
+                            <ul>
+                                <li>Carne magra (pollo, pavo) - 100g al día</li>
+                                <li>Pescado (2-3 veces por semana)</li>
+                                <li>Huevos (1 al día)</li>
+                                <li>Legumbres (lentejas, frijoles)</li>
+                                <li>Lácteos (leche, yogurt, queso)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3><i class="fas fa-carrot"></i> Vitaminas y minerales</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Frutas y verduras son fundamentales:</p>
+                            <ul>
+                                <li>5 porciones de frutas y verduras al día</li>
+                                <li>Verduras de hoja verde (espinacas, acelgas)</li>
+                                <li>Frutas cítricas (naranja, limón)</li>
+                                <li>Vegetales de colores variados</li>
+                            </ul>
+                            <p><strong>Truco:</strong> Come frutas de diferentes colores cada día.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/y9SIxqZKz80?si=3xdZKU9PBEOPpHj5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3><i class="fas fa-glass-water"></i> Hidratación</h3>
+                        <p>Beba 6-8 vasos de agua al día. El agua es vital para tu cuerpo.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%">60% de tu meta diaria</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-cookie-bite"></i> Snacks saludables</h3>
+                        <p>Frutas, nueces, yogurt natural. Evita frituras y dulces.</p>
+                        <button class="btn btn-secondary" onclick="openSnackModal()">Ver ideas</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Ejercicios -->
+        <div id="ejercicios" class="tab-content">
+            <div class="card animate-on-scroll">
+                <h2><i class="fas fa-running"></i> Ejercicios Recomendados</h2>
+                <p>La <span class="tooltip">OMS
+                    <span class="tooltip-text">Organización Mundial de la Salud</span>
+                </span> recomienda 60 minutos de actividad física diaria para adolescentes.</p>
+
+                <div class="img-container">
+                    <img src="images/atletas.jpg" alt="Jóvenes haciendo ejercicio">
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3><i class="fas fa-calendar-day"></i> Rutina Diaria</h3>
+                        <ul>
+                            <li>🚶‍♂️ Caminar o ir en bicicleta al colegio</li>
+                            <li>🏃‍♀️ 10 minutos de carrera ligera</li>
+                            <li>🤸‍♂️ Estiramientos matutinos</li>
+                            <li>🧘‍♀️ 5 minutos de respiración</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-calendar-week"></i> Actividades Semanales</h3>
+                        <ul>
+                            <li>⚽ Deportes en equipo (2-3 veces)</li>
+                            <li>🏊‍♂️ Natación (1 vez)</li>
+                            <li>🚴‍♀️ Ciclismo (1-2 veces)</li>
+                            <li>💪 Ejercicios de fuerza (2 veces)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3><i class="fas fa-fire"></i> Ejercicios cardiovasculares</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Mejoran la salud de tu corazón:</p>
+                            <ul>
+                                <li>Correr: 20-30 minutos, 3 veces por semana</li>
+                                <li>Saltar cuerda: 10 minutos diarios</li>
+                                <li>Baile: ¡Diviértete mientras te ejercitas!</li>
+                                <li>Fútbol, básquetbol, voleibol</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3><i class="fas fa-dumbbell"></i> Fortalecimiento muscular</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Con pesas ligeras o tu propio peso:</p>
+                            <ul>
+                                <li>Lagartijas: 3 series de 10-15</li>
+                                <li>Sentadillas: 3 series de 15</li>
+                                <li>Planchas: 3 series de 30 segundos</li>
+                                <li>Abdominales: 3 series de 20</li>
+                            </ul>
+                            <p><strong>Importante:</strong> Siempre con supervisión y técnica correcta.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3><i class="fas fa-spa"></i> Flexibilidad y equilibrio</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Previene lesiones y mejora postura:</p>
+                            <ul>
+                                <li>Yoga para adolescentes</li>
+                                <li>Estiramientos antes y después de ejercicio</li>
+                                <li>Tai chi o artes marciales</li>
+                                <li>Pilates básico</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="toggle-content">
+                    <button class="toggle-btn" onclick="toggleContent('exercise-tips')">
+                        <i class="fas fa-lightbulb"></i> Consejos profesionales
+                    </button>
+                    <div id="exercise-tips" class="hidden-content">
+                        <p>🏃‍♂️ Calienta siempre antes de ejercitarte</p>
+                        <p>💧 Hidrátate durante y después del ejercicio</p>
+                        <p>😴 Descansa los días necesarios para la recuperación</p>
+                        <p>👕 Usa ropa y calzado adecuados</p>
+                        <p>🎵 Escucha música motivadora</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Alcohol y Drogas -->
+        <div id="drogas" class="tab-content">
+            <div class="card animate-on-scroll">
+                <h2><i class="fas fa-ban"></i> Alcohol, Tabaco y Drogas</h2>
+                <p>Conoce los riesgos reales y aprende a tomar decisiones inteligentes para tu futuro.</p>
+
+                <div class="img-container">
+                    <img src="images/drogas.jpeg" alt="Decisión saludable">
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3><i class="fas fa-wine-bottle"></i> Alcohol</h3>
+                        <p><strong>Riesgos para adolescentes:</strong></p>
+                        <ul>
+                            <li>🧠 Daña el desarrollo cerebral</li>
+                            <li>📉 Afecta el rendimiento escolar</li>
+                            <li>⚠️ Riesgo de adicción</li>
+                            <li>🚗 Peligro en accidentes</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="openModalAlcohol()">Ver más consecuencias</button>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-smoking"></i> Tabaco</h3>
+                        <p><strong>¿Por qué decir NO?</strong></p>
+                        <ul>
+                            <li>🫁 Enfermedades respiratorias</li>
+                            <li>💰 Gasto económico innecesario</li>
+                            <li>🦷 Problemas dentales</li>
+                            <li>👴 Envejecimiento prematuro</li>
+                        </ul>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%">100% prevenible</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3><i class="fas fa-pills"></i> Drogas y sustancias</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p><strong>Tipos y peligros:</strong></p>
+                            <ul>
+                                <li><strong>Marihuana:</strong> Afecta memoria y concentración</li>
+                                <li><strong>Esteroides:</strong> Daños permanentes en el cuerpo</li>
+                                <li><strong>Inhalantes:</strong> Daño cerebral inmediato</li>
+                                <li><strong>Medicamentos sin receta:</strong> Riesgo de sobredosis</li>
+                            </ul>
+                            <p><strong>Recuerda:</strong> Una sola vez puede ser suficiente para causar daño.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3><i class="fas fa-piggy-bank"></i> Costos económicos</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p><strong>¿Qué podrías comprar en lugar de sustancias?</strong></p>
+                            <ul>
+                                <li>🎮 Videojuegos nuevos cada mes</li>
+                                <li>👟 Zapatillas deportivas de calidad</li>
+                                <li>📱 Plan celular premium</li>
+                                <li>🎫 Entradas a conciertos y eventos</li>
+                                <li>💰 Ahorrar para tu futuro</li>
+                            </ul>
+                            <p>El hábito más caro es el que no puedes pagar: tu salud.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3><i class="fas fa-users"></i> Presión social</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p><strong>Cómo decir NO:</strong></p>
+                            <ul>
+                                <li>🗣️ Sé firme y directo: "No, gracias"</li>
+                                <li>🏃‍♂️ Aléjate de la situación</li>
+                                <li>👥 Busca amigos con tus mismos valores</li>
+                                <li>📱 Ten un plan de escape</li>
+                                <li>👨‍👩‍👧‍👦 Habla con tus padres o un adulto de confianza</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/JndZ3y-KVLQ?si=3Q1mDJLMACJjcUEO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-hand-holding-heart"></i> Busca ayuda</h3>
+                    <p>Si tú o alguien que conoces necesita ayuda, no estás solo:</p>
+                    <ul>
+                        <li>📞 Llama a líneas de ayuda profesional</li>
+                        <li>👨‍⚕️ Habla con el psicólogo del colegio</li>
+                        <li>👨‍👩‍👧‍👦 Confía en tus padres</li>
+                        <li>🏥 Centros de salud gratuitos</li>
+                    </ul>
+                    <button class="btn btn-success" onclick="openHelpModal()">
+                        <i class="fas fa-phone-alt"></i> Ver recursos de ayuda
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Principal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2><i class="fas fa-trophy"></i> Metas Semanales de Salud</h2>
+            <div class="grid">
+                <div>
+                    <h3><i class="fas fa-check-circle"></i> Alimentación</h3>
+                    <ul>
+                        <li>Comer 5 frutas y verduras diarias</li>
+                        <li>Bebida 8 vasos de agua</li>
+                        <li>Evitar comida chatarra</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3><i class="fas fa-check-circle"></i> Ejercicio</h3>
+                    <ul>
+                        <li>60 minutos de actividad diaria</li>
+                        <li>3 días de deportes</li>
+                        <li>Estiramientos diarios</li>
+                    </ul>
+                </div>
+            </div>
+            <p><strong>¡Recompensa:</strong> Si cumples todas tus metas, date un premio saludable como una salida especial o tiempo extra para tu hobby favorito.</p>
+        </div>
+    </div>
+
+    <!-- Modal Snacks -->
+    <div id="snackModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSnackModal()">&times;</span>
+            <h2><i class="fas fa-cookie"></i> Ideas de Snacks Saludables</h2>
+            <div class="grid">
+                <div>
+                    <h3>Para el colegio</h3>
+                    <ul>
+                        <li>🍎 Manzana con mantequilla de maní</li>
+                        <li>🥕 Zanahorias baby con hummus</li>
+                        <li>🥜 Mix de nueces y frutas secas</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Para después del deporte</h3>
+                    <ul>
+                        <li>🍌 Plátano con yogurt</li>
+                        <li>🥤 Batido de frutas</li>
+                        <li>🥪 Sándwich integral</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Alcohol -->
+    <div id="alcoholModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModalAlcohol()">&times;</span>
+            <h2><i class="fas fa-exclamation-triangle"></i> Consecuencias del Alcohol</h2>
+            <p><strong>A corto plazo:</strong></p>
+            <ul>
+                <li>Pérdida de coordinación</li>
+                <li>Dificultad para concentrarse</li>
+                <li>Riesgo de accidentes</li>
+                <li>Comportamientos arriesgados</li>
+            </ul>
+            <p><strong>A largo plazo:</strong></p>
+            <ul>
+                <li>Daño cerebral permanente</li>
+                <li>Problemas de hígado</li>
+                <li>Adicción</li>
+                <li>Problemas familiares y sociales</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal Ayuda -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeHelpModal()">&times;</span>
+            <h2><i class="fas fa-hands-helping"></i> Recursos de Ayuda</h2>
+            <div class="grid">
+                <div>
+                    <h3><i class="fas fa-phone"></i> Líneas de Ayuda</h3>
+                    <ul>
+                        <li>Prevención Drogas: 1412</li>
+                        <li>Salud Mental: *4141</li>
+                        <li>Emergencias Médicas: 131</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3><i class="fas fa-globe"></i> Páginas Web</h3>
+                    <ul>
+                        <li>https://hablemosdetodo.injuv.gob.cl/</li>
+                    </ul>
+                </div>
+            </div>
+            <p><strong>Recuerda:</strong> Pedir ayuda es un signo de fortaleza, no de debilidad.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
