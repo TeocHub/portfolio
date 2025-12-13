@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Editorial Maestra</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #4f46e5;
+            --bg: #f3f4f6;
+            --card: #ffffff;
+            --text: #1f2937;
+            --border: #e5e7eb;
+            --danger: #ef4444;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--text);
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .col {
+            flex: 1;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.6rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        
+        input:focus, select:focus {
+            outline: 2px solid var(--primary);
+            border-color: transparent;
+        }
+
+        .helper {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        /* Botones y lista */
+        .btn-add {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .btn-add:hover { background: var(--secondary); }
+
+        .chapter-list {
+            margin-top: 10px;
+            max-height: 180px;
+            overflow-y: auto;
+            background: #f9fafb;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+        }
+
+        .chapter-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+            align-items: center;
+        }
+        
+        .chapter-item:nth-child(even) { background: #fff; }
+
+        .btn-del {
+            color: var(--danger);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        /* Resultados Divididos */
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+
+        .result-card {
+            background: #eff6ff;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #bfdbfe;
+        }
+
+        .result-card.secondary {
+            background: #fdf2f8; /* Un tono rojizo/rosado suave para diferenciar */
+            border-color: #fbcfe8;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        .result-card.secondary .result-value {
+            color: #db2777;
+        }
+
+        .result-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #555;
+            font-weight: 700;
+        }
+        
+        .result-sub {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .total-summary {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Calculadora de Libro</h1>
+
+    <div class="section">
+        <div class="row">
+            <div class="col">
+                <label>Formato / Tamaño</label>
+                <select id="density" onchange="calc()">
+                    <option value="250">Bolsillo (250 pal/pág)</option>
+                    <option value="300" selected>Estándar (300 pal/pág)</option>
+                    <option value="350">Literario (350 pal/pág)</option>
+                    <option value="450">Grande (450 pal/pág)</option>
+                </select>
+            </div>
+            <div class="col">
+                <label>Páginas Extra</label>
+                <input type="number" id="extras" value="8" min="0" onchange="calc()">
+                <div class="helper">Portadas, legales, blancas</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <label>Ingresar Capítulos (Palabras)</label>
+        <div class="row">
+            <div class="col">
+                <input type="number" id="chapInput" placeholder="Ej: 2500" onkeypress="enterKey(event)">
+            </div>
+            <button class="btn-add" onclick="addChap()">+</button>
+        </div>
+        
+        <div class="chapter-list" id="listContainer" style="display:none;"></div>
+        
+        <div style="text-align: right; margin-top: 5px;">
+             <span id="chapCount" style="font-size: 0.8rem; color:#666; margin-right: 10px;">0 caps</span>
+             <a href="#" onclick="clearAll()" style="color:var(--danger); font-size:0.8rem; text-decoration:none;">Borrar todo</a>
+        </div>
+    </div>
+
+    <div class="results-grid">
+        <div class="result-card">
+            <div class="result-title">Páginas (Caras)</div>
+            <div class="result-value" id="resPages">0</div>
+            <div class="result-sub">Números a pie de pág.</div>
+        </div>
+
+        <div class="result-card secondary">
+            <div class="result-title">Hojas de Papel</div>
+            <div class="result-value" id="resSheets">0</div>
+            <div class="result-sub">Hojas físicas</div>
+        </div>
+    </div>
+    
+    <div class="total-summary" id="wordSummary">
+        Total palabras manuscrito: 0
+    </div>
+</div>
+
+<script>
+    let chapters = [];
+
+    function addChap() {
+        const val = parseInt(document.getElementById('chapInput').value);
+        if (val > 0) {
+            chapters.push(val);
+            document.getElementById('chapInput').value = '';
+            document.getElementById('chapInput').focus();
+            render();
+            calc();
+        }
+    }
+
+    function delChap(idx) {
+        chapters.splice(idx, 1);
+        render();
+        calc();
+    }
+    
+    function clearAll() {
+        chapters = [];
+        render();
+        calc();
+    }
+
+    function enterKey(e) {
+        if(e.key === 'Enter') addChap();
+    }
+
+    function render() {
+        const box = document.getElementById('listContainer');
+        box.innerHTML = '';
+        box.style.display = chapters.length ? 'block' : 'none';
+        
+        chapters.forEach((w, i) => {
+            box.innerHTML += `
+                <div class="chapter-item">
+                    <span><strong>Cap ${i+1}:</strong> ${w} pal.</span>
+                    <button class="btn-del" onclick="delChap(${i})">&times;</button>
+                </div>
+            `;
+        });
+        document.getElementById('chapCount').innerText = `${chapters.length} caps`;
+    }
+
+    function calc() {
+        const density = parseInt(document.getElementById('density').value);
+        const extras = parseInt(document.getElementById('extras').value) || 0;
+        
+        let contentPages = 0; // Caras numeradas
+        let totalWords = 0;
+
+        // Lógica de salto de página simple
+        chapters.forEach(w => {
+            totalWords += w;
+            // Si el cap ocupa 3.1 páginas reales, ocupa 4 caras numeradas
+            // porque la siguiente empieza limpia en la siguiente cara.
+            contentPages += Math.ceil(w / density);
+        });
+
+        const totalPages = contentPages + extras;
+        
+        // Cálculo de hojas físicas: Cada hoja tiene 2 caras.
+        // Si tengo 151 páginas, necesito 76 hojas (la última hoja tendrá la cara trasera blanca).
+        const totalSheets = Math.ceil(totalPages / 2);
+
+        // Mostrar
+        document.getElementById('resPages').innerText = totalPages;
+        document.getElementById('resSheets').innerText = totalSheets;
+        document.getElementById('wordSummary').innerText = `Total palabras manuscrito: ${totalWords.toLocaleString()}`;
+    }
+</script>
+
+</body>
+</html>

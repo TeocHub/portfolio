@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Administración - SindicatoLegal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-primary mb-4">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">Panel Directiva: Sindicato Empresa X</span>
+        <a href="index.html" class="btn btn-sm btn-light">Cerrar Sesión</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-dark text-white">Documentación Legal</div>
+                <div class="card-body">
+                    <p class="small text-muted">Sube aquí el Contrato Colectivo vigente para que lo vean tus socios.</p>
+                    <div class="mb-3">
+                        <label class="form-label">Subir Archivo (PDF)</label>
+                        <input type="file" class="form-control">
+                    </div>
+                    <button class="btn btn-success w-100 mb-3">Subir Documento</button>
+                    
+                    <h6>Archivos Activos:</h6>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Contrato_Colectivo_2024.pdf
+                            <span class="badge bg-primary rounded-pill">Ver</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Acta_Asamblea_Nov.pdf
+                            <span class="badge bg-secondary rounded-pill">Borrar</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                    <span>Nómina de Socios</span>
+                    <button class="btn btn-sm btn-light">+ Nuevo Socio</button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>RUT</th>
+                                    <th>Nombre</th>
+                                    <th>Cargo</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>12.345.678-9</td>
+                                    <td>Carlos Muñoz</td>
+                                    <td>Presidente</td>
+                                    <td><span class="badge bg-success">Activo</span></td>
+                                    <td><button class="btn btn-sm btn-outline-primary">Editar</button></td>
+                                </tr>
+                                <tr>
+                                    <td>11.222.333-K</td>
+                                    <td>Ana Torres</td>
+                                    <td>Socia</td>
+                                    <td><span class="badge bg-success">Activo</span></td>
+                                    <td><button class="btn btn-sm btn-outline-primary">Editar</button></td>
+                                </tr>
+                                <tr>
+                                    <td>15.555.444-2</td>
+                                    <td>Luis Soto</td>
+                                    <td>Socio</td>
+                                    <td><span class="badge bg-danger">Inactivo</span></td>
+                                    <td><button class="btn btn-sm btn-outline-primary">Editar</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
