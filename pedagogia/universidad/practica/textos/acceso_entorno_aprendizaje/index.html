@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El acceso al entorno de aprendizaje II — Diseño Universal para el Aprendizaje</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#122436;
+  --navy-2:#1c3committee;
+  --cream:#faf6ee;
+  --paper:#f2ecdf;
+  --ink:#132131;
+  --coral:#ee5a36;
+  --teal:#278f83;
+  --gold:#eaa32a;
+  --violet:#6a4c93;
+  --line: rgba(19,33,49,0.14);
+  --line-light: rgba(255,255,255,0.16);
+  --radius: 3px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Work Sans', sans-serif;
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  margin:0;
+  letter-spacing:-0.01em;
+}
+p{margin:0 0 1em 0;}
+.eyebrow{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:0.72rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--coral);
+  font-weight:600;
+}
+a{color:inherit;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+@media(max-width:720px){.wrap{padding:0 20px;}}
+
+/* ---------- top nav ---------- */
+.topnav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(250,246,238,0.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.topnav-inner{
+  max-width:1120px;margin:0 auto;padding:14px 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.brandmark{
+  display:flex;align-items:center;gap:10px;
+  font-family:'IBM Plex Mono',monospace;font-size:0.78rem;font-weight:600;
+  letter-spacing:0.04em;
+}
+.brandmark .dot{width:9px;height:9px;border-radius:50%;background:var(--coral);display:inline-block;}
+.navlinks{display:flex;gap:26px;font-size:0.86rem;font-weight:500;}
+.navlinks a{text-decoration:none;color:var(--ink);opacity:0.68;transition:opacity .2s;position:relative;}
+.navlinks a:hover{opacity:1;}
+.navtoggle{display:none;background:none;border:1px solid var(--line);border-radius:var(--radius);padding:8px 10px;font-family:'IBM Plex Mono',monospace;font-size:.75rem;}
+@media(max-width:860px){
+  .navlinks{display:none;}
+  .navtoggle{display:block;}
+}
+
+/* ---------- hero ---------- */
+.hero{
+  background:var(--navy);
+  color:var(--cream);
+  position:relative;
+  overflow:hidden;
+  padding:96px 0 0 0;
+}
+.hero-grid{
+  max-width:1120px;margin:0 auto;padding:0 32px 64px;
+  display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:end;
+}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr;}}
+.hero-eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:0.78rem;color:var(--gold);
+  letter-spacing:0.14em;text-transform:uppercase;margin-bottom:22px;display:flex;gap:10px;align-items:center;
+}
+.hero-eyebrow::before{content:"";width:26px;height:1px;background:var(--gold);display:inline-block;}
+.hero h1{
+  font-size:clamp(2.1rem, 4.6vw, 3.5rem);
+  color:var(--cream);
+  line-height:1.06;
+  font-weight:600;
+}
+.hero h1 em{
+  font-style:italic;font-weight:500;color:var(--gold);
+}
+.hero-sub{
+  margin-top:22px;font-size:1.08rem;color:rgba(250,246,238,0.78);max-width:46ch;
+}
+.hero-meta{
+  display:flex;gap:26px;margin-top:34px;font-family:'IBM Plex Mono',monospace;font-size:0.76rem;color:rgba(250,246,238,0.6);flex-wrap:wrap;
+}
+.hero-meta strong{display:block;color:var(--cream);font-size:0.95rem;font-family:'Work Sans',sans-serif;font-weight:600;margin-bottom:2px;}
+
+/* signature: doors/ramp visual */
+.doors{
+  display:flex;align-items:flex-end;gap:10px;height:230px;position:relative;
+}
+.door{
+  flex:1;height:100%;border-radius:6px 6px 0 0;position:relative;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:14px;
+  font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:rgba(250,246,238,0.85);
+  transition:transform .35s ease;
+  cursor:default;
+}
+.door:hover{transform:translateY(-8px);}
+.door span{background:rgba(18,36,54,0.55);padding:4px 8px;border-radius:20px;backdrop-filter:blur(3px);text-align:center;}
+.door.d1{background:linear-gradient(180deg, rgba(39,143,131,0.28), rgba(39,143,131,0.75));height:78%;}
+.door.d2{background:linear-gradient(180deg, rgba(106,76,147,0.28), rgba(106,76,147,0.75));height:100%;}
+.door.d3{background:linear-gradient(180deg, rgba(234,163,42,0.28), rgba(234,163,42,0.75));height:88%;}
+.doors-caption{
+  font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:rgba(250,246,238,0.5);margin-top:14px;text-align:center;letter-spacing:0.04em;
+}
+.hero-strip{
+  border-top:1px solid var(--line-light);
+  background:rgba(255,255,255,0.03);
+}
+.hero-strip .wrap{
+  display:flex;flex-wrap:wrap;gap:0;
+}
+.strip-item{
+  flex:1;min-width:200px;padding:18px 26px;border-right:1px solid var(--line-light);
+  font-family:'IBM Plex Mono',monospace;font-size:0.74rem;color:rgba(250,246,238,0.65);
+}
+.strip-item:last-child{border-right:none;}
+.strip-item b{display:block;color:var(--cream);font-family:'Work Sans',sans-serif;font-size:0.98rem;font-weight:600;margin-bottom:3px;}
+
+/* ---------- generic section ---------- */
+section{padding:88px 0;border-bottom:1px solid var(--line);}
+section:last-of-type{border-bottom:none;}
+.section-head{max-width:640px;margin-bottom:48px;}
+.section-head h2{font-size:clamp(1.6rem,3vw,2.3rem);margin-top:10px;}
+.section-head p{margin-top:14px;color:rgba(19,33,49,0.72);font-size:1.02rem;}
+
+/* intro / definition */
+.definition-block{
+  display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;align-items:start;
+}
+@media(max-width:860px){.definition-block{grid-template-columns:1fr;}}
+.quote-card{
+  background:var(--navy);color:var(--cream);
+  padding:36px 34px;border-radius:4px;position:relative;
+}
+.quote-card::before{
+  content:"“";font-family:'Fraunces',serif;font-size:4.5rem;line-height:0;position:absolute;top:38px;left:24px;color:var(--coral);opacity:0.9;
+}
+.quote-card blockquote{
+  margin:22px 0 0 0;font-family:'Fraunces',serif;font-size:1.28rem;font-style:italic;font-weight:500;line-height:1.42;
+}
+.quote-card cite{
+  display:block;margin-top:18px;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:0.72rem;color:var(--gold);letter-spacing:0.04em;
+}
+.intro-text p{color:rgba(19,33,49,0.82);}
+.intro-text .callout{
+  border-left:3px solid var(--coral);padding-left:18px;margin-top:22px;font-size:0.98rem;color:rgba(19,33,49,0.68);
+}
+
+/* origin grid */
+.origin-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);
+}
+@media(max-width:860px){.origin-grid{grid-template-columns:repeat(2,1fr);}}
+.origin-card{
+  background:var(--cream);padding:30px 24px;min-height:210px;display:flex;flex-direction:column;justify-content:space-between;
+}
+.origin-num{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--coral);font-weight:600;}
+.origin-card h4{font-size:1.05rem;margin-top:14px;line-height:1.3;}
+.origin-card p{font-size:0.88rem;color:rgba(19,33,49,0.62);margin-top:10px;margin-bottom:0;}
+
+/* dimensions (UNICEF x DUA) */
+.dims{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:14px;
+}
+@media(max-width:960px){.dims{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.dims{grid-template-columns:1fr;}}
+.dim-card{
+  background:var(--paper);border-radius:4px;padding:22px 18px;border-top:3px solid var(--teal);
+}
+.dim-card:nth-child(1){border-top-color:var(--coral);}
+.dim-card:nth-child(2){border-top-color:var(--gold);}
+.dim-card:nth-child(3){border-top-color:var(--teal);}
+.dim-card:nth-child(4){border-top-color:var(--violet);}
+.dim-card:nth-child(5){border-top-color:var(--navy);}
+.dim-card .eyebrow{margin-bottom:8px;}
+.dim-card h4{font-size:1rem;}
+.dim-card p{font-size:0.85rem;color:rgba(19,33,49,0.66);margin-top:8px;margin-bottom:0;}
+
+/* cycle diagram */
+.cycle-wrap{
+  display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;
+}
+@media(max-width:860px){.cycle-wrap{grid-template-columns:1fr;}}
+.cycle{
+  position:relative;width:100%;max-width:420px;aspect-ratio:1/1;margin:0 auto;
+}
+.cycle-center{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:34%;height:34%;border-radius:50%;background:var(--navy);color:var(--cream);
+  display:flex;align-items:center;justify-content:center;text-align:center;font-family:'IBM Plex Mono',monospace;
+  font-size:0.68rem;letter-spacing:0.04em;padding:8px;line-height:1.3;
+}
+.cycle-node{
+  position:absolute;width:30%;aspect-ratio:1/1;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:0.78rem;font-weight:600;padding:10px;cursor:pointer;color:#fff;
+  transition:transform .25s ease, box-shadow .25s ease;
+  box-shadow:0 6px 18px rgba(0,0,0,0.12);
+}
+.cycle-node:hover, .cycle-node.active{transform:scale(1.08);box-shadow:0 10px 24px rgba(0,0,0,0.2);}
+.cycle-node.n1{top:0%;left:35%;background:var(--coral);}
+.cycle-node.n2{top:20%;left:70%;background:var(--gold);}
+.cycle-node.n3{top:60%;left:70%;background:var(--teal);}
+.cycle-node.n4{top:75%;left:35%;background:var(--violet);}
+.cycle-node.n5{top:35%;left:0%;background:#2f6690;}
+.cycle-detail{
+  background:var(--paper);border-radius:4px;padding:30px 28px;min-height:200px;
+}
+.cycle-detail .eyebrow{margin-bottom:10px;}
+.cycle-detail h4{font-size:1.25rem;margin-bottom:12px;}
+.cycle-detail p{color:rgba(19,33,49,0.72);font-size:0.96rem;margin:0;}
+.cycle-hint{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:rgba(19,33,49,0.45);margin-top:16px;text-align:center;}
+
+/* three pillars (tabs) */
+.tabbar{display:flex;gap:2px;margin-bottom:0;flex-wrap:wrap;}
+.tab-btn{
+  flex:1;min-width:200px;padding:20px 22px;text-align:left;background:var(--paper);border:none;cursor:pointer;
+  font-family:'Work Sans',sans-serif;color:var(--ink);border-bottom:3px solid transparent;
+  transition:background .2s ease;
+}
+.tab-btn .eyebrow{display:block;margin-bottom:6px;}
+.tab-btn strong{font-family:'Fraunces',serif;font-size:1.08rem;font-weight:600;display:block;}
+.tab-btn:hover{background:#ece4d2;}
+.tab-btn.active{background:var(--cream);border-bottom-color:var(--coral);}
+.tab-btn[data-tab="rep"].active{border-bottom-color:var(--teal);}
+.tab-btn[data-tab="accion"].active{border-bottom-color:var(--violet);}
+.tab-btn[data-tab="motiv"].active{border-bottom-color:var(--gold);}
+.tab-panel{display:none;background:var(--cream);border:1px solid var(--line);border-top:none;padding:40px;}
+.tab-panel.active{display:block;}
+@media(max-width:640px){.tab-panel{padding:26px 20px;}}
+.tab-panel h4{font-size:1.3rem;margin-bottom:12px;}
+.tab-panel .lead{color:rgba(19,33,49,0.72);margin-bottom:26px;max-width:66ch;}
+.strategy-table{width:100%;border-collapse:collapse;margin-bottom:30px;}
+.strategy-table th{
+  text-align:left;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em;
+  color:rgba(19,33,49,0.5);padding:8px 14px 8px 0;border-bottom:1px solid var(--line);
+}
+.strategy-table td{
+  padding:12px 14px 12px 0;border-bottom:1px solid var(--line);font-size:0.92rem;vertical-align:top;
+}
+.strategy-table td:first-child{font-weight:600;width:38%;}
+.example-box{
+  background:var(--navy);color:var(--cream);border-radius:4px;padding:26px 28px;
+}
+.example-box .eyebrow{color:var(--gold);margin-bottom:10px;}
+.example-box p{color:rgba(250,246,238,0.82);font-size:0.94rem;margin-bottom:12px;}
+.example-box ul{margin:0;padding-left:20px;color:rgba(250,246,238,0.82);font-size:0.9rem;}
+.example-box li{margin-bottom:8px;}
+
+/* DUE section */
+.due-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+@media(max-width:860px){.due-grid{grid-template-columns:repeat(2,1fr);}}
+.due-card{background:var(--cream);padding:26px 22px;}
+.due-card h4{font-size:1rem;margin-bottom:12px;color:var(--coral);}
+.due-card ul{margin:0;padding-left:18px;font-size:0.85rem;color:rgba(19,33,49,0.7);}
+.due-card li{margin-bottom:7px;}
+
+/* case studies */
+.cases{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+@media(max-width:960px){.cases{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.cases{grid-template-columns:1fr;}}
+.case-card{
+  background:var(--paper);border-radius:4px;padding:24px 20px;position:relative;overflow:hidden;
+  min-height:230px;display:flex;flex-direction:column;
+}
+.case-flag{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--coral);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;}
+.case-card h4{font-size:1.1rem;margin-top:8px;margin-bottom:12px;}
+.case-card p{font-size:0.86rem;color:rgba(19,33,49,0.68);flex-grow:1;}
+
+/* glossary accordion */
+.glossary{border-top:1px solid var(--line);}
+.gterm{border-bottom:1px solid var(--line);}
+.gterm-head{
+  display:flex;justify-content:space-between;align-items:center;padding:18px 4px;cursor:pointer;
+  font-family:'Fraunces',serif;font-weight:600;font-size:1.02rem;
+}
+.gterm-head .plus{font-family:'IBM Plex Mono',monospace;font-size:1.1rem;color:var(--coral);transition:transform .2s ease;}
+.gterm.open .plus{transform:rotate(45deg);}
+.gterm-body{max-height:0;overflow:hidden;transition:max-height .3s ease;font-size:0.94rem;color:rgba(19,33,49,0.72);}
+.gterm.open .gterm-body{max-height:220px;padding-bottom:18px;}
+
+/* conclusion / footer */
+.conclusion{background:var(--navy);color:var(--cream);}
+.conclusion .section-head p{color:rgba(250,246,238,0.72);}
+.conclusion .section-head .eyebrow{color:var(--gold);}
+.pillars-recap{display:flex;gap:18px;flex-wrap:wrap;margin-top:20px;}
+.pillar-chip{
+  border:1px solid var(--line-light);border-radius:30px;padding:9px 18px;font-family:'IBM Plex Mono',monospace;font-size:0.76rem;
+  display:flex;align-items:center;gap:8px;
+}
+.pillar-chip .sw{width:8px;height:8px;border-radius:50%;}
+footer{background:var(--ink);color:rgba(250,246,238,0.55);padding:36px 0;}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-family:'IBM Plex Mono',monospace;font-size:0.72rem;}
+
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+.reveal.show{opacity:1;transform:translateY(0);}
+
+::selection{background:var(--coral);color:#fff;}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="brandmark"><span class="dot"></span>DUA · CUADERNILLO 11 · UNICEF</div>
+    <div class="navlinks">
+      <a href="#intro">Qué es</a>
+      <a href="#origen">Origen</a>
+      <a href="#unicef">UNICEF</a>
+      <a href="#ciclo">Ciclo</a>
+      <a href="#principios">Principios</a>
+      <a href="#due">Evaluación</a>
+      <a href="#casos">En acción</a>
+      <a href="#glosario">Glosario</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">Cuadernillo 11 · Serie educación inclusiva</div>
+      <h1>El acceso al entorno<br>de aprendizaje <em>II</em></h1>
+      <p class="hero-sub">Diseño Universal para el Aprendizaje (DUA): un método para que <strong>todos</strong> los estudiantes —con y sin discapacidad— tengan las mismas oportunidades de aprender, mediante currículos flexibles en vez de un único camino para todos.</p>
+      <div class="hero-meta">
+        <div><strong>Chris Johnstone</strong>Universidad de Minnesota</div>
+        <div><strong>UNICEF, 2014 / adaptación LACRO 2018</strong>Ciudad de Panamá</div>
+        <div><strong>3 principios + evaluación</strong>Basado en el marco CAST</div>
+      </div>
+    </div>
+    <div>
+      <div class="doors">
+        <div class="door d1"><span>Representación</span></div>
+        <div class="door d2"><span>Acción y expresión</span></div>
+        <div class="door d3"><span>Motivación</span></div>
+      </div>
+      <div class="doors-caption">Tres puertas de entrada — un mismo aprendizaje</div>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div class="wrap">
+      <div class="strip-item"><b>Origen</b>Arquitectura accesible (Ron Mace)</div>
+      <div class="strip-item"><b>Enfoque</b>Derechos humanos y educación inclusiva</div>
+      <div class="strip-item"><b>Alcance</b>Todo el aula, no solo estudiantes con discapacidad</div>
+      <div class="strip-item"><b>Resultado</b>Menos barreras, más participación y logro</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="intro">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">01 — Qué es el DUA</span>
+      <h2>Un mismo objetivo, muchos caminos para llegar a él</h2>
+    </div>
+    <div class="definition-block reveal">
+      <div class="quote-card">
+        <blockquote>El diseño universal para el aprendizaje es un conjunto de principios para el desarrollo de currículos que ofrece a todas las personas igualdad de oportunidades en el aprendizaje.</blockquote>
+        <cite>— CAST, Centro para la Tecnología Especial Aplicada</cite>
+      </div>
+      <div class="intro-text">
+        <p>El <strong>Diseño Universal para el Aprendizaje (DUA)</strong> no es una solución única ni un programa especial paralelo: es un conjunto de <strong>enfoques flexibles</strong> para las metas de enseñanza, los métodos, los materiales y las evaluaciones, que pueden ajustarse a las necesidades individuales de cada estudiante dentro del aula regular.</p>
+        <p>Aunque muchas de sus estrategias se diseñaron pensando en niños y niñas con discapacidad, el DUA beneficia a <strong>toda la diversidad del aula</strong>: distintos estilos de aprendizaje, idiomas, ritmos, culturas y niveles de confianza.</p>
+        <div class="callout">El cuadernillo desarrolla tres preguntas centrales: ¿cómo enseño de formas distintas?, ¿cómo dejo que respondan de formas distintas?, ¿cómo motivo su participación de formas distintas?</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="origen">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">02 — De dónde viene la idea</span>
+      <h2>Nació en la arquitectura, no en el aula</h2>
+      <p>El término <strong>diseño universal</strong> lo acuñó Ron Mace, arquitecto y usuario de silla de ruedas, para describir principios que hacen accesibles los edificios y espacios públicos a todas las personas. Lo notable: esas soluciones terminan ayudando a mucha más gente que a la que fueron pensadas.</p>
+    </div>
+    <div class="origin-grid reveal">
+      <div class="origin-card">
+        <div class="origin-num">EJ. 01</div>
+        <h4>Rampas en las aceras</h4>
+        <p>Pensadas para personas con discapacidad, también sirven a quienes llevan coches de bebé o carros de compra.</p>
+      </div>
+      <div class="origin-card">
+        <div class="origin-num">EJ. 02</div>
+        <h4>Manijas de puerta</h4>
+        <p>Diseñadas para discapacidad física; útiles también para abrir con el codo cuando se cargan objetos.</p>
+      </div>
+      <div class="origin-card">
+        <div class="origin-num">EJ. 03</div>
+        <h4>Caracteres grandes</h4>
+        <p>Ayudan a personas con discapacidad visual y a niños y niñas que recién están aprendiendo a leer.</p>
+      </div>
+      <div class="origin-card">
+        <div class="origin-num">EJ. 04</div>
+        <h4>Señalización universal</h4>
+        <p>Íconos sin palabras que orientan a quienes hablan otro idioma o no saben leer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="unicef">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">03 — El DUA y UNICEF</span>
+      <h2>Un enfoque basado en derechos, aplicado a cinco dimensiones de calidad educativa</h2>
+      <p>Desde 1948, la Declaración Universal de los Derechos Humanos sostiene el derecho de todos los niños y niñas a la educación. UNICEF traduce ese derecho en cinco dimensiones de calidad — y el DUA influye en cada una de ellas.</p>
+    </div>
+    <div class="dims reveal">
+      <div class="dim-card">
+        <span class="eyebrow">01</span>
+        <h4>Estudiantes</h4>
+        <p>Mayor participación, éxito y confianza al tener alternativas para demostrar lo aprendido.</p>
+      </div>
+      <div class="dim-card">
+        <span class="eyebrow">02</span>
+        <h4>Entorno</h4>
+        <p>Aulas más inclusivas, con menos conductas ajenas a la tarea y mayor aceptación entre pares.</p>
+      </div>
+      <div class="dim-card">
+        <span class="eyebrow">03</span>
+        <h4>Contenido</h4>
+        <p>El contenido no baja su nivel: se abren múltiples caminos para comprenderlo y dominarlo.</p>
+      </div>
+      <div class="dim-card">
+        <span class="eyebrow">04</span>
+        <h4>Procesos</h4>
+        <p>Docentes que conocen a sus estudiantes y diseñan opciones de acceso desde el inicio.</p>
+      </div>
+      <div class="dim-card">
+        <span class="eyebrow">05</span>
+        <h4>Resultados</h4>
+        <p>Evaluaciones que miden con precisión el aprendizaje, minimizando el impacto de la discapacidad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ciclo">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">04 — El DUA en la práctica</span>
+      <h2>Un ciclo de cinco preguntas que guía cada lección</h2>
+      <p>Antes de dar una clase, el DUA propone recorrer este ciclo. Toca cada círculo para ver la pregunta que se hace el o la docente en cada etapa.</p>
+    </div>
+    <div class="cycle-wrap reveal">
+      <div class="cycle">
+        <div class="cycle-node n1" data-node="0">Contenido</div>
+        <div class="cycle-node n2" data-node="1">Presentación</div>
+        <div class="cycle-node n3" data-node="2">Respuesta</div>
+        <div class="cycle-node n4" data-node="3">Participación</div>
+        <div class="cycle-node n5" data-node="4">Evaluación</div>
+        <div class="cycle-center">Diseño<br>de la clase</div>
+      </div>
+      <div>
+        <div class="cycle-detail">
+          <span class="eyebrow" id="cycle-eyebrow">Etapa 01</span>
+          <h4 id="cycle-title">Contenido a enseñar</h4>
+          <p id="cycle-text">El o la docente decide qué va a enseñar. En el DUA, el contenido es la parte que se mantiene constante: lo que cambia es cómo se enseña y cómo se demuestra.</p>
+        </div>
+        <div class="cycle-hint">Haz clic en cada nodo del ciclo →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="principios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">05 — Los tres principios del DUA</span>
+      <h2>Múltiples medios de representación, acción/expresión y motivación</h2>
+      <p>Los tres principios se basan en cómo el cerebro recibe y procesa información: reconocimiento (representación), estrategia (acción y expresión) y afecto (motivación e implicación). Explora cada uno.</p>
+    </div>
+    <div class="reveal">
+      <div class="tabbar">
+        <button class="tab-btn active" data-tab="rep">
+          <span class="eyebrow">Principio 01</span>
+          <strong>Múltiples medios de representación</strong>
+        </button>
+        <button class="tab-btn" data-tab="accion">
+          <span class="eyebrow">Principio 02</span>
+          <strong>Múltiples medios de acción y expresión</strong>
+        </button>
+        <button class="tab-btn" data-tab="motiv">
+          <span class="eyebrow">Principio 03</span>
+          <strong>Múltiples medios de motivación e implicación</strong>
+        </button>
+      </div>
+
+      <div class="tab-panel active" id="panel-rep">
+        <h4>Diferentes maneras de enseñar y transmitir conocimientos</h4>
+        <p class="lead">Un solo "modelo único para todos y todas" se convierte en barrera para muchos estudiantes. El acceso a la información es el primer paso para adquirir conocimientos.</p>
+        <table class="strategy-table">
+          <tr><th>Estilo o desafío</th><th>Estrategia docente</th></tr>
+          <tr><td>Estilo visual (incl. discapacidad auditiva)</td><td>Imágenes, información codificada por colores, organizadores visuales.</td></tr>
+          <tr><td>Estilo auditivo (incl. discapacidad visual)</td><td>Conferencias, debates, audiolibros, texto a voz.</td></tr>
+          <tr><td>Desafíos de aprendizaje o atención</td><td>Bloques breves, repeticiones, múltiples ejemplos, experiencias concretas.</td></tr>
+          <tr><td>Estilos kinestésicos o activos</td><td>Aprendizaje práctico, objetos táctiles, aprendizaje por proyectos.</td></tr>
+          <tr><td>Culturalmente diversos</td><td>Materiales y métodos culturalmente relevantes.</td></tr>
+        </table>
+        <div class="example-box">
+          <span class="eyebrow">Aula en acción · Ciencias, las olas del mar</span>
+          <p>Una docente enseña sobre las olas del mar combinando estas estrategias:</p>
+          <ul>
+            <li>Explica de forma individual a quienes tienen pocos conocimientos previos, antes de la clase grupal.</li>
+            <li>Ofrece textos con distintos niveles de complejidad y audiolibros para quienes tienen dificultades de lectura.</li>
+            <li>Crea un diccionario ilustrado por unidad para estudiantes que no dominan el idioma.</li>
+            <li>Usa gestos y movimientos corporales para representar la formación de una ola.</li>
+            <li>Incorpora videos e imágenes con sonido para las fortalezas visuales y auditivas.</li>
+          </ul>
+          <p style="margin-top:14px;margin-bottom:0;"><strong>Caso Brasil:</strong> una docente de biología crea material táctil de bajo costo (cordones, algodón, alambres) para que estudiantes con discapacidad visual aprendan fotosíntesis a través del tacto, incluso con etiquetas en braille.</p>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panel-accion">
+        <h4>Diferentes maneras de demostrar lo que se está aprendiendo</h4>
+        <p class="lead">Cada estudiante tiene formas distintas de gestionar su aprendizaje y expresar lo que sabe: verbal, escrita, gráfica, kinestésica o mediante tecnología.</p>
+        <table class="strategy-table">
+          <tr><th>Estilo o desafío</th><th>Estrategia docente</th></tr>
+          <tr><td>Prefiere la palabra escrita</td><td>Diarios, ensayos, historias, poemas, espacios para completar.</td></tr>
+          <tr><td>Se expresa mejor de forma verbal</td><td>Debates en clase, respuestas orales.</td></tr>
+          <tr><td>Se comunica mejor con dibujos o diagramas</td><td>Formatos visuales o artísticos para mostrar conocimiento.</td></tr>
+          <tr><td>Estilos kinestésicos o activos</td><td>Teatro, movimiento, música, construir modelos, proyectos.</td></tr>
+          <tr><td>Discapacidad física o funcional compleja</td><td>Tableros de comunicación visual, apoyos para tomar apuntes.</td></tr>
+        </table>
+        <div class="example-box">
+          <span class="eyebrow">Aula en acción · Lectura, secuenciación de historias</span>
+          <p>Un docente enseña a ordenar los eventos de una historia usando palabras como "primero, luego, finalmente":</p>
+          <ul>
+            <li>Modela la secuencia con una tarea cotidiana (lavarse las manos) narrada paso a paso.</li>
+            <li>Deja elegir entre imágenes o palabras para representar cada paso.</li>
+            <li>Ofrece listas de control y tableros de imágenes para quienes necesitan apoyo organizativo.</li>
+            <li>Permite volver a contar la historia con dibujos, títeres, palabras escritas o habladas.</li>
+          </ul>
+          <p style="margin-top:14px;margin-bottom:0;"><strong>Caso México:</strong> la actividad "La Caja Mágica" usa elementos táctiles, olfativos y sonoros que representan personajes de un cuento, para que estudiantes con discapacidad visual secuencien o imaginen relatos a partir de "ilustraciones sensoriales".</p>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panel-motiv">
+        <h4>Oportunidades de participación para todos los estudiantes</h4>
+        <p class="lead">La motivación puede ser intrínseca o extrínseca, y depende de la cultura, los éxitos previos y el sentido que cada estudiante le encuentra al currículo.</p>
+        <table class="strategy-table">
+          <tr><th>Desafío</th><th>Estrategia docente</th></tr>
+          <tr><td>No le interesa el tema</td><td>Conectar con su vida cotidiana e intereses personales.</td></tr>
+          <tr><td>No participa en las actividades</td><td>Ofrecer opciones, aprendizaje entre pares, nivel de dificultad adecuado.</td></tr>
+          <tr><td>Se niega a participar en clase</td><td>Flexibilidad en las expectativas, participación en grupos pequeños.</td></tr>
+        </table>
+        <div class="example-box">
+          <span class="eyebrow">Aula en acción · Matemáticas cotidianas</span>
+          <p>Un docente busca despertar la curiosidad matemática de su grupo:</p>
+          <ul>
+            <li>Los estudiantes llevan una bitácora de números que ven en su vida diaria y elaboran un mural grupal.</li>
+            <li>A estudiantes tímidos les da las preguntas con anticipación para ganar confianza.</li>
+            <li>Ofrece trabajo individual o en equipo, según preferencia.</li>
+            <li>Crea "centros de matemáticas" con actividades de distinta complejidad y un cronómetro para quien lo necesite.</li>
+          </ul>
+          <p style="margin-top:14px;margin-bottom:0;"><strong>Caso Estados Unidos:</strong> en un aula de sexto grado, mayoritariamente indígena, con estudiantes hispanohablantes y con discapacidad, la docente combinó los tres principios: guías de estudio con colores y textos accesibles, opciones para trabajar solos o en grupo, y actividades atractivas — resultando en menos conductas problemáticas y mayor vinculación con los contenidos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="due">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">06 — Diseño Universal para la Evaluación (DUE)</span>
+      <h2>Evaluar sin cambiar lo que realmente se quiere medir</h2>
+      <p>La clave del DUE es definir con claridad el <strong>constructo</strong>: aquello que la prueba busca medir. Una vez definido, se puede dar flexibilidad en cuatro terrenos, siempre que esos ajustes no alteren el constructo.</p>
+    </div>
+    <div class="due-grid reveal">
+      <div class="due-card">
+        <h4>Presentación</h4>
+        <ul>
+          <li>Lectura oral o grabada</li>
+          <li>Caracteres grandes / braille</li>
+          <li>Lengua de señas</li>
+          <li>Gráficos táctiles</li>
+          <li>Lector de pantalla</li>
+        </ul>
+      </div>
+      <div class="due-card">
+        <h4>Respuesta</h4>
+        <ul>
+          <li>Responder por computadora o con ayuda para escribir</li>
+          <li>Tecnología de asistencia</li>
+          <li>Marcar respuestas en el mismo examen</li>
+          <li>Calculadoras, diccionarios (si no interfieren el constructo)</li>
+        </ul>
+      </div>
+      <div class="due-card">
+        <h4>Entorno</h4>
+        <ul>
+          <li>Espacio separado, sin distracciones</li>
+          <li>Grupos pequeños</li>
+          <li>Ajuste de luz</li>
+          <li>Amortiguadores de ruido</li>
+        </ul>
+      </div>
+      <div class="due-card">
+        <h4>Tiempo</h4>
+        <ul>
+          <li>Tiempo adicional</li>
+          <li>Descansos frecuentes</li>
+          <li>Reordenar preguntas (fáciles primero)</li>
+          <li>Pruebas repartidas en varios días</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="casos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">07 — DUA en acción, alrededor del mundo</span>
+      <h2>Ejemplos reales citados en el cuadernillo</h2>
+    </div>
+    <div class="cases reveal">
+      <div class="case-card">
+        <span class="case-flag">Brasil</span>
+        <h4>Ciencia táctil</h4>
+        <p>Material didáctico de bajo costo (algodón, alambres, braille) para enseñar fotosíntesis a estudiantes con discapacidad visual.</p>
+      </div>
+      <div class="case-card">
+        <span class="case-flag">México</span>
+        <h4>La Caja Mágica</h4>
+        <p>Estimulación sensorial (táctil, olfativa, sonora) para trabajar lenguaje y secuenciación de cuentos con estudiantes con discapacidad visual.</p>
+      </div>
+      <div class="case-card">
+        <span class="case-flag">Estados Unidos</span>
+        <h4>Aula multilingüe</h4>
+        <p>Guías de estudio accesibles y opciones de trabajo para un sexto grado con estudiantes indígenas, hispanohablantes y con discapacidad.</p>
+      </div>
+      <div class="case-card">
+        <span class="case-flag">Lesoto</span>
+        <h4>Examen de matemáticas</h4>
+        <p>Un docente elimina el límite de tiempo, reordena asientos según la luz solar disponible y permite rectas numéricas de apoyo, sin alterar el constructo evaluado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="glosario">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">08 — Glosario</span>
+      <h2>Términos clave del cuadernillo</h2>
+    </div>
+    <div class="glossary reveal" id="glossary-list"></div>
+  </div>
+</section>
+
+<section class="conclusion" id="conclusion">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">09 — En síntesis</span>
+      <h2>Cada docente, arquitecto o arquitecta de la accesibilidad</h2>
+      <p>El objetivo del DUA es que cada docente diseñe lecciones flexibles que permitan a todos sus estudiantes comprender los contenidos, demostrar su conocimiento y participar en clase — sin bajar los estándares, sino multiplicando los caminos para alcanzarlos.</p>
+      <div class="pillars-recap">
+        <div class="pillar-chip"><span class="sw" style="background:var(--teal)"></span>Representación</div>
+        <div class="pillar-chip"><span class="sw" style="background:var(--violet)"></span>Acción y expresión</div>
+        <div class="pillar-chip"><span class="sw" style="background:var(--gold)"></span>Motivación e implicación</div>
+        <div class="pillar-chip"><span class="sw" style="background:var(--coral)"></span>Evaluación universal (DUE)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Basado en "El acceso al entorno de aprendizaje II: diseño universal para el aprendizaje" — Cuadernillo 11, UNICEF (2014) / adaptación UNICEF LACRO (2018).</span>
+    <span>Autor original: Chris Johnstone</span>
+  </div>
+</footer>
+
+<script>
+// ---- glossary data ----
+const glossary = [
+  ["Acceso","La oportunidad de niños y niñas con discapacidad de participar y lograr progresos en el currículo."],
+  ["Ajustes","Cualquier cambio a una prueba típica o a las condiciones en que se realiza, que permite a niños y niñas con discapacidad demostrar su conocimiento y habilidades."],
+  ["Contenido","El currículo propuesto y enseñado en las escuelas."],
+  ["Constructo","Los conceptos o características que una prueba está diseñada para medir."],
+  ["Entorno","Los elementos físicos, psicosociales y de prestación de servicios de las escuelas."],
+  ["Estudiantes","Niños y niñas que van a la escuela, junto con las experiencias de salud, primera infancia y apoyo familiar que traen consigo."],
+  ["Procesos","La manera en que docentes y administradores usan los aportes para enmarcar experiencias de aprendizaje significativas."],
+  ["Resultados","Los efectos intencionales y esperados de un sistema educativo."],
+  ["Diseño universal","Enfoque de diseño que reconoce, respeta y valora el espectro más amplio posible de capacidades humanas en productos, entornos y sistemas de información."],
+  ["Diseño universal para el aprendizaje (DUA)","Enfoque diseñado para ofrecer a todos los estudiantes igual oportunidad de aprender en entornos inclusivos, mediante enfoques curriculares flexibles."]
+];
+const glossaryList = document.getElementById('glossary-list');
+glossary.forEach(([term, def]) => {
+  const item = document.createElement('div');
+  item.className = 'gterm';
+  item.innerHTML = `
+    <div class="gterm-head">
+      <span>${term}</span>
+      <span class="plus">+</span>
+    </div>
+    <div class="gterm-body"><p style="padding:0 4px 4px;margin:0;">${def}</p></div>
+  `;
+  item.querySelector('.gterm-head').addEventListener('click', () => {
+    item.classList.toggle('open');
+  });
+  glossaryList.appendChild(item);
+});
+
+// ---- cycle diagram ----
+const cycleData = [
+  {eyebrow:"Etapa 01", title:"Contenido a enseñar", text:"El o la docente decide qué va a enseñar. En el DUA, el contenido es la parte que se mantiene constante: lo que cambia es cómo se enseña y cómo se demuestra lo aprendido."},
+  {eyebrow:"Etapa 02", title:"Presentación", text:"¿Hay estudiantes que necesitan enfoques distintos para acceder a la misma información? Aquí entran los múltiples medios de representación."},
+  {eyebrow:"Etapa 03", title:"Respuesta", text:"¿Existe flexibilidad en la manera en que los estudiantes pueden demostrar lo que saben? Aquí entran los múltiples medios de acción y expresión."},
+  {eyebrow:"Etapa 04", title:"Participación", text:"¿Cuáles son las diferentes maneras de atraer a los estudiantes y fomentar su participación? Aquí entran los múltiples medios de motivación e implicación."},
+  {eyebrow:"Etapa 05", title:"Evaluación", text:"¿Cómo pueden las evaluaciones minimizar la influencia de la discapacidad, sin alterar lo que realmente se quiere medir?"}
+];
+const nodes = document.querySelectorAll('.cycle-node');
+const cTitle = document.getElementById('cycle-title');
+const cText = document.getElementById('cycle-text');
+const cEyebrow = document.getElementById('cycle-eyebrow');
+nodes.forEach(node => {
+  node.addEventListener('click', () => {
+    nodes.forEach(n => n.classList.remove('active'));
+    node.classList.add('active');
+    const d = cycleData[+node.dataset.node];
+    cEyebrow.textContent = d.eyebrow;
+    cTitle.textContent = d.title;
+    cText.textContent = d.text;
+  });
+});
+
+// ---- tabs ----
+const tabBtns = document.querySelectorAll('.tab-btn');
+const panels = document.querySelectorAll('.tab-panel');
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabBtns.forEach(b => b.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ---- reveal on scroll ----
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
+}, {threshold:0.12});
+revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
