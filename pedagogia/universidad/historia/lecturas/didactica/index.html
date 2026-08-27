@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pensar la Historia, Enseñar la Historia · Guía de tres textos clave</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#17130f;
+    --ink-soft:#2a241c;
+    --paper:#e9e2cf;
+    --paper-deep:#ddd4bb;
+    --cream:#f4efe1;
+    --bordeaux:#7a2530;
+    --bordeaux-deep:#551b23;
+    --gold:#b8863c;
+    --gold-light:#d9ac5f;
+    --teal:#2e5f63;
+    --teal-deep:#1f4245;
+    --line:rgba(23,19,15,0.14);
+    --line-dark:rgba(244,239,225,0.16);
+    --shadow:0 18px 45px -20px rgba(23,19,15,0.45);
+    --display:'Fraunces', serif;
+    --body:'Source Serif 4', serif;
+    --mono:'JetBrains Mono', monospace;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *,*::before,*::after{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  }
+
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; }
+  img{ max-width:100%; display:block; }
+
+  ::selection{ background:var(--gold); color:var(--ink); }
+
+  :focus-visible{
+    outline:3px solid var(--teal);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  /* ---------- Progress thread ---------- */
+  #progress{
+    position:fixed; top:0; left:0; height:4px; width:0%;
+    background:linear-gradient(90deg, var(--bordeaux), var(--gold) 55%, var(--teal));
+    z-index:999;
+    transition:width 0.08s linear;
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--bordeaux);
+    display:inline-flex;
+    align-items:center;
+    gap:0.55em;
+    margin:0 0 0.9rem;
+  }
+  .eyebrow::before{
+    content:"";
+    width:1.6em; height:1px; background:var(--bordeaux);
+    display:inline-block;
+  }
+  .eyebrow.gold{ color:var(--gold-light); }
+  .eyebrow.gold::before{ background:var(--gold-light); }
+  .eyebrow.teal{ color:var(--teal); }
+  .eyebrow.teal::before{ background:var(--teal); }
+
+  h1,h2,h3,h4{
+    font-family:var(--display);
+    font-weight:600;
+    line-height:1.06;
+    margin:0 0 0.6em;
+    color:var(--ink);
+  }
+  h2{ font-size:clamp(1.9rem, 3.6vw, 2.9rem); font-weight:600; }
+  h3{ font-size:clamp(1.25rem, 2vw, 1.55rem); font-weight:600; }
+  p{ margin:0 0 1.1em; }
+  .lede{ font-size:1.14rem; color:var(--ink-soft); max-width:62ch; }
+
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 clamp(1.25rem, 4vw, 3rem); }
+  section{ position:relative; }
+
+  /* ---------- Reveal ---------- */
+  .reveal{ opacity:0; transform:translateY(26px); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+
+  /* ---------- Header / Nav ---------- */
+  header.site{
+    position:sticky; top:0; z-index:60;
+    background:rgba(244,239,225,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0.85rem clamp(1.25rem, 4vw, 3rem);
+    max-width:1180px; margin:0 auto;
+  }
+  .brand{
+    font-family:var(--display); font-weight:700; font-size:1.05rem;
+    display:flex; align-items:baseline; gap:0.45rem;
+    text-decoration:none;
+  }
+  .brand span.mark{
+    display:inline-block; width:0.6em; height:0.6em; border-radius:50%;
+    background:conic-gradient(from 200deg, var(--bordeaux), var(--gold), var(--teal), var(--bordeaux));
+  }
+  nav.links{ display:flex; gap:clamp(0.9rem,2vw,1.7rem); }
+  nav.links a{
+    font-family:var(--mono); font-size:0.78rem; letter-spacing:0.03em;
+    text-decoration:none; color:var(--ink-soft); position:relative; padding:0.3rem 0;
+    white-space:nowrap;
+  }
+  nav.links a::after{
+    content:""; position:absolute; left:0; right:100%; bottom:-2px; height:2px;
+    background:var(--bordeaux); transition:right 0.25s ease;
+  }
+  nav.links a.active::after, nav.links a:hover::after{ right:0; }
+  nav.links a.active{ color:var(--bordeaux); }
+  #navToggle{
+    display:none; background:none; border:1px solid var(--line); border-radius:8px;
+    width:38px; height:34px; cursor:pointer; position:relative;
+  }
+  #navToggle span, #navToggle span::before, #navToggle span::after{
+    content:""; position:absolute; left:9px; right:9px; height:2px; background:var(--ink);
+  }
+  #navToggle span{ top:16px; }
+  #navToggle span::before{ top:-6px; }
+  #navToggle span::after{ top:6px; }
+
+  @media (max-width:820px){
+    nav.links{
+      position:fixed; inset:60px 0 auto 0; flex-direction:column; gap:0;
+      background:var(--cream); border-bottom:1px solid var(--line);
+      max-height:0; overflow:hidden; transition:max-height 0.35s ease;
+      padding:0 clamp(1.25rem,4vw,3rem);
+    }
+    nav.links.open{ max-height:400px; padding-bottom:1rem; }
+    nav.links a{ padding:0.75rem 0; border-bottom:1px solid var(--line); }
+    #navToggle{ display:block; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:clamp(3.2rem,9vw,6.5rem) 0 clamp(2.5rem,6vw,4rem);
+    background:
+      radial-gradient(ellipse 60% 55% at 85% 0%, rgba(184,134,60,0.16), transparent 60%),
+      radial-gradient(ellipse 55% 50% at 5% 15%, rgba(122,37,48,0.12), transparent 60%),
+      var(--cream);
+    overflow:hidden;
+  }
+  .hero-grid{ display:grid; grid-template-columns:1.35fr 0.9fr; gap:clamp(2rem,5vw,4rem); align-items:end; }
+  @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } }
+  .hero h1{
+    font-size:clamp(2.4rem, 6vw, 4.4rem);
+    letter-spacing:-0.01em;
+  }
+  .hero h1 em{
+    font-style:italic; font-weight:500; color:var(--bordeaux);
+  }
+  .hero-sources{
+    display:flex; flex-direction:column; gap:0.8rem;
+  }
+  .source-chip{
+    border:1px solid var(--line); border-radius:14px; padding:0.9rem 1.05rem;
+    background:rgba(255,255,255,0.4);
+    display:flex; gap:0.8rem; align-items:flex-start;
+    text-decoration:none; color:inherit;
+    transition:transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+  .source-chip:hover{ transform:translateX(4px); border-color:var(--gold); background:rgba(255,255,255,0.7); }
+  .source-chip .num{
+    font-family:var(--mono); font-size:0.85rem; color:var(--gold);
+    border:1px solid var(--gold); border-radius:50%; width:28px; height:28px;
+    display:flex; align-items:center; justify-content:center; flex:none;
+  }
+  .source-chip strong{ display:block; font-family:var(--display); font-size:1rem; margin-bottom:0.15rem; }
+  .source-chip small{ font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft); opacity:0.8; }
+
+  .scrollcue{
+    display:inline-flex; align-items:center; gap:0.6rem; margin-top:2.2rem;
+    font-family:var(--mono); font-size:0.75rem; letter-spacing:0.08em; color:var(--ink-soft);
+  }
+  .scrollcue .dot{
+    width:8px; height:8px; border-radius:50%; background:var(--bordeaux);
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{ transform:scale(1); opacity:1;} 50%{ transform:scale(1.6); opacity:0.4;} }
+
+  /* ---------- Intro band ---------- */
+  .intro-band{
+    background:var(--ink); color:var(--cream);
+    padding:clamp(2.5rem,6vw,4rem) 0;
+  }
+  .intro-band .lede{ color:rgba(244,239,225,0.82); max-width:70ch; }
+  .intro-band .eyebrow{ color:var(--gold-light); }
+  .intro-band .eyebrow::before{ background:var(--gold-light); }
+
+  /* ---------- Generic section spacing ---------- */
+  .section{ padding:clamp(3.5rem,8vw,6rem) 0; }
+  .section.alt{ background:var(--paper); }
+  .section-head{ max-width:70ch; margin-bottom:clamp(2rem,4vw,3rem); }
+
+  /* ---------- Stat cards (doc 1) ---------- */
+  .stat-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1.1rem; margin:2.2rem 0 2.6rem;
+  }
+  @media (max-width:900px){ .stat-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .stat-grid{ grid-template-columns:1fr; } }
+  .stat-card{
+    background:var(--ink); color:var(--cream); border-radius:16px; padding:1.5rem 1.3rem;
+    box-shadow:var(--shadow);
+  }
+  .stat-card .num{
+    font-family:var(--display); font-size:2.5rem; font-weight:700; color:var(--gold-light);
+    line-height:1;
+  }
+  .stat-card p{ font-size:0.88rem; color:rgba(244,239,225,0.82); margin:0.6rem 0 0; }
+  .stat-note{ font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft); opacity:0.75; }
+
+  .problem-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; margin-top:2rem;
+  }
+  @media (max-width:880px){ .problem-grid{ grid-template-columns:1fr; } }
+  .problem-card{
+    background:var(--cream); border:1px solid var(--line); border-radius:18px; padding:1.7rem 1.5rem;
+    position:relative;
+  }
+  .problem-card .tag{
+    font-family:var(--mono); font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--bordeaux); border:1px solid var(--bordeaux); border-radius:999px;
+    padding:0.2rem 0.7rem; display:inline-block; margin-bottom:0.9rem;
+  }
+  .problem-card p{ font-size:0.96rem; margin:0; color:var(--ink-soft); }
+
+  details.principles{
+    margin-top:2.2rem; border:1px solid var(--line); border-radius:18px; padding:1.4rem 1.6rem;
+    background:var(--cream);
+  }
+  details.principles summary{
+    cursor:pointer; font-family:var(--display); font-weight:600; font-size:1.15rem;
+    list-style:none; display:flex; align-items:center; justify-content:space-between;
+  }
+  details.principles summary::-webkit-details-marker{ display:none; }
+  details.principles summary::after{
+    content:"+"; font-family:var(--mono); font-size:1.4rem; color:var(--bordeaux);
+    transition:transform 0.25s ease;
+  }
+  details.principles[open] summary::after{ transform:rotate(45deg); }
+  .principle-list{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:0.6rem 1.5rem;
+    margin-top:1.2rem; padding-top:1.1rem; border-top:1px solid var(--line);
+  }
+  @media (max-width:640px){ .principle-list{ grid-template-columns:1fr; } }
+  .principle-list li{
+    list-style:none; font-size:0.94rem; padding-left:1.5rem; position:relative; color:var(--ink-soft);
+  }
+  .principle-list li::before{
+    content:counter(p); counter-increment:p;
+    position:absolute; left:0; top:0.05em; font-family:var(--mono); font-size:0.72rem; color:var(--gold);
+  }
+  .principle-list{ counter-reset:p; }
+
+  /* ---------- Comparison ---------- */
+  .compare-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; margin-top:2.4rem; }
+  @media (max-width:820px){ .compare-wrap{ grid-template-columns:1fr; } }
+  .compare-card{
+    border-radius:20px; padding:1.9rem 1.7rem 2.1rem; position:relative; overflow:hidden;
+  }
+  .compare-card.trad{ background:linear-gradient(160deg, var(--bordeaux-deep), var(--bordeaux)); color:var(--cream); }
+  .compare-card.new{ background:linear-gradient(160deg, var(--teal-deep), var(--teal)); color:var(--cream); }
+  .compare-card .ce{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase;
+    opacity:0.75; margin-bottom:0.4rem; display:block;
+  }
+  .compare-card h3{ color:#fff; margin-bottom:1rem; }
+  .compare-card ul{ margin:0; padding:0; list-style:none; }
+  .compare-card li{
+    padding:0.65rem 0; border-top:1px solid rgba(255,255,255,0.18); font-size:0.94rem;
+  }
+  .compare-card li:first-of-type{ border-top:none; }
+  .compare-card li b{ display:block; font-family:var(--mono); font-size:0.72rem; letter-spacing:0.04em; text-transform:uppercase; opacity:0.75; margin-bottom:0.2rem; }
+
+  /* ---------- Timeline ---------- */
+  .timeline-wrap{ position:relative; margin-top:3rem; }
+  .timeline-spine{
+    position:absolute; left:19px; top:0; bottom:0; width:3px;
+    background:var(--line);
+    border-radius:3px;
+  }
+  .timeline-spine-fill{
+    position:absolute; left:0; top:0; width:100%; height:0%;
+    background:linear-gradient(180deg, var(--bordeaux), var(--gold), var(--teal));
+    border-radius:3px; transition:height 0.15s linear;
+  }
+  .t-item{
+    position:relative; padding:0 0 2.6rem 3.2rem; max-width:760px;
+  }
+  .t-item:last-child{ padding-bottom:0; }
+  .t-dot{
+    position:absolute; left:9px; top:0.2rem; width:22px; height:22px; border-radius:50%;
+    background:var(--cream); border:3px solid var(--bordeaux);
+    transition:border-color 0.4s ease, transform 0.4s ease;
+  }
+  .t-item.in-view .t-dot{ border-color:var(--gold); transform:scale(1.15); }
+  .t-item:nth-child(n+5) .t-dot{ border-color:var(--bordeaux); }
+  .t-item:nth-child(n+5).in-view .t-dot{ border-color:var(--teal); }
+  .t-date{
+    font-family:var(--mono); font-size:0.78rem; letter-spacing:0.05em; color:var(--gold);
+    display:block; margin-bottom:0.35rem;
+  }
+  .t-item h4{ font-family:var(--display); font-size:1.25rem; margin-bottom:0.4rem; }
+  .t-item p{ color:var(--ink-soft); font-size:0.97rem; margin:0; }
+
+  /* ---------- Field / doc3 ---------- */
+  .field-callout{
+    background:var(--ink); color:var(--cream); border-radius:22px;
+    padding:clamp(1.8rem,4vw,2.6rem); margin:2.2rem 0 2.8rem;
+    display:grid; grid-template-columns:0.4fr 1fr; gap:2rem; align-items:center;
+  }
+  @media (max-width:760px){ .field-callout{ grid-template-columns:1fr; } }
+  .field-callout .glyph{
+    font-family:var(--display); font-size:3.4rem; font-weight:700; color:var(--gold-light);
+    line-height:0.9;
+  }
+  .field-callout p{ margin:0; color:rgba(244,239,225,0.86); }
+
+  .twin-defs{ display:grid; grid-template-columns:1fr 1fr; gap:1.3rem; margin:2rem 0 2.6rem; }
+  @media (max-width:760px){ .twin-defs{ grid-template-columns:1fr; } }
+  .def-card{
+    border:1px solid var(--line); border-radius:18px; padding:1.6rem;
+    background:var(--paper);
+  }
+  .def-card h4{ font-family:var(--display); margin-bottom:0.5rem; }
+  .def-card p{ margin:0; font-size:0.95rem; color:var(--ink-soft); }
+  .def-card.a{ border-top:4px solid var(--bordeaux); }
+  .def-card.b{ border-top:4px solid var(--teal); }
+
+  .skills-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-top:2rem;
+  }
+  @media (max-width:920px){ .skills-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .skills-grid{ grid-template-columns:1fr; } }
+  .skill-card{
+    background:var(--cream); border:1px solid var(--line); border-radius:14px; padding:1.1rem 1.05rem;
+  }
+  .skill-card .n{ font-family:var(--mono); font-size:0.75rem; color:var(--bordeaux); display:block; margin-bottom:0.4rem; }
+  .skill-card p{ margin:0; font-size:0.9rem; color:var(--ink-soft); }
+
+  .triad{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.3rem; margin-top:2.2rem; }
+  @media (max-width:880px){ .triad{ grid-template-columns:1fr; } }
+  .triad-card{ border-radius:18px; padding:1.6rem; background:var(--ink); color:var(--cream); }
+  .triad-card h4{ color:var(--gold-light); margin-bottom:0.7rem; font-size:1.05rem; }
+  .triad-card ul{ margin:0; padding-left:1.1rem; font-size:0.9rem; color:rgba(244,239,225,0.85); }
+  .triad-card li{ margin-bottom:0.4rem; }
+
+  .challenge-row{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1.3rem; margin-top:2.2rem;
+  }
+  @media (max-width:880px){ .challenge-row{ grid-template-columns:1fr; } }
+  .challenge-card{
+    border:1px dashed var(--bordeaux); border-radius:16px; padding:1.4rem;
+    background:rgba(122,37,48,0.05);
+  }
+  .challenge-card .n{ font-family:var(--display); font-size:1.8rem; color:var(--bordeaux); display:block; margin-bottom:0.5rem; }
+  .challenge-card p{ margin:0; font-size:0.92rem; color:var(--ink-soft); }
+
+  /* ---------- Glossary ---------- */
+  .glossary-grid{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:0.9rem; margin-top:2rem;
+  }
+  @media (max-width:760px){ .glossary-grid{ grid-template-columns:1fr; } }
+  details.term{
+    border:1px solid var(--line); border-radius:14px; padding:1rem 1.2rem;
+    background:var(--cream); transition:border-color 0.25s ease;
+  }
+  details.term[open]{ border-color:var(--gold); }
+  details.term summary{
+    cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between;
+    font-family:var(--display); font-weight:600; font-size:1.02rem; gap:1rem;
+  }
+  details.term summary::-webkit-details-marker{ display:none; }
+  details.term summary::after{
+    content:"→"; font-family:var(--mono); color:var(--gold); flex:none; transition:transform 0.25s ease;
+  }
+  details.term[open] summary::after{ transform:rotate(90deg); }
+  details.term p{ margin:0.7rem 0 0; font-size:0.92rem; color:var(--ink-soft); }
+
+  /* ---------- Synthesis ---------- */
+  .synthesis{
+    background:linear-gradient(165deg, var(--ink) 0%, #1f2b2c 55%, var(--teal-deep) 100%);
+    color:var(--cream); border-radius:28px; padding:clamp(2.2rem,6vw,4rem);
+    position:relative; overflow:hidden;
+  }
+  .synthesis::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(circle at 85% 15%, rgba(184,134,60,0.25), transparent 55%);
+  }
+  .synthesis > *{ position:relative; z-index:1; }
+  .synthesis .eyebrow{ color:var(--gold-light); }
+  .synthesis .eyebrow::before{ background:var(--gold-light); }
+  .synthesis h2{ color:#fff; max-width:20ch; }
+  .synthesis .lede{ color:rgba(244,239,225,0.85); }
+  .synth-points{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; margin-top:2.2rem;
+  }
+  @media (max-width:880px){ .synth-points{ grid-template-columns:1fr; } }
+  .synth-points div{
+    border-left:2px solid var(--gold-light); padding-left:1rem;
+  }
+  .synth-points strong{ display:block; font-family:var(--display); font-size:1.05rem; margin-bottom:0.4rem; }
+  .synth-points p{ margin:0; font-size:0.9rem; color:rgba(244,239,225,0.8); }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:2.6rem 0 3.5rem; background:var(--paper-deep); border-top:1px solid var(--line);
+  }
+  .refs{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; margin-bottom:2rem; }
+  @media (max-width:820px){ .refs{ grid-template-columns:1fr; } }
+  .ref-card{ font-size:0.85rem; color:var(--ink-soft); }
+  .ref-card .num{ font-family:var(--mono); color:var(--bordeaux); font-size:0.75rem; display:block; margin-bottom:0.3rem; }
+  .foot-line{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.8rem;
+    font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft); border-top:1px solid var(--line); padding-top:1.3rem;
+  }
+
+  .backtop{
+    text-decoration:none; border:1px solid var(--ink); border-radius:999px; padding:0.35rem 0.9rem;
+    color:var(--ink);
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<header class="site">
+  <div class="nav-inner">
+    <a class="brand" href="#inicio"><span class="mark"></span>Didáctica&nbsp;de&nbsp;la&nbsp;Historia</a>
+    <button id="navToggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+    <nav class="links" id="navLinks">
+      <a href="#diagnostico">El diagnóstico</a>
+      <a href="#giro">El giro historiográfico</a>
+      <a href="#campo">La didáctica hoy</a>
+      <a href="#glosario">Glosario</a>
+      <a href="#sintesis">Síntesis</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="inicio">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Tres textos académicos · un mismo debate</p>
+      <h1>¿Qué historia <em>enseñamos</em>, y por qué tantas veces no logra <em>enseñar</em> nada?</h1>
+      <p class="lede">Esta guía reúne y traduce a un lenguaje claro tres textos sobre didáctica de la historia: uno que diagnostica la distancia entre la investigación y el aula, otro que reconstruye cómo cambió la propia disciplina histórica en el último siglo, y un tercero que define qué significa, hoy, enseñar a "pensar históricamente". Juntos explican por qué formar profesores de historia es una tarea mucho más compleja de lo que parece.</p>
+      <div class="scrollcue"><span class="dot"></span> Desliza para recorrer los tres documentos</div>
+    </div>
+    <div class="hero-sources">
+      <a class="source-chip" href="#diagnostico">
+        <span class="num">1</span>
+        <span><strong>El diagnóstico</strong><small>Joan Pagès Blanch · Reflexiones sobre la investigación en didáctica de la historia (2010)</small></span>
+      </a>
+      <a class="source-chip" href="#giro">
+        <span class="num">2</span>
+        <span><strong>El giro historiográfico</strong><small>Ignacio Muñoz Delaunoy · De la "Historia Tradicional" a la "Nueva Historia" (2013)</small></span>
+      </a>
+      <a class="source-chip" href="#campo">
+        <span class="num">3</span>
+        <span><strong>La didáctica como campo</strong><small>¿Qué entendemos por Didáctica de la Historia? — Programa de formación docente, PUCV</small></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INTRO BAND ===================== -->
+<section class="intro-band">
+  <div class="wrap reveal">
+    <p class="eyebrow gold">De qué trata realmente todo esto</p>
+    <p class="lede">Los tres textos comparten una misma pregunta de fondo: <strong>¿por qué la historia que se enseña en las escuelas suele sentirse ajena, memorística e inútil para la vida de los jóvenes?</strong> Cada autor responde desde un ángulo distinto — la investigación educativa, la evolución de la historiografía y la formación del profesorado — pero los tres coinciden en algo: la solución no es enseñar "más historia", sino enseñar a <em>pensar</em> históricamente, con profesores capaces de traducir un saber disciplinar que no ha dejado de transformarse.</p>
+  </div>
+</section>
+
+<!-- ===================== DOC 1: DIAGNÓSTICO ===================== -->
+<section class="section" id="diagnostico">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Documento 1 — Joan Pagès Blanch</p>
+      <h2>La historia no llega: el abismo entre investigar y enseñar</h2>
+      <p class="lede">Pagès parte de un hecho incómodo: buena parte del alumnado termina la escuela sin poder usar el conocimiento histórico para comprender su propio mundo. Para ilustrarlo, retoma cifras recogidas por Howard Gardner sobre el desconocimiento del Holocausto entre jóvenes de distintos países.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="stat-grid">
+        <div class="stat-card"><span class="num">33%</span><p>de estudiantes suecos de secundaria dudaba de que el Holocausto realmente haya ocurrido.</p></div>
+        <div class="stat-card"><span class="num">20%</span><p>de personas adultas en EE.UU. admitía desconocer qué fue el Holocausto.</p></div>
+        <div class="stat-card"><span class="num">70%</span><p>de esas mismas personas reconocía que le gustaría saber más al respecto.</p></div>
+        <div class="stat-card"><span class="num">10-20%</span><p>de estudiantes universitarios no lograba afirmar con claridad que el intento nazi de genocidio estuvo mal.</p></div>
+      </div>
+      <p class="stat-note">Cifras citadas por H. Gardner (2000) y retomadas por J. Pagès (2010) para argumentar que "saber datos" no equivale a comprender ni a juzgar el pasado.</p>
+    </div>
+
+    <div class="reveal">
+      <p>Para Pagès, este divorcio entre la historia escolar y los problemas reales de la vida no se debe a que falten buenas intenciones, sino a que <strong>la investigación en didáctica de la historia rara vez transforma la práctica del aula</strong>. Identifica tres problemas concretos que explican esa distancia:</p>
+    </div>
+
+    <div class="problem-grid reveal">
+      <article class="problem-card">
+        <span class="tag">¿Para quién?</span>
+        <h3>El problema de la utilidad</h3>
+        <p>Gran parte de la investigación se dirige a la propia academia — sirve para la promoción universitaria — más que a mejorar lo que ocurre en las aulas. El lenguaje técnico de los estudios se vuelve, además, un obstáculo para el profesorado que podría aprovecharlos.</p>
+      </article>
+      <article class="problem-card">
+        <span class="tag">¿Qué se estudia?</span>
+        <h3>El problema del objeto</h3>
+        <p>Predomina el análisis de currículos y libros de texto: sabemos mucho de lo que dicen los manuales, pero muy poco sobre por qué un profesor elige un texto, cómo lo usa en clase o cómo los estudiantes realmente aprenden con él.</p>
+      </article>
+      <article class="problem-card">
+        <span class="tag">¿Cómo se investiga?</span>
+        <h3>El problema del método</h3>
+        <p>Existe poco debate metodológico, en parte por inseguridad frente a la crítica y en parte por un falso enfrentamiento entre métodos cuantitativos y cualitativos que, en la práctica, se necesitan y se complementan.</p>
+      </article>
+    </div>
+
+    <details class="principles reveal">
+      <summary>Entonces, ¿cómo debería ser esa investigación? — 8 rasgos propuestos por Pagès</summary>
+      <ol class="principle-list">
+        <li>Educativa: centrada en la enseñanza y el aprendizaje reales, no en la disciplina de referencia por sí sola.</li>
+        <li>Holística: atiende a la vez al alumnado, al profesorado y a los contenidos escolares.</li>
+        <li>Contextualizada: política y socialmente, según el momento y el lugar donde ocurre.</li>
+        <li>Transformadora: parte de los problemas de la práctica y vuelve a ella para cambiarla.</li>
+        <li>Orientadora, no prescriptiva: sugiere caminos posibles en vez de imponer recetas.</li>
+        <li>Multireferenciada: se nutre de fuentes diversas — protagonistas, documentos, observación de aula.</li>
+        <li>Cooperativa: conecta a la universidad con el resto del profesorado del sistema educativo.</li>
+        <li>Con sentido cívico: apunta, en último término, a formar jóvenes capaces de pensar su mundo.</li>
+      </ol>
+    </details>
+
+    <div class="reveal" style="margin-top:2.4rem;">
+      <p>El texto cierra con una idea clave para la formación docente: <strong>la práctica solo cambia cuando el profesorado quiere cambiarla</strong>, no porque lo indique un currículo o un estudio académico. Por eso Pagès insiste en que la formación inicial y continua debe ser coherente — que lo que se predica en la universidad se vea reflejado en cómo se enseña en la propia universidad — y cita un estudio canadiense (Bérubé, 2005) que matiza el lugar común de que el profesorado "no le interesa" la investigación: el problema, muchas veces, es que no tiene claro qué es realmente investigar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DOC 2: GIRO HISTORIOGRÁFICO ===================== -->
+<section class="section alt" id="giro">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Documento 2 — Ignacio Muñoz Delaunoy</p>
+      <h2>De la Historia que entrega certezas a la Historia que exige preguntas</h2>
+      <p class="lede">Muñoz Delaunoy sostiene que buena parte de la dificultad para enseñar historia hoy no es pedagógica, sino disciplinar: <strong>la propia Historia dejó de ser un relato único hace más de un siglo</strong>, y el profesorado quedó en medio de esa transformación, exigido a enseñar "modos de pensar" en una disciplina que todavía discute cuáles son esos modos.</p>
+    </div>
+
+    <div class="compare-wrap reveal">
+      <article class="compare-card trad">
+        <span class="ce">Modelo dominante · siglo XIX</span>
+        <h3>Historia Tradicional</h3>
+        <ul>
+          <li><b>Protagonistas</b>Grandes hombres, dirigentes y Estados-nación.</li>
+          <li><b>Forma</b>Relato narrativo, cronológico y lineal, "tal como ocurrieron los hechos".</li>
+          <li><b>Mirada</b>Desde arriba: la política manda, lo social y económico son telón de fondo.</li>
+          <li><b>Rol docente</b>Transmitir un saber ya cerrado, para que el alumnado lo memorice y repita.</li>
+          <li><b>Visión del cambio</b>Teleológica: la historia avanza hacia el progreso occidental.</li>
+        </ul>
+      </article>
+      <article class="compare-card new">
+        <span class="ce">En construcción · desde 1900</span>
+        <h3>Nueva Historia</h3>
+        <ul>
+          <li><b>Protagonistas</b>Las masas, los grupos sociales, la vida cotidiana, las minorías.</li>
+          <li><b>Forma</b>Analítica y problematizadora, apoyada en economía, sociología y antropología.</li>
+          <li><b>Mirada</b>Desde abajo: la experiencia de la gente común también explica el cambio histórico.</li>
+          <li><b>Rol docente</b>Mediador que guía al estudiante en la construcción de su propio conocimiento.</li>
+          <li><b>Visión del cambio</b>Estructural: tensión entre fuerzas económicas, sociales y la acción humana.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="reveal" style="margin-top:2.6rem;">
+      <h3>Una línea de tiempo con dos siglos de discusión</h3>
+      <p class="lede">El paso de una historia a otra no fue un cambio de opinión repentino, sino un proceso de más de dos mil años que se aceleró de forma dramática en el siglo XX. Recorre los hitos que Muñoz Delaunoy identifica como decisivos.</p>
+    </div>
+
+    <div class="timeline-wrap reveal" id="timelineWrap">
+      <div class="timeline-spine"><div class="timeline-spine-fill" id="spineFill"></div></div>
+
+      <div class="t-item" data-t>
+        <span class="t-dot"></span>
+        <span class="t-date">Siglo V a.C. — Grecia clásica</span>
+        <h4>Nace la historia "racional"</h4>
+        <p>Tucídides y Heródoto separan el relato del pasado de la mitología y la magia: proponen reconstruir los hechos mediante el examen crítico de la evidencia y la razón, sentando la base de todo lo que vendrá después.</p>
+      </div>
+
+      <div class="t-item" data-t>
+        <span class="t-dot"></span>
+        <span class="t-date">1810–1880 — Profesionalización alemana</span>
+        <h4>La Historia se vuelve disciplina universitaria</h4>
+        <p>Niebuhr sistematiza el "método crítico" de análisis de fuentes; en 1810 Wilhelm von Humboldt funda la Universidad de Berlín, donde se dictan los primeros cursos formales de Historia. Leopold von Ranke consolida un modelo narrativo, político y eurocéntrico que se expande por el mundo, incluido Chile.</p>
+      </div>
+
+      <div class="t-item" data-t>
+        <span class="t-date">Fines del s. XIX — Primeras grietas</span>
+        <h4>Los "New Historians" cuestionan el relato del Estado</h4>
+        <p>En Estados Unidos, Frederick Jackson Turner, Charles Beard y James Harvey Robinson empiezan a mirar la historia desde la sociedad y la economía, no solo desde la política de los grandes hombres.</p>
+        <span class="t-dot"></span>
+      </div>
+
+      <div class="t-item" data-t>
+        <span class="t-dot"></span>
+        <span class="t-date">1929 — Nace la Escuela de los Annales</span>
+        <h4>Marc Bloch y Lucien Febvre fundan una revista, y una forma de pensar</h4>
+        <p>En Francia surge la publicación que dará nombre a la corriente más influyente de la "Nueva Historia": una historia abierta a la economía, la sociedad y los tiempos largos, no solo a los acontecimientos políticos.</p>
+      </div>
+
+      <div class="t-item" data-t>
+        <span class="t-dot"></span>
+        <span class="t-date">1945–1960 — Historia Social de posguerra</span>
+        <h4>El horror de la guerra desacredita el relato tradicional</h4>
+        <p>Tras el Holocausto y la Segunda Guerra Mundial, una nueva generación culpa a la historia narrativa y nacionalista de haber alimentado el fanatismo. La economía y lo social pasan a ser el centro casi obligado de la investigación histórica.</p>
+      </div>
+
+      <div class="t-item" data-t>
+        <span class="t-dot"></span>
+        <span class="t-date">1960–1970 — La "Historia Total" y su fragmentación</span>
+        <h4>Todo se vuelve objeto de estudio — y se pierde el centro</h4>
+        <p>Labrousse y Braudel proponen modelos de tres capas (geografía y economía en la base, sociedad en el medio, política y cultura arriba). La historia serial y cuantitativa multiplica los temas —género, demografía, vida cotidiana— pero algunos textos terminan sin protagonistas humanos reconocibles: la llamada "historia sin gente".</p>
+      </div>
+
+      <div class="t-item" data-t>
+        <span class="t-dot"></span>
+        <span class="t-date">Década de 1980 — Crisis y retorno de la narrativa</span>
+        <h4>Se cuestiona el exceso de teoría</h4>
+        <p>Historiadores empiezan a señalar que tanto aparato metodológico produjo resultados empíricos modestos. Resurgen el interés por el individuo, la historia cultural, la historia de las mujeres, la microhistoria y la "historia desde abajo".</p>
+      </div>
+
+      <div class="t-item" data-t>
+        <span class="t-dot"></span>
+        <span class="t-date">Hoy — Una historia descentrada y digital</span>
+        <h4>Conviven, sin resolverse, la Historia Tradicional y la Nueva Historia</h4>
+        <p>La globalización, el cine, las series, los videojuegos e internet multiplican quién cuenta la historia y cómo se cuenta. En las aulas —sobre todo en países como Chile— lo nuevo no reemplazó a lo viejo: ambos modelos conviven, muchas veces en el mismo profesor.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:2.6rem; max-width:70ch;">
+      <p>La consecuencia para la enseñanza es directa: si la Historia ya no tiene "un" centro claro, enseñarla exige mucho más que transmitir un temario. El profesorado debe entender qué es la Historia hoy, manejar sus distintos enfoques y ayudar al estudiantado a construir su propio conocimiento — un desafío que, según el autor, convirtió a esta asignatura en una de las más exigentes del currículo escolar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DOC 3: DIDÁCTICA COMO CAMPO ===================== -->
+<section class="section" id="campo">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow teal">Documento 3 — ¿Qué entendemos por Didáctica de la Historia?</p>
+      <h2>Enseñar a pensar históricamente</h2>
+      <p class="lede">Este tercer texto, de un programa de formación de profesores, responde a la pregunta que dejan abiertas los dos anteriores: si la investigación no siempre llega al aula y la disciplina histórica cambió por completo, <strong>¿qué debe saber y saber hacer un profesor de historia hoy?</strong></p>
+    </div>
+
+    <div class="field-callout reveal">
+      <span class="glyph">D+H</span>
+      <p>Una <strong>didáctica específica</strong> no es solo "aplicar" técnicas de enseñanza a un contenido. Nace de combinar dos fuentes: las Ciencias de la Educación y la ciencia de referencia —aquí, la Historia—. Al unirse, producen un conocimiento propio, distinto de la simple suma de ambas: la Didáctica de la Historia estudia específicamente cómo se enseña y cómo se aprende a pensar el pasado.</p>
+    </div>
+
+    <div class="reveal">
+      <p>El documento describe un giro que atraviesa toda la enseñanza escolar: pasar de una historia "evenemencial" —fechas, personajes y hechos aislados para memorizar— a una historia centrada en comprender los procesos de cambio y continuidad, y en formar ciudadanía crítica y autónoma.</p>
+    </div>
+
+    <div class="twin-defs reveal">
+      <div class="def-card a">
+        <h4>Pensamiento histórico</h4>
+        <p>El conjunto de habilidades que permite comprender el pasado y usarlo para dar sentido al presente: identificar causas y consecuencias, distinguir cambios de continuidades, situarse en el tiempo y el espacio, y trabajar con fuentes históricas.</p>
+      </div>
+      <div class="def-card b">
+        <h4>Pensamiento crítico aplicado a la Historia</h4>
+        <p>La capacidad de cuestionar las propias fuentes y versiones del pasado, entendiendo que la Historia se construye desde valores e interpretaciones — no existen "hechos puros" que hablen por sí solos.</p>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <h3>Habilidades que el currículo chileno espera desarrollar en Historia</h3>
+      <div class="skills-grid">
+        <div class="skill-card"><span class="n">01</span><p>Comprensión de la temporalidad y la historicidad</p></div>
+        <div class="skill-card"><span class="n">02</span><p>Comprensión de la dimensión espacial</p></div>
+        <div class="skill-card"><span class="n">03</span><p>Búsqueda y organización de la información</p></div>
+        <div class="skill-card"><span class="n">04</span><p>Uso de conceptos de Historia y Ciencias Sociales</p></div>
+        <div class="skill-card"><span class="n">05</span><p>Comprensión y empatía histórica</p></div>
+        <div class="skill-card"><span class="n">06</span><p>Aceptación de la pluralidad de puntos de vista</p></div>
+        <div class="skill-card"><span class="n">07</span><p>Actitud de reflexión crítica y propositiva</p></div>
+        <div class="skill-card"><span class="n">08</span><p>Habilidades comunicativas</p></div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <h3>El pensamiento histórico, en tres frentes</h3>
+      <div class="triad">
+        <div class="triad-card">
+          <h4>Tiempo y espacio</h4>
+          <ul>
+            <li>Comparar presente y pasado, y extraer lecciones.</li>
+            <li>Reconocer qué cambia, qué permanece y a qué ritmo.</li>
+            <li>Leer mapas y ubicar procesos en su contexto geográfico.</li>
+          </ul>
+        </div>
+        <div class="triad-card">
+          <h4>Evidencia y puntos de vista</h4>
+          <ul>
+            <li>Distinguir fuentes primarias de secundarias.</li>
+            <li>Identificar sesgos e intereses detrás de cada relato.</li>
+            <li>Contrastar versiones y construir hipótesis propias.</li>
+          </ul>
+        </div>
+        <div class="triad-card">
+          <h4>Interpretación histórica</h4>
+          <ul>
+            <li>Relacionar hechos puntuales con procesos más amplios.</li>
+            <li>Aceptar la multicausalidad, sin simplificar en exceso.</li>
+            <li>Entender que el pasado pudo haber tomado otros caminos.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <h3>Aprender a enseñar: tres tensiones que enfrenta todo futuro profesor</h3>
+      <p class="lede">El texto retoma investigaciones sobre formación docente (Hammerness et al., 2005) para explicar por qué "aprender a enseñar historia" no es solo aprender contenidos.</p>
+      <div class="challenge-row">
+        <div class="challenge-card">
+          <span class="n">1</span>
+          <p>Pensar la enseñanza de un modo distinto a como cada quien vivió la escuela siendo estudiante.</p>
+        </div>
+        <div class="challenge-card">
+          <span class="n">2</span>
+          <p>Pasar del saber teórico a ponerlo realmente en práctica frente a un curso.</p>
+        </div>
+        <div class="challenge-card">
+          <span class="n">3</span>
+          <p>Entender el conocimiento histórico como algo que se construye en el aula, no como algo ya terminado que solo se transmite.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GLOSARIO ===================== -->
+<section class="section alt" id="glosario">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow gold">Para no perderse</p>
+      <h2>Glosario de términos clave</h2>
+      <p class="lede">Diez conceptos que aparecen una y otra vez en los tres textos. Toca cada uno para ver su definición.</p>
+    </div>
+
+    <div class="glossary-grid reveal">
+      <details class="term"><summary>Didáctica de la Historia</summary><p>Campo de conocimiento e investigación que estudia cómo se enseña y se aprende historia, combinando la pedagogía con el saber histórico disciplinar.</p></details>
+      <details class="term"><summary>Historia Tradicional</summary><p>Modelo nacido en el siglo XIX, centrado en el Estado, los grandes hombres y un relato cronológico lineal presentado como verdad objetiva.</p></details>
+      <details class="term"><summary>Nueva Historia</summary><p>Conjunto de corrientes, desde inicios del siglo XX, que amplían la historia hacia lo económico, social y cultural, incorporando métodos de otras ciencias sociales.</p></details>
+      <details class="term"><summary>Escuela de los Annales</summary><p>Corriente francesa fundada en 1929 por Marc Bloch y Lucien Febvre, pionera de una historia social y económica de larga duración.</p></details>
+      <details class="term"><summary>Historia Total</summary><p>Modelo que intenta explicar el pasado articulando en distintos niveles la geografía, la economía, la sociedad y la política (Labrousse, Braudel).</p></details>
+      <details class="term"><summary>Pensamiento histórico</summary><p>Conjunto de habilidades para comprender el pasado y darle sentido al presente: causalidad, cambio y continuidad, empatía y uso crítico de fuentes.</p></details>
+      <details class="term"><summary>Historia desde abajo</summary><p>Enfoque que sitúa a la gente común —no solo a las élites— como protagonista posible del relato histórico.</p></details>
+      <details class="term"><summary>Fuentes primarias y secundarias</summary><p>Las primarias son testimonios directos de una época (documentos, objetos, imágenes); las secundarias son interpretaciones posteriores elaboradas por historiadores.</p></details>
+      <details class="term"><summary>Constructivismo en la enseñanza</summary><p>Enfoque pedagógico que sitúa al estudiante, y no al profesor, en el centro de la construcción activa del conocimiento histórico.</p></details>
+      <details class="term"><summary>Investigación-acción docente</summary><p>Camino propuesto por Pagès en el que el propio profesorado investiga su práctica para comprenderla y transformarla desde adentro.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SÍNTESIS ===================== -->
+<section class="section" id="sintesis">
+  <div class="wrap">
+    <div class="synthesis reveal">
+      <p class="eyebrow">Uniendo los tres hilos</p>
+      <h2>Tres diagnósticos, una misma tarea pendiente</h2>
+      <p class="lede">Ninguno de los tres textos culpa al profesorado. Los tres señalan, en cambio, una tarea estructural todavía inconclusa: acercar la investigación educativa, la historiografía actual y la formación docente, para que la historia vuelva a ser una herramienta útil para pensar el presente.</p>
+      <div class="synth-points">
+        <div>
+          <strong>La disciplina cambió</strong>
+          <p>La Historia dejó de ser un relato único hace más de un siglo: hoy conviven enfoques económicos, sociales, culturales y políticos que exigen enseñar a interpretar, no solo a memorizar.</p>
+        </div>
+        <div>
+          <strong>La investigación existe, pero no siempre llega</strong>
+          <p>Hay evidencia sólida sobre cómo aprenden mejor los estudiantes de historia; el reto es que ese conocimiento efectivamente transforme lo que ocurre dentro del aula.</p>
+        </div>
+        <div>
+          <strong>La didáctica es el puente</strong>
+          <p>Formar profesores capaces de guiar el pensamiento histórico —y no solo transmitir contenidos— es la vía que proponen los tres autores para cerrar esa brecha.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="refs">
+      <div class="ref-card">
+        <span class="num">Fuente 1</span>
+        Pagès Blanch, J. (2010). <em>Reflexiones sobre algunos problemas teóricos y de método de la investigación en Didáctica de la Historia y de las Ciencias Sociales.</em> Basado en conferencia dictada en la Universidad Nacional de Salta.
+      </div>
+      <div class="ref-card">
+        <span class="num">Fuente 2</span>
+        Muñoz Delaunoy, I. (2013). "De la 'Historia Tradicional' a la 'Nueva Historia'". En Muñoz Delaunoy, I. y Osandón Millavil, L. (comps.), <em>La Didáctica de la Historia y la Formación de Ciudadanos en el Mundo Actual.</em> Centro de Investigaciones Diego Barros Arana.
+      </div>
+      <div class="ref-card">
+        <span class="num">Fuente 3</span>
+        <em>¿Qué entendemos por Didáctica de la Historia?</em> Programa de formación inicial docente, Instituto de Historia, Pontificia Universidad Católica de Valparaíso.
+      </div>
+    </div>
+    <div class="foot-line">
+      <span>Guía de lectura elaborada a partir de tres textos sobre didáctica de la historia</span>
+      <a class="backtop" href="#inicio">Volver arriba ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Progress bar
+  var progress = document.getElementById('progress');
+  function updateProgress(){
+    var h = document.documentElement;
+    var scrolled = h.scrollTop;
+    var max = h.scrollHeight - h.clientHeight;
+    var pct = max > 0 ? (scrolled / max) * 100 : 0;
+    progress.style.width = pct + '%';
+  }
+  document.addEventListener('scroll', updateProgress, { passive:true });
+  updateProgress();
+
+  // Mobile nav toggle
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Active nav link on scroll
+  var sections = ['diagnostico','giro','campo','glosario','sintesis'].map(function(id){
+    return document.getElementById(id);
+  }).filter(Boolean);
+  var navA = Array.from(navLinks.querySelectorAll('a'));
+  var navObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var link = navA.find(function(a){ return a.getAttribute('href') === '#' + entry.target.id; });
+      if(!link) return;
+      if(entry.isIntersecting){
+        navA.forEach(function(a){ a.classList.remove('active'); });
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin:'-45% 0px -50% 0px', threshold:0 });
+  sections.forEach(function(s){ navObserver.observe(s); });
+
+  // Reveal on scroll
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var revealEls = document.querySelectorAll('.reveal');
+  if(reduceMotion){
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  } else {
+    var revealObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.12 });
+    revealEls.forEach(function(el){ revealObserver.observe(el); });
+  }
+
+  // Timeline spine fill + item highlight
+  var tItems = document.querySelectorAll('.t-item');
+  var spineFill = document.getElementById('spineFill');
+  var timelineWrap = document.getElementById('timelineWrap');
+
+  var timelineObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      entry.target.classList.toggle('in-view', entry.isIntersecting);
+    });
+  }, { rootMargin:'-20% 0px -45% 0px', threshold:0 });
+  tItems.forEach(function(el){ timelineObserver.observe(el); });
+
+  function updateSpine(){
+    if(!timelineWrap) return;
+    var rect = timelineWrap.getBoundingClientRect();
+    var viewportCenter = window.innerHeight * 0.55;
+    var total = rect.height;
+    var passed = viewportCenter - rect.top;
+    var pct = Math.max(0, Math.min(100, (passed / total) * 100));
+    spineFill.style.height = pct + '%';
+  }
+  document.addEventListener('scroll', updateSpine, { passive:true });
+  window.addEventListener('resize', updateSpine);
+  updateSpine();
+})();
+</script>
+
+</body>
+</html>
