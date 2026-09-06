@@ -1,129 +1,235 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Gestión</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mar y Ola — Velas, Home Spray, Mikados y Talleres de Candelería | Barrio Italia, Ñuñoa</title>
+<meta name="description" content="Mar y Ola: velas artesanales, home spray y mikados (Decoarte) y talleres + insumos de candelería (Candelería). Barrio Italia y Atelier Villa Frei, Ñuñoa.">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>Gestión de Tienda</h1>
-    </header>
-
-    <nav class="tab-nav">
-        <button class="tab-button active" onclick="showTab('pos-tab')">Punto de Venta</button>
-        <button class="tab-button" onclick="showTab('members-tab')">Socios</button>
-        <button class="tab-button" onclick="showTab('inventory-tab')">Inventario</button>
+<header class="site-header">
+  <div class="nav-row">
+    <a href="index.html" class="brand-mark">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M46 8c0 6-5 7-5 12s5 6 5 11" stroke="#C79A3E" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M42 10c0 5-4 6-4 10s4 5 4 9" stroke="#C79A3E" stroke-width="2" stroke-linecap="round"/>
+        <path d="M6 40c6-6 12-6 18 0s12 6 18 0s12-6 18 0" stroke="#0F4A4C" stroke-width="3" stroke-linecap="round"/>
+        <path d="M6 48c6-6 12-6 18 0s12 6 18 0s12-6 18 0" stroke="#5FBFC9" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+      </svg>
+      <span class="brand-text">Mar <b>y</b> Ola</span>
+    </a>
+    <button class="nav-toggle" aria-label="Abrir menú" onclick="document.querySelector('.main-nav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav">
+      <a href="index.html" class="active">Inicio</a>
+      <a href="decoarte.html">Decoarte</a>
+      <a href="candeleria.html">Candelería</a>
+      <a href="contacto.html">Contacto</a>
     </nav>
+  </div>
+</header>
 
-    <main>
-        <!-- PESTAÑA PUNTO DE VENTA -->
-        <section id="pos-tab" class="tab-content active">
-            <h2>Realizar Venta</h2>
-            <div class="pos-container">
-                <div class="pos-actions">
-                    <div class="form-group">
-                        <label for="product-id">ID del Producto:</label>
-                        <input type="text" id="product-id" placeholder="Ej: PROD001">
-                        <button onclick="addToCart()">Agregar a la Venta</button>
-                    </div>
-                    <div class="form-group">
-                        <label for="customer-rut">RUT del Socio (Opcional):</label>
-                        <input type="text" id="customer-rut" placeholder="Ej: 12.345.678-9">
-                    </div>
-                    <div class="form-group">
-                        <label for="coupon-code">Código de Descuento (Opcional):</label>
-                        <input type="text" id="coupon-code" placeholder="Ej: VERANO10">
-                        <button onclick="applyCoupon()">Aplicar</button>
-                        <span id="coupon-status"></span>
-                    </div>
-                </div>
-                
-                <div class="cart-summary">
-                    <h3>Resumen de Venta</h3>
-                    <table id="cart-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Producto</th>
-                                <th>Precio Unit.</th>
-                                <th>Cantidad</th>
-                                <th>Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody id="cart-items">
-                            <!-- Los productos se agregarán aquí dinámicamente -->
-                        </tbody>
-                    </table>
-                    <div class="totals">
-                        <p>Subtotal: <span id="subtotal">$0</span></p>
-                        <p>Descuento: <span id="discount">$0</span></p>
-                        <h3>Total: <span id="total">$0</span></h3>
-                    </div>
-                    <div class="cart-actions">
-                        <button class="button-cancel" onclick="cancelSale()">Cancelar Venta</button>
-                        <button class="button-confirm" onclick="confirmSale()">Realizar Venta</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div>
+      <span class="hero-eyebrow">BARRIO ITALIA · ÑUÑOA · SANTIAGO</span>
+      <h1>Donde el mar se vuelve <em>llama</em>, y la llama se vuelve <em>oficio</em>.</h1>
+      <p class="lead">Mar y Ola nace en Barrio Italia hace tres años como un taller familiar de velas, y hoy es dos mundos que conviven bajo un mismo nombre: <strong>Decoarte</strong>, nuestra línea de velas y aromas de autor, y <strong>Candelería</strong>, nuestro Atelier de talleres e insumos cerca de Villa Frei.</p>
+      <div class="hero-actions">
+        <a href="decoarte.html" class="btn gold">Ver Decoarte</a>
+        <a href="candeleria.html" class="btn ghost">Ver Candelería</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="assets/vela_amarilla_hero.jpg" alt="Vela artesanal Mar y Ola con acabado tipo copa de postre, aroma tropical">
+      <div class="hero-tag"><b>3 años</b>en Barrio Italia</div>
+    </div>
+  </div>
+</section>
 
-        <!-- PESTAÑA SOCIOS -->
-        <section id="members-tab" class="tab-content">
-            <h2>Gestión de Socios</h2>
-            <div class="two-column-layout">
-                <div class="form-container">
-                    <h3>Buscar Socio</h3>
-                    <div class="form-group">
-                        <input type="text" id="search-rut" placeholder="Ingresa el RUT a buscar">
-                        <button onclick="searchMember()">Buscar</button>
-                    </div>
-                    <div id="member-search-result"></div>
-                </div>
-                <div class="form-container">
-                    <h3>Inscribir Nuevo Socio</h3>
-                    <form id="new-member-form" onsubmit="addMember(event)">
-                        <div class="form-group"><label>RUT:</label><input type="text" id="new-rut" required></div>
-                        <div class="form-group"><label>Nombre:</label><input type="text" id="new-name" required></div>
-                        <div class="form-group"><label>Fecha de Cumpleaños:</label><input type="date" id="new-birthday" required></div>
-                        <button type="submit">Inscribir</button>
-                    </form>
-                </div>
-            </div>
-        </section>
+<div class="wave-divide">
+  <svg viewBox="0 0 1180 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C 180,90 360,0 590,40 C 820,80 1000,10 1180,45 L1180,90 L0,90 Z" fill="#0F4A4C"/>
+  </svg>
+</div>
 
-        <!-- PESTAÑA INVENTARIO -->
-        <section id="inventory-tab" class="tab-content">
-            <h2>Gestión de Inventario</h2>
-            <div class="inventory-controls">
-                 <button onclick="loadInventory()">Actualizar Inventario</button>
-            </div>
-            <table id="inventory-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                        <th>Stock Actual</th>
-                        <th>Stock Mínimo</th>
-                        <th>Estado</th>
-                        <th>Tipo</th>
-                    </tr>
-                </thead>
-                <tbody id="inventory-items">
-                    <!-- El inventario se cargará aquí -->
-                </tbody>
-            </table>
-        </section>
-    </main>
+<!-- LOS DOS MUNDOS -->
+<div class="worlds">
+  <div class="world decoarte">
+    <span class="dept-label">DEPARTAMENTO 01</span>
+    <h3>Decoarte</h3>
+    <p class="founder">Fundado y dirigido por Mariola Ramírez</p>
+    <p>Velas de soya hechas a mano con terminaciones de repostería, home spray y mikados. Se encuentran en Galería La Bota, Av. Italia 1571, local 32.</p>
+    <a href="decoarte.html" class="btn">Explorar la línea</a>
+  </div>
+  <div class="world candeleria">
+    <span class="dept-label">DEPARTAMENTO 02</span>
+    <h3>Candelería</h3>
+    <p class="founder">Fundado y administrado por Carla Ramírez</p>
+    <p>Nuestro Atelier cerca del Metro Villa Frei: talleres los sábados y venta de insumos —ceras, aromas y moldes— para quienes quieren aprender el oficio.</p>
+    <a href="candeleria.html" class="btn">Ver talleres e insumos</a>
+  </div>
+</div>
 
-    <div id="notification" class="notification"></div>
+<!-- SOBRE NOSOTROS -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">NUESTRA HISTORIA</span>
+      <h2>Dos hermanas, un mismo oficio</h2>
+      <p>Mar y Ola comenzó como un pequeño mesón en Barrio Italia y hoy es una marca con identidad propia, construida entre dos hermanas que decidieron dividir el oficio para hacerlo crecer.</p>
+    </div>
+    <div class="founders">
+      <div class="founder-card">
+        <span class="name">Mariola Ramírez</span>
+        <span class="role">FUNDADORA · DECOARTE</span>
+        <p>Mariola diseña cada vela como si fuera un postre: capas, texturas y terminaciones que buscan sorprender antes de encenderse. Bajo su mirada nació la línea Decoarte, con velas de autor, home spray y mikados que hoy se venden en Galería La Bota.</p>
+        <div class="rule"></div>
+        <p>Su búsqueda constante es que cada pieza cuente algo —un sabor, un recuerdo, una estación— antes de perfumar un espacio.</p>
+      </div>
+      <div class="founder-card">
+        <span class="name">Carla Ramírez</span>
+        <span class="role">FUNDADORA Y ADMINISTRADORA · CANDELERÍA</span>
+        <p>Carla abrió el nuevo Atelier de Mar y Ola cerca de Metro Villa Frei con una idea clara: que el oficio de hacer velas se pueda aprender y compartir. Ahí dirige los talleres de cada sábado y administra la venta de insumos para quienes ya se animaron a crear las suyas.</p>
+        <div class="rule"></div>
+        <p>Los insumos también se pueden pedir por WhatsApp, con despacho a domicilio o retiro en el Atelier.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script src="script.js"></script>
+<!-- TALLERES RESUMEN -->
+<section style="background:var(--ivory-deep); border-top:1px solid var(--gold-line); border-bottom:1px solid var(--gold-line);">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">CANDELERÍA · SÁBADOS</span>
+      <h2>Talleres en el Atelier</h2>
+      <p>Cupos reducidos, cerca del Metro Villa Frei, Ñuñoa. Consulta disponibilidad e inscripciones por Instagram.</p>
+    </div>
+    <div class="schedule">
+      <div class="slot">
+        <div class="time">10:00</div>
+        <p style="color:var(--teal-deep); font-weight:500; margin-bottom:12px;">Módulo mañana</p>
+        <ul>
+          <li>Home Spray</li>
+          <li>Mikados</li>
+          <li>Difusores</li>
+        </ul>
+      </div>
+      <div class="slot">
+        <div class="time">14:30</div>
+        <p style="color:var(--teal-deep); font-weight:500; margin-bottom:12px;">Módulo tarde</p>
+        <ul>
+          <li>Velas de soya</li>
+          <li>Velas de masaje</li>
+          <li>Wax melts</li>
+          <li>Suculentas de cera</li>
+        </ul>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:36px;">
+      <a href="candeleria.html" class="btn gold">Ver detalle de talleres</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">DECOARTE · GALERÍA</span>
+      <h2>Piezas que se ven, huelen y se recuerdan</h2>
+      <p>Una muestra de las velas y ambientadores que encuentras en Galería La Bota.</p>
+    </div>
+    <div class="gallery">
+      <figure><img src="assets/vela_sandia.jpg" alt="Vela Sandía"><figcaption>Sandía</figcaption></figure>
+      <figure><img src="assets/vela_mandarin.jpg" alt="Vela Mandarin Cake"><figcaption>Mandarin Cake</figcaption></figure>
+      <figure><img src="assets/vela_cafe.jpg" alt="Vela Venecia Coffee"><figcaption>Venecia Coffee</figcaption></figure>
+      <figure><img src="assets/vela_maracuya.jpg" alt="Vela Maracuyá"><figcaption>Maracuyá</figcaption></figure>
+      <figure><img src="assets/homespray_botellas.jpg" alt="Home Spray Deluxe Collection"><figcaption>Home Spray Deluxe</figcaption></figure>
+      <figure><img src="assets/mikados_bouquet.jpg" alt="Mikados y ramos de cera"><figcaption>Mikados & ramos</figcaption></figure>
+    </div>
+    <div style="text-align:center; margin-top:44px;">
+      <a href="decoarte.html" class="btn ghost">Ver todo Decoarte</a>
+    </div>
+  </div>
+</section>
+
+<!-- INFO RAPIDA -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">INFORMACIÓN RÁPIDA</span>
+      <h2>Todo lo que necesitas saber</h2>
+    </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Galería La Bota — Decoarte</h4>
+        <p>Av. Italia 1571, local 32, Barrio Italia</p>
+        <p>Martes a domingo, 12:00 a 20:00 hrs</p>
+        <p style="margin-top:14px;"><a class="link" href="https://instagram.com/maryola_decoarte" target="_blank">@maryola_decoarte</a></p>
+        <p><a class="link" href="tel:+56972741198">+56 9 7274 1198</a></p>
+      </div>
+      <div class="info-card">
+        <h4>Atelier — Candelería</h4>
+        <p>Cerca de Metro Villa Frei, Ñuñoa</p>
+        <p>Talleres los sábados · Insumos por WhatsApp</p>
+        <p style="margin-top:14px;"><a class="link" href="https://instagram.com/maryola_candeleria" target="_blank">@maryola_candeleria</a></p>
+        <p><a class="link" href="tel:+56966764228">+56 9 6676 4228</a></p>
+      </div>
+      <div class="info-card">
+        <h4>¿Cómo comprar insumos?</h4>
+        <p>Escríbenos por WhatsApp al Atelier.</p>
+        <p>Coordinamos despacho a domicilio o retiro directo en Candelería.</p>
+        <p style="margin-top:14px;"><a class="link" href="contacto.html">Ver todos los contactos →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-strip">
+  <div class="container">
+    <h2>¿Vela, aroma o taller?</h2>
+    <p>Cualquiera sea tu forma de acercarte a Mar y Ola, hay un rincón pensado para ti.</p>
+    <a href="decoarte.html" class="btn gold">Decoarte</a>
+    <a href="candeleria.html" class="btn gold">Candelería</a>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h5>MAR Y OLA</h5>
+        <p style="max-width:38ch; color:rgba(251,246,236,0.6);">Marca chilena de velas artesanales y talleres de candelería, con tres años de historia en Barrio Italia, Santiago.</p>
+      </div>
+      <div>
+        <h5>DECOARTE</h5>
+        <a href="decoarte.html">Velas, home spray y mikados</a>
+        <a href="https://instagram.com/maryola_decoarte" target="_blank">@maryola_decoarte</a>
+        <a href="tel:+56972741198">+56 9 7274 1198</a>
+      </div>
+      <div>
+        <h5>CANDELERÍA</h5>
+        <a href="candeleria.html">Talleres e insumos</a>
+        <a href="https://instagram.com/maryola_candeleria" target="_blank">@maryola_candeleria</a>
+        <a href="tel:+56966764228">+56 9 6676 4228</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Mar y Ola. Hecho a mano en Santiago, Chile.</span>
+      <span>Martes a domingo · 12:00–20:00 · Barrio Italia</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wsp-float" href="https://wa.me/56966764228" target="_blank" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.02 3C9.4 3 4.03 8.37 4.03 15c0 2.36.68 4.56 1.86 6.42L4 29l7.76-1.86A11.9 11.9 0 0 0 16.02 27C22.64 27 28 21.63 28 15S22.64 3 16.02 3zm6.98 16.7c-.3.83-1.5 1.53-2.42 1.72-.64.13-1.47.24-4.28-.9-3.6-1.46-5.92-5.02-6.1-5.26-.18-.24-1.46-1.94-1.46-3.7 0-1.75.9-2.6 1.24-2.96.3-.32.66-.4.88-.4.22 0 .44.002.63.01.2.01.47-.08.74.56.3.7 1 2.44 1.1 2.62.1.18.16.4.03.64-.12.24-.19.4-.37.6-.18.22-.38.48-.55.65-.18.18-.37.37-.16.73.2.36.9 1.5 1.95 2.44 1.34 1.2 2.47 1.57 2.84 1.75.37.18.58.15.8-.1.22-.24.9-1.06 1.15-1.42.24-.36.48-.3.8-.18.32.12 2.05.98 2.4 1.16.35.18.58.27.66.42.1.16.1.9-.2 1.73z"/></svg>
+</a>
+
 </body>
 </html>
