@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Resultados: Proyecto "El agua y la vida"</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  <script>/* tipografía y neutros del portfolio */if(window.tailwind)tailwind.config={theme:{extend:{fontFamily:{sans:["Literata","Georgia","serif"],serif:["Literata","Georgia","serif"],display:["Bricolage Grotesque","system-ui","sans-serif"]},colors:{gray:{50:"#F6F7FA",100:"#EEF1F6",200:"#E1E5EE",300:"#D2D7E3",400:"#A3A9C2",500:"#6E7393",600:"#4D5170",700:"#3A3D58",800:"#262940",900:"#1A1C2E",950:"#12131F"},stone:{50:"#F6F7FA",100:"#EEF1F6",200:"#E1E5EE",300:"#D2D7E3",400:"#A3A9C2",500:"#6E7393",600:"#4D5170",700:"#3A3D58",800:"#262940",900:"#1A1C2E",950:"#12131F"},slate:{50:"#F6F7FA",100:"#EEF1F6",200:"#E1E5EE",300:"#D2D7E3",400:"#A3A9C2",500:"#6E7393",600:"#4D5170",700:"#3A3D58",800:"#262940",900:"#1A1C2E",950:"#12131F"},zinc:{50:"#F6F7FA",100:"#EEF1F6",200:"#E1E5EE",300:"#D2D7E3",400:"#A3A9C2",500:"#6E7393",600:"#4D5170",700:"#3A3D58",800:"#262940",900:"#1A1C2E",950:"#12131F"},neutral:{50:"#F6F7FA",100:"#EEF1F6",200:"#E1E5EE",300:"#D2D7E3",400:"#A3A9C2",500:"#6E7393",600:"#4D5170",700:"#3A3D58",800:"#262940",900:"#1A1C2E",950:"#12131F"}}}}};</script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+    </style>
+
+  <link rel="icon" href="../../../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../../assets/css/site.css">
+  <link rel="stylesheet" href="../../../../assets/css/armonia.css">
+  <script src="../../../../assets/js/site.js" defer></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="bg-[#005082] text-white p-8 text-center shadow-lg">
+        <h1 class="text-4xl font-black tracking-tight">Análisis de Resultados del Proyecto</h1>
+        <p class="text-xl font-bold text-[#00A1E4] mt-2">"El agua y la vida"</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="introduccion" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-[#0077C0] mb-4 text-center">Impacto y Concientización</h2>
+                <p class="text-lg text-center text-gray-600">
+                    Este informe visualiza los resultados de la evaluación del proyecto "El agua y la vida". Los datos revelan un alto nivel de comprensión conceptual y una fuerte conexión personal de los estudiantes con la importancia de la conservación del agua, demostrando el notable éxito de la iniciativa.
+                </p>
+            </div>
+        </section>
+
+        <section id="conceptos" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-[#0077C0] mb-2 text-center">Sección I: Comprensión Conceptual</h2>
+                <p class="text-md text-center text-gray-500 mb-6 max-w-3xl mx-auto">El rendimiento general en las preguntas conceptuales fue excepcional, superando el 75% de aciertos en todas las áreas. Esto indica que los estudiantes asimilaron eficazmente los conocimientos fundamentales sobre el ciclo del agua, su escasez y los efectos de la contaminación.</p>
+                <div class="chart-container">
+                    <canvas id="conceptualChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="percepcion" class="mb-12">
+            <h2 class="text-3xl font-bold text-[#0077C0] mb-6 text-center">Sección II: Percepción y Conciencia Generada</h2>
+             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 md:p-8">
+                    <h3 class="text-2xl font-bold text-center mb-4">Valor del Agua y Frecuencia de Ahorro</h3>
+                    <p class="text-md text-center text-gray-500 mb-6">El proyecto generó un impacto muy positivo en la percepción de los estudiantes. La gran mayoría no solo comprendió el valor del agua, sino que también reportó realizar acciones de ahorro con frecuencia.</p>
+                    <div class="chart-container h-80 max-h-[40vh]">
+                        <canvas id="perceptionChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-4 content-start">
+                    <div class="bg-[#00A1E4] text-white rounded-lg shadow-lg p-4 text-center flex flex-col justify-center">
+                        <span class="text-5xl font-black">4.8/5</span>
+                        <span class="font-bold mt-2">Valor del Agua</span>
+                    </div>
+                    <div class="bg-[#0077C0] text-white rounded-lg shadow-lg p-4 text-center flex flex-col justify-center">
+                        <span class="text-5xl font-black">4.5/5</span>
+                        <span class="font-bold mt-2">Frecuencia de Ahorro</span>
+                    </div>
+                    <div class="bg-[#0077C0] text-white rounded-lg shadow-lg p-4 text-center flex flex-col justify-center">
+                        <span class="text-5xl font-black">4.7/5</span>
+                        <span class="font-bold mt-2">Interés en el Tema</span>
+                    </div>
+                    <div class="bg-[#00A1E4] text-white rounded-lg shadow-lg p-4 text-center flex flex-col justify-center">
+                        <span class="text-5xl font-black">4.2/5</span>
+                        <span class="font-bold mt-2">Comunicación Familiar</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="abiertas" class="mb-12">
+             <h2 class="text-3xl font-bold text-[#0077C0] mb-6 text-center">Sección III: De la Observación a la Acción</h2>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                    <h3 class="text-2xl font-bold text-center mb-4">Usos Irresponsables Identificados</h3>
+                    <p class="text-md text-center text-gray-500 mb-6">Los estudiantes demostraron ser agudos observadores de su entorno, identificando claramente las prácticas de desperdicio de agua más comunes.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center bg-gray-50 p-4 rounded-lg">
+                            <span class="text-3xl mr-4">🚗</span>
+                            <span class="text-lg font-semibold">Lavar autos con manguera</span>
+                        </li>
+                        <li class="flex items-center bg-gray-50 p-4 rounded-lg">
+                            <span class="text-3xl mr-4">💧</span>
+                            <span class="text-lg font-semibold">Fugas y goteras en grifos y tuberías</span>
+                        </li>
+                        <li class="flex items-center bg-gray-50 p-4 rounded-lg">
+                            <span class="text-3xl mr-4">🌿</span>
+                            <span class="text-lg font-semibold">Riego excesivo de jardines</span>
+                        </li>
+                    </ul>
+                </div>
+                 <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                    <h3 class="text-2xl font-bold text-center mb-4">Ideas Propuestas para el Futuro</h3>
+                     <p class="text-md text-center text-gray-500 mb-6">El conocimiento adquirido se tradujo en ideas concretas para generar un cambio positivo a nivel personal, familiar y comunitario.</p>
+                     <ul class="space-y-4">
+                        <li class="flex items-center bg-gray-50 p-4 rounded-lg">
+                            <span class="text-3xl mr-4">👤</span>
+                            <span class="text-lg font-semibold">Acciones Personales (Duchas cortas, reutilizar)</span>
+                        </li>
+                        <li class="flex items-center bg-gray-50 p-4 rounded-lg">
+                            <span class="text-3xl mr-4">👨‍👩‍👧‍👦</span>
+                            <span class="text-lg font-semibold">Concientización Familiar</span>
+                        </li>
+                        <li class="flex items-center bg-gray-50 p-4 rounded-lg">
+                            <span class="text-3xl mr-4">🏫</span>
+                            <span class="text-lg font-semibold">Campañas y Proyectos Comunitarios</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusiones">
+            <div class="bg-[#005082] text-white rounded-lg shadow-xl p-8">
+                <h2 class="text-3xl font-bold text-center mb-6">Conclusiones Clave</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div>
+                        <h4 class="text-2xl font-black text-[#00A1E4]">Solidez Conceptual</h4>
+                        <p class="mt-2">Los estudiantes asimilaron de forma efectiva los conceptos clave sobre el ciclo del agua, su escasez y la contaminación.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-2xl font-black text-[#00A1E4]">Impacto en la Percepción</h4>
+                        <p class="mt-2">El proyecto generó un cambio positivo, fomentando una mayor valoración del agua y la motivación para actuar.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-2xl font-black text-[#00A1E4]">Proyección a la Acción</h4>
+                        <p class="mt-2">Los estudiantes son capaces de proponer soluciones concretas, demostrando su potencial como agentes de cambio.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tooltipTitleCallback = {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                } else {
+                                  return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            
+            const conceptualData = {
+                labels: [
+                    'P1: % de Agua Dulce', 
+                    'P2: Ciclo del Agua Global', 
+                    'P3: Efecto de la Temperatura', 
+                    'P4: Acciones Responsables', 
+                    'P5: Contaminante Invisible', 
+                    'P6: Disponibilidad Afectada'
+                ],
+                datasets: [{
+                    label: '% de Aciertos',
+                    data: [80, 95, 90, 75, 85, 90],
+                    backgroundColor: '#00A1E4',
+                    borderColor: '#0077C0',
+                    borderWidth: 2,
+                    borderRadius: 5,
+                    barThickness: 30,
+                }]
+            };
+
+            new Chart(document.getElementById('conceptualChart'), {
+                type: 'bar',
+                data: conceptualData,
+                options: {
+                    ...tooltipTitleCallback,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                color: '#e0e0e0'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        ...tooltipTitleCallback.plugins,
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            const perceptionData = {
+                labels: ['Totalmente de acuerdo', 'De acuerdo', 'Otro'],
+                datasets: [{
+                    label: 'Distribución de Respuestas',
+                    data: [85, 10, 5],
+                    backgroundColor: [
+                        '#0077C0',
+                        '#00A1E4',
+                        '#D3D3D3'
+                    ],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 4,
+                }]
+            };
+
+            new Chart(document.getElementById('perceptionChart'), {
+                type: 'doughnut',
+                data: perceptionData,
+                options: {
+                    ...tooltipTitleCallback,
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    cutout: '60%',
+                    plugins: {
+                       ...tooltipTitleCallback.plugins,
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+/* ==========================================================
+   Capa de armonía para las páginas de contenido
+   ----------------------------------------------------------
+   Se carga DESPUÉS del CSS propio de cada página y unifica la
+   tipografía del portfolio sin tocar su estructura ni su JS.
+   Las páginas con marca propia (Mar y Ola, SmartFit,
+   SindicatoLegal, Digital Monster, Innovatech) no la usan.
+   ========================================================== */
+
+html body {
+  font-family: var(--tc-texto) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Títulos con la tipografía del portfolio */
+html body :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--tc-display) !important;
+  font-variation-settings: "wdth" 88;
+  letter-spacing: -0.005em;
+}
+
+/* Controles y etiquetas cortas: la misma tipografía de los títulos */
+html body :is(button, input, select, textarea, label, th, nav a, .btn, .tag, .badge) {
+  font-family: var(--tc-display) !important;
+}
+
+/* El texto largo respira un poco más con Literata */
+html body :is(p, li) { line-height: 1.65; }
+
+/* Foco visible y coherente en todas las páginas */
+html body :is(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--tc-area, #2D7A57);
+  outline-offset: 2px;
+}
+
+/* La página no debe tapar la barra común con un header fijo propio */
+html body > .tc-barra { position: relative; z-index: 1000; }

@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Código 4D · Panel de la sala</title>
+<style>
+:root{
+  --bg:#111214; --panel:#1c1d21; --line:#e9e7e1; --ink:#f4f2ec; --mute:#a9a6a0;
+  --acc:#ffd23f; --ok:#5fd38d; --bad:#ff6b6b; --dark:#0b0b0c;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:"Trebuchet MS","DejaVu Sans",system-ui,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer}
+.px{display:inline-block;vertical-align:middle}
+.app{display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
+body.fs-on{cursor:default}
+.fit{transform-origin:0 0;display:flex;flex-direction:column}
+/* barra superior */
+.top{display:flex;align-items:center;gap:14px;padding:10px 16px;flex-wrap:nowrap;border-bottom:3px solid var(--line);background:var(--dark)}
+.logo{display:flex;align-items:center;gap:10px}
+.tabs{display:flex;gap:6px;flex-wrap:nowrap;flex-shrink:0}
+.tab{min-width:52px;height:46px;padding:0 10px;border:3px solid var(--line);background:transparent;display:flex;align-items:center;justify-content:center}
+.tab.on{background:var(--ink)}
+.tab.on svg{fill:var(--dark)}
+.tab .done{width:9px;height:9px;background:var(--ok);margin-left:6px}
+.spacer{flex:1}
+.timer{display:flex;align-items:center;gap:10px}
+.clock{font-family:"Courier New",monospace;font-weight:700;font-size:44px;letter-spacing:2px;min-width:150px;text-align:center;padding:2px 10px;border:3px solid var(--line)}
+.clock.warn{color:var(--acc);border-color:var(--acc)}
+.clock.end{color:var(--bad);border-color:var(--bad)}
+.tbtn{width:50px;height:50px;border:3px solid var(--line);background:transparent;font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.tbtn:hover,.tab:hover,.btn:hover{background:#2a2b30}
+.tab.on:hover{background:var(--ink)}
+.tsmall{display:flex;flex-direction:column;gap:4px}
+.tsmall button{width:34px;height:23px;border:2px solid var(--line);background:transparent;font-size:13px;font-weight:700;padding:0}
+/* cuerpo */
+.main{flex:1;display:grid;grid-template-columns:1fr minmax(300px,28%);gap:0;min-height:0;overflow:hidden}
+.stage{padding:18px 24px;overflow:hidden;position:relative;min-height:0}
+.stage>.fit{gap:16px}
+.side{border-left:3px solid var(--line);padding:14px;overflow:hidden;background:var(--panel);min-height:0;position:relative}
+.side>.fit{gap:12px}
+.lvhead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.lvsub{color:var(--mute);font-size:20px;margin-top:6px}
+.roles{display:flex;gap:8px;flex-wrap:wrap}
+.role{border:2px solid var(--line);padding:6px 10px;font-size:17px;display:flex;gap:8px;align-items:center}
+.role b{background:var(--ink);color:var(--dark);padding:1px 8px;font-size:18px}
+.sits{display:flex;flex-direction:column;gap:12px}
+.sit{display:flex;gap:16px;border:3px solid var(--line);background:var(--panel);align-items:stretch}
+.sitn{background:var(--ink);color:var(--dark);min-width:118px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px}
+.sitn small{font-size:14px;font-weight:700;letter-spacing:1px}
+.sitn svg{fill:var(--dark)}
+.sitt{padding:14px 16px 14px 0;font-size:25px;line-height:1.35}
+.sit .sitt:only-child{padding-left:16px}
+.sideh{gap:10px}
+.just{align-self:flex-start;background:var(--acc);color:var(--dark);font-weight:700;padding:8px 14px;font-size:19px}
+.hint{border:3px dashed var(--acc);color:var(--acc);padding:12px 16px;font-size:22px;display:flex;gap:12px;align-items:center}
+.hint b{font-size:15px;background:var(--acc);color:var(--dark);padding:2px 8px}
+.shint{margin-top:8px;font-size:19px;color:var(--acc);border-top:2px dashed var(--acc);padding-top:6px}
+.shint b{font-size:13px;background:var(--acc);color:var(--dark);padding:1px 6px;margin-right:4px;vertical-align:middle}
+.bonusbox{border:3px solid var(--line);padding:12px 16px;display:flex;flex-direction:column;gap:6px;background:repeating-linear-gradient(135deg,#1c1d21 0 10px,#232429 10px 20px)}
+.bonusbox .bt{font-weight:700;font-size:15px;letter-spacing:1px;color:var(--acc)}
+.bonusbox .bq{font-size:23px;line-height:1.35}
+.bonusbox .bn{font-size:16px;color:var(--mute)}
+.rv .rw{font-size:17px;color:var(--ink);line-height:1.35}
+.rv .rcol{display:flex;flex-direction:column;gap:3px}
+.banner{border:3px solid var(--ok);color:var(--ok);padding:12px 16px;font-size:22px;font-weight:700}
+.icons3{display:flex;gap:22px;flex-wrap:wrap}
+.icard{border:3px solid var(--line);padding:16px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;background:var(--panel)}
+.icard svg.ic{fill:var(--ink)}
+.icard .ring{font-size:16px;color:var(--mute);font-weight:700}
+.story{font-size:25px;line-height:1.5;border:3px solid var(--line);padding:16px 20px;background:var(--panel)}
+.story mark{background:var(--ink);color:var(--dark);padding:0 6px;font-weight:700}
+.story .pt{background:var(--acc);color:var(--dark);font-weight:700;padding:0 6px;margin-right:4px}
+/* grupos */
+.sideh{display:flex;justify-content:space-between;align-items:center}
+.groups{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g{border:3px solid var(--line);background:transparent;padding:10px;text-align:left;display:flex;flex-direction:column;gap:6px;min-height:104px;position:relative}
+.g .gn{font-weight:700;font-size:19px}
+.g .gd{font-size:14px;color:var(--mute)}
+.g .gs{font-size:16px;font-weight:700}
+.g .gp{position:absolute;right:8px;top:8px;font-family:"Courier New",monospace;font-weight:700;font-size:20px}
+.g.ok{border-color:var(--ok)} .g.ok .gs{color:var(--ok)}
+.g.lock{border-color:var(--bad)} .g.lock .gs{color:var(--bad)}
+.actions{display:flex;flex-direction:column;gap:8px;margin-top:auto}
+.btn{border:3px solid var(--line);background:transparent;padding:11px 12px;font-weight:700;font-size:17px;text-align:center}
+.btn.pri{background:var(--ink);color:var(--dark)}
+.btn.pri:hover{background:#d9d6cf}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;z-index:10;padding:16px}
+.modal.on{display:flex}
+.box{background:var(--panel);border:4px solid var(--line);box-shadow:8px 8px 0 #000;padding:20px;width:min(640px,100%);max-height:94vh;overflow:auto;display:flex;flex-direction:column;gap:14px}
+.box h2{margin:0;font-size:26px}
+.slots{display:flex;gap:12px;justify-content:center}
+.slot{width:76px;height:88px;border:4px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:52px;font-weight:700;font-family:"Courier New",monospace}
+.slot.cur{border-color:var(--acc)}
+.keys{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.key{height:62px;border:3px solid var(--line);background:transparent;font-size:30px;font-weight:700}
+.key:hover{background:#2a2b30}
+.result{font-size:30px;font-weight:700;text-align:center;padding:10px;border:3px solid}
+.result.ok{color:var(--ok);border-color:var(--ok)} .result.bad{color:var(--bad);border-color:var(--bad)}
+.toggles{display:flex;gap:10px;flex-wrap:wrap}
+.tg{border:3px solid var(--line);background:transparent;padding:10px 14px;font-weight:700;font-size:17px}
+.tg.on{background:var(--ok);color:var(--dark);border-color:var(--ok)}
+/* revisión */
+.review{display:flex;flex-direction:column;gap:12px}
+.rv{display:flex;gap:14px;align-items:center;border:3px solid var(--line);padding:10px 14px;background:var(--panel)}
+.rv svg.ic{fill:var(--ink)}
+.rv .rc{font-size:24px;font-weight:700}
+.rv .rr{color:var(--mute);font-size:16px;font-weight:700;min-width:84px}
+.why{font-size:22px;line-height:1.4;border-left:6px solid var(--acc);padding:6px 14px}
+.frag{border:4px solid var(--acc);padding:14px 18px;display:flex;flex-direction:column;gap:6px}
+.frag .fl{color:var(--acc);font-weight:700;letter-spacing:1px;font-size:15px}
+.frag .ft{font-size:28px;font-weight:700}
+/* configuración */
+.cfg{max-width:860px;margin:0 auto;padding:24px;display:flex;flex-direction:column;gap:18px}
+.cfg table{width:100%;border-collapse:collapse}
+.cfg td,.cfg th{border:2px solid var(--line);padding:8px 10px;text-align:left;font-size:17px}
+.cfg th{background:var(--ink);color:var(--dark)}
+.cfg input[type=text],.cfg select{font:inherit;font-size:17px;background:var(--dark);color:var(--ink);border:2px solid var(--line);padding:6px 8px;width:100%}
+.stepper{display:flex;align-items:center;gap:10px}
+.stepper button{width:44px;height:44px;border:3px solid var(--line);background:transparent;font-size:22px;font-weight:700}
+.stepper span{font-size:28px;font-weight:700;min-width:40px;text-align:center}
+.warnt{color:var(--bad);font-weight:700}
+.note{color:var(--mute);font-size:15px}
+.final{display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;padding:30px;text-align:center}
+.final .phrase{font-size:40px;font-weight:700;line-height:1.25;max-width:1000px}
+.rank{width:min(700px,100%);border-collapse:collapse}
+.rank td{border:3px solid var(--line);padding:10px 14px;font-size:24px}
+.rank td.p{text-align:right;font-family:"Courier New",monospace;font-weight:700}
+.rank tr:first-child td{background:var(--acc);color:var(--dark)}
+.fsb{height:50px;padding:0 12px;border:3px solid var(--line);background:transparent;font-weight:700;font-size:15px;white-space:nowrap}
+.fsb:hover{background:#2a2b30}
+@media (max-width:1180px){.clock{font-size:34px;min-width:118px}.tab{min-width:40px;height:42px;padding:0 6px}.tbtn{width:42px;height:42px}.fsb{height:42px;font-size:20px}.fsl{display:none}.top{gap:10px}}
+@media (max-width:900px){.logo{display:none}}
+@media (max-width:700px){.app{height:auto;overflow:visible}.main{grid-template-columns:1fr;overflow:visible}.stage,.side{overflow:visible}.side{border-left:0;border-top:3px solid var(--line)}.top{flex-wrap:wrap}}
+</style>
+
+  <link rel="icon" href="../../../../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../../../assets/css/site.css">
+  <link rel="stylesheet" href="../../../../../assets/css/armonia.css">
+  <script src="../../../../../assets/js/site.js" defer></script>
+</head>
+<body>
+<div class="app" id="app"></div>
+<div class="modal" id="modal"><div class="box" id="box"></div></div>
+<script>
+const DATA = {"levels": [{"kind": "practice", "tab": "0", "title": "PRÁCTICA", "name": "Práctica", "subtitle": "Aprendan a usar el disco. Este nivel no da puntos.", "symbols": ["luna", "llave", "corona"], "symbolNames": ["Luna", "Llave", "Corona"], "answers": ["Luna", "Llave", "Corona"], "hint": "Pongan el símbolo en la ventana de arriba (▲) y lean la letra en la ventana de abajo (▼) del mismo anillo.", "why": "Si el código salió bien, ¡ya saben usar el disco! Recuerden: la letra que está junto a un símbolo no es la suya.", "roles": [1, 2, 3, 4, 5]}, {"kind": "level", "tab": "1", "title": "NIVEL 1 · EL ESTIRÓN", "name": "Nivel 1 · El estirón", "subtitle": "Martín y Benjamín tienen 13 años y vuelven de vacaciones al colegio.", "justify": 2, "symbols": ["gota", "estrella", "hoja"], "answers": ["Hormonas", "Autoestima", "Grupo de pares"], "situations": [{"text": "En vacaciones, el cuerpo de Martín produjo sustancias que dieron la orden de crecer: volvió al colegio 10 cm más alto.", "hint": "¿Qué \"da la orden\" en el cuerpo? Busquen en el manual qué son esas sustancias.", "why": "<b>Hormonas</b> (biológica): son las sustancias químicas que dan órdenes al cuerpo para crecer y cambiar."}, {"text": "Benjamín, que todavía no ha crecido, se compara con Martín y empieza a pensar que vale menos que él.", "hint": "No es lo que siente en un momento, sino cómo se valora a sí mismo.", "why": "<b>Autoestima</b> (afectiva): compararse cambia cómo Benjamín se valora a sí mismo."}, {"text": "En el recreo, Benjamín vuelve con sus compañeros de siempre, de su misma edad, con quienes se siente parte del grupo.", "hint": "Nadie lo obliga a hacer nada. ¿Cómo se llaman las personas de su edad con las que se relaciona?", "why": "<b>Grupo de pares</b> (social): sus compañeros de la misma edad le dan apoyo y pertenencia."}], "bonus": {"text": "Un compañero le dice a Benjamín: \"Tranquilo, cada uno crece a su tiempo\". ¿Qué concepto explica esa frase?", "symbol": "luna", "concept": "Ritmo propio"}, "fragment": "ANILLO 1 = lo que CAMBIA en su CUERPO · «LA SEXUALIDAD»", "roles": [1, 2, 3, 4, 5]}, {"kind": "level", "tab": "2", "title": "NIVEL 2 · EL DIARIO", "name": "Nivel 2 · El diario", "subtitle": "Tres páginas del diario de Camila, de 13 años.", "justify": 3, "symbols": ["espiral", "llave", "corona"], "answers": ["Pubertad", "Identidad", "Valor"], "situations": [{"text": "\"A los 11 empezaron los cambios en mi cuerpo. Mi mamá dice que es la etapa que lo prepara para ser adulta.\"", "hint": "Habla de toda una etapa de cambios físicos, no de una sustancia ni de una velocidad.", "why": "<b>Pubertad</b> (biológica): la etapa de cambios físicos que prepara al cuerpo para la adultez."}, {"text": "\"Ya no me visto como a los 10. Estoy descubriendo qué cosas me representan y quién quiero ser.\"", "hint": "¿Qué concepto habla de lo que hace que una persona sea quien es?", "why": "<b>Identidad</b> (afectiva): Camila está descubriendo las características que la hacen ser quien es."}, {"text": "\"Mi abuela me enseñó que la honestidad es lo más importante, y quiero que eso guíe todo lo que hago.\"", "hint": "Es un principio que orienta su conducta, no una forma de juzgar una situación puntual.", "why": "<b>Valor</b> (valórica): la honestidad es un principio que guía lo que Camila hace."}], "bonus": {"text": "Camila quiere decidir sola a qué hora hace sus tareas, sin que sus papás se lo digan. ¿Qué concepto es?", "symbol": "ancla", "concept": "Autonomía"}, "fragment": "ANILLO 2 = cómo se VALORA a sí mismo · «ES INTEGRAL:»", "roles": [2, 3, 4, 5, 1]}, {"kind": "level", "tab": "3", "title": "NIVEL 3 · LA FOTO", "name": "Nivel 3 · La foto", "subtitle": "El curso vuelve de un paseo y todos suben fotos a las redes.", "justify": 1, "symbols": ["flecha", "rombo", "rayo"], "answers": ["Presión de grupo", "Responsabilidad individual", "Emoción"], "situations": [{"text": "Todos suben la foto del paseo con el mismo filtro, y Sofía también lo usa, aunque no quería.", "hint": "¿Alguien actúa como los demás por la influencia del grupo?", "why": "<b>Presión de grupo</b> (social): Sofía hace lo mismo que el resto aunque no quería."}, {"text": "Ignacio se da cuenta de que, en una foto que subió, un compañero sale mal. La borra y le pide disculpas.", "hint": "Se hace cargo de algo que hizo y de lo que provocó.", "why": "<b>Responsabilidad individual</b> (valórica): Ignacio se hace cargo de su acción y de sus consecuencias."}, {"text": "Cuando Diego ve cómo salió en la foto, siente rabia y vergüenza al mismo tiempo.", "hint": "Es una reacción de ese momento, no cómo se valora en general.", "why": "<b>Emoción</b> (afectiva): rabia y vergüenza son reacciones internas ante lo que le pasa."}], "bonus": {"text": "La próxima vez, Sofía decide por sí misma no usar el filtro, aunque todos lo usen. ¿Qué concepto es?", "symbol": "ojo", "concept": "Criterio propio"}, "fragment": "ANILLO 3 = lo que hacen los DEMÁS para encajar · «NINGUNA DIMENSIÓN»", "roles": [3, 4, 5, 1, 2]}, {"kind": "level", "tab": "4", "title": "NIVEL 4 · EL MEME", "name": "Nivel 4 · El meme", "subtitle": "En el WhatsApp del curso suben un meme que se burla de la estatura de Joaquín.", "justify": 2, "symbols": ["ojo", "ancla", "luna"], "answers": ["Criterio propio", "Autonomía", "Ritmo propio"], "situations": [{"text": "Aunque en el grupo todos se ríen, Valentina piensa por su cuenta y decide que burlarse no está bien.", "hint": "Juzga por sí misma qué está bien, aunque el grupo opine distinto.", "why": "<b>Criterio propio</b> (valórica): Valentina juzga por sí misma qué está bien."}, {"text": "Valentina le dice a su mamá que quiere resolverlo ella, hablando con el curso, sin que los adultos decidan por ella.", "hint": "Fíjense frente a quiénes quiere tomar la decisión.", "why": "<b>Autonomía</b> (social): quiere tomar sus propias decisiones frente a los adultos."}, {"text": "Joaquín es el más bajo del curso. El profe de ciencias le explica que cada cuerpo cambia a su propia velocidad.", "hint": "Es biológica, pero no habla de una etapa ni de sustancias.", "why": "<b>Ritmo propio</b> (biológica): cada persona vive la pubertad a su propia velocidad."}], "bonus": {"text": "Joaquín le cuenta lo que pasó a sus amigos de siempre, de su edad, y ellos lo apoyan. ¿Qué concepto es?", "symbol": "hoja", "concept": "Grupo de pares"}, "fragment": "ANILLO 4 = lo que DECIDE por su propia cuenta · «FUNCIONA SOLA.»", "roles": [4, 5, 1, 2, 3]}, {"kind": "final", "tab": "F", "title": "NIVEL FINAL", "name": "Nivel final", "subtitle": "La historia de Matías · 7 partes, pero solo 4 abren el código", "symbols": ["espiral", "estrella", "flecha", "ojo"], "answers": ["Pubertad", "Autoestima", "Presión de grupo", "Criterio propio"], "parts": ["A", "E", "C", "G"], "story": [["A", "A Matías, de 13 años, le empezó a cambiar la voz y a veces le sale aguda."], ["B", "Cada vez que pasa, siente vergüenza y rabia."], ["C", "En el WhatsApp del curso lo imitan y, para no quedar fuera, sus amigos también se ríen, aunque no les parece bien."], ["D", "Solo Lucas, su compañero desde primero básico, no se ríe."], ["E", "Matías empieza a pensar que hay algo malo en él y se valora cada vez menos."], ["F", "Su abuelo le recuerda que el respeto es algo que nadie debería perder."], ["G", "Aunque le dicen \"no seas exagerado\", Matías decide por su cuenta que lo correcto es pedir ayuda al profesor jefe."]], "hint": "Hay 7 partes y solo 4 sirven. No basta con la dimensión: cada fragmento dice exactamente qué buscar. Por ejemplo, B también es afectiva, pero el anillo 2 pide cómo se VALORA.", "why": "Solo sirven las partes que calzan exactamente con cada fragmento. B (emoción), D (grupo de pares) y F (valor) son de las mismas dimensiones, pero no son lo que pide cada anillo. Un cambio del cuerpo (A) provocó burlas del grupo (C), que bajaron su autoestima (E), y eso lo llevó a decidir pedir ayuda (G). <b>Ninguna dimensión funciona sola.</b>", "roles": [5, 1, 2, 3, 4]}], "letters": {"1": {"1": {"espiral": "L", "gota": "F", "luna": "D", "rayo": "C", "llave": "A", "estrella": "I", "hoja": "G", "ancla": "B", "flecha": "E", "corona": "K", "ojo": "H", "rombo": "J"}, "2": {"espiral": "I", "gota": "L", "luna": "H", "rayo": "F", "llave": "D", "estrella": "E", "hoja": "G", "ancla": "C", "flecha": "A", "corona": "B", "ojo": "J", "rombo": "K"}, "3": {"espiral": "H", "gota": "J", "luna": "C", "rayo": "E", "llave": "G", "estrella": "K", "hoja": "L", "ancla": "I", "flecha": "D", "corona": "B", "ojo": "A", "rombo": "F"}, "4": {"espiral": "K", "gota": "A", "luna": "E", "rayo": "J", "llave": "L", "estrella": "B", "hoja": "F", "ancla": "I", "flecha": "C", "corona": "D", "ojo": "H", "rombo": "G"}}, "2": {"1": {"espiral": "J", "gota": "D", "luna": "B", "rayo": "A", "llave": "K", "estrella": "G", "hoja": "E", "ancla": "L", "flecha": "C", "corona": "I", "ojo": "F", "rombo": "H"}, "2": {"espiral": "H", "gota": "K", "luna": "G", "rayo": "E", "llave": "C", "estrella": "D", "hoja": "F", "ancla": "B", "flecha": "L", "corona": "A", "ojo": "I", "rombo": "J"}, "3": {"espiral": "G", "gota": "I", "luna": "B", "rayo": "D", "llave": "F", "estrella": "J", "hoja": "K", "ancla": "H", "flecha": "C", "corona": "A", "ojo": "L", "rombo": "E"}, "4": {"espiral": "F", "gota": "H", "luna": "L", "rayo": "E", "llave": "G", "estrella": "I", "hoja": "A", "ancla": "D", "flecha": "J", "corona": "K", "ojo": "C", "rombo": "B"}}, "3": {"1": {"espiral": "I", "gota": "C", "luna": "A", "rayo": "L", "llave": "J", "estrella": "F", "hoja": "D", "ancla": "K", "flecha": "B", "corona": "H", "ojo": "E", "rombo": "G"}, "2": {"espiral": "B", "gota": "E", "luna": "A", "rayo": "K", "llave": "I", "estrella": "J", "hoja": "L", "ancla": "H", "flecha": "F", "corona": "G", "ojo": "C", "rombo": "D"}, "3": {"espiral": "B", "gota": "D", "luna": "I", "rayo": "K", "llave": "A", "estrella": "E", "hoja": "F", "ancla": "C", "flecha": "J", "corona": "H", "ojo": "G", "rombo": "L"}, "4": {"espiral": "J", "gota": "L", "luna": "D", "rayo": "I", "llave": "K", "estrella": "A", "hoja": "E", "ancla": "H", "flecha": "B", "corona": "C", "ojo": "G", "rombo": "F"}}, "4": {"1": {"espiral": "F", "gota": "L", "luna": "J", "rayo": "I", "llave": "G", "estrella": "C", "hoja": "A", "ancla": "H", "flecha": "K", "corona": "E", "ojo": "B", "rombo": "D"}, "2": {"espiral": "C", "gota": "F", "luna": "B", "rayo": "L", "llave": "J", "estrella": "K", "hoja": "A", "ancla": "I", "flecha": "G", "corona": "H", "ojo": "D", "rombo": "E"}, "3": {"espiral": "J", "gota": "L", "luna": "E", "rayo": "G", "llave": "I", "estrella": "A", "hoja": "B", "ancla": "K", "flecha": "F", "corona": "D", "ojo": "C", "rombo": "H"}, "4": {"espiral": "D", "gota": "F", "luna": "J", "rayo": "C", "llave": "E", "estrella": "G", "hoja": "K", "ancla": "B", "flecha": "H", "corona": "I", "ojo": "A", "rombo": "L"}}, "5": {"1": {"espiral": "B", "gota": "H", "luna": "F", "rayo": "E", "llave": "C", "estrella": "K", "hoja": "I", "ancla": "D", "flecha": "G", "corona": "A", "ojo": "J", "rombo": "L"}, "2": {"espiral": "G", "gota": "J", "luna": "F", "rayo": "D", "llave": "B", "estrella": "C", "hoja": "E", "ancla": "A", "flecha": "K", "corona": "L", "ojo": "H", "rombo": "I"}, "3": {"espiral": "C", "gota": "E", "luna": "J", "rayo": "L", "llave": "B", "estrella": "F", "hoja": "G", "ancla": "D", "flecha": "K", "corona": "I", "ojo": "H", "rombo": "A"}, "4": {"espiral": "I", "gota": "K", "luna": "C", "rayo": "H", "llave": "J", "estrella": "L", "hoja": "D", "ancla": "G", "flecha": "A", "corona": "B", "ojo": "F", "rombo": "E"}}, "6": {"1": {"espiral": "G", "gota": "A", "luna": "K", "rayo": "J", "llave": "H", "estrella": "D", "hoja": "B", "ancla": "I", "flecha": "L", "corona": "F", "ojo": "C", "rombo": "E"}, "2": {"espiral": "L", "gota": "C", "luna": "K", "rayo": "I", "llave": "G", "estrella": "H", "hoja": "J", "ancla": "F", "flecha": "D", "corona": "E", "ojo": "A", "rombo": "B"}, "3": {"espiral": "F", "gota": "H", "luna": "A", "rayo": "C", "llave": "E", "estrella": "I", "hoja": "J", "ancla": "G", "flecha": "B", "corona": "L", "ojo": "K", "rombo": "D"}, "4": {"espiral": "H", "gota": "J", "luna": "B", "rayo": "G", "llave": "I", "estrella": "K", "hoja": "C", "ancla": "F", "flecha": "L", "corona": "A", "ojo": "E", "rombo": "D"}}, "7": {"1": {"espiral": "H", "gota": "B", "luna": "L", "rayo": "K", "llave": "I", "estrella": "E", "hoja": "C", "ancla": "J", "flecha": "A", "corona": "G", "ojo": "D", "rombo": "F"}, "2": {"espiral": "J", "gota": "A", "luna": "I", "rayo": "G", "llave": "E", "estrella": "F", "hoja": "H", "ancla": "D", "flecha": "B", "corona": "C", "ojo": "K", "rombo": "L"}, "3": {"espiral": "D", "gota": "F", "luna": "K", "rayo": "A", "llave": "C", "estrella": "G", "hoja": "H", "ancla": "E", "flecha": "L", "corona": "J", "ojo": "I", "rombo": "B"}, "4": {"espiral": "B", "gota": "D", "luna": "H", "rayo": "A", "llave": "C", "estrella": "E", "hoja": "I", "ancla": "L", "flecha": "F", "corona": "G", "ojo": "K", "rombo": "J"}}, "R": {"1": {"espiral": "D", "gota": "J", "luna": "H", "rayo": "G", "llave": "E", "estrella": "A", "hoja": "K", "ancla": "F", "flecha": "I", "corona": "C", "ojo": "L", "rombo": "B"}, "2": {"espiral": "E", "gota": "H", "luna": "D", "rayo": "B", "llave": "L", "estrella": "A", "hoja": "C", "ancla": "K", "flecha": "I", "corona": "J", "ojo": "F", "rombo": "G"}, "3": {"espiral": "I", "gota": "K", "luna": "D", "rayo": "F", "llave": "H", "estrella": "L", "hoja": "A", "ancla": "J", "flecha": "E", "corona": "C", "ojo": "B", "rombo": "G"}, "4": {"espiral": "C", "gota": "E", "luna": "I", "rayo": "B", "llave": "D", "estrella": "F", "hoja": "J", "ancla": "A", "flecha": "G", "corona": "H", "ojo": "L", "rombo": "K"}}}, "phrase": "LA SEXUALIDAD ES INTEGRAL: NINGUNA DIMENSIÓN FUNCIONA SOLA."};
+const ICONS = {"espiral": ["XXXXXXXXXXXX", "X..........X", "X.XXXXXXXX.X", "X.X......X.X", "X.X.XXXX.X.X", "X.X.X..X.X.X", "X.X.X.XX.X.X", "X.X.X....X.X", "X.X.XXXXXX.X", "X.X........X", "X.XXXXXXXXXX", "X..........."], "gota": [".....XX.....", ".....XX.....", "....XXXX....", "....XXXX....", "...XXXXXX...", "..XXXXXXXX..", "..XXXXXXXX..", ".XXXXXXXXXX.", ".XXXXXXXXXX.", ".XXXXXXXXXX.", "..XXXXXXXX..", "...XXXXXX..."], "luna": ["...XXXXX....", "..XXXX......", ".XXXX.......", ".XXX........", "XXXX........", "XXXX........", "XXXX........", "XXXX........", ".XXX........", ".XXXX.......", "..XXXX......", "...XXXXX...."], "rayo": ["......XXXX..", ".....XXXX...", "....XXXX....", "...XXXX.....", "..XXXXXXXX..", ".....XXXX...", "....XXXX....", "...XXXX.....", "..XXX.......", "..XX........", ".XX.........", ".X.........."], "llave": ["..XXXX......", ".XX..XX.....", ".XX..XX.....", "..XXXX......", "...XX.......", "...XX.......", "...XXXX.....", "...XX.......", "...XXX......", "...XX.......", "...XXXX.....", "............"], "estrella": [".....XX.....", ".....XX.....", "....XXXX....", "XXXXXXXXXXXX", ".XXXXXXXXXX.", "..XXXXXXXX..", "...XXXXXX...", "...XXXXXX...", "..XXXXXXXX..", "..XXX..XXX..", ".XXX....XXX.", ".XX......XX."], "hoja": [".........XXX", ".......XXXXX", ".....XXXXXXX", "....XXXXXX.X", "...XXXXX.XXX", "..XXXX.XXXXX", "..XXX.XXXXX.", ".XXX.XXXXX..", ".XX.XXXXX...", ".X.XXXX.....", "X...........", "X..........."], "ancla": [".....XX.....", "....X..X....", "....X..X....", ".....XX.....", "..XXXXXXXX..", ".....XX.....", ".....XX.....", ".....XX.....", "X....XX....X", "XX...XX...XX", ".XXX.XX.XXX.", "...XXXXXX..."], "flecha": ["............", "......X.....", "......XX....", "......XXX...", "XXXXXXXXXX..", "XXXXXXXXXXX.", "XXXXXXXXXXX.", "XXXXXXXXXX..", "......XXX...", "......XX....", "......X.....", "............"], "corona": ["............", "X....XX....X", "XX..XXXX..XX", "XXX.XXXX.XXX", "XXXXXXXXXXXX", "XXXXXXXXXXXX", "XXXXXXXXXXXX", "XXXXXXXXXXXX", "............", "XXXXXXXXXXXX", "XXXXXXXXXXXX", "............"], "ojo": ["............", "............", "....XXXX....", "..XX....XX..", ".X...XX...X.", "X...XXXX...X", "X...XXXX...X", ".X...XX...X.", "..XX....XX..", "....XXXX....", "............", "............"], "rombo": [".....XX.....", "....XXXX....", "...XXXXXX...", "..XXX..XXX..", ".XXX....XXX.", "XXX......XXX", "XXX......XXX", ".XXX....XXX.", "..XXX..XXX..", "...XXXXXX...", "....XXXX....", ".....XX....."]};
+const GLYPHS = {"A": ".XXX. X...X X...X XXXXX X...X X...X X...X", "B": "XXXX. X...X X...X XXXX. X...X X...X XXXX.", "C": ".XXX. X...X X.... X.... X.... X...X .XXX.", "D": "XXXX. X...X X...X X...X X...X X...X XXXX.", "E": "XXXXX X.... X.... XXXX. X.... X.... XXXXX", "F": "XXXXX X.... X.... XXXX. X.... X.... X....", "G": ".XXX. X...X X.... X.XXX X...X X...X .XXXX", "H": "X...X X...X X...X XXXXX X...X X...X X...X", "I": ".XXX. ..X.. ..X.. ..X.. ..X.. ..X.. .XXX.", "J": "..XXX ...X. ...X. ...X. ...X. X..X. .XX..", "K": "X...X X..X. X.X.. XX... X.X.. X..X. X...X", "L": "X.... X.... X.... X.... X.... X.... XXXXX", "M": "X...X XX.XX X.X.X X.X.X X...X X...X X...X", "N": "X...X X...X XX..X X.X.X X..XX X...X X...X", "O": ".XXX. X...X X...X X...X X...X X...X .XXX.", "P": "XXXX. X...X X...X XXXX. X.... X.... X....", "Q": ".XXX. X...X X...X X...X X.X.X X..X. .XX.X", "R": "XXXX. X...X X...X XXXX. X.X.. X..X. X...X", "S": ".XXXX X.... X.... .XXX. ....X ....X XXXX.", "T": "XXXXX ..X.. ..X.. ..X.. ..X.. ..X.. ..X..", "U": "X...X X...X X...X X...X X...X X...X .XXX.", "V": "X...X X...X X...X X...X X...X .X.X. ..X..", "W": "X...X X...X X...X X.X.X X.X.X X.X.X .X.X.", "X": "X...X X...X .X.X. ..X.. .X.X. X...X X...X", "Y": "X...X X...X .X.X. ..X.. ..X.. ..X.. ..X..", "Z": "XXXXX ....X ...X. ..X.. .X... X.... XXXXX", "0": ".XXX. X...X X..XX X.X.X XX..X X...X .XXX.", "1": "..X.. .XX.. ..X.. ..X.. ..X.. ..X.. .XXX.", "2": ".XXX. X...X ....X ...X. ..X.. .X... XXXXX", "3": "XXXXX ...X. ..X.. ...X. ....X X...X .XXX.", "4": "...X. ..XX. .X.X. X..X. XXXXX ...X. ...X.", "5": "XXXXX X.... XXXX. ....X ....X X...X .XXX.", "6": "..XX. .X... X.... XXXX. X...X X...X .XXX.", "7": "XXXXX ....X ...X. ..X.. .X... .X... .X...", "8": ".XXX. X...X X...X .XXX. X...X X...X .XXX.", "9": ".XXX. X...X X...X .XXXX ....X ...X. .XX..", ".": ".. .. .. .. .. XX XX", ",": ".. .. .. .. XX .X X.", ":": ".. XX XX .. XX XX ..", "!": "XX XX XX XX XX .. XX", "¡": "XX .. XX XX XX XX XX", "?": ".XXX. X...X ....X ...X. ..X.. ..... ..X..", "¿": "..X.. ..... ..X.. .X... X.... X...X .XXX.", "-": "..... ..... ..... XXXXX ..... ..... .....", "+": "..... ..X.. ..X.. XXXXX ..X.. ..X.. .....", "°": ".XX. X..X .XX. .... .... .... ....", "/": "....X ...X. ...X. ..X.. .X... .X... X....", "·": ".. .. .. XX .. .. ..", "(": ".X X. X. X. X. X. .X", ")": "X. .X .X .X .X .X X."};
+const LS = 'codigo4d-panel-v1';
+
+/* ---------- utilidades de dibujo ---------- */
+function runsOf(rows){const out=[];rows.forEach((row,y)=>{let x=0;while(x<row.length){if(row[x]==='X'){const s=x;while(x<row.length&&row[x]==='X')x++;out.push([s,y,x-s])}else x++}});return out}
+function iconSVG(name,size){const r=runsOf(ICONS[name]);return `<svg class="ic" width="${size}" height="${size}" viewBox="0 0 12 12" shape-rendering="crispEdges" role="img" aria-label="${name}">${r.map(([x,y,w])=>`<rect x="${x}" y="${y}" width="${w}" height="1"/>`).join('')}</svg>`}
+const ACC={'Á':'A','É':'E','Í':'I','Ó':'O','Ú':'U'};
+function pix(text,scale,color){text=text.toUpperCase();let x=0;const rects=[];const top=3;for(const ch of text){if(ch===' '){x+=4;continue}let base=ch,acc=null;if(ACC[ch]){base=ACC[ch];acc='a'}if(ch==='Ñ'){base='N';acc='t'}const g=GLYPHS[base];if(!g){x+=4;continue}const rows=g.split(' ');const w=rows[0].length;runsOf(rows).forEach(([a,b,c])=>rects.push([x+a,b+top,c,1]));if(acc==='a'){rects.push([x+Math.floor(w/2)+1,0,1,1],[x+Math.floor(w/2),1,1,1])}if(acc==='t'){rects.push([x+1,0,2,1],[x+4,0,1,1],[x,1,1,1],[x+3,1,1,1])}x+=w+1}const W=Math.max(x-1,1),H=10;return `<svg class="px" width="${W*scale}" height="${H*scale}" viewBox="0 0 ${W} ${H}" shape-rendering="crispEdges" fill="${color||'currentColor'}" role="img" aria-label="${text}">${rects.map(r=>`<rect x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}"/>`).join('')}</svg>`}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- estado ---------- */
+const DISCS=Object.keys(DATA.letters);
+function defaultState(){return{screen:'setup',cfg:{n:7,groups:Array.from({length:8},(_,i)=>({name:'Grupo '+(i+1),disc:DISCS[i]||'R'})),minutes:9,hintAt:6},level:0,prog:{},timer:{running:false,remaining:9*60*1000,endAt:0},hintShown:{},reviewed:{}}}
+let S=load()||defaultState();
+function load(){try{const t=localStorage.getItem(LS);return t?JSON.parse(t):null}catch(e){return null}}
+function save(){try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}}
+const groups=()=>S.cfg.groups.slice(0,S.cfg.n);
+function gp(lv,i){const k=lv+':'+i;if(!S.prog[k])S.prog[k]={solved:false,attempts:0,lockUntil:0,pts:0,just:false,bonus:false};return S.prog[k]}
+function expected(lv,disc){const L=DATA.levels[lv];return L.symbols.map((s,k)=>DATA.letters[disc][String(k+1)][s]).join('')}
+function score(i){let t=0;for(let lv=0;lv<DATA.levels.length;lv++){const p=S.prog[lv+':'+i];if(!p)continue;t+=p.pts+(p.just?1:0)+(p.bonus?2:0)}return t}
+function allSolved(lv){return groups().every((_,i)=>gp(lv,i).solved)}
+
+/* ---------- temporizador ---------- */
+function remaining(){const t=S.timer;return t.running?Math.max(0,t.endAt-Date.now()):t.remaining}
+function tPlay(){if(S.timer.running)return;if(S.timer.remaining<=0)S.timer.remaining=S.cfg.minutes*60000;S.timer.endAt=Date.now()+S.timer.remaining;S.timer.running=true;save();render()}
+function tPause(){if(!S.timer.running)return;S.timer.remaining=remaining();S.timer.running=false;save();render()}
+function tStop(){S.timer.running=false;S.timer.remaining=S.cfg.minutes*60000;S.hintShown[S.level]=false;save();render()}
+function tAdj(d){const m=Math.max(1,Math.min(30,S.cfg.minutes+d));S.cfg.minutes=m;if(!S.timer.running)S.timer.remaining=m*60000;else S.timer.endAt+=d*60000;save();render()}
+let beeped=false;
+function beep(){try{const c=new (window.AudioContext||window.webkitAudioContext)();[0,0.25,0.5].forEach(o=>{const g=c.createGain(),os=c.createOscillator();os.type='square';os.frequency.value=660;g.gain.value=0.08;os.connect(g);g.connect(c.destination);os.start(c.currentTime+o);os.stop(c.currentTime+o+0.15)})}catch(e){}}
+function fmt(ms){const s=Math.ceil(ms/1000);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+setInterval(()=>{
+  if(S.screen!=='game')return;
+  const r=remaining();const el=document.getElementById('clock');
+  if(el){el.textContent=fmt(r);const total=S.cfg.minutes*60000;el.className='clock'+(r===0?' end':(total-r>=S.cfg.hintAt*60000?' warn':''))}
+  const total=S.cfg.minutes*60000;
+  if(S.timer.running&&!S.hintShown[S.level]&&total-r>=S.cfg.hintAt*60000){S.hintShown[S.level]=true;save();render()}
+  if(S.timer.running&&r===0){S.timer.running=false;S.timer.remaining=0;save();if(!beeped){beeped=true;beep()}render()}
+  if(r>0)beeped=false;
+  document.querySelectorAll('[data-lock]').forEach(e=>{const i=+e.dataset.lock;const p=gp(S.level,i);const left=Math.ceil((p.lockUntil-Date.now())/1000);if(left<=0){render()}else e.textContent='Bloqueado '+left+' s'});
+  const ml=modal.classList.contains('on')?document.getElementById('mlock'):null;if(ml){const p=gp(S.level,+ml.dataset.g);const left=Math.ceil((p.lockUntil-Date.now())/1000);if(left<=0)openCode(+ml.dataset.g);else ml.textContent='Esperen '+left+' segundos para volver a intentar.'}
+},250);
+
+/* ---------- pantallas ---------- */
+const app=document.getElementById('app'),modal=document.getElementById('modal'),box=document.getElementById('box');
+function render(){if(S.screen==='setup')return renderSetup();if(S.screen==='final')return renderFinal();renderGame()}
+
+function renderSetup(){
+  const rows=S.cfg.groups.slice(0,S.cfg.n).map((g,i)=>`<tr><td><input type="text" data-name="${i}" value="${esc(g.name)}" aria-label="Nombre del grupo ${i+1}"></td><td><select data-disc="${i}" aria-label="Disco del grupo ${i+1}">${DISCS.map(d=>`<option value="${d}" ${d===g.disc?'selected':''}>Disco ${d}</option>`).join('')}</select></td></tr>`).join('');
+  const used=groups().map(g=>g.disc);const dup=used.filter((d,i)=>used.indexOf(d)!==i);
+  app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',4,'#f4f2ec')}</div><div class="spacer"></div><div class="note">Panel de la sala</div></div>
+  <div class="cfg">
+   <h1 style="margin:0">${pix('CONFIGURAR',4,'#f4f2ec')}</h1>
+   <div><div style="font-weight:700;margin-bottom:8px">Cantidad de grupos</div><div class="stepper"><button id="nm" aria-label="Menos grupos">−</button><span>${S.cfg.n}</span><button id="np" aria-label="Más grupos">+</button></div>
+   <div class="note" style="margin-top:6px">Lo ideal son 7 grupos, más el Disco R de reserva. Máximo 8 discos.</div></div>
+   <table><tr><th>Grupo</th><th>Disco que recibe</th></tr>${rows}</table>
+   ${dup.length?`<div class="warnt">Ojo: hay dos grupos con el mismo disco (${[...new Set(dup)].map(d=>'Disco '+d).join(', ')}). Así podrían copiarse.</div>`:''}
+   <div class="row2"><div><div style="font-weight:700;margin-bottom:8px">Minutos por nivel</div><div class="stepper"><button id="mm">−</button><span>${S.cfg.minutes}</span><button id="mp">+</button></div></div>
+   <div><div style="font-weight:700;margin-bottom:8px">Pista en el minuto</div><div class="stepper"><button id="hm">−</button><span>${S.cfg.hintAt}</span><button id="hp">+</button></div></div></div>
+   <div class="row2"><button class="btn pri" id="go">${Object.keys(S.prog).length?'Volver al juego':'Comenzar'}</button><button class="btn" id="reset">Borrar puntajes y empezar de cero</button></div>
+   <div class="note">Este panel lo maneja solo el profe. Guarda el avance en este navegador: si se recarga la página, no se pierde nada.</div>
+  </div>`;
+  document.querySelectorAll('[data-name]').forEach(e=>e.oninput=()=>{S.cfg.groups[+e.dataset.name].name=e.value||('Grupo '+(+e.dataset.name+1));save()});
+  document.querySelectorAll('[data-disc]').forEach(e=>e.onchange=()=>{S.cfg.groups[+e.dataset.disc].disc=e.value;save();render()});
+  nm.onclick=()=>{S.cfg.n=Math.max(1,S.cfg.n-1);save();render()};np.onclick=()=>{S.cfg.n=Math.min(8,S.cfg.n+1);save();render()};
+  mm.onclick=()=>{S.cfg.minutes=Math.max(2,S.cfg.minutes-1);S.cfg.hintAt=Math.min(S.cfg.hintAt,S.cfg.minutes-1);if(!S.timer.running)S.timer.remaining=S.cfg.minutes*60000;save();render()};
+  mp.onclick=()=>{S.cfg.minutes=Math.min(30,S.cfg.minutes+1);if(!S.timer.running)S.timer.remaining=S.cfg.minutes*60000;save();render()};
+  hm.onclick=()=>{S.cfg.hintAt=Math.max(1,S.cfg.hintAt-1);save();render()};hp.onclick=()=>{S.cfg.hintAt=Math.min(S.cfg.minutes-1,S.cfg.hintAt+1);save();render()};
+  go.onclick=()=>{S.screen='game';save();render()};
+  reset.onclick=()=>{if(confirm('¿Borrar todos los puntajes y avances? La configuración de grupos se mantiene.')){S.prog={};S.level=0;S.hintShown={};S.reviewed={};S.timer={running:false,remaining:S.cfg.minutes*60000,endAt:0};save();render()}};
+}
+
+function levelBody(L,lv){
+  const hintOn=!!S.hintShown[lv];
+  if(L.kind==='practice'){
+    return `<div class="sits"><div class="sit"><div class="sitt">Ubiquen estos tres símbolos en los anillos 1, 2 y 3, en la ventana de arriba (▲). Lean las letras en las ventanas de abajo (▼) y anoten el código en la fila 0 de su hoja.</div></div></div>
+    <div class="icons3">${L.symbols.map((s,k)=>`<div class="icard">${iconSVG(s,120)}<div style="font-size:24px;font-weight:700">${esc(L.symbolNames[k])}</div><div class="ring">ANILLO ${k+1}</div></div>`).join('')}</div>
+    ${hintOn?`<div class="hint"><b>PISTA</b>${esc(L.hint)}</div>`:''}`;
+  }
+  if(L.kind==='final'){
+    return `<div class="story">${L.story.map(([k,t])=>`<span class="pt">${k}</span>${esc(t)} `).join('')}</div>
+    <div class="sits"><div class="sit"><div class="sitt">Lean sus 4 fragmentos: cada uno dice qué buscar en cada anillo. Elijan la parte de la historia que calza <b>exactamente</b> con cada fragmento, busquen su concepto y pónganlo en ese anillo. El código tiene <b>4 letras</b>.</div></div></div>
+    ${hintOn?`<div class="hint"><b>PISTA</b>${esc(L.hint)}</div>`:''}
+    <div class="just">En la fila final de la hoja completen la frase: "El sistema no podía funcionar con una sola dimensión porque…"</div>`;
+  }
+  const anySolved=groups().some((_,i)=>gp(lv,i).solved);
+  return `<div class="sits">${L.situations.map((t,k)=>`<div class="sit"><div class="sitn">${pix(String(k+1),6,'#0b0b0c')}<small>ANILLO ${k+1}</small></div><div class="sitt">${esc(t.text)}${hintOn?`<div class="shint"><b>PISTA</b> ${esc(t.hint)}</div>`:''}</div></div>`).join('')}</div>
+  <div class="just">Justifiquen la situación ${L.justify} en su hoja de registro.</div>
+  ${anySolved?`<div class="bonusbox"><div class="bt">CASO BONUS · para los grupos que ya tienen su código · +2</div><div class="bq">${esc(L.bonus.text)}</div><div class="bn">Busquen el concepto, pongan su símbolo en el <b>anillo 4</b> y anoten la letra que aparece en la ventana ▼.</div></div>`:''}`;
+}
+
+function renderGame(){
+  const lv=S.level,L=DATA.levels[lv];
+  const tabs=DATA.levels.map((x,i)=>`<button class="tab ${i===lv?'on':''}" data-lv="${i}" aria-label="${esc(x.name)}">${pix(x.tab,3,i===lv?'#0b0b0c':'#f4f2ec')}${allSolved(i)&&groups().length?'<span class="done" title="Todos resolvieron"></span>':''}</button>`).join('');
+  const roles=L.roles.map((n,k)=>`<div class="role"><b>${n}</b>${['Lector','Buscador','Operador','Redactor','Vocero'][k]}</div>`).join('');
+  const gs=groups().map((g,i)=>{const p=gp(lv,i);const locked=p.lockUntil>Date.now();const st=p.solved?('¡Resuelto!'+(L.bonus?(p.bonusTried?(p.bonus?' · bonus ✓':' · bonus ✗'):''):'')):locked?`<span data-lock="${i}">Bloqueado</span>`:(p.attempts?`${p.attempts} intento${p.attempts>1?'s':''}`:'Esperando código');
+    return `<button class="g ${p.solved?'ok':locked?'lock':''}" data-g="${i}"><span class="gn">${esc(g.name)}</span><span class="gd">Disco ${esc(g.disc)}</span><span class="gs">${st}</span><span class="gp">${score(i)}</span></button>`}).join('');
+  const done=allSolved(lv)&&groups().length;
+  const r=remaining();
+  app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',3,'#f4f2ec')}</div><div class="tabs">${tabs}</div><div class="spacer"></div>
+   <div class="timer"><div class="clock" id="clock">${fmt(r)}</div>
+    <button class="tbtn" id="tp" aria-label="Iniciar">▶</button><button class="tbtn" id="tpa" aria-label="Pausar">❚❚</button><button class="tbtn" id="ts" aria-label="Detener y reiniciar">■</button>
+    <div class="tsmall"><button id="tplus" aria-label="Un minuto más">+1</button><button id="tminus" aria-label="Un minuto menos">−1</button></div></div>
+    <button class="fsb" id="fsb">${isFs()?'✕<span class="fsl"> Salir de pantalla completa</span>':'⛶<span class="fsl"> Pantalla completa</span>'}</button></div>
+  <div class="main"><div class="stage" id="stg"><div class="fit" id="fitS">
+    <div class="lvhead"><div>${pix(L.title,5,'#f4f2ec')}<div class="lvsub">${esc(L.subtitle)}</div></div><div class="roles">${roles}</div></div>
+    ${done?`<div class="banner">¡Todos los grupos lo lograron! Pueden pasar a la revisión.</div>`:''}
+    ${r===0&&!done?`<div class="banner" style="color:var(--bad);border-color:var(--bad)">¡Se acabó el tiempo! Pasen a la revisión.</div>`:''}
+    ${levelBody(L,lv)}
+  </div></div>
+  <div class="side" id="sid"><div class="fit" id="fitR"><div class="sideh"><b>Grupos</b><span class="note">Toca un grupo para ingresar su código</span></div>
+    <div class="groups">${gs}</div>
+    <div class="actions"><div class="row2"><button class="btn" id="bh">${S.hintShown[lv]?'Ocultar pista':'Mostrar pista'}</button><button class="btn" id="br">Revisión</button></div>
+     <button class="btn pri" id="bn">${lv<DATA.levels.length-1?'Siguiente nivel →':'Ver resultado final'}</button>
+     <div class="row2"><button class="btn" id="bk">Ranking</button><button class="btn" id="bc">Configurar</button></div></div>
+  </div></div></div>`;
+  document.querySelectorAll('[data-lv]').forEach(e=>e.onclick=()=>goLevel(+e.dataset.lv));
+  document.querySelectorAll('[data-g]').forEach(e=>e.onclick=()=>openCode(+e.dataset.g));
+  tp.onclick=tPlay;tpa.onclick=tPause;ts.onclick=tStop;tplus.onclick=()=>tAdj(1);tminus.onclick=()=>tAdj(-1);
+  bh.onclick=()=>{S.hintShown[lv]=!S.hintShown[lv];save();render()};
+  br.onclick=()=>openReview(lv);
+  bn.onclick=()=>{if(lv<DATA.levels.length-1)goLevel(lv+1);else{S.screen='final';save();render()}};
+  bk.onclick=openRank;bc.onclick=()=>{S.screen='setup';save();render()};
+  fsb.onclick=toggleFs;
+  fitAll();
+}
+function goLevel(i){S.level=i;S.timer={running:false,remaining:S.cfg.minutes*60000,endAt:0};save();render()}
+
+/* ---------- ingreso de código ---------- */
+let typed='';
+function openCode(i){
+  const lv=S.level,L=DATA.levels[lv],g=groups()[i],p=gp(lv,i),n=L.symbols.length;
+  if(p.lockUntil>Date.now()){box.innerHTML=`<h2>${esc(g.name)} · Disco ${esc(g.disc)}</h2><div class="result bad">CÓDIGO INCORRECTO</div><div id="mlock" data-g="${i}" style="font-size:22px;text-align:center">Esperen…</div><button class="btn" id="mx">Cerrar</button>`;modal.classList.add('on');mx.onclick=closeModal;return}
+  if(p.solved){return openSolved(i)}
+  typed='';box.dataset.mode='code';drawPad(i,n);modal.classList.add('on');
+}
+function drawPad(i,n,msg){
+  const g=groups()[i];const bonusMode=box.dataset.mode==='bonus';
+  const slots=Array.from({length:n},(_,k)=>`<div class="slot ${k===typed.length?'cur':''}">${typed[k]||''}</div>`).join('');
+  box.innerHTML=`<h2>${esc(g.name)} · Disco ${esc(g.disc)}</h2><div class="note">${bonusMode?'CASO BONUS: ingresa la letra del <b>anillo 4</b>. Hay un solo intento.':`Ingresa las ${n} letras de la hoja, de afuera hacia adentro (anillo 1, 2, 3${n>3?', 4':''}).`}</div>
+  <div class="slots">${slots}</div>${msg||''}
+  <div class="keys">${'ABCDEFGHIJKL'.split('').map(c=>`<button class="key" data-k="${c}">${c}</button>`).join('')}</div>
+  <div class="row2"><button class="btn" id="kb">Borrar</button><button class="btn pri" id="kv" ${typed.length<n?'disabled style="opacity:.4"':''}>Verificar</button></div>
+  <button class="btn" id="mx">Cancelar</button>`;
+  document.querySelectorAll('[data-k]').forEach(e=>e.onclick=()=>{if(typed.length<n){typed+=e.dataset.k;drawPad(i,n)}});
+  kb.onclick=()=>{typed=typed.slice(0,-1);drawPad(i,n)};kv.onclick=()=>bonusMode?verifyBonus(i):verify(i);mx.onclick=closeModal;
+  box.dataset.g=i;box.dataset.n=n;
+}
+document.addEventListener('keydown',e=>{
+  if(!modal.classList.contains('on')||box.dataset.g===undefined||!document.querySelector('.keys'))return;
+  const i=+box.dataset.g,n=+box.dataset.n,k=e.key.toUpperCase();
+  if(/^[A-L]$/.test(k)&&typed.length<n){typed+=k;drawPad(i,n)}
+  else if(e.key==='Backspace'){typed=typed.slice(0,-1);drawPad(i,n)}
+  else if(e.key==='Enter'&&typed.length===n)(box.dataset.mode==='bonus'?verifyBonus(i):verify(i));
+  else if(e.key==='Escape')closeModal();
+});
+function verify(i){
+  const lv=S.level,L=DATA.levels[lv],g=groups()[i],p=gp(lv,i);
+  p.attempts++;
+  if(typed===expected(lv,g.disc)){
+    p.solved=true;p.pts=L.kind==='practice'?0:L.kind==='final'?5:Math.max(1,4-p.attempts);
+    save();openSolved(i,true);render();
+  }else{
+    p.lockUntil=Date.now()+30000;save();
+    box.innerHTML=`<h2>${esc(g.name)} · Disco ${esc(g.disc)}</h2><div class="result bad">CÓDIGO INCORRECTO</div><div class="note" style="text-align:center;font-size:18px">Revisen sus respuestas y cómo giraron el disco.</div><div id="mlock" data-g="${i}" style="font-size:22px;text-align:center">Esperen 30 segundos para volver a intentar.</div><button class="btn" id="mx">Cerrar</button>`;
+    delete box.dataset.g;mx.onclick=closeModal;render();
+  }
+}
+function openSolved(i,fresh){
+  const lv=S.level,L=DATA.levels[lv],g=groups()[i],p=gp(lv,i);delete box.dataset.g;box.dataset.mode='';
+  let extra='';
+  if(L.kind==='practice')extra='<div class="note">El nivel de práctica no da puntos.</div>';
+  else if(L.kind==='final')extra=`<div class="toggles"><button class="tg ${p.just?'on':''}" id="tj">+1 frase final válida</button></div>`;
+  else{
+    const b=p.bonusTried?(p.bonus?'<div class="result ok" style="font-size:20px">CASO BONUS CORRECTO · +2</div>':'<div class="result bad" style="font-size:20px">CASO BONUS INCORRECTO</div>')
+      :'<button class="btn" id="tbz">Ingresar caso bonus (1 letra del anillo 4)</button>';
+    extra=`<div class="toggles"><button class="tg ${p.just?'on':''}" id="tj">+1 justificación válida</button></div>${b}`;
+  }
+  box.innerHTML=`<h2>${esc(g.name)} · Disco ${esc(g.disc)}</h2><div class="result ok">¡CÓDIGO CORRECTO!</div>
+  <div style="text-align:center;font-size:20px">${L.kind==='practice'?'¡Ya saben usar el disco!':`+${p.pts} puntos (intento ${p.attempts})`}</div>${extra}<button class="btn pri" id="mx">Listo</button>`;
+  const tj=document.getElementById('tj'),tbz=document.getElementById('tbz');
+  if(tj)tj.onclick=()=>{p.just=!p.just;save();openSolved(i);render()};
+  if(tbz)tbz.onclick=()=>{typed='';box.dataset.mode='bonus';drawPad(i,1)};
+  mx.onclick=closeModal;modal.classList.add('on');
+}
+function verifyBonus(i){
+  const lv=S.level,L=DATA.levels[lv],g=groups()[i],p=gp(lv,i);
+  if(p.bonusTried)return openSolved(i);
+  p.bonusTried=true;p.bonus=(typed===DATA.letters[g.disc]['4'][L.bonus.symbol]);
+  save();openSolved(i);render();
+}
+function closeModal(){modal.classList.remove('on');delete box.dataset.g;box.dataset.mode='';box.innerHTML='';render()}
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+
+/* ---------- revisión, ranking y final ---------- */
+function openReview(lv){
+  const L=DATA.levels[lv];S.timer.running&&tPause();
+  let items='';
+  if(L.kind==='level'){
+    items=L.situations.map((t,k)=>`<div class="rv"><span class="rr">Situación ${k+1}</span>${iconSVG(L.symbols[k],52)}<span class="rcol"><span class="rc">${esc(L.answers[k])}</span><span class="rw">${t.why}</span></span></div>`).join('')
+      +`<div class="rv"><span class="rr">Bonus · anillo 4</span>${iconSVG(L.bonus.symbol,52)}<span class="rc">${esc(L.bonus.concept)}</span></div>`;
+  }else{
+    items=L.answers.map((a,k)=>`<div class="rv"><span class="rr">${L.kind==='final'?'Parte '+L.parts[k]+' → anillo '+(k+1):'Anillo '+(k+1)}</span>${iconSVG(L.symbols[k],52)}<span class="rc">${esc(a)}</span></div>`).join('');
+  }
+  box.innerHTML=`<h2>Revisión · ${esc(L.name)}</h2><div class="review">${items}${L.why?`<div class="why">${L.why}</div>`:''}${L.fragment?`<div class="frag"><span class="fl">FRAGMENTO ${lv} · anótenlo en su hoja</span><span class="ft">${esc(L.fragment)}</span></div>`:''}</div><button class="btn pri" id="mx">Cerrar</button>`;
+  delete box.dataset.g;mx.onclick=closeModal;modal.classList.add('on');
+}
+function ranking(){return groups().map((g,i)=>({g,i,p:score(i)})).sort((a,b)=>b.p-a.p)}
+function openRank(){box.innerHTML=`<h2>Ranking</h2><table class="rank">${ranking().map(r=>`<tr><td>${esc(r.g.name)}</td><td class="p">${r.p}</td></tr>`).join('')}</table><button class="btn pri" id="mx">Cerrar</button>`;delete box.dataset.g;mx.onclick=closeModal;modal.classList.add('on')}
+function renderFinal(){
+  app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',3,'#f4f2ec')}</div><div class="spacer"></div><button class="fsb" id="fsb">${isFs()?'Salir de pantalla completa':'⛶ Pantalla completa'}</button><button class="btn" id="back">← Volver al juego</button></div>
+  <div class="final">${pix('¡CÓDIGO COMPLETO!',6,'#ffd23f')}<div class="phrase">${esc(DATA.phrase)}</div>
+  <table class="rank">${ranking().map(r=>`<tr><td>${esc(r.g.name)}</td><td class="p">${r.p} pts</td></tr>`).join('')}</table></div>`;
+  back.onclick=()=>{S.screen='game';save();render()};
+  fsb.onclick=toggleFs;
+}
+/* ---------- pantalla completa y ajuste al tamaño ---------- */
+function isFs(){return !!(document.fullscreenElement||document.webkitFullscreenElement)}
+function toggleFs(){
+  const d=document.documentElement;
+  try{
+    if(isFs()){(document.exitFullscreen||document.webkitExitFullscreen).call(document)}
+    else{const f=d.requestFullscreen||d.webkitRequestFullscreen;if(f){const r=f.call(d);if(r&&r.catch)r.catch(()=>alert('Este navegador no permitió la pantalla completa. Prueba con la tecla F11 o el menú del navegador.'))}else alert('Este navegador no tiene pantalla completa. Prueba con la tecla F11 o el menú del navegador.')}
+  }catch(e){alert('No se pudo activar la pantalla completa. Prueba con la tecla F11.')}
+}
+document.addEventListener('fullscreenchange',()=>render());
+document.addEventListener('webkitfullscreenchange',()=>render());
+function fitBox(outer,inner,minZ,maxZ){
+  if(!outer||!inner)return;
+  if(window.innerWidth<=700){inner.style.transform='';inner.style.width='';inner.style.minHeight='';return}
+  const cs=getComputedStyle(outer);
+  const cw=outer.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+  const ch=outer.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
+  const tryZ=z=>{inner.style.minHeight='0px';inner.style.width=(cw/z)+'px';inner.style.transform='scale('+z+')';return inner.scrollHeight*z<=ch+1};
+  let lo=minZ,hi=maxZ;
+  if(tryZ(hi)){lo=hi}else{for(let k=0;k<14;k++){const m=(lo+hi)/2;if(tryZ(m))lo=m;else hi=m}}
+  tryZ(lo);inner.style.minHeight=(ch/lo)+'px';
+}
+function fitAll(){fitBox(document.getElementById('stg'),document.getElementById('fitS'),0.35,1.45);fitBox(document.getElementById('sid'),document.getElementById('fitR'),0.4,1.3)}
+let rz;window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(fitAll,80)});
+render();
+</script>
+</body>
+</html>
