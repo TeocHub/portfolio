@@ -13,11 +13,13 @@
 html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:"Trebuchet MS","DejaVu Sans",system-ui,sans-serif}
 button{font:inherit;color:inherit;cursor:pointer}
 .px{display:inline-block;vertical-align:middle}
-.app{display:flex;flex-direction:column;height:100vh;min-height:620px}
+.app{display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
+body.fs-on{cursor:default}
+.fit{transform-origin:0 0;display:flex;flex-direction:column}
 /* barra superior */
-.top{display:flex;align-items:center;gap:18px;padding:12px 18px;border-bottom:3px solid var(--line);background:var(--dark)}
+.top{display:flex;align-items:center;gap:14px;padding:10px 16px;flex-wrap:nowrap;border-bottom:3px solid var(--line);background:var(--dark)}
 .logo{display:flex;align-items:center;gap:10px}
-.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tabs{display:flex;gap:6px;flex-wrap:nowrap;flex-shrink:0}
 .tab{min-width:52px;height:46px;padding:0 10px;border:3px solid var(--line);background:transparent;display:flex;align-items:center;justify-content:center}
 .tab.on{background:var(--ink)}
 .tab.on svg{fill:var(--dark)}
@@ -33,9 +35,11 @@ button{font:inherit;color:inherit;cursor:pointer}
 .tsmall{display:flex;flex-direction:column;gap:4px}
 .tsmall button{width:34px;height:23px;border:2px solid var(--line);background:transparent;font-size:13px;font-weight:700;padding:0}
 /* cuerpo */
-.main{flex:1;display:grid;grid-template-columns:1fr 380px;gap:0;min-height:0}
-.stage{padding:20px 26px;overflow:auto;display:flex;flex-direction:column;gap:16px;position:relative}
-.side{border-left:3px solid var(--line);padding:16px;overflow:auto;display:flex;flex-direction:column;gap:12px;background:var(--panel)}
+.main{flex:1;display:grid;grid-template-columns:1fr minmax(300px,28%);gap:0;min-height:0;overflow:hidden}
+.stage{padding:18px 24px;overflow:hidden;position:relative;min-height:0}
+.stage>.fit{gap:16px}
+.side{border-left:3px solid var(--line);padding:14px;overflow:hidden;background:var(--panel);min-height:0;position:relative}
+.side>.fit{gap:12px}
 .lvhead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .lvsub{color:var(--mute);font-size:20px;margin-top:6px}
 .roles{display:flex;gap:8px;flex-wrap:wrap}
@@ -118,7 +122,11 @@ button{font:inherit;color:inherit;cursor:pointer}
 .rank td{border:3px solid var(--line);padding:10px 14px;font-size:24px}
 .rank td.p{text-align:right;font-family:"Courier New",monospace;font-weight:700}
 .rank tr:first-child td{background:var(--acc);color:var(--dark)}
-@media (max-width:980px){.main{grid-template-columns:1fr}.side{border-left:0;border-top:3px solid var(--line)}.clock{font-size:32px;min-width:110px}.sitt{font-size:20px}}
+.fsb{height:50px;padding:0 12px;border:3px solid var(--line);background:transparent;font-weight:700;font-size:15px;white-space:nowrap}
+.fsb:hover{background:#2a2b30}
+@media (max-width:1180px){.clock{font-size:34px;min-width:118px}.tab{min-width:40px;height:42px;padding:0 6px}.tbtn{width:42px;height:42px}.fsb{height:42px;font-size:20px}.fsl{display:none}.top{gap:10px}}
+@media (max-width:900px){.logo{display:none}}
+@media (max-width:700px){.app{height:auto;overflow:visible}.main{grid-template-columns:1fr;overflow:visible}.stage,.side{overflow:visible}.side{border-left:0;border-top:3px solid var(--line)}.top{flex-wrap:wrap}}
 </style>
 </head>
 <body>
@@ -223,20 +231,21 @@ function renderGame(){
   app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',3,'#f4f2ec')}</div><div class="tabs">${tabs}</div><div class="spacer"></div>
    <div class="timer"><div class="clock" id="clock">${fmt(r)}</div>
     <button class="tbtn" id="tp" aria-label="Iniciar">▶</button><button class="tbtn" id="tpa" aria-label="Pausar">❚❚</button><button class="tbtn" id="ts" aria-label="Detener y reiniciar">■</button>
-    <div class="tsmall"><button id="tplus" aria-label="Un minuto más">+1</button><button id="tminus" aria-label="Un minuto menos">−1</button></div></div></div>
-  <div class="main"><div class="stage">
+    <div class="tsmall"><button id="tplus" aria-label="Un minuto más">+1</button><button id="tminus" aria-label="Un minuto menos">−1</button></div></div>
+    <button class="fsb" id="fsb">${isFs()?'✕<span class="fsl"> Salir de pantalla completa</span>':'⛶<span class="fsl"> Pantalla completa</span>'}</button></div>
+  <div class="main"><div class="stage" id="stg"><div class="fit" id="fitS">
     <div class="lvhead"><div>${pix(L.title,5,'#f4f2ec')}<div class="lvsub">${esc(L.subtitle)}</div></div><div class="roles">${roles}</div></div>
     ${done?`<div class="banner">¡Todos los grupos lo lograron! Pueden pasar a la revisión.</div>`:''}
     ${r===0&&!done?`<div class="banner" style="color:var(--bad);border-color:var(--bad)">¡Se acabó el tiempo! Pasen a la revisión.</div>`:''}
     ${levelBody(L,lv)}
     ${S.hintShown[lv]?`<div class="hint"><b>PISTA</b>${esc(L.hint)}</div>`:''}
-  </div>
-  <div class="side"><div class="sideh"><b>Grupos</b><span class="note">Toca un grupo para ingresar su código</span></div>
+  </div></div>
+  <div class="side" id="sid"><div class="fit" id="fitR"><div class="sideh"><b>Grupos</b><span class="note">Toca un grupo para ingresar su código</span></div>
     <div class="groups">${gs}</div>
     <div class="actions"><div class="row2"><button class="btn" id="bh">${S.hintShown[lv]?'Ocultar pista':'Mostrar pista'}</button><button class="btn" id="br">Revisión</button></div>
      <button class="btn pri" id="bn">${lv<DATA.levels.length-1?'Siguiente nivel →':'Ver resultado final'}</button>
      <div class="row2"><button class="btn" id="bk">Ranking</button><button class="btn" id="bc">Configurar</button></div></div>
-  </div></div>`;
+  </div></div></div>`;
   document.querySelectorAll('[data-lv]').forEach(e=>e.onclick=()=>goLevel(+e.dataset.lv));
   document.querySelectorAll('[data-g]').forEach(e=>e.onclick=()=>openCode(+e.dataset.g));
   tp.onclick=tPlay;tpa.onclick=tPause;ts.onclick=tStop;tplus.onclick=()=>tAdj(1);tminus.onclick=()=>tAdj(-1);
@@ -244,6 +253,8 @@ function renderGame(){
   br.onclick=()=>openReview(lv);
   bn.onclick=()=>{if(lv<DATA.levels.length-1)goLevel(lv+1);else{S.screen='final';save();render()}};
   bk.onclick=openRank;bc.onclick=()=>{S.screen='setup';save();render()};
+  fsb.onclick=toggleFs;
+  fitAll();
 }
 function goLevel(i){S.level=i;S.timer={running:false,remaining:S.cfg.minutes*60000,endAt:0};save();render()}
 
@@ -310,11 +321,36 @@ function openReview(lv){
 function ranking(){return groups().map((g,i)=>({g,i,p:score(i)})).sort((a,b)=>b.p-a.p)}
 function openRank(){box.innerHTML=`<h2>Ranking</h2><table class="rank">${ranking().map(r=>`<tr><td>${esc(r.g.name)}</td><td class="p">${r.p}</td></tr>`).join('')}</table><button class="btn pri" id="mx">Cerrar</button>`;delete box.dataset.g;mx.onclick=closeModal;modal.classList.add('on')}
 function renderFinal(){
-  app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',3,'#f4f2ec')}</div><div class="spacer"></div><button class="btn" id="back">← Volver al juego</button></div>
+  app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',3,'#f4f2ec')}</div><div class="spacer"></div><button class="fsb" id="fsb">${isFs()?'Salir de pantalla completa':'⛶ Pantalla completa'}</button><button class="btn" id="back">← Volver al juego</button></div>
   <div class="final">${pix('¡CÓDIGO COMPLETO!',6,'#ffd23f')}<div class="phrase">${esc(DATA.phrase)}</div>
   <table class="rank">${ranking().map(r=>`<tr><td>${esc(r.g.name)}</td><td class="p">${r.p} pts</td></tr>`).join('')}</table></div>`;
   back.onclick=()=>{S.screen='game';save();render()};
+  fsb.onclick=toggleFs;
 }
+/* ---------- pantalla completa y ajuste al tamaño ---------- */
+function isFs(){return !!(document.fullscreenElement||document.webkitFullscreenElement)}
+function toggleFs(){
+  const d=document.documentElement;
+  try{
+    if(isFs()){(document.exitFullscreen||document.webkitExitFullscreen).call(document)}
+    else{const f=d.requestFullscreen||d.webkitRequestFullscreen;if(f){const r=f.call(d);if(r&&r.catch)r.catch(()=>alert('Este navegador no permitió la pantalla completa. Prueba con la tecla F11 o el menú del navegador.'))}else alert('Este navegador no tiene pantalla completa. Prueba con la tecla F11 o el menú del navegador.')}
+  }catch(e){alert('No se pudo activar la pantalla completa. Prueba con la tecla F11.')}
+}
+document.addEventListener('fullscreenchange',()=>render());
+document.addEventListener('webkitfullscreenchange',()=>render());
+function fitBox(outer,inner,minZ,maxZ){
+  if(!outer||!inner)return;
+  if(window.innerWidth<=700){inner.style.transform='';inner.style.width='';inner.style.minHeight='';return}
+  const cs=getComputedStyle(outer);
+  const cw=outer.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+  const ch=outer.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
+  const tryZ=z=>{inner.style.minHeight='0px';inner.style.width=(cw/z)+'px';inner.style.transform='scale('+z+')';return inner.scrollHeight*z<=ch+1};
+  let lo=minZ,hi=maxZ;
+  if(tryZ(hi)){lo=hi}else{for(let k=0;k<14;k++){const m=(lo+hi)/2;if(tryZ(m))lo=m;else hi=m}}
+  tryZ(lo);inner.style.minHeight=(ch/lo)+'px';
+}
+function fitAll(){fitBox(document.getElementById('stg'),document.getElementById('fitS'),0.35,1.45);fitBox(document.getElementById('sid'),document.getElementById('fitR'),0.4,1.3)}
+let rz;window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(fitAll,80)});
 render();
 </script>
 </body>
