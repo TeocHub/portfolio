@@ -13,7 +13,9 @@
 html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:"Trebuchet MS","DejaVu Sans",system-ui,sans-serif}
 button{font:inherit;color:inherit;cursor:pointer}
 .px{display:inline-block;vertical-align:middle}
-.app{display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
+.app{display:flex;flex-direction:column;height:calc(100vh - var(--barH,0px));height:calc(100dvh - var(--barH,0px));overflow:hidden}
+html:fullscreen .tc-barra,html:fullscreen .tc-pie{display:none!important}
+html:-webkit-full-screen .tc-barra,html:-webkit-full-screen .tc-pie{display:none!important}
 body.fs-on{cursor:default}
 .fit{transform-origin:0 0;display:flex;flex-direction:column}
 /* barra superior */
@@ -135,6 +137,55 @@ body.fs-on{cursor:default}
 @media (max-width:1180px){.clock{font-size:34px;min-width:118px}.tab{min-width:40px;height:42px;padding:0 6px}.tbtn{width:42px;height:42px}.fsb{height:42px;font-size:20px}.fsl{display:none}.top{gap:10px}}
 @media (max-width:900px){.logo{display:none}}
 @media (max-width:700px){.app{height:auto;overflow:visible}.main{grid-template-columns:1fr;overflow:visible}.stage,.side{overflow:visible}.side{border-left:0;border-top:3px solid var(--line)}.top{flex-wrap:wrap}}
+
+/* clase (presentación) */
+.solo{flex:1;min-height:0;overflow:hidden;display:flex}
+.solo>.stage{flex:1}
+.secs{display:flex;gap:6px}
+.sec{height:46px;padding:0 12px;border:3px solid var(--line);background:transparent;font-weight:700;font-size:15px;letter-spacing:1px}
+.sec.on{background:var(--ink);color:var(--dark)}
+.cnt{font-family:"Courier New",monospace;font-weight:700;font-size:20px;min-width:74px;text-align:center}
+.sl{display:flex;flex-direction:column;gap:22px;justify-content:center}
+.kick{color:var(--acc);font-weight:700;letter-spacing:2px;font-size:20px}
+.big{font-size:44px;font-weight:700;line-height:1.2}
+.lead{font-size:30px;line-height:1.4;max-width:1200px}
+.cover{align-items:center;text-align:center;gap:26px}
+.cover .meta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.cover .meta span{border:3px solid var(--line);padding:8px 16px;font-size:22px;font-weight:700}
+.obj{border:4px solid var(--acc);padding:22px 26px;font-size:34px;line-height:1.4;font-weight:700}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.how div{border:3px solid var(--line);padding:14px 16px;font-size:22px;line-height:1.35;background:var(--panel)}
+.how b{display:block;color:var(--acc);font-size:16px;letter-spacing:1px;margin-bottom:6px}
+.dims{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.dim{border:3px solid var(--line);background:var(--panel);padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.dim .dq{font-size:24px;color:var(--mute);font-style:italic}
+.dim .dc{display:flex;gap:16px;flex-wrap:wrap}
+.dim .dc span{display:flex;align-items:center;gap:8px;font-size:21px;font-weight:700}
+.dim svg.ic{fill:var(--ink)}
+.hid{visibility:hidden}
+.rev{align-self:flex-start}
+.ccards{display:flex;flex-direction:column;gap:14px}
+.cc{display:flex;border:3px solid var(--line);background:var(--panel)}
+.cc .ci{min-width:130px;background:var(--ink);display:flex;align-items:center;justify-content:center;padding:12px}
+.cc .ci svg{fill:var(--dark)}
+.cc .ct{padding:12px 18px;display:flex;flex-direction:column;gap:6px}
+.cc .cn{font-size:30px;font-weight:700}
+.cc .cd{font-size:25px;line-height:1.35}
+.cc .ce{font-size:20px;color:var(--mute);font-style:italic}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.vs div{border:3px solid var(--line);padding:16px 18px;font-size:24px;line-height:1.4;background:var(--panel)}
+.vs b{display:block;font-size:28px;margin-bottom:6px}
+.mview{display:flex;gap:18px;justify-content:center;align-items:flex-start}
+.mview img{height:760px;width:auto;border:3px solid var(--line);background:#fff;display:block}
+.mnav{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap}
+.mnav .btn{min-width:64px}
+.mnav .pg{font-weight:700;font-size:20px;min-width:160px;text-align:center}
+.qs{display:flex;flex-direction:column;gap:14px}
+.q{border:3px solid var(--line);background:var(--panel);padding:14px 18px;display:flex;flex-direction:column;gap:8px}
+.q .qq{font-size:28px;font-weight:700;line-height:1.3}
+.q .qa{font-size:23px;line-height:1.4;color:var(--ok)}
+.phrasebig{font-size:52px;font-weight:700;line-height:1.25;text-align:center;border:4px solid var(--acc);padding:26px}
+.mnav a.btn,.mnav a.btn:visited{color:var(--ink)}
 </style>
 
   <link rel="icon" href="../../../../../assets/img/favicon.svg" type="image/svg+xml">
@@ -160,7 +211,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 
 /* ---------- estado ---------- */
 const DISCS=Object.keys(DATA.letters);
-function defaultState(){return{screen:'setup',cfg:{n:7,groups:Array.from({length:8},(_,i)=>({name:'Grupo '+(i+1),disc:DISCS[i]||'R'})),minutes:9,hintAt:6},level:0,prog:{},timer:{running:false,remaining:9*60*1000,endAt:0},hintShown:{},reviewed:{}}}
+function defaultState(){return{screen:'clase',slide:0,cfg:{n:7,groups:Array.from({length:8},(_,i)=>({name:'Grupo '+(i+1),disc:DISCS[i]||'R'})),minutes:9,hintAt:6},level:0,prog:{},timer:{running:false,remaining:9*60*1000,endAt:0},hintShown:{},reviewed:{}}}
 let S=load()||defaultState();
 function load(){try{const t=localStorage.getItem(LS);return t?JSON.parse(t):null}catch(e){return null}}
 function save(){try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}}
@@ -193,12 +244,12 @@ setInterval(()=>{
 
 /* ---------- pantallas ---------- */
 const app=document.getElementById('app'),modal=document.getElementById('modal'),box=document.getElementById('box');
-function render(){if(S.screen==='setup')return renderSetup();if(S.screen==='final')return renderFinal();renderGame()}
+function render(){if(S.screen==='clase')return renderClase();if(S.screen==='setup')return renderSetup();if(S.screen==='final')return renderFinal();renderGame()}
 
 function renderSetup(){
   const rows=S.cfg.groups.slice(0,S.cfg.n).map((g,i)=>`<tr><td><input type="text" data-name="${i}" value="${esc(g.name)}" aria-label="Nombre del grupo ${i+1}"></td><td><select data-disc="${i}" aria-label="Disco del grupo ${i+1}">${DISCS.map(d=>`<option value="${d}" ${d===g.disc?'selected':''}>Disco ${d}</option>`).join('')}</select></td></tr>`).join('');
   const used=groups().map(g=>g.disc);const dup=used.filter((d,i)=>used.indexOf(d)!==i);
-  app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',4,'#f4f2ec')}</div><div class="spacer"></div><div class="note">Panel de la sala</div></div>
+  app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',4,'#f4f2ec')}</div><div class="spacer"></div><button class="btn" id="toClase">← Presentación de la clase</button></div>
   <div class="cfg">
    <h1 style="margin:0">${pix('CONFIGURAR',4,'#f4f2ec')}</h1>
    <div><div style="font-weight:700;margin-bottom:8px">Cantidad de grupos</div><div class="stepper"><button id="nm" aria-label="Menos grupos">−</button><span>${S.cfg.n}</span><button id="np" aria-label="Más grupos">+</button></div>
@@ -217,6 +268,7 @@ function renderSetup(){
   mp.onclick=()=>{S.cfg.minutes=Math.min(30,S.cfg.minutes+1);if(!S.timer.running)S.timer.remaining=S.cfg.minutes*60000;save();render()};
   hm.onclick=()=>{S.cfg.hintAt=Math.max(1,S.cfg.hintAt-1);save();render()};hp.onclick=()=>{S.cfg.hintAt=Math.min(S.cfg.minutes-1,S.cfg.hintAt+1);save();render()};
   go.onclick=()=>{S.screen='game';save();render()};
+  toClase.onclick=()=>openClase('MANUAL');
   reset.onclick=()=>{if(confirm('¿Borrar todos los puntajes y avances? La configuración de grupos se mantiene.')){S.prog={};S.level=0;S.hintShown={};S.reviewed={};S.timer={running:false,remaining:S.cfg.minutes*60000,endAt:0};save();render()}};
 }
 
@@ -251,7 +303,7 @@ function renderGame(){
    <div class="timer"><div class="clock" id="clock">${fmt(r)}</div>
     <button class="tbtn" id="tp" aria-label="Iniciar">▶</button><button class="tbtn" id="tpa" aria-label="Pausar">❚❚</button><button class="tbtn" id="ts" aria-label="Detener y reiniciar">■</button>
     <div class="tsmall"><button id="tplus" aria-label="Un minuto más">+1</button><button id="tminus" aria-label="Un minuto menos">−1</button></div></div>
-    <button class="fsb" id="fsb">${isFs()?'✕<span class="fsl"> Salir de pantalla completa</span>':'⛶<span class="fsl"> Pantalla completa</span>'}</button></div>
+    <button class="fsb" id="bcl" title="Volver a la presentación">CLASE</button><button class="fsb" id="fsb">${isFs()?'✕<span class="fsl"> Salir de pantalla completa</span>':'⛶<span class="fsl"> Pantalla completa</span>'}</button></div>
   <div class="main"><div class="stage" id="stg"><div class="fit" id="fitS">
     <div class="lvhead"><div>${pix(L.title,5,'#f4f2ec')}<div class="lvsub">${esc(L.subtitle)}</div></div><div class="roles">${roles}</div></div>
     ${done?`<div class="banner">¡Todos los grupos lo lograron! Pueden pasar a la revisión.</div>`:''}
@@ -271,7 +323,7 @@ function renderGame(){
   br.onclick=()=>openReview(lv);
   bn.onclick=()=>{if(lv<DATA.levels.length-1)goLevel(lv+1);else{S.screen='final';save();render()}};
   bk.onclick=openRank;bc.onclick=()=>{S.screen='setup';save();render()};
-  fsb.onclick=toggleFs;
+  bcl.onclick=()=>openClase('MANUAL');fsb.onclick=toggleFs;
   fitAll();
 }
 function goLevel(i){S.level=i;S.timer={running:false,remaining:S.cfg.minutes*60000,endAt:0};save();render()}
@@ -358,12 +410,85 @@ function openReview(lv){
 function ranking(){return groups().map((g,i)=>({g,i,p:score(i)})).sort((a,b)=>b.p-a.p)}
 function openRank(){box.innerHTML=`<h2>Ranking</h2><table class="rank">${ranking().map(r=>`<tr><td>${esc(r.g.name)}</td><td class="p">${r.p}</td></tr>`).join('')}</table><button class="btn pri" id="mx">Cerrar</button>`;delete box.dataset.g;mx.onclick=closeModal;modal.classList.add('on')}
 function renderFinal(){
-  app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',3,'#f4f2ec')}</div><div class="spacer"></div><button class="fsb" id="fsb">${isFs()?'Salir de pantalla completa':'⛶ Pantalla completa'}</button><button class="btn" id="back">← Volver al juego</button></div>
+  app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',3,'#f4f2ec')}</div><div class="spacer"></div><button class="fsb" id="fsb">${isFs()?'Salir de pantalla completa':'⛶ Pantalla completa'}</button><button class="btn" id="back">← Volver al juego</button><button class="btn pri" id="toCierre">Cierre de la clase →</button></div>
   <div class="final">${pix('¡CÓDIGO COMPLETO!',6,'#ffd23f')}<div class="phrase">${esc(DATA.phrase)}</div>
   <table class="rank">${ranking().map(r=>`<tr><td>${esc(r.g.name)}</td><td class="p">${r.p} pts</td></tr>`).join('')}</table></div>`;
   back.onclick=()=>{S.screen='game';save();render()};
+  toCierre.onclick=()=>openClase('CIERRE');
   fsb.onclick=toggleFs;
 }
+
+/* ---------- clase: inicio, manual y cierre ---------- */
+const CONC={"bio": {"t": "DIMENSIÓN BIOLÓGICA", "q": "¿Qué le pasa a mi cuerpo?", "c": [{"i": "espiral", "n": "Pubertad", "d": "Etapa de cambios físicos que prepara al cuerpo para la adultez. Es solo una parte de la adolescencia: la parte biológica.", "e": "Crecer varios centímetros en un año o notar que cambia la voz."}, {"i": "gota", "n": "Hormonas", "d": "Sustancias químicas que produce el cuerpo y que dan órdenes a otros órganos.", "e": "Las hormonas ponen en marcha cambios como el estirón o el acné."}, {"i": "luna", "n": "Ritmo propio", "d": "Cada persona vive la pubertad a su propia velocidad, antes o después, y ambas cosas son normales.", "e": "Dos amigas de la misma edad: una ya creció mucho y la otra todavía no. Las dos están bien."}]}, "afe": {"t": "DIMENSIÓN AFECTIVA", "q": "¿Qué siento y quién soy?", "c": [{"i": "rayo", "n": "Emoción", "d": "Reacción interna ante algo que nos pasa, como alegría, rabia o miedo.", "e": "Sentir alegría por un logro o rabia frente a una injusticia."}, {"i": "llave", "n": "Identidad", "d": "Conjunto de características que hacen que una persona sea quien es.", "e": "Descubrir qué música, estilo o actividades me representan."}, {"i": "estrella", "n": "Autoestima", "d": "Valoración que una persona tiene de sí misma.", "e": "Sentirse capaz y valioso, aunque algo no salga bien."}]}, "soc": {"t": "DIMENSIÓN SOCIAL", "q": "¿Cómo me relaciono y quién me influye?", "c": [{"i": "hoja", "n": "Grupo de pares", "d": "Personas de edad parecida con las que nos relacionamos, como compañeros y amigos.", "e": "Los compañeros con los que comparto los recreos."}, {"i": "ancla", "n": "Autonomía", "d": "Capacidad de tomar decisiones propias frente a la familia y otros adultos.", "e": "Querer elegir mi propia ropa o mi horario de estudio."}, {"i": "flecha", "n": "Presión de grupo", "d": "Influencia de un grupo para que una persona actúe como los demás.", "e": "Hacer algo solo porque \"todos lo hacen\"."}]}, "val": {"t": "DIMENSIÓN VALÓRICA", "q": "¿Qué es importante para mí y cómo decido?", "c": [{"i": "corona", "n": "Valor", "d": "Principio que una persona considera importante y que orienta su conducta.", "e": "El respeto, la honestidad y la solidaridad son valores."}, {"i": "ojo", "n": "Criterio propio", "d": "Forma propia de juzgar y decidir qué está bien.", "e": "Pensar por mí mismo si algo está bien, aunque otros opinen distinto."}, {"i": "rombo", "n": "Responsabilidad individual", "d": "Hacerse cargo de las propias acciones y de sus consecuencias.", "e": "Reconocer un error y hacer algo para repararlo."}]}};
+const DK=['bio','afe','soc','val'];
+const DN={bio:'BIOLÓGICA',afe:'AFECTIVA',soc:'SOCIAL',val:'VALÓRICA'};
+function slides(){
+ const L=[];
+ L.push({sec:'INICIO',id:'cover',html:()=>`<div class="sl cover">${pix('CÓDIGO 4D',12,'#f4f2ec')}
+  <div class="big">Las 4 dimensiones de la sexualidad</div>
+  <div class="meta"><span>Ciencias Naturales</span><span>7° Básico A</span><span>Lunes 19 de octubre</span></div></div>`});
+ L.push({sec:'INICIO',id:'obj',html:()=>`<div class="sl"><div class="kick">OBJETIVO DE LA CLASE</div>
+  <div class="obj">Explicar la sexualidad como un aspecto integral, relacionando sus dimensiones biológica, afectiva, social y valórica en situaciones cotidianas.</div>
+  <div class="kick" style="margin-top:6px">¿CÓMO LO VAMOS A HACER?</div>
+  <div class="how"><div><b>1 · RECORDAR</b>Repasamos lo que vimos la clase pasada y los 12 conceptos.</div><div><b>2 · JUGAR</b>En grupo resolvemos los niveles de Código 4D con el manual y el disco.</div><div><b>3 · CONCLUIR</b>Unimos los fragmentos y explicamos por qué la sexualidad es integral.</div></div></div>`});
+ L.push({sec:'INICIO',id:'rec',html:()=>{const r=S.rev&&S.rev.rec;return `<div class="sl"><div class="kick">LA CLASE PASADA</div>
+  <div class="big">¿Qué significa que la sexualidad sea <span style="color:var(--acc)">integral</span>?</div>
+  <div class="lead ${r?'':'hid'}">Que la sexualidad no es solo el cuerpo: también incluye lo que sentimos, cómo nos relacionamos y lo que valoramos. Por eso la miramos en <b>4 dimensiones</b>.</div>
+  <div class="vs ${r?'':'hid'}"><div><b>Pubertad</b>Los cambios físicos que preparan al cuerpo para la adultez (aprox. 8 a 14 años).</div><div><b>Adolescencia</b>Toda la etapa entre la niñez y la adultez (10 a 19 años). La pubertad es solo su parte biológica.</div></div>
+  <button class="btn rev" data-rev="rec">${r?'Ocultar respuesta':'Mostrar respuesta'}</button></div>`}});
+ L.push({sec:'INICIO',id:'dims',html:()=>{const r=S.rev&&S.rev.dims;return `<div class="sl"><div class="kick">LAS 4 DIMENSIONES</div>
+  <div class="big">Cada dimensión responde una pregunta</div>
+  <div class="dims">${DK.map(k=>`<div class="dim">${pix('DIMENSIÓN '+DN[k],3,'#f4f2ec')}<div class="dq">${esc(CONC[k].q)}</div>
+   <div class="dc ${r?'':'hid'}">${CONC[k].c.map(c=>`<span>${iconSVG(c.i,34)}${esc(c.n)}</span>`).join('')}</div></div>`).join('')}</div>
+  <button class="btn rev" data-rev="dims">${r?'Ocultar conceptos':'Mostrar los 12 conceptos'}</button></div>`}});
+ DK.forEach(k=>L.push({sec:'INICIO',id:'d_'+k,html:()=>`<div class="sl"><div class="kick">DEFINICIÓN RÁPIDA</div>
+  <div>${pix('DIMENSIÓN '+DN[k],5,'#f4f2ec')}<div class="lvsub" style="font-size:26px">${esc(CONC[k].q)}</div></div>
+  <div class="ccards">${CONC[k].c.map(c=>`<div class="cc"><div class="ci">${iconSVG(c.i,84)}</div><div class="ct"><div class="cn">${esc(c.n)}</div><div class="cd">${esc(c.d)}</div><div class="ce">Ejemplo: ${esc(c.e)}</div></div></div>`).join('')}</div></div>`}));
+ L.push({sec:'MANUAL',id:'man',html:()=>{const m=S.mpage||0;const a=m*2+1,b=a+1;return `<div class="sl"><div class="lvhead"><div><div class="kick">EL MANUAL</div><div class="big">Todo lo que necesitan está aquí</div></div>
+  <div class="lead" style="font-size:22px;max-width:640px">Queda en su mesa durante todo el juego. Con él buscan los conceptos y aprenden a usar el disco.</div></div>
+  <div class="mview"><img src="manual/p${a}.png" alt="Manual, página ${a}"><img src="manual/p${b}.png" alt="Manual, página ${b}"></div>
+  <div class="mnav"><button class="btn" data-mp="-1" aria-label="Páginas anteriores">◀</button><span class="pg">Páginas ${a} y ${b} de 8</span><button class="btn" data-mp="1" aria-label="Páginas siguientes">▶</button>
+  <a class="btn" href="../materiales/Manual_Codigo4D.pdf" target="_blank" rel="noopener" style="text-decoration:none">Abrir PDF</a></div></div>`}});
+ L.push({sec:'MANUAL',id:'go',html:()=>`<div class="sl cover"><div class="kick">¿LISTOS?</div>${pix('A JUGAR',10,'#ffd23f')}
+  <div class="lead">Cada grupo tiene su <b>disco</b>, su <b>manual</b> y su <b>hoja de registro</b>. Primero jugamos el nivel de <b>práctica</b>, que no da puntos.</div>
+  <button class="btn pri" id="toGame" style="font-size:24px;padding:16px 28px">Ir al panel del juego →</button></div>`});
+ L.push({sec:'CIERRE',id:'phr',html:()=>`<div class="sl"><div class="kick" style="text-align:center">LA FRASE QUE FORMARON LOS FRAGMENTOS</div>
+  <div class="phrasebig">${esc(DATA.phrase)}</div>
+  <div class="lead" style="text-align:center;margin:0 auto">En la historia de Matías, un cambio del <b>cuerpo</b> provocó burlas del <b>grupo</b>, que bajaron su <b>autoestima</b>, y eso lo llevó a <b>decidir</b> pedir ayuda.</div></div>`});
+ L.push({sec:'CIERRE',id:'pl',html:()=>{const r=S.rev&&S.rev.pl;return `<div class="sl"><div class="kick">PARA CERRAR</div><div class="qs">
+  <div class="q"><div class="qq">1. ¿Por qué en cada nivel aparecían conceptos de distintas dimensiones?</div><div class="qa ${r?'':'hid'}">Porque en la vida real las dimensiones aparecen juntas: lo que le pasa al cuerpo también se siente, se vive con otros y se decide.</div></div>
+  <div class="q"><div class="qq">2. ¿Por qué no podían abrir el nivel final con un solo fragmento?</div><div class="qa ${r?'':'hid'}">Porque se necesitaban las 4 dimensiones: ninguna dimensión funciona sola.</div></div>
+  <div class="q"><div class="qq">3. ¿En qué se diferencian la pubertad y la adolescencia?</div><div class="qa ${r?'':'hid'}">La pubertad son los cambios físicos; la adolescencia es toda la etapa, e incluye lo afectivo, lo social y lo valórico.</div></div>
+  </div><button class="btn rev" data-rev="pl">${r?'Ocultar respuestas':'Mostrar respuestas'}</button></div>`}});
+ L.push({sec:'CIERRE',id:'end',html:()=>`<div class="sl cover">${pix('¡GRACIAS!',10,'#ffd23f')}
+  <div class="lead">Devuelvan el <b>manual</b> y el <b>disco</b>, y entreguen la <b>hoja de registro</b> con los nombres del grupo.</div>
+  <button class="btn" id="toRank" style="font-size:22px;padding:14px 24px">Ver ranking final</button></div>`});
+ return L;
+}
+function renderClase(){
+ const L=slides();S.slide=Math.max(0,Math.min(L.length-1,S.slide||0));const cur=L[S.slide];
+ const secs=['INICIO','MANUAL','CIERRE'].map(x=>`<button class="sec ${cur.sec===x?'on':''}" data-sec="${x}">${x}</button>`).join('');
+ app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',3,'#f4f2ec')}</div><div class="secs">${secs}<button class="sec" id="toGame2">JUEGO</button></div><div class="spacer"></div>
+  <button class="tbtn" id="sp" aria-label="Diapositiva anterior">◀</button><div class="cnt">${S.slide+1}/${L.length}</div><button class="tbtn" id="sn" aria-label="Diapositiva siguiente">▶</button>
+  <button class="fsb" id="fsb">${isFs()?'✕<span class="fsl"> Salir de pantalla completa</span>':'⛶<span class="fsl"> Pantalla completa</span>'}</button></div>
+  <div class="solo"><div class="stage" id="stg"><div class="fit" id="fitS">${cur.html()}</div></div></div>`;
+ sp.onclick=()=>goSlide(-1);sn.onclick=()=>goSlide(1);fsb.onclick=toggleFs;
+ toGame2.onclick=()=>{S.screen=Object.keys(S.prog).length?'game':'setup';save();render()};
+ document.querySelectorAll('[data-sec]').forEach(b=>b.onclick=()=>{S.slide=L.findIndex(x=>x.sec===b.dataset.sec);save();render()});
+ document.querySelectorAll('[data-rev]').forEach(b=>b.onclick=()=>{S.rev=S.rev||{};S.rev[b.dataset.rev]=!S.rev[b.dataset.rev];save();render()});
+ document.querySelectorAll('[data-mp]').forEach(b=>b.onclick=()=>{S.mpage=Math.max(0,Math.min(3,(S.mpage||0)+(+b.dataset.mp)));save();render()});
+ const tg=document.getElementById('toGame');if(tg)tg.onclick=()=>{S.screen=Object.keys(S.prog).length?'game':'setup';save();render()};
+ const tr=document.getElementById('toRank');if(tr)tr.onclick=()=>{S.screen='final';save();render()};
+ document.querySelectorAll('.mview img').forEach(im=>{if(!im.complete)im.onload=fitAll});
+ requestAnimationFrame(fitAll);
+}
+function goSlide(d){const n=slides().length;S.slide=Math.max(0,Math.min(n-1,(S.slide||0)+d));save();render()}
+function openClase(sec){S.screen='clase';if(sec){const i=slides().findIndex(x=>x.sec===sec);if(i>=0)S.slide=i}save();render()}
+document.addEventListener('keydown',e=>{
+ if(S.screen!=='clase'||modal.classList.contains('on'))return;
+ if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();goSlide(1)}
+ else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();goSlide(-1)}
+});
 /* ---------- pantalla completa y ajuste al tamaño ---------- */
 function isFs(){return !!(document.fullscreenElement||document.webkitFullscreenElement)}
 function toggleFs(){
@@ -388,6 +513,10 @@ function fitBox(outer,inner,minZ,maxZ){
 }
 function fitAll(){fitBox(document.getElementById('stg'),document.getElementById('fitS'),0.35,1.45);fitBox(document.getElementById('sid'),document.getElementById('fitR'),0.4,1.3)}
 let rz;window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(fitAll,80)});
+function setBar(){const b=document.querySelector('.tc-barra');const h=(b&&!isFs()&&b.offsetParent!==null)?b.offsetHeight:0;document.documentElement.style.setProperty('--barH',h+'px');fitAll()}
+try{new MutationObserver(()=>{clearTimeout(rz);rz=setTimeout(setBar,60)}).observe(document.body,{childList:true})}catch(e){}
+window.addEventListener('load',setBar);document.addEventListener('fullscreenchange',()=>setTimeout(setBar,50));document.addEventListener('webkitfullscreenchange',()=>setTimeout(setBar,50));
+window.addEventListener('resize',()=>setTimeout(setBar,100));
 render();
 </script>
 </body>
