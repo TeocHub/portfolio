@@ -394,6 +394,7 @@
       area: "letras", titulo: "Letras",
       intro: "Escribo historias desde hace años y las publico en Wattpad. Algunas son cortas; otras son mundos completos.",
       estante: [
+        { t: "Entre dos mundos", d: "Octavio Ibarra tiene el talento para ser el mejor practicante de Vallarreal. Lo que no tiene es el apellido.", img: "letras/portadas/Entre Dos Mundos.png", url: "https://www.wattpad.com/story/416510977" },
         { t: "Travesía a lo desconocido", d: "Romina descubre que los cuentos de su abuelo eran reales y entra a Folgan, un mundo que solo existía en su infancia.", img: "letras/portadas/Travesía a lo Desconocido.png", url: "https://www.wattpad.com/story/342387679" },
         { t: "Lost Media", d: "Mi mejor amiga fue borrada de la memoria de todos. Y no sé si soy el siguiente.", img: "letras/portadas/Lost Media.png", url: "https://www.wattpad.com/story/399853618" },
         { t: "Natu: la historia de un inmortal", d: "En un futuro lejano, un inmortal solitario llega a la ciudad buscando compañía y se encuentra con su pasado.", img: "letras/portadas/Natu.png", url: "https://www.wattpad.com/story/359579112" },
