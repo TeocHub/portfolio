@@ -6,14 +6,14 @@
     <title>Bases Curriculares</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: var(--texto);
             margin: 0;
             padding: 0;
-            background-color: #EEF1F6;
+            background-color: var(--fondo);
         }
         header {
-            background-color: #2D7A57;
-            color: white;
+            background-color: var(--acento-relleno);
+            color: var(--tinta);
             padding: 1em 0;
             text-align: center;
         }
@@ -24,44 +24,44 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            background-color: #22603F;
+            background-color: var(--acento-relleno);
         }
         nav ul li {
             position: relative;
         }
         nav ul li a {
             display: block;
-            color: white;
+            color: var(--tinta);
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
             transition: background-color 0.3s;
         }
         nav ul li a:hover {
-            background-color: #3E9670;
+            background-color: var(--acento-relleno);
         }
         .container {
             padding: 2em;
         }
         .subject-section {
             display: none;
-            background-color: white;
+            background-color: var(--superficie);
             padding: 2em;
             margin-top: 1em;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: var(--radio-sm);
+            box-shadow: var(--sombra-suave);
         }
         .subject-section.active {
             display: block;
         }
         h2 {
-            color: #2D7A57;
+            color: var(--acento);
         }
         h3 {
-            border-bottom: 2px solid #ccc;
+            border-bottom: 2px solid var(--linea);
             padding-bottom: 0.5em;
             margin-top: 1.5em;
-            color: #1A1C2E;
+            color: var(--h3);
         }
         ul {
             list-style-type: disc;
@@ -72,7 +72,8 @@
   <link rel="icon" href="../../../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../../assets/css/site.css">
   <link rel="stylesheet" href="../../../assets/css/armonia.css">
-  <script src="../../../assets/js/site.js" defer></script>
+  <script src="../../../assets/js/site.js"></script>
+  <!-- barajas aplicadas -->
 </head>
 <body>
 

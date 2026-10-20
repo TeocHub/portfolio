@@ -1,37 +1,195 @@
 /* ==========================================================
-   Capa de armonía para las páginas de contenido
+   Capa común para las páginas de contenido
    ----------------------------------------------------------
-   Se carga DESPUÉS del CSS propio de cada página y unifica la
-   tipografía del portfolio sin tocar su estructura ni su JS.
-   Las páginas con marca propia (Mar y Ola, SmartFit,
-   SindicatoLegal, Digital Monster, Innovatech) no la usan.
+   Se carga DESPUÉS del CSS propio de cada página. Los colores
+   de cada página ya apuntan a los tokens de barajas.css; esta
+   capa unifica tipografía, controles, tablas y enlaces, y
+   define las sombras y radios que cambian con la baraja.
+   No la usan: Digital Monster, Mar y Ola, SmartFit,
+   SindicatoLegal ni Innovatech (tienen marca propia).
    ========================================================== */
 
+:root {
+  --sobre-relleno: var(--tinta);
+  /* Luz: las tarjetas se vuelven "pegatinas" con trazo de tinta */
+  --sombra-suave: 0 0 0 2px var(--trazo), 4px 4px 0 var(--trazo);
+  --sombra-alta: 0 0 0 2.5px var(--trazo), 7px 7px 0 var(--trazo);
+}
+:root[data-baraja="sombra"] {
+  /* Sombra: filete de latón y una sombra honda */
+  --sombra-suave: 0 0 0 1px rgb(var(--trazo-rgb) / .45), 0 12px 24px -14px #000;
+  --sombra-alta: 0 0 0 1px rgb(var(--trazo-rgb) / .7), 0 24px 40px -18px #000;
+}
+
+:where(html) { background-color: var(--fondo); }
+:where(body) { background-color: var(--fondo); color: var(--tinta); }
 html body {
-  font-family: var(--tc-texto) !important;
+  font-family: var(--texto) !important;
   -webkit-font-smoothing: antialiased;
 }
+::selection { background: rgb(var(--resalte-rgb) / .55); color: var(--tinta); }
 
-/* Títulos con la tipografía del portfolio */
+/* Títulos con la tipografía y el carácter de la baraja */
 html body :is(h1, h2, h3, h4, h5, h6) {
-  font-family: var(--tc-display) !important;
-  font-variation-settings: "wdth" 88;
-  letter-spacing: -0.005em;
+  font-family: var(--display) !important;
+  font-variation-settings: var(--display-fvs);
+  font-weight: var(--display-peso);
+  letter-spacing: var(--display-espaciado) !important;
+  text-transform: none;
+  text-wrap: balance;
+}
+html body :is(h4, h5, h6) { font-weight: 700; }
+:root[data-baraja="sombra"] body :is(h1, h2) { font-weight: 500; }
+
+/* Texto largo */
+html body :is(p, li, dd, td) { line-height: 1.65; }
+
+/* Enlaces dentro del texto */
+html body :is(p, li, td, dd, blockquote) > a:not([class]) {
+  color: var(--acento);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
 }
 
-/* Controles y etiquetas cortas: la misma tipografía de los títulos */
-html body :is(button, input, select, textarea, label, th, nav a, .btn, .tag, .badge) {
-  font-family: var(--tc-display) !important;
+/* Controles */
+html body :is(button, input, select, textarea, label, .btn) { font-family: var(--texto) !important; }
+html body :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"]), select, textarea) {
+  background-color: var(--superficie);
+  color: var(--tinta);
+  border: 2px solid var(--trazo);
+  border-radius: var(--radio-sm);
 }
+:root[data-baraja="sombra"] body :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"]), select, textarea) {
+  border: 1px solid var(--linea);
+  background-color: var(--fondo-2);
+}
+html body :is(input, select, textarea)::placeholder { color: var(--tinta-3); }
+html body :is(input[type="checkbox"], input[type="radio"], input[type="range"], progress) { accent-color: var(--acento); }
 
-/* El texto largo respira un poco más con Literata */
-html body :is(p, li) { line-height: 1.65; }
+/* Tablas */
+html body table { border-color: var(--linea); }
+html body th { color: var(--tinta); }
 
-/* Foco visible y coherente en todas las páginas */
-html body :is(a, button, input, select, textarea, summary):focus-visible {
-  outline: 2px solid var(--tc-area, #2D7A57);
+/* Citas */
+html body blockquote { border-color: var(--acento); }
+
+/* Foco visible y coherente */
+html body :is(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--acento) !important;
   outline-offset: 2px;
 }
 
-/* La página no debe tapar la barra común con un header fijo propio */
+/* Bootstrap (Reporteros de la democracia) */
+html body {
+  --bs-body-bg: var(--fondo);
+  --bs-body-color: var(--tinta);
+  --bs-secondary-color: var(--tinta-2);
+  --bs-border-color: var(--linea);
+  --bs-primary: var(--acento);
+  --bs-primary-rgb: var(--acento-rgb);
+  --bs-link-color: var(--acento);
+  --bs-link-color-rgb: var(--acento-rgb);
+  --bs-link-hover-color: var(--acento);
+  --bs-card-bg: var(--superficie);
+  --bs-tertiary-bg: var(--fondo-2);
+  --bs-secondary-bg: var(--fondo-2);
+  --bs-light-rgb: var(--fondo-2-rgb);
+  --bs-dark-rgb: var(--tinta-rgb);
+  --bs-white-rgb: var(--superficie-rgb);
+  --bs-emphasis-color: var(--tinta);
+}
+html body .card { --bs-card-bg: var(--superficie); --bs-card-color: var(--tinta); --bs-card-border-color: var(--linea); --bs-card-cap-bg: var(--fondo-2); }
+html body .btn-primary, html body .btn-success {
+  --bs-btn-bg: var(--acento-relleno); --bs-btn-border-color: var(--trazo); --bs-btn-color: var(--tinta);
+  --bs-btn-hover-bg: var(--acento-relleno); --bs-btn-hover-border-color: var(--trazo); --bs-btn-hover-color: var(--tinta);
+  --bs-btn-active-bg: var(--acento-relleno); --bs-btn-active-color: var(--tinta);
+}
+html body .btn-secondary, html body .btn-outline-secondary, html body .btn-light {
+  --bs-btn-bg: var(--superficie); --bs-btn-border-color: var(--trazo); --bs-btn-color: var(--tinta);
+  --bs-btn-hover-bg: var(--fondo-2); --bs-btn-hover-color: var(--tinta); --bs-btn-hover-border-color: var(--trazo);
+}
+html body .btn-outline-primary {
+  --bs-btn-color: var(--acento); --bs-btn-border-color: var(--acento);
+  --bs-btn-hover-bg: var(--acento-relleno); --bs-btn-hover-color: var(--tinta); --bs-btn-hover-border-color: var(--trazo);
+}
+html body .text-muted { color: var(--tinta-2) !important; }
+html body .bg-light { background-color: var(--fondo-2) !important; }
+html body .bg-white { background-color: var(--superficie) !important; }
+html body .form-control, html body .form-select { background-color: var(--superficie); color: var(--tinta); }
+html body .progress { --bs-progress-bg: var(--fondo-2); --bs-progress-bar-bg: var(--acento); }
+html body .alert { --bs-alert-color: var(--tinta); --bs-alert-bg: var(--superficie-2); --bs-alert-border-color: var(--linea); }
+
+/* La barra común siempre por encima de las cabeceras fijas de cada página */
 html body > .tc-barra { position: relative; z-index: 1000; }
+
+/* ---------- Botones de acción: la misma forma en todas las páginas ---------- */
+html body :is(.btn, .expand-btn, .toggle-btn, .toggle-button, .card-button, .btn-add, .btn-form, .accion) {
+  border: 2.5px solid var(--trazo) !important;
+  border-radius: 999px !important;
+  background: var(--acento-relleno) !important;
+  color: var(--tinta) !important;
+  box-shadow: 3px 3px 0 var(--trazo) !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  transition: transform .12s, box-shadow .12s;
+}
+html body :is(.btn, .expand-btn, .toggle-btn, .toggle-button, .card-button, .btn-add, .btn-form, .accion):hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--trazo) !important;
+}
+html body :is(.btn, .expand-btn, .toggle-btn, .toggle-button, .card-button, .btn-add, .btn-form, .accion):active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--trazo) !important;
+}
+/* Secundarios: blancos */
+html body :is(.btn-secondary, .btn-light, .btn-outline-secondary, .btn:not(.pri, .btn-primary, .btn-success, .btn-form, .btn-lg, [id])) {
+  background: var(--superficie) !important;
+}
+html body .btn-form { background: var(--resalte) !important; }
+html body .btn-del { color: var(--peligro) !important; }
+
+:root[data-baraja="sombra"] body :is(.btn, .expand-btn, .toggle-btn, .toggle-button, .card-button, .btn-add, .btn-form, .accion) {
+  border: 1px solid var(--trazo) !important;
+  border-radius: 3px !important;
+  background: rgb(var(--resalte-rgb) / .08) !important;
+  color: var(--resalte) !important;
+  box-shadow: inset 0 0 0 2px var(--fondo), inset 0 0 0 3px rgb(var(--trazo-rgb) / .35) !important;
+  font-weight: 600 !important;
+}
+:root[data-baraja="sombra"] body :is(.btn, .expand-btn, .toggle-btn, .toggle-button, .card-button, .btn-add, .btn-form, .accion):hover {
+  transform: none;
+  background: rgb(var(--resalte-rgb) / .16) !important;
+}
+:root[data-baraja="sombra"] body :is(.btn-secondary, .btn-light, .btn-outline-secondary, .btn:not(.pri, .btn-primary, .btn-success, .btn-form, .btn-lg, [id])) {
+  background: transparent !important;
+  color: var(--tinta-2) !important;
+  border-color: var(--linea) !important;
+}
+
+/* ---------- Pestañas ---------- */
+html body :is(.tab-btn, .ing-tab, .process-tab, .nav-button) {
+  border: 2px solid var(--trazo) !important;
+  border-radius: 999px !important;
+  background: var(--superficie) !important;
+  color: var(--tinta) !important;
+  box-shadow: none !important;
+  font-weight: 700 !important;
+}
+html body :is(.tab-btn, .ing-tab, .process-tab, .nav-button):is(.active, [aria-selected="true"]) {
+  background: var(--acento-relleno) !important;
+  box-shadow: 3px 3px 0 var(--trazo) !important;
+}
+:root[data-baraja="sombra"] body :is(.tab-btn, .ing-tab, .process-tab, .nav-button) {
+  border: 0 !important;
+  border-bottom: 1px solid var(--linea) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--tinta-2) !important;
+  font-weight: 400 !important;
+}
+:root[data-baraja="sombra"] body :is(.tab-btn, .ing-tab, .process-tab, .nav-button):is(.active, [aria-selected="true"]) {
+  color: var(--resalte) !important;
+  border-bottom: 2px solid var(--resalte) !important;
+  box-shadow: none !important;
+}

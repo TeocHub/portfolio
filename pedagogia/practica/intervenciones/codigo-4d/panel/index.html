@@ -6,194 +6,195 @@
 <title>Código 4D · Panel de la sala</title>
 <style>
 :root{
-  --bg:#111214; --panel:#1c1d21; --line:#e9e7e1; --ink:#f4f2ec; --mute:#a9a6a0;
-  --acc:#ffd23f; --ok:#5fd38d; --bad:#ff6b6b; --dark:#0b0b0c;
+  --bg: var(--fondo); --panel: var(--superficie); --line: var(--trazo); --ink: var(--tinta); --mute: var(--tinta-2);
+  --acc: var(--acento); --ok: var(--acento-suave); --bad: var(--h2-relleno); --dark: var(--tinta);
 }
-*{box-sizing:border-box}
-html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:"Trebuchet MS","DejaVu Sans",system-ui,sans-serif}
-button{font:inherit;color:inherit;cursor:pointer}
-.px{display:inline-block;vertical-align:middle}
-.app{display:flex;flex-direction:column;height:calc(100vh - var(--barH,0px));height:calc(100dvh - var(--barH,0px));overflow:hidden}
-html:fullscreen .tc-barra,html:fullscreen .tc-pie{display:none!important}
-html:-webkit-full-screen .tc-barra,html:-webkit-full-screen .tc-pie{display:none!important}
-body.fs-on{cursor:default}
-.fit{transform-origin:0 0;display:flex;flex-direction:column}
+*{box-sizing: border-box}
+html,body{margin: 0;height: 100%;background: var(--fondo);color: var(--tinta);font-family: var(--texto)}
+button{font: inherit;color: inherit;cursor: pointer}
+.px{display: inline-block;vertical-align: middle}
+.app{display: flex;flex-direction: column;height: calc(100vh - var(--barH,0px));height: calc(100dvh - var(--barH,0px));overflow: hidden}
+html:fullscreen .tc-barra,html:fullscreen .tc-pie{display: none!important}
+html:-webkit-full-screen .tc-barra,html:-webkit-full-screen .tc-pie{display: none!important}
+body.fs-on{cursor: default}
+.fit{transform-origin: 0 0;display: flex;flex-direction: column}
 /* barra superior */
-.top{display:flex;align-items:center;gap:14px;padding:10px 16px;flex-wrap:nowrap;border-bottom:3px solid var(--line);background:var(--dark)}
-.logo{display:flex;align-items:center;gap:10px}
-.tabs{display:flex;gap:6px;flex-wrap:nowrap;flex-shrink:0}
-.tab{min-width:52px;height:46px;padding:0 10px;border:3px solid var(--line);background:transparent;display:flex;align-items:center;justify-content:center}
-.tab.on{background:var(--ink)}
-.tab.on svg{fill:var(--dark)}
-.tab .done{width:9px;height:9px;background:var(--ok);margin-left:6px}
-.spacer{flex:1}
-.timer{display:flex;align-items:center;gap:10px}
-.clock{font-family:"Courier New",monospace;font-weight:700;font-size:44px;letter-spacing:2px;min-width:150px;text-align:center;padding:2px 10px;border:3px solid var(--line)}
-.clock.warn{color:var(--acc);border-color:var(--acc)}
-.clock.end{color:var(--bad);border-color:var(--bad)}
-.tbtn{width:50px;height:50px;border:3px solid var(--line);background:transparent;font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.tbtn:hover,.tab:hover,.btn:hover{background:#2a2b30}
-.tab.on:hover{background:var(--ink)}
-.tsmall{display:flex;flex-direction:column;gap:4px}
-.tsmall button{width:34px;height:23px;border:2px solid var(--line);background:transparent;font-size:13px;font-weight:700;padding:0}
+.top{display: flex;align-items: center;gap: 14px;padding: 10px 16px;flex-wrap: nowrap;border-bottom: 3px solid var(--trazo);background: var(--fondo)}
+.logo{display: flex;align-items: center;gap: 10px}
+.tabs{display: flex;gap: 6px;flex-wrap: nowrap;flex-shrink: 0}
+.tab{min-width: 52px;height: 46px;padding: 0 10px;border: 3px solid var(--trazo);background: transparent;display: flex;align-items: center;justify-content: center}
+.tab.on{background: var(--acento-relleno)}
+.tab.on svg{fill: var(--tinta)}
+.tab .done{width: 9px;height: 9px;background: var(--acento-suave);margin-left: 6px}
+.spacer{flex: 1}
+.timer{display: flex;align-items: center;gap: 10px}
+.clock{font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;font-weight: 700;font-size: 44px;letter-spacing: 2px;min-width: 150px;text-align: center;padding: 2px 10px;border: 3px solid var(--trazo)}
+.clock.warn{color: var(--acento);border-color: var(--acento)}
+.clock.end{color: var(--h2);border-color: var(--h2)}
+.tbtn{width: 50px;height: 50px;border: 3px solid var(--trazo);background: transparent;font-size: 20px;font-weight: 700;display: flex;align-items: center;justify-content: center}
+.tbtn:hover,.tab:hover,.btn:hover{background: var(--superficie)}
+.tab.on:hover{background: var(--acento-relleno)}
+.tsmall{display: flex;flex-direction: column;gap: 4px}
+.tsmall button{width: 34px;height: 23px;border: 2px solid var(--trazo);background: transparent;font-size: 13px;font-weight: 700;padding: 0}
 /* cuerpo */
-.main{flex:1;display:grid;grid-template-columns:1fr minmax(300px,28%);gap:0;min-height:0;overflow:hidden}
-.stage{padding:18px 24px;overflow:hidden;position:relative;min-height:0}
-.stage>.fit{gap:16px}
-.side{border-left:3px solid var(--line);padding:14px;overflow:hidden;background:var(--panel);min-height:0;position:relative}
-.side>.fit{gap:12px}
-.lvhead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.lvsub{color:var(--mute);font-size:20px;margin-top:6px}
-.roles{display:flex;gap:8px;flex-wrap:wrap}
-.role{border:2px solid var(--line);padding:6px 10px;font-size:17px;display:flex;gap:8px;align-items:center}
-.role b{background:var(--ink);color:var(--dark);padding:1px 8px;font-size:18px}
-.sits{display:flex;flex-direction:column;gap:12px}
-.sit{display:flex;gap:16px;border:3px solid var(--line);background:var(--panel);align-items:stretch}
-.sitn{background:var(--ink);color:var(--dark);min-width:118px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px}
-.sitn small{font-size:14px;font-weight:700;letter-spacing:1px}
-.sitn svg{fill:var(--dark)}
-.sitt{padding:14px 16px 14px 0;font-size:25px;line-height:1.35}
-.sit .sitt:only-child{padding-left:16px}
-.sideh{gap:10px}
-.just{align-self:flex-start;background:var(--acc);color:var(--dark);font-weight:700;padding:8px 14px;font-size:19px}
-.hint{border:3px dashed var(--acc);color:var(--acc);padding:12px 16px;font-size:22px;display:flex;gap:12px;align-items:center}
-.hint b{font-size:15px;background:var(--acc);color:var(--dark);padding:2px 8px}
-.shint{margin-top:8px;font-size:19px;color:var(--acc);border-top:2px dashed var(--acc);padding-top:6px}
-.shint b{font-size:13px;background:var(--acc);color:var(--dark);padding:1px 6px;margin-right:4px;vertical-align:middle}
-.bonusbox{border:3px solid var(--line);padding:12px 16px;display:flex;flex-direction:column;gap:6px;background:repeating-linear-gradient(135deg,#1c1d21 0 10px,#232429 10px 20px)}
-.bonusbox .bt{font-weight:700;font-size:15px;letter-spacing:1px;color:var(--acc)}
-.bonusbox .bq{font-size:23px;line-height:1.35}
-.bonusbox .bn{font-size:16px;color:var(--mute)}
-.rv .rw{font-size:17px;color:var(--ink);line-height:1.35}
-.rv .rcol{display:flex;flex-direction:column;gap:3px}
-.banner{border:3px solid var(--ok);color:var(--ok);padding:12px 16px;font-size:22px;font-weight:700}
-.icons3{display:flex;gap:22px;flex-wrap:wrap}
-.icard{border:3px solid var(--line);padding:16px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;background:var(--panel)}
-.icard svg.ic{fill:var(--ink)}
-.icard .ring{font-size:16px;color:var(--mute);font-weight:700}
-.story{font-size:25px;line-height:1.5;border:3px solid var(--line);padding:16px 20px;background:var(--panel)}
-.story mark{background:var(--ink);color:var(--dark);padding:0 6px;font-weight:700}
-.story .pt{background:var(--acc);color:var(--dark);font-weight:700;padding:0 6px;margin-right:4px}
+.main{flex: 1;display: grid;grid-template-columns: 1fr minmax(300px,28%);gap: 0;min-height: 0;overflow: hidden}
+.stage{padding: 18px 24px;overflow: hidden;position: relative;min-height: 0}
+.stage>.fit{gap: 16px}
+.side{border-left: 3px solid var(--trazo);padding: 14px;overflow: hidden;background: var(--superficie);min-height: 0;position: relative}
+.side>.fit{gap: 12px}
+.lvhead{display: flex;align-items: flex-end;justify-content: space-between;gap: 16px;flex-wrap: wrap}
+.lvsub{color: var(--tinta-2);font-size: 20px;margin-top: 6px}
+.roles{display: flex;gap: 8px;flex-wrap: wrap}
+.role{border: 2px solid var(--trazo);padding: 6px 10px;font-size: 17px;display: flex;gap: 8px;align-items: center}
+.role b{background: var(--acento-relleno);color: var(--tinta);padding: 1px 8px;font-size: 18px}
+.sits{display: flex;flex-direction: column;gap: 12px}
+.sit{display: flex;gap: 16px;border: 3px solid var(--trazo);background: var(--superficie);align-items: stretch}
+.sitn{background: var(--acento-relleno);color: var(--tinta);min-width: 118px;display: flex;flex-direction: column;align-items: center;justify-content: center;gap: 4px;padding: 8px}
+.sitn small{font-size: 14px;font-weight: 700;letter-spacing: 1px}
+.sitn svg{fill: var(--tinta)}
+.sitt{padding: 14px 16px 14px 0;font-size: 25px;line-height: 1.35}
+.sit .sitt:only-child{padding-left: 16px}
+.sideh{gap: 10px}
+.just{align-self: flex-start;background: var(--acento-relleno);color: var(--tinta);font-weight: 700;padding: 8px 14px;font-size: 19px}
+.hint{border: 3px dashed var(--acento);color: var(--acento);padding: 12px 16px;font-size: 22px;display: flex;gap: 12px;align-items: center}
+.hint b{font-size: 15px;background: var(--acento-relleno);color: var(--tinta);padding: 2px 8px}
+.shint{margin-top: 8px;font-size: 19px;color: var(--acento);border-top: 2px dashed var(--acento);padding-top: 6px}
+.shint b{font-size: 13px;background: var(--acento-relleno);color: var(--tinta);padding: 1px 6px;margin-right: 4px;vertical-align: middle}
+.bonusbox{border: 3px solid var(--trazo);padding: 12px 16px;display: flex;flex-direction: column;gap: 6px;background: repeating-linear-gradient(135deg,var(--superficie) 0 10px,var(--superficie) 10px 20px)}
+.bonusbox .bt{font-weight: 700;font-size: 15px;letter-spacing: 1px;color: var(--acento)}
+.bonusbox .bq{font-size: 23px;line-height: 1.35}
+.bonusbox .bn{font-size: 16px;color: var(--tinta-2)}
+.rv .rw{font-size: 17px;color: var(--tinta);line-height: 1.35}
+.rv .rcol{display: flex;flex-direction: column;gap: 3px}
+.banner{border: 3px solid var(--exito);color: var(--exito);padding: 12px 16px;font-size: 22px;font-weight: 700}
+.icons3{display: flex;gap: 22px;flex-wrap: wrap}
+.icard{border: 3px solid var(--trazo);padding: 16px 22px;display: flex;flex-direction: column;align-items: center;gap: 10px;background: var(--superficie)}
+.icard svg.ic{fill: var(--tinta)}
+.icard .ring{font-size: 16px;color: var(--tinta-2);font-weight: 700}
+.story{font-size: 25px;line-height: 1.5;border: 3px solid var(--trazo);padding: 16px 20px;background: var(--superficie)}
+.story mark{background: var(--acento-relleno);color: var(--tinta);padding: 0 6px;font-weight: 700}
+.story .pt{background: var(--acento-relleno);color: var(--tinta);font-weight: 700;padding: 0 6px;margin-right: 4px}
 /* grupos */
-.sideh{display:flex;justify-content:space-between;align-items:center}
-.groups{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.g{border:3px solid var(--line);background:transparent;padding:10px;text-align:left;display:flex;flex-direction:column;gap:6px;min-height:104px;position:relative}
-.g .gn{font-weight:700;font-size:19px}
-.g .gd{font-size:14px;color:var(--mute)}
-.g .gs{font-size:16px;font-weight:700}
-.g .gp{position:absolute;right:8px;top:8px;font-family:"Courier New",monospace;font-weight:700;font-size:20px}
-.g.ok{border-color:var(--ok)} .g.ok .gs{color:var(--ok)}
-.g.lock{border-color:var(--bad)} .g.lock .gs{color:var(--bad)}
-.actions{display:flex;flex-direction:column;gap:8px;margin-top:auto}
-.btn{border:3px solid var(--line);background:transparent;padding:11px 12px;font-weight:700;font-size:17px;text-align:center}
-.btn.pri{background:var(--ink);color:var(--dark)}
-.btn.pri:hover{background:#d9d6cf}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sideh{display: flex;justify-content: space-between;align-items: center}
+.groups{display: grid;grid-template-columns: 1fr 1fr;gap: 10px}
+.g{border: 3px solid var(--trazo);background: transparent;padding: 10px;text-align: left;display: flex;flex-direction: column;gap: 6px;min-height: 104px;position: relative}
+.g .gn{font-weight: 700;font-size: 19px}
+.g .gd{font-size: 14px;color: var(--tinta-2)}
+.g .gs{font-size: 16px;font-weight: 700}
+.g .gp{position: absolute;right: 8px;top: 8px;font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;font-weight: 700;font-size: 20px}
+.g.ok{border-color: var(--exito)} .g.ok .gs{color: var(--exito)}
+.g.lock{border-color: var(--h2)} .g.lock .gs{color: var(--h2)}
+.actions{display: flex;flex-direction: column;gap: 8px;margin-top: auto}
+.btn{border: 3px solid var(--trazo);background: transparent;padding: 11px 12px;font-weight: 700;font-size: 17px;text-align: center}
+.btn.pri{background: var(--acento-relleno);color: var(--tinta)}
+.btn.pri:hover{background: var(--acento-relleno)}
+.row2{display: grid;grid-template-columns: 1fr 1fr;gap: 8px}
 /* modal */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;z-index:10;padding:16px}
-.modal.on{display:flex}
-.box{background:var(--panel);border:4px solid var(--line);box-shadow:8px 8px 0 #000;padding:20px;width:min(640px,100%);max-height:94vh;overflow:auto;display:flex;flex-direction:column;gap:14px}
-.box h2{margin:0;font-size:26px}
-.slots{display:flex;gap:12px;justify-content:center}
-.slot{width:76px;height:88px;border:4px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:52px;font-weight:700;font-family:"Courier New",monospace}
-.slot.cur{border-color:var(--acc)}
-.keys{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
-.key{height:62px;border:3px solid var(--line);background:transparent;font-size:30px;font-weight:700}
-.key:hover{background:#2a2b30}
-.result{font-size:30px;font-weight:700;text-align:center;padding:10px;border:3px solid}
-.result.ok{color:var(--ok);border-color:var(--ok)} .result.bad{color:var(--bad);border-color:var(--bad)}
-.toggles{display:flex;gap:10px;flex-wrap:wrap}
-.tg{border:3px solid var(--line);background:transparent;padding:10px 14px;font-weight:700;font-size:17px}
-.tg.on{background:var(--ok);color:var(--dark);border-color:var(--ok)}
+.modal{position: fixed;inset: 0;background: rgb(var(--fondo-rgb) / 0.78);display: none;align-items: center;justify-content: center;z-index: 10;padding: 16px}
+.modal.on{display: flex}
+.box{background: var(--superficie);border: 4px solid var(--trazo);box-shadow: var(--sombra-suave);padding: 20px;width: min(640px,100%);max-height: 94vh;overflow: auto;display: flex;flex-direction: column;gap: 14px}
+.box h2{margin: 0;font-size: 26px}
+.slots{display: flex;gap: 12px;justify-content: center}
+.slot{width: 76px;height: 88px;border: 4px solid var(--trazo);display: flex;align-items: center;justify-content: center;font-size: 52px;font-weight: 700;font-family: ui-monospace, "SFMono-Regular", Menlo, monospace}
+.slot.cur{border-color: var(--acento)}
+.keys{display: grid;grid-template-columns: repeat(6,1fr);gap: 8px}
+.key{height: 62px;border: 3px solid var(--trazo);background: transparent;font-size: 30px;font-weight: 700}
+.key:hover{background: var(--superficie)}
+.result{font-size: 30px;font-weight: 700;text-align: center;padding: 10px;border: 3px solid}
+.result.ok{color: var(--exito);border-color: var(--exito)} .result.bad{color: var(--h2);border-color: var(--h2)}
+.toggles{display: flex;gap: 10px;flex-wrap: wrap}
+.tg{border: 3px solid var(--trazo);background: transparent;padding: 10px 14px;font-weight: 700;font-size: 17px}
+.tg.on{background: var(--acento-suave);color: var(--tinta);border-color: var(--exito)}
 /* revisión */
-.review{display:flex;flex-direction:column;gap:12px}
-.rv{display:flex;gap:14px;align-items:center;border:3px solid var(--line);padding:10px 14px;background:var(--panel)}
-.rv svg.ic{fill:var(--ink)}
-.rv .rc{font-size:24px;font-weight:700}
-.rv .rr{color:var(--mute);font-size:16px;font-weight:700;min-width:84px}
-.why{font-size:22px;line-height:1.4;border-left:6px solid var(--acc);padding:6px 14px}
-.frag{border:4px solid var(--acc);padding:14px 18px;display:flex;flex-direction:column;gap:6px}
-.frag .fl{color:var(--acc);font-weight:700;letter-spacing:1px;font-size:15px}
-.frag .ft{font-size:28px;font-weight:700}
+.review{display: flex;flex-direction: column;gap: 12px}
+.rv{display: flex;gap: 14px;align-items: center;border: 3px solid var(--trazo);padding: 10px 14px;background: var(--superficie)}
+.rv svg.ic{fill: var(--tinta)}
+.rv .rc{font-size: 24px;font-weight: 700}
+.rv .rr{color: var(--tinta-2);font-size: 16px;font-weight: 700;min-width: 84px}
+.why{font-size: 22px;line-height: 1.4;border-left: 6px solid var(--acento);padding: 6px 14px}
+.frag{border: 4px solid var(--acento);padding: 14px 18px;display: flex;flex-direction: column;gap: 6px}
+.frag .fl{color: var(--acento);font-weight: 700;letter-spacing: 1px;font-size: 15px}
+.frag .ft{font-size: 28px;font-weight: 700}
 /* configuración */
-.cfg{max-width:860px;margin:0 auto;padding:24px;display:flex;flex-direction:column;gap:18px}
-.cfg table{width:100%;border-collapse:collapse}
-.cfg td,.cfg th{border:2px solid var(--line);padding:8px 10px;text-align:left;font-size:17px}
-.cfg th{background:var(--ink);color:var(--dark)}
-.cfg input[type=text],.cfg select{font:inherit;font-size:17px;background:var(--dark);color:var(--ink);border:2px solid var(--line);padding:6px 8px;width:100%}
-.stepper{display:flex;align-items:center;gap:10px}
-.stepper button{width:44px;height:44px;border:3px solid var(--line);background:transparent;font-size:22px;font-weight:700}
-.stepper span{font-size:28px;font-weight:700;min-width:40px;text-align:center}
-.warnt{color:var(--bad);font-weight:700}
-.note{color:var(--mute);font-size:15px}
-.final{display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;padding:30px;text-align:center}
-.final .phrase{font-size:40px;font-weight:700;line-height:1.25;max-width:1000px}
-.rank{width:min(700px,100%);border-collapse:collapse}
-.rank td{border:3px solid var(--line);padding:10px 14px;font-size:24px}
-.rank td.p{text-align:right;font-family:"Courier New",monospace;font-weight:700}
-.rank tr:first-child td{background:var(--acc);color:var(--dark)}
-.fsb{height:50px;padding:0 12px;border:3px solid var(--line);background:transparent;font-weight:700;font-size:15px;white-space:nowrap}
-.fsb:hover{background:#2a2b30}
-@media (max-width:1180px){.clock{font-size:34px;min-width:118px}.tab{min-width:40px;height:42px;padding:0 6px}.tbtn{width:42px;height:42px}.fsb{height:42px;font-size:20px}.fsl{display:none}.top{gap:10px}}
-@media (max-width:900px){.logo{display:none}}
-@media (max-width:700px){.app{height:auto;overflow:visible}.main{grid-template-columns:1fr;overflow:visible}.stage,.side{overflow:visible}.side{border-left:0;border-top:3px solid var(--line)}.top{flex-wrap:wrap}}
+.cfg{max-width: 860px;margin: 0 auto;padding: 24px;display: flex;flex-direction: column;gap: 18px}
+.cfg table{width: 100%;border-collapse: collapse}
+.cfg td,.cfg th{border: 2px solid var(--trazo);padding: 8px 10px;text-align: left;font-size: 17px}
+.cfg th{background: var(--acento-relleno);color: var(--tinta)}
+.cfg input[type=text],.cfg select{font: inherit;font-size: 17px;background: var(--fondo);color: var(--tinta);border: 2px solid var(--trazo);padding: 6px 8px;width: 100%}
+.stepper{display: flex;align-items: center;gap: 10px}
+.stepper button{width: 44px;height: 44px;border: 3px solid var(--trazo);background: transparent;font-size: 22px;font-weight: 700}
+.stepper span{font-size: 28px;font-weight: 700;min-width: 40px;text-align: center}
+.warnt{color: var(--h2);font-weight: 700}
+.note{color: var(--tinta-2);font-size: 15px}
+.final{display: flex;flex-direction: column;gap: 20px;align-items: center;justify-content: center;padding: 30px;text-align: center}
+.final .phrase{font-size: 40px;font-weight: 700;line-height: 1.25;max-width: 1000px}
+.rank{width: min(700px,100%);border-collapse: collapse}
+.rank td{border: 3px solid var(--trazo);padding: 10px 14px;font-size: 24px}
+.rank td.p{text-align: right;font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;font-weight: 700}
+.rank tr:first-child td{background: var(--acento-relleno);color: var(--tinta)}
+.fsb{height: 50px;padding: 0 12px;border: 3px solid var(--trazo);background: transparent;font-weight: 700;font-size: 15px;white-space: nowrap}
+.fsb:hover{background: var(--superficie)}
+@media (max-width:1180px){.clock{font-size: 34px;min-width: 118px}.tab{min-width: 40px;height: 42px;padding: 0 6px}.tbtn{width: 42px;height: 42px}.fsb{height: 42px;font-size: 20px}.fsl{display: none}.top{gap: 10px}}
+@media (max-width:900px){.logo{display: none}}
+@media (max-width:700px){.app{height: auto;overflow: visible}.main{grid-template-columns: 1fr;overflow: visible}.stage,.side{overflow: visible}.side{border-left: 0;border-top: 3px solid var(--trazo)}.top{flex-wrap: wrap}}
 
 /* clase (presentación) */
-.solo{flex:1;min-height:0;overflow:hidden;display:flex}
-.solo>.stage{flex:1}
-.secs{display:flex;gap:6px}
-.sec{height:46px;padding:0 12px;border:3px solid var(--line);background:transparent;font-weight:700;font-size:15px;letter-spacing:1px}
-.sec.on{background:var(--ink);color:var(--dark)}
-.cnt{font-family:"Courier New",monospace;font-weight:700;font-size:20px;min-width:74px;text-align:center}
-.sl{display:flex;flex-direction:column;gap:22px;justify-content:center}
-.kick{color:var(--acc);font-weight:700;letter-spacing:2px;font-size:20px}
-.big{font-size:44px;font-weight:700;line-height:1.2}
-.lead{font-size:30px;line-height:1.4;max-width:1200px}
-.cover{align-items:center;text-align:center;gap:26px}
-.cover .meta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
-.cover .meta span{border:3px solid var(--line);padding:8px 16px;font-size:22px;font-weight:700}
-.obj{border:4px solid var(--acc);padding:22px 26px;font-size:34px;line-height:1.4;font-weight:700}
-.how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.how div{border:3px solid var(--line);padding:14px 16px;font-size:22px;line-height:1.35;background:var(--panel)}
-.how b{display:block;color:var(--acc);font-size:16px;letter-spacing:1px;margin-bottom:6px}
-.dims{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.dim{border:3px solid var(--line);background:var(--panel);padding:16px 18px;display:flex;flex-direction:column;gap:10px}
-.dim .dq{font-size:24px;color:var(--mute);font-style:italic}
-.dim .dc{display:flex;gap:16px;flex-wrap:wrap}
-.dim .dc span{display:flex;align-items:center;gap:8px;font-size:21px;font-weight:700}
-.dim svg.ic{fill:var(--ink)}
-.hid{visibility:hidden}
-.rev{align-self:flex-start}
-.ccards{display:flex;flex-direction:column;gap:14px}
-.cc{display:flex;border:3px solid var(--line);background:var(--panel)}
-.cc .ci{min-width:130px;background:var(--ink);display:flex;align-items:center;justify-content:center;padding:12px}
-.cc .ci svg{fill:var(--dark)}
-.cc .ct{padding:12px 18px;display:flex;flex-direction:column;gap:6px}
-.cc .cn{font-size:30px;font-weight:700}
-.cc .cd{font-size:25px;line-height:1.35}
-.cc .ce{font-size:20px;color:var(--mute);font-style:italic}
-.vs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.vs div{border:3px solid var(--line);padding:16px 18px;font-size:24px;line-height:1.4;background:var(--panel)}
-.vs b{display:block;font-size:28px;margin-bottom:6px}
-.mview{display:flex;gap:18px;justify-content:center;align-items:flex-start}
-.mview img{height:760px;width:auto;border:3px solid var(--line);background:#fff;display:block}
-.mnav{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap}
-.mnav .btn{min-width:64px}
-.mnav .pg{font-weight:700;font-size:20px;min-width:160px;text-align:center}
-.qs{display:flex;flex-direction:column;gap:14px}
-.q{border:3px solid var(--line);background:var(--panel);padding:14px 18px;display:flex;flex-direction:column;gap:8px}
-.q .qq{font-size:28px;font-weight:700;line-height:1.3}
-.q .qa{font-size:23px;line-height:1.4;color:var(--ok)}
-.phrasebig{font-size:52px;font-weight:700;line-height:1.25;text-align:center;border:4px solid var(--acc);padding:26px}
-.mnav a.btn,.mnav a.btn:visited{color:var(--ink)}
+.solo{flex: 1;min-height: 0;overflow: hidden;display: flex}
+.solo>.stage{flex: 1}
+.secs{display: flex;gap: 6px}
+.sec{height: 46px;padding: 0 12px;border: 3px solid var(--trazo);background: transparent;font-weight: 700;font-size: 15px;letter-spacing: 1px}
+.sec.on{background: var(--acento-relleno);color: var(--tinta)}
+.cnt{font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;font-weight: 700;font-size: 20px;min-width: 74px;text-align: center}
+.sl{display: flex;flex-direction: column;gap: 22px;justify-content: center}
+.kick{color: var(--acento);font-weight: 700;letter-spacing: 2px;font-size: 20px}
+.big{font-size: 44px;font-weight: 700;line-height: 1.2}
+.lead{font-size: 30px;line-height: 1.4;max-width: 1200px}
+.cover{align-items: center;text-align: center;gap: 26px}
+.cover .meta{display: flex;gap: 14px;flex-wrap: wrap;justify-content: center}
+.cover .meta span{border: 3px solid var(--trazo);padding: 8px 16px;font-size: 22px;font-weight: 700}
+.obj{border: 4px solid var(--acento);padding: 22px 26px;font-size: 34px;line-height: 1.4;font-weight: 700}
+.how{display: grid;grid-template-columns: repeat(3,1fr);gap: 14px}
+.how div{border: 3px solid var(--trazo);padding: 14px 16px;font-size: 22px;line-height: 1.35;background: var(--superficie)}
+.how b{display: block;color: var(--acento);font-size: 16px;letter-spacing: 1px;margin-bottom: 6px}
+.dims{display: grid;grid-template-columns: 1fr 1fr;gap: 16px}
+.dim{border: 3px solid var(--trazo);background: var(--superficie);padding: 16px 18px;display: flex;flex-direction: column;gap: 10px}
+.dim .dq{font-size: 24px;color: var(--tinta-2);font-style: italic}
+.dim .dc{display: flex;gap: 16px;flex-wrap: wrap}
+.dim .dc span{display: flex;align-items: center;gap: 8px;font-size: 21px;font-weight: 700}
+.dim svg.ic{fill: var(--tinta)}
+.hid{visibility: hidden}
+.rev{align-self: flex-start}
+.ccards{display: flex;flex-direction: column;gap: 14px}
+.cc{display: flex;border: 3px solid var(--trazo);background: var(--superficie)}
+.cc .ci{min-width: 130px;background: var(--acento-relleno);display: flex;align-items: center;justify-content: center;padding: 12px}
+.cc .ci svg{fill: var(--tinta)}
+.cc .ct{padding: 12px 18px;display: flex;flex-direction: column;gap: 6px}
+.cc .cn{font-size: 30px;font-weight: 700}
+.cc .cd{font-size: 25px;line-height: 1.35}
+.cc .ce{font-size: 20px;color: var(--tinta-2);font-style: italic}
+.vs{display: grid;grid-template-columns: 1fr 1fr;gap: 16px}
+.vs div{border: 3px solid var(--trazo);padding: 16px 18px;font-size: 24px;line-height: 1.4;background: var(--superficie)}
+.vs b{display: block;font-size: 28px;margin-bottom: 6px}
+.mview{display: flex;gap: 18px;justify-content: center;align-items: flex-start}
+.mview img{height: 760px;width: auto;border: 3px solid var(--trazo);background: var(--acento-relleno);display: block}
+.mnav{display: flex;gap: 10px;justify-content: center;align-items: center;flex-wrap: wrap}
+.mnav .btn{min-width: 64px}
+.mnav .pg{font-weight: 700;font-size: 20px;min-width: 160px;text-align: center}
+.qs{display: flex;flex-direction: column;gap: 14px}
+.q{border: 3px solid var(--trazo);background: var(--superficie);padding: 14px 18px;display: flex;flex-direction: column;gap: 8px}
+.q .qq{font-size: 28px;font-weight: 700;line-height: 1.3}
+.q .qa{font-size: 23px;line-height: 1.4;color: var(--exito)}
+.phrasebig{font-size: 52px;font-weight: 700;line-height: 1.25;text-align: center;border: 4px solid var(--acento);padding: 26px}
+.mnav a.btn,.mnav a.btn:visited{color: var(--tinta)}
 </style>
 
   <link rel="icon" href="../../../../../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../../../../assets/css/site.css">
   <link rel="stylesheet" href="../../../../../assets/css/armonia.css">
-  <script src="../../../../../assets/js/site.js" defer></script>
+  <script src="../../../../../assets/js/site.js"></script>
+  <!-- barajas aplicadas -->
 </head>
-<body>
+<body data-original="oscura">
 <div class="app" id="app"></div>
 <div class="modal" id="modal"><div class="box" id="box"></div></div>
 <script>
@@ -206,7 +207,7 @@ const LS = 'codigo4d-panel-v1';
 function runsOf(rows){const out=[];rows.forEach((row,y)=>{let x=0;while(x<row.length){if(row[x]==='X'){const s=x;while(x<row.length&&row[x]==='X')x++;out.push([s,y,x-s])}else x++}});return out}
 function iconSVG(name,size){const r=runsOf(ICONS[name]);return `<svg class="ic" width="${size}" height="${size}" viewBox="0 0 12 12" shape-rendering="crispEdges" role="img" aria-label="${name}">${r.map(([x,y,w])=>`<rect x="${x}" y="${y}" width="${w}" height="1"/>`).join('')}</svg>`}
 const ACC={'Á':'A','É':'E','Í':'I','Ó':'O','Ú':'U'};
-function pix(text,scale,color){text=text.toUpperCase();let x=0;const rects=[];const top=3;for(const ch of text){if(ch===' '){x+=4;continue}let base=ch,acc=null;if(ACC[ch]){base=ACC[ch];acc='a'}if(ch==='Ñ'){base='N';acc='t'}const g=GLYPHS[base];if(!g){x+=4;continue}const rows=g.split(' ');const w=rows[0].length;runsOf(rows).forEach(([a,b,c])=>rects.push([x+a,b+top,c,1]));if(acc==='a'){rects.push([x+Math.floor(w/2)+1,0,1,1],[x+Math.floor(w/2),1,1,1])}if(acc==='t'){rects.push([x+1,0,2,1],[x+4,0,1,1],[x,1,1,1],[x+3,1,1,1])}x+=w+1}const W=Math.max(x-1,1),H=10;return `<svg class="px" width="${W*scale}" height="${H*scale}" viewBox="0 0 ${W} ${H}" shape-rendering="crispEdges" fill="${color||'currentColor'}" role="img" aria-label="${text}">${rects.map(r=>`<rect x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}"/>`).join('')}</svg>`}
+function pix(text,scale,color){text=text.toUpperCase();let x=0;const rects=[];const top=3;for(const ch of text){if(ch===' '){x+=4;continue}let base=ch,acc=null;if(ACC[ch]){base=ACC[ch];acc='a'}if(ch==='Ñ'){base='N';acc='t'}const g=GLYPHS[base];if(!g){x+=4;continue}const rows=g.split(' ');const w=rows[0].length;runsOf(rows).forEach(([a,b,c])=>rects.push([x+a,b+top,c,1]));if(acc==='a'){rects.push([x+Math.floor(w/2)+1,0,1,1],[x+Math.floor(w/2),1,1,1])}if(acc==='t'){rects.push([x+1,0,2,1],[x+4,0,1,1],[x,1,1,1],[x+3,1,1,1])}x+=w+1}const W=Math.max(x-1,1),H=10;return `<svg class="px" width="${W*scale}" height="${H*scale}" viewBox="0 0 ${W} ${H}" shape-rendering="crispEdges" style="fill:${color||'currentColor'}" role="img" aria-label="${text}">${rects.map(r=>`<rect x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}"/>`).join('')}</svg>`}
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 /* ---------- estado ---------- */
@@ -249,15 +250,15 @@ function render(){if(S.screen==='clase')return renderClase();if(S.screen==='setu
 function renderSetup(){
   const rows=S.cfg.groups.slice(0,S.cfg.n).map((g,i)=>`<tr><td><input type="text" data-name="${i}" value="${esc(g.name)}" aria-label="Nombre del grupo ${i+1}"></td><td><select data-disc="${i}" aria-label="Disco del grupo ${i+1}">${DISCS.map(d=>`<option value="${d}" ${d===g.disc?'selected':''}>Disco ${d}</option>`).join('')}</select></td></tr>`).join('');
   const used=groups().map(g=>g.disc);const dup=used.filter((d,i)=>used.indexOf(d)!==i);
-  app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',4,'#f4f2ec')}</div><div class="spacer"></div><button class="btn" id="toClase">← Presentación de la clase</button></div>
+  app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',4,'var(--tinta)')}</div><div class="spacer"></div><button class="btn" id="toClase">← Presentación de la clase</button></div>
   <div class="cfg">
-   <h1 style="margin:0">${pix('CONFIGURAR',4,'#f4f2ec')}</h1>
-   <div><div style="font-weight:700;margin-bottom:8px">Cantidad de grupos</div><div class="stepper"><button id="nm" aria-label="Menos grupos">−</button><span>${S.cfg.n}</span><button id="np" aria-label="Más grupos">+</button></div>
-   <div class="note" style="margin-top:6px">Lo ideal son 7 grupos, más el Disco R de reserva. Máximo 8 discos.</div></div>
+   <h1 style="margin: 0">${pix('CONFIGURAR',4,'var(--tinta)')}</h1>
+   <div><div style="font-weight: 700;margin-bottom: 8px">Cantidad de grupos</div><div class="stepper"><button id="nm" aria-label="Menos grupos">−</button><span>${S.cfg.n}</span><button id="np" aria-label="Más grupos">+</button></div>
+   <div class="note" style="margin-top: 6px">Lo ideal son 7 grupos, más el Disco R de reserva. Máximo 8 discos.</div></div>
    <table><tr><th>Grupo</th><th>Disco que recibe</th></tr>${rows}</table>
    ${dup.length?`<div class="warnt">Ojo: hay dos grupos con el mismo disco (${[...new Set(dup)].map(d=>'Disco '+d).join(', ')}). Así podrían copiarse.</div>`:''}
-   <div class="row2"><div><div style="font-weight:700;margin-bottom:8px">Minutos por nivel</div><div class="stepper"><button id="mm">−</button><span>${S.cfg.minutes}</span><button id="mp">+</button></div></div>
-   <div><div style="font-weight:700;margin-bottom:8px">Pista en el minuto</div><div class="stepper"><button id="hm">−</button><span>${S.cfg.hintAt}</span><button id="hp">+</button></div></div></div>
+   <div class="row2"><div><div style="font-weight: 700;margin-bottom: 8px">Minutos por nivel</div><div class="stepper"><button id="mm">−</button><span>${S.cfg.minutes}</span><button id="mp">+</button></div></div>
+   <div><div style="font-weight: 700;margin-bottom: 8px">Pista en el minuto</div><div class="stepper"><button id="hm">−</button><span>${S.cfg.hintAt}</span><button id="hp">+</button></div></div></div>
    <div class="row2"><button class="btn pri" id="go">${Object.keys(S.prog).length?'Volver al juego':'Comenzar'}</button><button class="btn" id="reset">Borrar puntajes y empezar de cero</button></div>
    <div class="note">Este panel lo maneja solo el profe. Guarda el avance en este navegador: si se recarga la página, no se pierde nada.</div>
   </div>`;
@@ -276,7 +277,7 @@ function levelBody(L,lv){
   const hintOn=!!S.hintShown[lv];
   if(L.kind==='practice'){
     return `<div class="sits"><div class="sit"><div class="sitt">Ubiquen estos tres símbolos en los anillos 1, 2 y 3, en la ventana de arriba (▲). Lean las letras en las ventanas de abajo (▼) y anoten el código en la fila 0 de su hoja.</div></div></div>
-    <div class="icons3">${L.symbols.map((s,k)=>`<div class="icard">${iconSVG(s,120)}<div style="font-size:24px;font-weight:700">${esc(L.symbolNames[k])}</div><div class="ring">ANILLO ${k+1}</div></div>`).join('')}</div>
+    <div class="icons3">${L.symbols.map((s,k)=>`<div class="icard">${iconSVG(s,120)}<div style="font-size: 24px;font-weight: 700">${esc(L.symbolNames[k])}</div><div class="ring">ANILLO ${k+1}</div></div>`).join('')}</div>
     ${hintOn?`<div class="hint"><b>PISTA</b>${esc(L.hint)}</div>`:''}`;
   }
   if(L.kind==='final'){
@@ -286,28 +287,28 @@ function levelBody(L,lv){
     <div class="just">En la fila final de la hoja completen la frase: "El sistema no podía funcionar con una sola dimensión porque…"</div>`;
   }
   const anySolved=groups().some((_,i)=>gp(lv,i).solved);
-  return `<div class="sits">${L.situations.map((t,k)=>`<div class="sit"><div class="sitn">${pix(String(k+1),6,'#0b0b0c')}<small>ANILLO ${k+1}</small></div><div class="sitt">${esc(t.text)}${hintOn?`<div class="shint"><b>PISTA</b> ${esc(t.hint)}</div>`:''}</div></div>`).join('')}</div>
+  return `<div class="sits">${L.situations.map((t,k)=>`<div class="sit"><div class="sitn">${pix(String(k+1),6,'var(--tinta)')}<small>ANILLO ${k+1}</small></div><div class="sitt">${esc(t.text)}${hintOn?`<div class="shint"><b>PISTA</b> ${esc(t.hint)}</div>`:''}</div></div>`).join('')}</div>
   <div class="just">Justifiquen la situación ${L.justify} en su hoja de registro.</div>
   ${anySolved?`<div class="bonusbox"><div class="bt">CASO BONUS · para los grupos que ya tienen su código · +2</div><div class="bq">${esc(L.bonus.text)}</div><div class="bn">Busquen el concepto, pongan su símbolo en el <b>anillo 4</b> y anoten la letra que aparece en la ventana ▼.</div></div>`:''}`;
 }
 
 function renderGame(){
   const lv=S.level,L=DATA.levels[lv];
-  const tabs=DATA.levels.map((x,i)=>`<button class="tab ${i===lv?'on':''}" data-lv="${i}" aria-label="${esc(x.name)}">${pix(x.tab,3,i===lv?'#0b0b0c':'#f4f2ec')}${allSolved(i)&&groups().length?'<span class="done" title="Todos resolvieron"></span>':''}</button>`).join('');
+  const tabs=DATA.levels.map((x,i)=>`<button class="tab ${i===lv?'on':''}" data-lv="${i}" aria-label="${esc(x.name)}">${pix(x.tab,3,i===lv?'var(--tinta)':'var(--tinta)')}${allSolved(i)&&groups().length?'<span class="done" title="Todos resolvieron"></span>':''}</button>`).join('');
   const roles=L.roles.map((n,k)=>`<div class="role"><b>${n}</b>${['Lector','Buscador','Operador','Redactor','Vocero'][k]}</div>`).join('');
   const gs=groups().map((g,i)=>{const p=gp(lv,i);const locked=p.lockUntil>Date.now();const st=p.solved?('¡Resuelto!'+(L.bonus?(p.bonusTried?(p.bonus?' · bonus ✓':' · bonus ✗'):''):'')):locked?`<span data-lock="${i}">Bloqueado</span>`:(p.attempts?`${p.attempts} intento${p.attempts>1?'s':''}`:'Esperando código');
     return `<button class="g ${p.solved?'ok':locked?'lock':''}" data-g="${i}"><span class="gn">${esc(g.name)}</span><span class="gd">Disco ${esc(g.disc)}</span><span class="gs">${st}</span><span class="gp">${score(i)}</span></button>`}).join('');
   const done=allSolved(lv)&&groups().length;
   const r=remaining();
-  app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',3,'#f4f2ec')}</div><div class="tabs">${tabs}</div><div class="spacer"></div>
+  app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',3,'var(--tinta)')}</div><div class="tabs">${tabs}</div><div class="spacer"></div>
    <div class="timer"><div class="clock" id="clock">${fmt(r)}</div>
     <button class="tbtn" id="tp" aria-label="Iniciar">▶</button><button class="tbtn" id="tpa" aria-label="Pausar">❚❚</button><button class="tbtn" id="ts" aria-label="Detener y reiniciar">■</button>
     <div class="tsmall"><button id="tplus" aria-label="Un minuto más">+1</button><button id="tminus" aria-label="Un minuto menos">−1</button></div></div>
     <button class="fsb" id="bcl" title="Volver a la presentación">CLASE</button><button class="fsb" id="fsb">${isFs()?'✕<span class="fsl"> Salir de pantalla completa</span>':'⛶<span class="fsl"> Pantalla completa</span>'}</button></div>
   <div class="main"><div class="stage" id="stg"><div class="fit" id="fitS">
-    <div class="lvhead"><div>${pix(L.title,5,'#f4f2ec')}<div class="lvsub">${esc(L.subtitle)}</div></div><div class="roles">${roles}</div></div>
+    <div class="lvhead"><div>${pix(L.title,5,'var(--tinta)')}<div class="lvsub">${esc(L.subtitle)}</div></div><div class="roles">${roles}</div></div>
     ${done?`<div class="banner">¡Todos los grupos lo lograron! Pueden pasar a la revisión.</div>`:''}
-    ${r===0&&!done?`<div class="banner" style="color:var(--bad);border-color:var(--bad)">¡Se acabó el tiempo! Pasen a la revisión.</div>`:''}
+    ${r===0&&!done?`<div class="banner" style="color: var(--h2);border-color: var(--h2)">¡Se acabó el tiempo! Pasen a la revisión.</div>`:''}
     ${levelBody(L,lv)}
   </div></div>
   <div class="side" id="sid"><div class="fit" id="fitR"><div class="sideh"><b>Grupos</b><span class="note">Toca un grupo para ingresar su código</span></div>
@@ -332,7 +333,7 @@ function goLevel(i){S.level=i;S.timer={running:false,remaining:S.cfg.minutes*600
 let typed='';
 function openCode(i){
   const lv=S.level,L=DATA.levels[lv],g=groups()[i],p=gp(lv,i),n=L.symbols.length;
-  if(p.lockUntil>Date.now()){box.innerHTML=`<h2>${esc(g.name)} · Disco ${esc(g.disc)}</h2><div class="result bad">CÓDIGO INCORRECTO</div><div id="mlock" data-g="${i}" style="font-size:22px;text-align:center">Esperen…</div><button class="btn" id="mx">Cerrar</button>`;modal.classList.add('on');mx.onclick=closeModal;return}
+  if(p.lockUntil>Date.now()){box.innerHTML=`<h2>${esc(g.name)} · Disco ${esc(g.disc)}</h2><div class="result bad">CÓDIGO INCORRECTO</div><div id="mlock" data-g="${i}" style="font-size: 22px;text-align: center">Esperen…</div><button class="btn" id="mx">Cerrar</button>`;modal.classList.add('on');mx.onclick=closeModal;return}
   if(p.solved){return openSolved(i)}
   typed='';box.dataset.mode='code';drawPad(i,n);modal.classList.add('on');
 }
@@ -342,7 +343,7 @@ function drawPad(i,n,msg){
   box.innerHTML=`<h2>${esc(g.name)} · Disco ${esc(g.disc)}</h2><div class="note">${bonusMode?'CASO BONUS: ingresa la letra del <b>anillo 4</b>. Hay un solo intento.':`Ingresa las ${n} letras de la hoja, de afuera hacia adentro (anillo 1, 2, 3${n>3?', 4':''}).`}</div>
   <div class="slots">${slots}</div>${msg||''}
   <div class="keys">${'ABCDEFGHIJKL'.split('').map(c=>`<button class="key" data-k="${c}">${c}</button>`).join('')}</div>
-  <div class="row2"><button class="btn" id="kb">Borrar</button><button class="btn pri" id="kv" ${typed.length<n?'disabled style="opacity:.4"':''}>Verificar</button></div>
+  <div class="row2"><button class="btn" id="kb">Borrar</button><button class="btn pri" id="kv" ${typed.length<n?'disabled style="opacity: .4"':''}>Verificar</button></div>
   <button class="btn" id="mx">Cancelar</button>`;
   document.querySelectorAll('[data-k]').forEach(e=>e.onclick=()=>{if(typed.length<n){typed+=e.dataset.k;drawPad(i,n)}});
   kb.onclick=()=>{typed=typed.slice(0,-1);drawPad(i,n)};kv.onclick=()=>bonusMode?verifyBonus(i):verify(i);mx.onclick=closeModal;
@@ -364,7 +365,7 @@ function verify(i){
     save();openSolved(i,true);render();
   }else{
     p.lockUntil=Date.now()+30000;save();
-    box.innerHTML=`<h2>${esc(g.name)} · Disco ${esc(g.disc)}</h2><div class="result bad">CÓDIGO INCORRECTO</div><div class="note" style="text-align:center;font-size:18px">Revisen sus respuestas y cómo giraron el disco.</div><div id="mlock" data-g="${i}" style="font-size:22px;text-align:center">Esperen 30 segundos para volver a intentar.</div><button class="btn" id="mx">Cerrar</button>`;
+    box.innerHTML=`<h2>${esc(g.name)} · Disco ${esc(g.disc)}</h2><div class="result bad">CÓDIGO INCORRECTO</div><div class="note" style="text-align: center;font-size: 18px">Revisen sus respuestas y cómo giraron el disco.</div><div id="mlock" data-g="${i}" style="font-size: 22px;text-align: center">Esperen 30 segundos para volver a intentar.</div><button class="btn" id="mx">Cerrar</button>`;
     delete box.dataset.g;mx.onclick=closeModal;render();
   }
 }
@@ -374,12 +375,12 @@ function openSolved(i,fresh){
   if(L.kind==='practice')extra='<div class="note">El nivel de práctica no da puntos.</div>';
   else if(L.kind==='final')extra=`<div class="toggles"><button class="tg ${p.just?'on':''}" id="tj">+1 frase final válida</button></div>`;
   else{
-    const b=p.bonusTried?(p.bonus?'<div class="result ok" style="font-size:20px">CASO BONUS CORRECTO · +2</div>':'<div class="result bad" style="font-size:20px">CASO BONUS INCORRECTO</div>')
+    const b=p.bonusTried?(p.bonus?'<div class="result ok" style="font-size: 20px">CASO BONUS CORRECTO · +2</div>':'<div class="result bad" style="font-size: 20px">CASO BONUS INCORRECTO</div>')
       :'<button class="btn" id="tbz">Ingresar caso bonus (1 letra del anillo 4)</button>';
     extra=`<div class="toggles"><button class="tg ${p.just?'on':''}" id="tj">+1 justificación válida</button></div>${b}`;
   }
   box.innerHTML=`<h2>${esc(g.name)} · Disco ${esc(g.disc)}</h2><div class="result ok">¡CÓDIGO CORRECTO!</div>
-  <div style="text-align:center;font-size:20px">${L.kind==='practice'?'¡Ya saben usar el disco!':`+${p.pts} puntos (intento ${p.attempts})`}</div>${extra}<button class="btn pri" id="mx">Listo</button>`;
+  <div style="text-align: center;font-size: 20px">${L.kind==='practice'?'¡Ya saben usar el disco!':`+${p.pts} puntos (intento ${p.attempts})`}</div>${extra}<button class="btn pri" id="mx">Listo</button>`;
   const tj=document.getElementById('tj'),tbz=document.getElementById('tbz');
   if(tj)tj.onclick=()=>{p.just=!p.just;save();openSolved(i);render()};
   if(tbz)tbz.onclick=()=>{typed='';box.dataset.mode='bonus';drawPad(i,1)};
@@ -410,8 +411,8 @@ function openReview(lv){
 function ranking(){return groups().map((g,i)=>({g,i,p:score(i)})).sort((a,b)=>b.p-a.p)}
 function openRank(){box.innerHTML=`<h2>Ranking</h2><table class="rank">${ranking().map(r=>`<tr><td>${esc(r.g.name)}</td><td class="p">${r.p}</td></tr>`).join('')}</table><button class="btn pri" id="mx">Cerrar</button>`;delete box.dataset.g;mx.onclick=closeModal;modal.classList.add('on')}
 function renderFinal(){
-  app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',3,'#f4f2ec')}</div><div class="spacer"></div><button class="fsb" id="fsb">${isFs()?'Salir de pantalla completa':'⛶ Pantalla completa'}</button><button class="btn" id="back">← Volver al juego</button><button class="btn pri" id="toCierre">Cierre de la clase →</button></div>
-  <div class="final">${pix('¡CÓDIGO COMPLETO!',6,'#ffd23f')}<div class="phrase">${esc(DATA.phrase)}</div>
+  app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',3,'var(--tinta)')}</div><div class="spacer"></div><button class="fsb" id="fsb">${isFs()?'Salir de pantalla completa':'⛶ Pantalla completa'}</button><button class="btn" id="back">← Volver al juego</button><button class="btn pri" id="toCierre">Cierre de la clase →</button></div>
+  <div class="final">${pix('¡CÓDIGO COMPLETO!',6,'var(--acento)')}<div class="phrase">${esc(DATA.phrase)}</div>
   <table class="rank">${ranking().map(r=>`<tr><td>${esc(r.g.name)}</td><td class="p">${r.p} pts</td></tr>`).join('')}</table></div>`;
   back.onclick=()=>{S.screen='game';save();render()};
   toCierre.onclick=()=>openClase('CIERRE');
@@ -424,51 +425,51 @@ const DK=['bio','afe','soc','val'];
 const DN={bio:'BIOLÓGICA',afe:'AFECTIVA',soc:'SOCIAL',val:'VALÓRICA'};
 function slides(){
  const L=[];
- L.push({sec:'INICIO',id:'cover',html:()=>`<div class="sl cover">${pix('CÓDIGO 4D',12,'#f4f2ec')}
+ L.push({sec:'INICIO',id:'cover',html:()=>`<div class="sl cover">${pix('CÓDIGO 4D',12,'var(--tinta)')}
   <div class="big">Las 4 dimensiones de la sexualidad</div>
   <div class="meta"><span>Ciencias Naturales</span><span>7° Básico A</span><span>Lunes 19 de octubre</span></div></div>`});
  L.push({sec:'INICIO',id:'obj',html:()=>`<div class="sl"><div class="kick">OBJETIVO DE LA CLASE</div>
   <div class="obj">Explicar la sexualidad como un aspecto integral, relacionando sus dimensiones biológica, afectiva, social y valórica en situaciones cotidianas.</div>
-  <div class="kick" style="margin-top:6px">¿CÓMO LO VAMOS A HACER?</div>
+  <div class="kick" style="margin-top: 6px">¿CÓMO LO VAMOS A HACER?</div>
   <div class="how"><div><b>1 · RECORDAR</b>Repasamos lo que vimos la clase pasada y los 12 conceptos.</div><div><b>2 · JUGAR</b>En grupo resolvemos los niveles de Código 4D con el manual y el disco.</div><div><b>3 · CONCLUIR</b>Unimos los fragmentos y explicamos por qué la sexualidad es integral.</div></div></div>`});
  L.push({sec:'INICIO',id:'rec',html:()=>{const r=S.rev&&S.rev.rec;return `<div class="sl"><div class="kick">LA CLASE PASADA</div>
-  <div class="big">¿Qué significa que la sexualidad sea <span style="color:var(--acc)">integral</span>?</div>
+  <div class="big">¿Qué significa que la sexualidad sea <span style="color: var(--acento)">integral</span>?</div>
   <div class="lead ${r?'':'hid'}">Que la sexualidad no es solo el cuerpo: también incluye lo que sentimos, cómo nos relacionamos y lo que valoramos. Por eso la miramos en <b>4 dimensiones</b>.</div>
   <div class="vs ${r?'':'hid'}"><div><b>Pubertad</b>Los cambios físicos que preparan al cuerpo para la adultez (aprox. 8 a 14 años).</div><div><b>Adolescencia</b>Toda la etapa entre la niñez y la adultez (10 a 19 años). La pubertad es solo su parte biológica.</div></div>
   <button class="btn rev" data-rev="rec">${r?'Ocultar respuesta':'Mostrar respuesta'}</button></div>`}});
  L.push({sec:'INICIO',id:'dims',html:()=>{const r=S.rev&&S.rev.dims;return `<div class="sl"><div class="kick">LAS 4 DIMENSIONES</div>
   <div class="big">Cada dimensión responde una pregunta</div>
-  <div class="dims">${DK.map(k=>`<div class="dim">${pix('DIMENSIÓN '+DN[k],3,'#f4f2ec')}<div class="dq">${esc(CONC[k].q)}</div>
+  <div class="dims">${DK.map(k=>`<div class="dim">${pix('DIMENSIÓN '+DN[k],3,'var(--tinta)')}<div class="dq">${esc(CONC[k].q)}</div>
    <div class="dc ${r?'':'hid'}">${CONC[k].c.map(c=>`<span>${iconSVG(c.i,34)}${esc(c.n)}</span>`).join('')}</div></div>`).join('')}</div>
   <button class="btn rev" data-rev="dims">${r?'Ocultar conceptos':'Mostrar los 12 conceptos'}</button></div>`}});
  DK.forEach(k=>L.push({sec:'INICIO',id:'d_'+k,html:()=>`<div class="sl"><div class="kick">DEFINICIÓN RÁPIDA</div>
-  <div>${pix('DIMENSIÓN '+DN[k],5,'#f4f2ec')}<div class="lvsub" style="font-size:26px">${esc(CONC[k].q)}</div></div>
+  <div>${pix('DIMENSIÓN '+DN[k],5,'var(--tinta)')}<div class="lvsub" style="font-size: 26px">${esc(CONC[k].q)}</div></div>
   <div class="ccards">${CONC[k].c.map(c=>`<div class="cc"><div class="ci">${iconSVG(c.i,84)}</div><div class="ct"><div class="cn">${esc(c.n)}</div><div class="cd">${esc(c.d)}</div><div class="ce">Ejemplo: ${esc(c.e)}</div></div></div>`).join('')}</div></div>`}));
  L.push({sec:'MANUAL',id:'man',html:()=>{const m=S.mpage||0;const a=m*2+1,b=a+1;return `<div class="sl"><div class="lvhead"><div><div class="kick">EL MANUAL</div><div class="big">Todo lo que necesitan está aquí</div></div>
-  <div class="lead" style="font-size:22px;max-width:640px">Queda en su mesa durante todo el juego. Con él buscan los conceptos y aprenden a usar el disco.</div></div>
+  <div class="lead" style="font-size: 22px;max-width: 640px">Queda en su mesa durante todo el juego. Con él buscan los conceptos y aprenden a usar el disco.</div></div>
   <div class="mview"><img src="manual/p${a}.png" alt="Manual, página ${a}"><img src="manual/p${b}.png" alt="Manual, página ${b}"></div>
   <div class="mnav"><button class="btn" data-mp="-1" aria-label="Páginas anteriores">◀</button><span class="pg">Páginas ${a} y ${b} de 8</span><button class="btn" data-mp="1" aria-label="Páginas siguientes">▶</button>
-  <a class="btn" href="../materiales/Manual_Codigo4D.pdf" target="_blank" rel="noopener" style="text-decoration:none">Abrir PDF</a></div></div>`}});
- L.push({sec:'MANUAL',id:'go',html:()=>`<div class="sl cover"><div class="kick">¿LISTOS?</div>${pix('A JUGAR',10,'#ffd23f')}
+  <a class="btn" href="../materiales/Manual_Codigo4D.pdf" target="_blank" rel="noopener" style="text-decoration: none">Abrir PDF</a></div></div>`}});
+ L.push({sec:'MANUAL',id:'go',html:()=>`<div class="sl cover"><div class="kick">¿LISTOS?</div>${pix('A JUGAR',10,'var(--acento)')}
   <div class="lead">Cada grupo tiene su <b>disco</b>, su <b>manual</b> y su <b>hoja de registro</b>. Primero jugamos el nivel de <b>práctica</b>, que no da puntos.</div>
-  <button class="btn pri" id="toGame" style="font-size:24px;padding:16px 28px">Ir al panel del juego →</button></div>`});
- L.push({sec:'CIERRE',id:'phr',html:()=>`<div class="sl"><div class="kick" style="text-align:center">LA FRASE QUE FORMARON LOS FRAGMENTOS</div>
+  <button class="btn pri" id="toGame" style="font-size: 24px;padding: 16px 28px">Ir al panel del juego →</button></div>`});
+ L.push({sec:'CIERRE',id:'phr',html:()=>`<div class="sl"><div class="kick" style="text-align: center">LA FRASE QUE FORMARON LOS FRAGMENTOS</div>
   <div class="phrasebig">${esc(DATA.phrase)}</div>
-  <div class="lead" style="text-align:center;margin:0 auto">En la historia de Matías, un cambio del <b>cuerpo</b> provocó burlas del <b>grupo</b>, que bajaron su <b>autoestima</b>, y eso lo llevó a <b>decidir</b> pedir ayuda.</div></div>`});
+  <div class="lead" style="text-align: center;margin: 0 auto">En la historia de Matías, un cambio del <b>cuerpo</b> provocó burlas del <b>grupo</b>, que bajaron su <b>autoestima</b>, y eso lo llevó a <b>decidir</b> pedir ayuda.</div></div>`});
  L.push({sec:'CIERRE',id:'pl',html:()=>{const r=S.rev&&S.rev.pl;return `<div class="sl"><div class="kick">PARA CERRAR</div><div class="qs">
   <div class="q"><div class="qq">1. ¿Por qué en cada nivel aparecían conceptos de distintas dimensiones?</div><div class="qa ${r?'':'hid'}">Porque en la vida real las dimensiones aparecen juntas: lo que le pasa al cuerpo también se siente, se vive con otros y se decide.</div></div>
   <div class="q"><div class="qq">2. ¿Por qué no podían abrir el nivel final con un solo fragmento?</div><div class="qa ${r?'':'hid'}">Porque se necesitaban las 4 dimensiones: ninguna dimensión funciona sola.</div></div>
   <div class="q"><div class="qq">3. ¿En qué se diferencian la pubertad y la adolescencia?</div><div class="qa ${r?'':'hid'}">La pubertad son los cambios físicos; la adolescencia es toda la etapa, e incluye lo afectivo, lo social y lo valórico.</div></div>
   </div><button class="btn rev" data-rev="pl">${r?'Ocultar respuestas':'Mostrar respuestas'}</button></div>`}});
- L.push({sec:'CIERRE',id:'end',html:()=>`<div class="sl cover">${pix('¡GRACIAS!',10,'#ffd23f')}
+ L.push({sec:'CIERRE',id:'end',html:()=>`<div class="sl cover">${pix('¡GRACIAS!',10,'var(--acento)')}
   <div class="lead">Devuelvan el <b>manual</b> y el <b>disco</b>, y entreguen la <b>hoja de registro</b> con los nombres del grupo.</div>
-  <button class="btn" id="toRank" style="font-size:22px;padding:14px 24px">Ver ranking final</button></div>`});
+  <button class="btn" id="toRank" style="font-size: 22px;padding: 14px 24px">Ver ranking final</button></div>`});
  return L;
 }
 function renderClase(){
  const L=slides();S.slide=Math.max(0,Math.min(L.length-1,S.slide||0));const cur=L[S.slide];
  const secs=['INICIO','MANUAL','CIERRE'].map(x=>`<button class="sec ${cur.sec===x?'on':''}" data-sec="${x}">${x}</button>`).join('');
- app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',3,'#f4f2ec')}</div><div class="secs">${secs}<button class="sec" id="toGame2">JUEGO</button></div><div class="spacer"></div>
+ app.innerHTML=`<div class="top"><div class="logo">${pix('CÓDIGO 4D',3,'var(--tinta)')}</div><div class="secs">${secs}<button class="sec" id="toGame2">JUEGO</button></div><div class="spacer"></div>
   <button class="tbtn" id="sp" aria-label="Diapositiva anterior">◀</button><div class="cnt">${S.slide+1}/${L.length}</div><button class="tbtn" id="sn" aria-label="Diapositiva siguiente">▶</button>
   <button class="fsb" id="fsb">${isFs()?'✕<span class="fsl"> Salir de pantalla completa</span>':'⛶<span class="fsl"> Pantalla completa</span>'}</button></div>
   <div class="solo"><div class="stage" id="stg"><div class="fit" id="fitS">${cur.html()}</div></div></div>`;

@@ -1,24 +1,24 @@
 /* Estilos Generales */
 :root {
-    --primary-color: #2D7A57; /* Rojo */
-    --secondary-color: #4D5170;
-    --background-color: #EEF1F6;
-    --line-color: #E1E5EE;
-    --text-color: #1A1C2E;
+    --primary-color: var(--acento); /* Rojo */
+    --secondary-color: var(--h3);
+    --background-color: var(--fondo);
+    --line-color: var(--linea);
+    --text-color: var(--h3);
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--texto);
     margin: 0;
     padding: 0;
-    background-color: var(--background-color);
-    color: var(--text-color);
+    background-color: var(--fondo);
+    color: var(--h3);
     line-height: 1.6;
 }
 
 .header {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--acento-relleno);
+    color: var(--tinta);
     text-align: center;
     padding: 3rem 1rem;
     margin-bottom: 2rem;
@@ -44,11 +44,11 @@ main {
 .section {
     padding: 2rem 0;
     margin-bottom: 2rem;
-    border-bottom: 2px solid var(--line-color);
+    border-bottom: 2px solid var(--linea);
 }
 
 .section-title {
-    color: var(--primary-color);
+    color: var(--acento);
     font-size: 2rem;
     margin-top: 0;
     margin-bottom: 1rem;
@@ -57,7 +57,7 @@ main {
 
 .section-description {
     font-style: italic;
-    color: var(--secondary-color);
+    color: var(--h3);
     margin-bottom: 2rem;
     text-align: center; /* Centramos también la descripción para que se vea mejor */
 }
@@ -71,10 +71,10 @@ main {
 }
 
 .card {
-    background-color: #fff;
+    background-color: var(--superficie);
     padding: 1.5rem;
-    border: 1px solid var(--line-color);
-    border-radius: 12px;
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-sm);
     flex: 1 1 250px; /* Hacemos las tarjetas más cuadradas */
     max-width: 300px;
     aspect-ratio: 1 / 1; /* Mantiene la relación de aspecto 1:1 (cuadrada) */
@@ -83,17 +83,17 @@ main {
     justify-content: center;
     align-items: center;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--sombra-suave);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--sombra-suave);
 }
 
 .card-title {
-    color: var(--primary-color);
+    color: var(--acento);
     margin: 0 0 0.5rem 0;
     font-size: 1.2rem;
     text-align: center; /* Centramos el título de la tarjeta */
@@ -105,8 +105,8 @@ main {
 }
 
 .card-button {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--acento-relleno);
+    color: var(--tinta);
     border: none;
     padding: 0.75rem 1.5rem;
     border-radius: 50px;
@@ -116,7 +116,7 @@ main {
 }
 
 .card-button:hover {
-    background-color: #22603F; /* Un rojo más oscuro */
+    background-color: var(--acento-relleno); /* Un rojo más oscuro */
 }
 
 /* Estilos para la línea separadora (ya no se usa en el diseño, pero se mantiene la clase para evitar errores) */
@@ -126,19 +126,19 @@ main {
 
 /* Estilos para información adicional */
 .additional-info {
-    background-color: #f7e7e9; /* Un fondo rosado suave para la información adicional */
+    background-color: var(--fondo); /* Un fondo rosado suave para la información adicional */
     padding: 1.5rem;
-    border-radius: 8px;
+    border-radius: var(--radio-sm);
     margin-top: 1.5rem;
-    border-left: 4px solid var(--primary-color);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid var(--acento);
+    box-shadow: var(--sombra-suave);
     /* Se añade flexbox para alinear el contenido */
     display: flex;
     flex-direction: column;
 }
 
 .additional-info h4 {
-    color: #22603F;
+    color: var(--acento);
     margin-top: 0;
 }
 
@@ -155,7 +155,7 @@ main {
 
 .additional-info li::before {
     content: "•";
-    color: var(--primary-color);
+    color: var(--acento);
     font-weight: bold;
     display: inline-block;
     width: 1em;
@@ -176,9 +176,9 @@ main {
 .conclusion {
     margin-top: 2rem;
     padding: 1.5rem;
-    background-color: #e7f7e9; /* Un fondo verde suave para la conclusión */
-    border-radius: 8px;
-    border-left: 4px solid #8bc34a;
+    background-color: var(--fondo); /* Un fondo verde suave para la conclusión */
+    border-radius: var(--radio-sm);
+    border-left: 4px solid var(--acento);
 }
 
 .conclusion p {

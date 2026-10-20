@@ -1,12 +1,12 @@
 /* Importar una fuente de Google Fonts para un aspecto más profesional */
 /* Estilos generales */
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--texto);
     line-height: 1.7;
     margin: 0;
     padding: 0;
-    background-color: #EEF1F6; /* Fondo muy oscuro */
-    color: #1A1C2E; /* Texto claro */
+    background-color: var(--fondo); /* Fondo muy oscuro */
+    color: var(--h3); /* Texto claro */
     transition: background-color 0.5s ease;
 }
 
@@ -18,15 +18,15 @@ body {
 }
 
 header {
-    background: #1C1F3F;
-    color: #ffffff;
+    background: var(--acento-relleno);
+    color: var(--tinta);
     padding: 2rem 0;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--sombra-suave);
 }
 
 h1, h2, h3 {
-    color: #2D7A57; /* Un azul vibrante para los títulos, similar a las referencias */
+    color: var(--acento); /* Un azul vibrante para los títulos, similar a las referencias */
     font-weight: 700;
 }
 
@@ -45,7 +45,7 @@ h3 {
     font-size: 1.5em;
     margin-top: 2em;
     margin-bottom: 0.8em;
-    border-bottom: 1px solid rgba(45, 122, 87, 0.3); /* Línea sutil bajo el título */
+    border-bottom: 1px solid rgb(var(--acento-rgb) / 0.3); /* Línea sutil bajo el título */
     padding-bottom: 5px;
 }
 
@@ -64,10 +64,10 @@ p {
 }
 
 .card {
-    background-color: #FFFFFF;
-    border-radius: 8px;
+    background-color: var(--superficie);
+    border-radius: var(--radio-sm);
     padding: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--sombra-suave);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -77,17 +77,17 @@ p {
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--sombra-suave);
 }
 
 .card-icon {
     font-size: 2.5em;
     margin-bottom: 15px;
-    color: #2D7A57;
+    color: var(--acento);
 }
 
 .card h3 {
-    color: #2D7A57;
+    color: var(--acento);
     margin-top: 0;
     margin-bottom: 10px;
     font-size: 1.25em;
@@ -98,7 +98,7 @@ p {
 .card p {
     font-size: 0.95em;
     line-height: 1.6;
-    color: #4D5170;
+    color: var(--h3);
     margin-bottom: 0;
     flex-grow: 1;
 }
@@ -111,8 +111,8 @@ p {
 }
 
 .images-section {
-    background-color: #FFFFFF;
-    border-radius: 8px;
+    background-color: var(--superficie);
+    border-radius: var(--radio-sm);
     padding: 40px;
 }
 
@@ -124,9 +124,9 @@ p {
 }
 
 .grid-item {
-    background-color: #FFFFFF;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background-color: var(--superficie);
+    border-radius: var(--radio-sm);
+    box-shadow: var(--sombra-suave);
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -134,11 +134,11 @@ p {
 
 .image-placeholder {
     width: 100%;
-    background-color: #E1E5EE;
-    border: 2px dashed #2D7A57;
+    background-color: var(--fondo);
+    border: 2px dashed var(--acento);
     box-sizing: border-box;
     text-align: center;
-    color: #6E7393;
+    color: var(--tinta-3);
     margin-bottom: 15px;
     display: flex;
     align-items: center;
@@ -163,16 +163,16 @@ p {
 .image-description h3 {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
-    border-bottom: 1px solid rgba(45, 122, 87, 0.3);
+    border-bottom: 1px solid rgb(var(--acento-rgb) / 0.3);
     padding-bottom: 5px;
 }
 
 footer {
     text-align: center;
     padding: 2rem 0;
-    background: #1C1F3F;
+    background: var(--acento-relleno);
     margin-top: 50px;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--sombra-suave);
 }
 
 footer p {
@@ -182,5 +182,11 @@ footer p {
 }
 
 /* Portfolio: títulos claros sobre la cabecera índigo */
-header h1, header h2, header p { color: #ffffff; }
-.card, .grid-item { box-shadow: 0 1px 0 #D2D7E3, 0 8px 20px -12px rgba(26, 28, 46, .35); }
+header h1, header h2, header p { color: var(--tinta); }
+.card, .grid-item { box-shadow: var(--sombra-alta); }
+
+/* Portfolio: en pantallas angostas, una columna */
+@media (max-width: 720px) {
+    .cards-container { grid-template-columns: 1fr; }
+    .images-section { padding: 20px; }
+}

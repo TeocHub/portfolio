@@ -5,28 +5,28 @@
 }
 
 :root {
-    --color-1: #546A76;
-    --color-2: #88A0A8;
-    --color-3: #B4CEB3;
-    --color-4: #DBD3C9;
-    --color-5: #FAD4D8;
+    --color-1: var(--acento);
+    --color-2: var(--tinta-3);
+    --color-3: var(--exito);
+    --color-4: var(--tinta);
+    --color-5: var(--tinta);
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, var(--color-4) 0%, var(--color-3) 100%);
+    font-family: var(--texto);
+    background: linear-gradient(135deg, var(--h1-suave) 0%, var(--acento-suave) 100%);
     min-height: 100vh;
-    color: var(--color-1);
+    color: var(--acento);
     line-height: 1.6;
 }
 
 /* Header */
 header {
-    background: var(--color-1);
-    color: white;
+    background: var(--acento-relleno);
+    color: var(--tinta);
     padding: 2rem;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: var(--sombra-suave);
     position: relative;
     overflow: hidden;
 }
@@ -38,7 +38,7 @@ header::before {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgb(var(--superficie-rgb) / 0.1) 0%, transparent 70%);
     animation: pulse 4s ease-in-out infinite;
 }
 
@@ -68,7 +68,7 @@ h1 {
 
 .subtitle {
     font-size: 1.2rem;
-    color: var(--color-3);
+    color: var(--exito);
     position: relative;
     z-index: 1;
 }
@@ -77,11 +77,11 @@ h1 {
 .nav-tabs {
     display: flex;
     justify-content: center;
-    background: var(--color-2);
+    background: var(--acento-relleno);
     padding: 0;
     margin: 0;
     list-style: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: var(--sombra-suave);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -94,18 +94,18 @@ h1 {
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
-    color: white;
+    color: var(--tinta);
     font-weight: 500;
 }
 
 .nav-tab:hover {
-    background: var(--color-1);
+    background: var(--acento-relleno);
     transform: translateY(-2px);
 }
 
 .nav-tab.active {
-    background: var(--color-1);
-    box-shadow: inset 0 -3px 0 var(--color-3);
+    background: var(--acento-relleno);
+    box-shadow: inset 0 -3px 0 var(--exito);
 }
 
 .nav-tab i {
@@ -135,11 +135,11 @@ h1 {
 
 /* Cards */
 .card {
-    background: white;
-    border-radius: 15px;
+    background: var(--superficie);
+    border-radius: var(--radio);
     padding: 2rem;
     margin-bottom: 2rem;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: var(--sombra-suave);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -147,7 +147,7 @@ h1 {
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    box-shadow: var(--sombra-suave);
 }
 
 .card::before {
@@ -157,7 +157,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 5px;
-    background: linear-gradient(90deg, var(--color-3), var(--color-5));
+    background: linear-gradient(90deg, var(--acento-suave), var(--fondo));
 }
 
 /* Accordion */
@@ -166,21 +166,21 @@ h1 {
 }
 
 .accordion-item {
-    background: white;
-    border-radius: 10px;
+    background: var(--superficie);
+    border-radius: var(--radio-sm);
     margin-bottom: 1rem;
     overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: var(--sombra-suave);
     transition: all 0.3s ease;
 }
 
 .accordion-item:hover {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    box-shadow: var(--sombra-suave);
 }
 
 .accordion-header {
-    background: var(--color-2);
-    color: white;
+    background: var(--acento-relleno);
+    color: var(--tinta);
     padding: 1.2rem;
     cursor: pointer;
     display: flex;
@@ -190,7 +190,7 @@ h1 {
 }
 
 .accordion-header:hover {
-    background: var(--color-1);
+    background: var(--acento-relleno);
 }
 
 .accordion-header i {
@@ -218,13 +218,13 @@ h1 {
     display: inline-block;
     padding: 0.8rem 1.5rem;
     border: none;
-    border-radius: 25px;
+    border-radius: var(--radio);
     cursor: pointer;
     font-size: 1rem;
     font-weight: 500;
     transition: all 0.3s ease;
     text-decoration: none;
-    color: white;
+    color: var(--tinta);
     position: relative;
     overflow: hidden;
 }
@@ -237,7 +237,7 @@ h1 {
     width: 0;
     height: 0;
     border-radius: 50%;
-    background: rgba(255,255,255,0.3);
+    background: rgb(var(--superficie-rgb) / 0.3);
     transform: translate(-50%, -50%);
     transition: width 0.6s, height 0.6s;
 }
@@ -248,21 +248,21 @@ h1 {
 }
 
 .btn-primary {
-    background: var(--color-1);
+    background: var(--acento-relleno);
 }
 
 .btn-secondary {
-    background: var(--color-2);
+    background: var(--acento-relleno);
 }
 
 .btn-success {
-    background: var(--color-3);
-    color: var(--color-1);
+    background: var(--acento-suave);
+    color: var(--acento);
 }
 
 .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: var(--sombra-suave);
 }
 
 /* Tooltip */
@@ -270,7 +270,7 @@ h1 {
     position: relative;
     display: inline-block;
     cursor: help;
-    color: var(--color-1);
+    color: var(--acento);
     font-weight: bold;
     text-decoration: underline dotted;
 }
@@ -278,10 +278,10 @@ h1 {
 .tooltip .tooltip-text {
     visibility: hidden;
     width: 250px;
-    background-color: var(--color-1);
-    color: white;
+    background-color: var(--acento-relleno);
+    color: var(--tinta);
     text-align: center;
-    border-radius: 10px;
+    border-radius: var(--radio-sm);
     padding: 0.8rem;
     position: absolute;
     z-index: 1;
@@ -302,7 +302,7 @@ h1 {
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: var(--color-1) transparent transparent transparent;
+    border-color: var(--acento) transparent transparent transparent;
 }
 
 .tooltip:hover .tooltip-text {
@@ -319,15 +319,15 @@ h1 {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgb(var(--acento-relleno-rgb) / 0.5);
     animation: fadeIn 0.3s ease;
 }
 
 .modal-content {
-    background-color: white;
+    background-color: var(--superficie);
     margin: 5% auto;
     padding: 2rem;
-    border-radius: 15px;
+    border-radius: var(--radio);
     width: 80%;
     max-width: 600px;
     position: relative;
@@ -346,7 +346,7 @@ h1 {
 }
 
 .close {
-    color: var(--color-1);
+    color: var(--acento);
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -355,7 +355,7 @@ h1 {
 }
 
 .close:hover {
-    color: var(--color-5);
+    color: var(--tinta);
 }
 
 /* Images */
@@ -367,8 +367,8 @@ h1 {
 .img-container img {
     max-width: 100%;
     height: auto;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra-suave);
     transition: transform 0.3s ease;
 }
 
@@ -383,8 +383,8 @@ h1 {
     height: 0;
     overflow: hidden;
     margin: 2rem 0;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra-suave);
 }
 
 .video-container iframe {
@@ -393,7 +393,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    border-radius: 15px;
+    border-radius: var(--radio);
 }
 
 /* Grid Layout */
@@ -410,25 +410,25 @@ h1 {
 }
 
 .toggle-btn {
-    background: var(--color-3);
-    color: var(--color-1);
+    background: var(--acento-suave);
+    color: var(--acento);
     padding: 0.5rem 1rem;
     border: none;
-    border-radius: 20px;
+    border-radius: var(--radio);
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .toggle-btn:hover {
-    background: var(--color-2);
-    color: white;
+    background: var(--acento-relleno);
+    color: var(--tinta);
 }
 
 .hidden-content {
     display: none;
     padding: 1rem;
-    background: var(--color-4);
-    border-radius: 10px;
+    background: var(--h1-suave);
+    border-radius: var(--radio-sm);
     margin-top: 1rem;
 }
 
@@ -441,28 +441,28 @@ h1 {
 .progress-bar {
     width: 100%;
     height: 30px;
-    background: var(--color-4);
-    border-radius: 15px;
+    background: var(--h1-suave);
+    border-radius: var(--radio);
     overflow: hidden;
     margin: 1rem 0;
 }
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--color-3), var(--color-5));
-    border-radius: 15px;
+    background: linear-gradient(90deg, var(--acento-suave), var(--fondo));
+    border-radius: var(--radio);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-1);
+    color: var(--acento);
     font-weight: bold;
     transition: width 1s ease;
 }
 
 /* Footer */
 footer {
-    background: var(--color-1);
-    color: white;
+    background: var(--acento-relleno);
+    color: var(--tinta);
     text-align: center;
     padding: 2rem;
     margin-top: 3rem;
