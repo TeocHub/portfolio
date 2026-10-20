@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #2D7A57;
-            --secondary-color: #3E9670;
-            --accent-color: #C49E3E;
-            --text-color: #1A1C2E;
-            --light-bg: #EEF1F6;
-            --white: #ffffff;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --primary-color: var(--acento);
+            --secondary-color: var(--acento);
+            --accent-color: var(--h1);
+            --text-color: var(--h3);
+            --light-bg: var(--fondo);
+            --white: var(--superficie);
+            --shadow: 0 4px 6px rgb(var(--tinta-rgb) / 0.1);
             --transition: all 0.3s ease;
         }
 
@@ -24,9 +24,9 @@
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--light-bg);
-            color: var(--text-color);
+            font-family: var(--texto);
+            background-color: var(--fondo);
+            color: var(--h3);
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
@@ -34,8 +34,8 @@
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--white);
+            background: linear-gradient(135deg, var(--acento-relleno), var(--acento-relleno));
+            color: var(--tinta);
             padding: 1.5rem 0;
             box-shadow: var(--shadow);
         }
@@ -54,7 +54,7 @@
         }
 
         h1 {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--display);
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
@@ -71,8 +71,8 @@
         }
 
         .card {
-            background: var(--white);
-            border-radius: 10px;
+            background: var(--superficie);
+            border-radius: var(--radio-sm);
             box-shadow: var(--shadow);
             padding: 2rem;
             margin-bottom: 2rem;
@@ -81,7 +81,7 @@
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--sombra-suave);
         }
 
         .form-group {
@@ -92,32 +92,32 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--acento);
         }
 
         select {
             width: 100%;
             padding: 0.75rem;
-            border: 2px solid #D2D7E3;
-            border-radius: 5px;
+            border: 2px solid var(--h3);
+            border-radius: var(--radio-sm);
             font-size: 1rem;
             transition: var(--transition);
-            background-color: var(--white);
+            background-color: var(--superficie);
         }
 
         select:focus {
             outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(45, 122, 87, 0.2);
+            border-color: var(--acento);
+            box-shadow: var(--sombra-suave);
         }
 
         .btn {
             display: inline-block;
             padding: 0.75rem 1.5rem;
-            background-color: var(--primary-color);
-            color: var(--white);
+            background-color: var(--acento-relleno);
+            color: var(--tinta);
             border: none;
-            border-radius: 5px;
+            border-radius: var(--radio-sm);
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -127,26 +127,26 @@
         }
 
         .btn:hover {
-            background-color: var(--secondary-color);
+            background-color: var(--acento-relleno);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--sombra-suave);
         }
 
         .btn-form {
-            background-color: var(--accent-color);
+            background-color: var(--h1-relleno);
             margin-left: 1rem;
         }
 
         .btn-form:hover {
-            background-color: #e67e22;
+            background-color: var(--h1-relleno);
         }
 
         .haiku-container {
             display: none;
             text-align: center;
             padding: 2rem;
-            background: linear-gradient(135deg, #EEF1F6 0%, #D2D7E3 100%);
-            border-radius: 10px;
+            background: linear-gradient(135deg, var(--fondo) 0%, var(--h3-suave) 100%);
+            border-radius: var(--radio-sm);
             margin-top: 2rem;
             min-height: 300px;
             display: flex;
@@ -156,18 +156,18 @@
         }
 
         .haiku-title {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--display);
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
-            color: var(--primary-color);
+            color: var(--acento);
         }
 
         .haiku-lines {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--display);
             font-size: 1.5rem;
             line-height: 2;
-            color: var(--text-color);
+            color: var(--h3);
         }
 
         .haiku-line {
@@ -178,7 +178,7 @@
 
         .haiku-line:hover {
             transform: scale(1.05);
-            color: var(--primary-color);
+            color: var(--acento);
         }
 
         .loading {
@@ -188,11 +188,11 @@
         }
 
         .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
+            border: 4px solid rgb(var(--trazo-rgb) / 0.1);
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            border-left-color: var(--primary-color);
+            border-left-color: var(--acento);
             animation: spin 1s linear infinite;
             margin: 0 auto;
         }
@@ -207,9 +207,9 @@
             top: 20px;
             right: 20px;
             padding: 1rem 1.5rem;
-            background-color: var(--white);
-            border-radius: 5px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            background-color: var(--superficie);
+            border-radius: var(--radio-sm);
+            box-shadow: var(--sombra-suave);
             transform: translateX(120%);
             transition: transform 0.3s ease;
             z-index: 1000;
@@ -221,15 +221,15 @@
         }
 
         .notification.success {
-            border-left: 4px solid #2ecc71;
+            border-left: 4px solid var(--acento);
         }
 
         .notification.error {
-            border-left: 4px solid #e74c3c;
+            border-left: 4px solid var(--h2);
         }
 
         .notification.info {
-            border-left: 4px solid var(--primary-color);
+            border-left: 4px solid var(--acento);
         }
 
         .selectors-row {
@@ -247,7 +247,8 @@
   <link rel="icon" href="../../../../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../../../assets/css/site.css">
   <link rel="stylesheet" href="../../../../assets/css/armonia.css">
-  <script src="../../../../assets/js/site.js" defer></script>
+  <script src="../../../../assets/js/site.js"></script>
+  <!-- barajas aplicadas -->
 </head>
 <body>
     <header>

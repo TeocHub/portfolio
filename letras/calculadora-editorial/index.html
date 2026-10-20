@@ -6,36 +6,36 @@
     <title>Calculadora Editorial Maestra</title>
     <style>
         :root {
-            --primary: #B03A4C;
-            --secondary: #8E2C3C;
-            --bg: #EEF1F6;
-            --card: #ffffff;
-            --text: #1A1C2E;
-            --border: #D2D7E3;
-            --danger: #ef4444;
+            --primary: var(--h2);
+            --secondary: var(--h2);
+            --bg: var(--fondo);
+            --card: var(--superficie);
+            --text: var(--h3);
+            --border: var(--h3);
+            --danger: var(--h2);
         }
 
         body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
+            font-family: var(--texto);
+            background-color: var(--fondo);
+            color: var(--h3);
             padding: 20px;
             display: flex;
             justify-content: center;
         }
 
         .container {
-            background: var(--card);
+            background: var(--superficie);
             padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: var(--radio-sm);
+            box-shadow: var(--sombra-suave);
             width: 100%;
             max-width: 600px;
         }
 
         h1 {
             text-align: center;
-            color: var(--text);
+            color: var(--h3);
             font-size: 1.5rem;
             margin-bottom: 2rem;
         }
@@ -43,7 +43,7 @@
         .section {
             margin-bottom: 1.5rem;
             padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--h3);
         }
 
         label {
@@ -65,58 +65,58 @@
         input, select {
             width: 100%;
             padding: 0.6rem;
-            border: 1px solid var(--border);
-            border-radius: 6px;
+            border: 1px solid var(--h3);
+            border-radius: var(--radio-sm);
             font-size: 1rem;
             box-sizing: border-box;
         }
         
         input:focus, select:focus {
-            outline: 2px solid var(--primary);
+            outline: 2px solid var(--h2);
             border-color: transparent;
         }
 
         .helper {
             font-size: 0.75rem;
-            color: #4D5170;
+            color: var(--h3);
             margin-top: 4px;
         }
 
         /* Botones y lista */
         .btn-add {
-            background: var(--primary);
-            color: white;
+            background: var(--h2-relleno);
+            color: var(--tinta);
             border: none;
             padding: 0 1.5rem;
-            border-radius: 6px;
+            border-radius: var(--radio-sm);
             font-weight: 600;
             cursor: pointer;
         }
         
-        .btn-add:hover { background: var(--secondary); }
+        .btn-add:hover { background: var(--h2-relleno); }
 
         .chapter-list {
             margin-top: 10px;
             max-height: 180px;
             overflow-y: auto;
-            background: #F6F7FA;
-            border: 1px solid var(--border);
-            border-radius: 6px;
+            background: var(--fondo);
+            border: 1px solid var(--h3);
+            border-radius: var(--radio-sm);
         }
 
         .chapter-item {
             display: flex;
             justify-content: space-between;
             padding: 8px 12px;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--h3);
             font-size: 0.9rem;
             align-items: center;
         }
         
-        .chapter-item:nth-child(even) { background: #fff; }
+        .chapter-item:nth-child(even) { background: var(--superficie); }
 
         .btn-del {
-            color: var(--danger);
+            color: var(--h2);
             background: none;
             border: none;
             cursor: pointer;
@@ -133,39 +133,39 @@
         }
 
         .result-card {
-            background: #F8E9EC;
+            background: var(--fondo);
             padding: 1rem;
-            border-radius: 8px;
+            border-radius: var(--radio-sm);
             text-align: center;
-            border: 1px solid #E8C2C9;
+            border: 1px solid var(--h2);
         }
 
         .result-card.secondary {
-            background: #F8E9EC; /* Un tono rojizo/rosado suave para diferenciar */
-            border-color: #E8C2C9;
+            background: var(--fondo); /* Un tono rojizo/rosado suave para diferenciar */
+            border-color: var(--h2);
         }
 
         .result-value {
             font-size: 2rem;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--h2);
         }
         
         .result-card.secondary .result-value {
-            color: #8E2C3C;
+            color: var(--h2);
         }
 
         .result-title {
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: #4D5170;
+            color: var(--h3);
             font-weight: 700;
         }
         
         .result-sub {
             font-size: 0.75rem;
-            color: #4D5170;
+            color: var(--h3);
             margin-top: 5px;
         }
         
@@ -173,7 +173,7 @@
             text-align: center;
             margin-top: 15px;
             font-size: 0.85rem;
-            color: #4D5170;
+            color: var(--h3);
         }
 
     </style>
@@ -181,7 +181,8 @@
   <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/site.css">
   <link rel="stylesheet" href="../../assets/css/armonia.css">
-  <script src="../../assets/js/site.js" defer></script>
+  <script src="../../assets/js/site.js"></script>
+  <!-- barajas aplicadas -->
 </head>
 <body>
 
@@ -216,11 +217,11 @@
             <button class="btn-add" onclick="addChap()">+</button>
         </div>
         
-        <div class="chapter-list" id="listContainer" style="display:none;"></div>
+        <div class="chapter-list" id="listContainer" style="display: none;"></div>
         
         <div style="text-align: right; margin-top: 5px;">
-             <span id="chapCount" style="font-size: 0.8rem; color:#4D5170; margin-right: 10px;">0 caps</span>
-             <a href="#" onclick="clearAll()" style="color:var(--danger); font-size:0.8rem; text-decoration:none;">Borrar todo</a>
+             <span id="chapCount" style="font-size: 0.8rem; color: var(--h3); margin-right: 10px;">0 caps</span>
+             <a href="#" onclick="clearAll()" style="color: var(--h2); font-size: 0.8rem; text-decoration: none;">Borrar todo</a>
         </div>
     </div>
 

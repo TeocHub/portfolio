@@ -1,12 +1,20 @@
 /* ==========================================================
    Tomás Cabrolier · Portfolio — script compartido
    ----------------------------------------------------------
+   Se carga en el <head> SIN defer, para elegir la baraja
+   (Luz o Sombra) antes de pintar y evitar un parpadeo.
+
    PARA AGREGAR UN TRABAJO NUEVO: busca el área en CATALOGO
    (más abajo) y añade una línea a la lista "items" del grupo
    que corresponda:
      { t: "Título", d: "Una frase que diga qué es.", url: "ruta/desde/la/raiz/", tipo: "Lectura guiada" }
    Sin "url", el trabajo aparece como pendiente.
    La ruta siempre se escribe desde la raíz del portfolio.
+
+   PARA QUE UN COLOR CAMBIE CON LA BARAJA en una página,
+   usa los tokens de assets/css/barajas.css:
+     CSS:      color: var(--tinta);  background: var(--acento-suave);
+     Gráficos: backgroundColor: "var(--acento-relleno)"
    ========================================================== */
 (function () {
   "use strict";
@@ -14,7 +22,110 @@
   /* ---------- Raíz del sitio (funciona en GitHub Pages y en local) ---------- */
   var script = document.currentScript || document.querySelector('script[src*="assets/js/site.js"]');
   var RAIZ = new URL("../../", script.src);
-  document.documentElement.classList.add("js");
+  var html = document.documentElement;
+  html.classList.add("js");
+
+  /* ---------- Baraja: Luz o Sombra ---------- */
+  var CLAVE = "tc-baraja";
+  function barajaGuardada() {
+    try { return localStorage.getItem(CLAVE); } catch (e) { return null; }
+  }
+  function guardarBaraja(b) {
+    try { localStorage.setItem(CLAVE, b); } catch (e) { /* sin almacenamiento: no pasa nada */ }
+  }
+  var inicial = barajaGuardada();
+  if (inicial !== "luz" && inicial !== "sombra") {
+    inicial = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "sombra" : "luz";
+  }
+  html.dataset.baraja = inicial;
+
+  /* ---------- Colores de gráficos (Chart.js) que siguen a la baraja ---------- */
+  var sonda = null, lienzo = null;
+  function resolverColor(valor) {
+    if (typeof valor !== "string" || valor.indexOf("var(") < 0) return valor;
+    if (!sonda) {
+      sonda = document.createElement("span");
+      sonda.style.display = "none";
+      html.appendChild(sonda);
+      lienzo = document.createElement("canvas").getContext("2d");
+    }
+    sonda.style.color = "";
+    sonda.style.color = valor;
+    var calculado = getComputedStyle(sonda).color;
+    lienzo.fillStyle = "#000";
+    lienzo.fillStyle = calculado;
+    return lienzo.fillStyle;
+  }
+  function recorrer(obj, registro, visto) {
+    if (!obj || typeof obj !== "object" || visto.indexOf(obj) >= 0) return;
+    visto.push(obj);
+    Object.keys(obj).forEach(function (k) {
+      var v = obj[k];
+      if (typeof v === "string" && v.indexOf("var(") >= 0) registro.push([obj, k, v]);
+      else if (v && typeof v === "object" && !(v instanceof HTMLElement)) recorrer(v, registro, visto);
+    });
+  }
+  var pluginBaraja = {
+    id: "tcBaraja",
+    beforeInit: function (chart) {
+      var reg = [];
+      var conf = chart.config._config || chart.config;
+      recorrer(conf.data, reg, []);
+      recorrer(conf.options, reg, []);
+      chart.$tcColores = reg;
+    },
+    beforeUpdate: function (chart) {
+      (chart.$tcColores || []).forEach(function (r) { r[0][r[1]] = resolverColor(r[2]); });
+    }
+  };
+  function prepararChart(C) {
+    try {
+      C.register(pluginBaraja);
+      C.defaults.font.family = '"Atkinson Hyperlegible", system-ui, sans-serif';
+      C.defaults.color = "var(--tinta-2)";
+      C.defaults.borderColor = "rgb(var(--linea-rgb))";
+      ajustarDefaultsChart(C);
+    } catch (e) { /* versión de Chart.js sin register: se ignora */ }
+  }
+  function ajustarDefaultsChart(C) {
+    C.defaults.color = resolverColor("var(--tinta-2)");
+    C.defaults.borderColor = resolverColor("rgb(var(--linea-rgb))");
+  }
+  if (window.Chart) prepararChart(window.Chart);
+  else {
+    try {
+      var _chart;
+      Object.defineProperty(window, "Chart", {
+        configurable: true,
+        get: function () { return _chart; },
+        set: function (v) { _chart = v; if (v && v.register) prepararChart(v); }
+      });
+    } catch (e) { /* sin acceso: los gráficos quedan con sus colores */ }
+  }
+  function actualizarGraficos() {
+    var C = window.Chart;
+    if (!C || !C.instances) return;
+    ajustarDefaultsChart(C);
+    Object.keys(C.instances).forEach(function (k) {
+      var g = C.instances[k];
+      try {
+        if (g.options && g.options.scales) {
+          Object.keys(g.options.scales).forEach(function (s) {
+            var e = g.options.scales[s];
+            if (e.ticks) e.ticks.color = C.defaults.color;
+            if (e.grid) e.grid.color = C.defaults.borderColor;
+            if (e.pointLabels) e.pointLabels.color = C.defaults.color;
+            if (e.angleLines) e.angleLines.color = C.defaults.borderColor;
+            if (e.title) e.title.color = C.defaults.color;
+          });
+        }
+        if (g.options && g.options.plugins && g.options.plugins.legend && g.options.plugins.legend.labels) {
+          g.options.plugins.legend.labels.color = C.defaults.color;
+        }
+        g.update("none");
+      } catch (e) { /* gráfico sin opciones estándar */ }
+    });
+  }
 
   function enlace(url) {
     if (!url) return null;
@@ -45,17 +156,112 @@
   var ORDEN = ["pedagogia", "letras", "codigo", "esoterico", "estudio", "sitios"];
   var CARPETA_AREA = { "digital-monster": "estudio" };
 
-  /* Dibujos de cada arcano (trazos simples, se colorean con currentColor) */
+  /* Dibujos de cada arcano. Clases: .area (color del área), .tinta, .papel, .llama, .sol */
   var GLIFOS = {
-    pedagogia: '<path d="M50 8v10M34 13l5 8M66 13l-5 8"/><path d="M12 70q19-9 38 0q19-9 38 0V36q-19-9-38 0q-19-9-38 0z"/><path d="M50 36v34M22 46q10-3 20 1M22 56q10-3 20 1M58 47q10-4 20-1M58 57q10-4 20-1"/>',
-    letras: '<path d="M27 15a12 12 0 1 0 12 16a9 9 0 1 1-12-16z"/><path d="M80 12C58 18 42 44 34 86"/><path d="M80 12c6 24-10 44-38 52M80 12C66 22 54 38 46 58"/><path d="M34 86l-3 8"/>',
-    codigo: '<path d="M50 22c-7-10-20-10-20 0s13 10 20 0c7-10 20-10 20 0s-13 10-20 0z"/><path d="M34 46L18 62l16 16M66 46l16 16-16 16M56 42L44 82"/>',
-    esoterico: '<path d="M60 10a32 32 0 1 0 30 44a25 25 0 1 1-30-44z"/><path d="M14 62h16v28H14z"/><path class="relleno" d="M22 44c-5 7-4 13 0 13s5-6 0-13z"/><path d="M12 90h20"/>',
-    estudio: '<path d="M50 6l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/><path d="M28 88V56a22 22 0 0 1 44 0v32l-7-6-7 6-7-6-7 6-7-6-9 6z"/><circle cx="50" cy="56" r="8"/><circle class="relleno" cx="51" cy="57" r="3"/>',
-    sitios: '<rect x="14" y="20" width="72" height="46" rx="4"/><path d="M14 31h72"/><circle class="relleno" cx="21" cy="25.5" r="1.8"/><circle class="relleno" cx="27" cy="25.5" r="1.8"/><circle cx="30" cy="80" r="9"/><circle cx="70" cy="80" r="9"/><path d="M24 66l3 6M76 66l-3 6"/>'
+    pedagogia:
+      '<path d="M50 5v11M31 11l6 9M69 11l-6 9"/>' +
+      '<path class="area" d="M10 74q20-10 40 0q20-10 40 0V34q-20-10-40 0q-20-10-40 0z"/>' +
+      '<path d="M50 34v40M20 46q10-4 21 0M20 56q10-4 21 0M59 46q10-4 21 0M59 56q10-4 21 0"/>',
+    letras:
+      '<path class="tinta" d="M22 14a12 12 0 1 0 13 17a9.5 9.5 0 1 1-13-17z"/>' +
+      '<path class="area" d="M80 9C58 15 40 41 33 79l9-4c4-15 13-28 25-38C81 26 86 15 80 9z"/>' +
+      '<path d="M75 15C59 29 46 51 37 77M33 79l-5 12"/>' +
+      '<path class="papel" d="M14 90h30"/>',
+    codigo:
+      '<path d="M50 23c-7-10-20-10-20 0s13 10 20 0c7-10 20-10 20 0s-13 10-20 0z"/>' +
+      '<rect class="area" x="13" y="40" width="74" height="50" rx="9"/>' +
+      '<path d="M38 55l-10 10 10 10M62 55l10 10-10 10M55 52l-10 26"/>',
+    esoterico:
+      '<path class="area" d="M62 8a33 33 0 1 0 29 45a26 26 0 1 1-29-45z"/>' +
+      '<path class="llama" d="M22 41c-7 8-6 16 0 16s7-8 0-16z"/>' +
+      '<path d="M22 57v5"/>' +
+      '<rect class="papel" x="13" y="62" width="18" height="28" rx="2"/>' +
+      '<path class="tinta" d="M84 70l2.2 5.3 5.3 2.2-5.3 2.2-2.2 5.3-2.2-5.3-5.3-2.2 5.3-2.2z"/>',
+    estudio:
+      '<path class="sol" d="M50 4l4 8.4 9 1.2-6.6 6.2 1.7 9-8.1-4.4-8.1 4.4 1.7-9-6.6-6.2 9-1.2z"/>' +
+      '<path class="area" d="M26 91V57a24 24 0 0 1 48 0v34l-8-7-8 7-8-7-8 7-8-7z"/>' +
+      '<circle class="papel" cx="50" cy="57" r="10"/><circle class="tinta" cx="52" cy="58" r="4.2"/>',
+    sitios:
+      '<rect class="area" x="12" y="16" width="76" height="52" rx="7"/>' +
+      '<path d="M12 30h76M24 45h32M24 55h20"/>' +
+      '<circle class="tinta" cx="21" cy="23" r="2.2"/><circle class="tinta" cx="28" cy="23" r="2.2"/>' +
+      '<circle class="papel" cx="30" cy="81" r="10"/><circle class="papel" cx="70" cy="81" r="10"/>' +
+      '<path d="M30 71v20M20 81h20M70 71v20M60 81h20"/>'
   };
   function glifo(area) {
-    return '<svg viewBox="0 0 100 100" aria-hidden="true">' + (GLIFOS[area] || "") + "</svg>";
+    return '<svg class="glifo" viewBox="0 0 100 100" aria-hidden="true">' + (GLIFOS[area] || "") + "</svg>";
+  }
+
+  /* Engranaje: dientes cuadrados alrededor de un círculo */
+  function engranaje(cx, cy, r, dientes, prof) {
+    var n = dientes * 4, pts = [];
+    for (var i = 0; i < n; i++) {
+      var a = (i / n) * Math.PI * 2;
+      var rr = (i % 4 < 2) ? r : r - prof;
+      pts.push((cx + rr * Math.cos(a)).toFixed(1) + " " + (cy + rr * Math.sin(a)).toFixed(1));
+    }
+    return "M" + pts.join("L") + "Z";
+  }
+  var NUBE = "M18 52h86a14 14 0 0 0 0-28a20 20 0 0 0-36-12a18 18 0 0 0-30 8a14 14 0 0 0-20 32z";
+  function adornosCarta() {
+    return '<svg class="adorno nube" viewBox="0 0 120 60" aria-hidden="true"><path d="' + NUBE + '"/></svg>' +
+      '<svg class="adorno nube" viewBox="0 0 120 60" aria-hidden="true"><path d="' + NUBE + '"/></svg>' +
+      '<svg class="adorno engranaje" viewBox="0 0 100 100" aria-hidden="true">' +
+        '<path d="' + engranaje(50, 50, 46, 14, 5) + '"/><circle cx="50" cy="50" r="33"/>' +
+        '<circle cx="50" cy="50" r="8"/><path d="M50 17v25M50 58v25M17 50h25M58 50h25"/></svg>';
+  }
+
+  /* Escena del cielo (Luz) y de la relojería (Sombra) */
+  function escenaHTML() {
+    var rayos = "";
+    for (var i = 0; i < 12; i++) {
+      var a = (i / 12) * Math.PI * 2;
+      rayos += "M" + (100 + 70 * Math.cos(a)).toFixed(1) + " " + (100 + 70 * Math.sin(a)).toFixed(1) +
+        "L" + (100 + 92 * Math.cos(a)).toFixed(1) + " " + (100 + 92 * Math.sin(a)).toFixed(1);
+    }
+    var sol =
+      '<svg class="sol" viewBox="0 0 200 200" aria-hidden="true"><path class="rayos" d="' + rayos + '"/>' +
+      '<circle class="disco" cx="100" cy="100" r="56"/>' +
+      '<circle cx="82" cy="94" r="6" fill="var(--trazo)"/><circle cx="118" cy="94" r="6" fill="var(--trazo)"/>' +
+      '<path d="M80 114q20 18 40 0" fill="none" stroke="var(--trazo)" stroke-width="5" stroke-linecap="round"/>' +
+      '<circle cx="70" cy="112" r="7" fill="#FF8DB3" opacity=".8"/><circle cx="130" cy="112" r="7" fill="#FF8DB3" opacity=".8"/></svg>';
+    var nubes = ["n1", "n2", "n3"].map(function (c) {
+      return '<svg class="nube-grande ' + c + '" viewBox="0 0 120 60" aria-hidden="true"><path d="' + NUBE + '"/></svg>';
+    }).join("");
+    var colinas =
+      '<svg class="colinas" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true">' +
+      '<path class="c2" vector-effect="non-scaling-stroke" d="M-10 150V72C200 22 380 30 560 70S900 122 1100 62 1360 30 1450 50V150Z"/>' +
+      '<path class="c1" vector-effect="non-scaling-stroke" d="M-10 150V106C240 70 420 80 640 110S1040 132 1240 96 1450 88 1450 88V150Z"/></svg>';
+    /* Constelación: puntos fijos, siempre iguales */
+    var pts = [[3, 8], [9, 4], [16, 9], [24, 3], [58, 6], [64, 14], [71, 7], [78, 18], [86, 9], [93, 20], [97, 6], [2, 86], [5, 72], [10, 92], [90, 62], [96, 78], [84, 90]];
+    var lineas = [[0, 1], [1, 2], [2, 3], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9], [9, 10], [11, 12], [11, 13], [14, 15], [15, 16]];
+    var conste = '<svg class="constelacion" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">' +
+      lineas.map(function (l) {
+        return '<line vector-effect="non-scaling-stroke" x1="' + pts[l[0]][0] + '" y1="' + pts[l[0]][1] + '" x2="' + pts[l[1]][0] + '" y2="' + pts[l[1]][1] + '"/>';
+      }).join("") + "</svg>";
+    var estrellas = pts.map(function (p, i) {
+      var r = i % 3 === 0 ? 2.2 : 1.4;
+      return '<span style="position:absolute;left:' + p[0] + "%;top:" + p[1] + "%;width:" + (r * 2) + "px;height:" + (r * 2) +
+        'px;margin:-' + r + "px;border-radius:50%;background:var(--tinta);opacity:" + (i % 2 ? ".55" : ".9") + '"></span>';
+    }).join("");
+    var marcas = "";
+    for (var m = 0; m < 60; m++) {
+      var am = (m / 60) * Math.PI * 2, r1 = m % 5 === 0 ? 212 : 222;
+      marcas += "M" + (260 + r1 * Math.cos(am)).toFixed(1) + " " + (260 + r1 * Math.sin(am)).toFixed(1) +
+        "L" + (260 + 232 * Math.cos(am)).toFixed(1) + " " + (260 + 232 * Math.sin(am)).toFixed(1);
+    }
+    var reloj = '<svg class="reloj" viewBox="0 0 520 520" aria-hidden="true">' +
+      '<circle cx="260" cy="260" r="246"/><circle cx="260" cy="260" r="236"/><path d="' + marcas + '"/>' +
+      '<circle cx="260" cy="260" r="150"/>' +
+      '<path d="' + engranaje(200, 230, 92, 18, 9) + '"/><circle cx="200" cy="230" r="58"/><circle cx="200" cy="230" r="12"/>' +
+      '<path d="' + engranaje(330, 330, 62, 13, 8) + '"/><circle cx="330" cy="330" r="34"/><circle cx="330" cy="330" r="8"/>' +
+      '<path d="M260 260L260 92M260 260L372 300"/><circle cx="260" cy="260" r="6"/></svg>';
+    return '<div class="escena" aria-hidden="true">' + sol + nubes + colinas + conste + estrellas + reloj + "</div>";
+  }
+  function pintarEscenas() {
+    document.querySelectorAll(".cielo > .escena:empty").forEach(function (e) {
+      e.outerHTML = escenaHTML();
+    });
   }
 
   /* ---------- Catálogo: índices y trabajos ---------- */
@@ -230,8 +436,8 @@
       intro: "Páginas que diseñé y programé para negocios y organizaciones. Cada una conserva la identidad de su marca.",
       grupos: [{ titulo: "Proyectos", items: [
         { t: "Mar y Ola", d: "Tienda de velas, home spray y talleres de candelería en Barrio Italia, Ñuñoa.", url: "sitios/mar-y-ola/", tipo: "Sitio web" },
-        { t: "Reglamentos SmartFit", d: "Contratos y reglamentos de SmartFit Chile resumidos y fáciles de navegar.", url: "sitios/smartfit/", tipo: "Sitio web" },
-        { t: "SindicatoLegal", d: "Prototipo de plataforma para sindicatos, con portal de socios y panel de directiva.", url: "sitios/sindicato/", tipo: "Prototipo" },
+        { t: "SindicatoLegal", d: "Prototipo rápido de la base de una plataforma para sindicatos, con portal de socios y panel de directiva.", url: "sitios/sindicato/", tipo: "Prototipo" },
+        { t: "Reglamentos SmartFit", d: "Mi primer sitio, hecho rápido: contratos y reglamentos de SmartFit resumidos. Ya no refleja sus políticas actuales.", url: "sitios/smartfit/", tipo: "Archivo" },
         { t: "Digital Monster", d: "El sitio de nuestro estudio indie.", url: "digital-monster/", tipo: "Sitio web" }
       ]}]
     }
@@ -288,10 +494,59 @@
     return hallado;
   }
 
+  /* ---------- Interruptor de baraja ---------- */
+  var ICONO_SOL = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="#FFCB3D" stroke="currentColor" stroke-width="2"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  var ICONO_LUNA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5a8.5 8.5 0 1 0 5 13.4A6.8 6.8 0 1 1 15.5 3.5z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="6" r="1" fill="currentColor"/></svg>';
+  function etiquetaBaraja(b) { return b === "sombra" ? "Sombra" : "Luz"; }
+  function pintarInterruptores() {
+    var b = html.dataset.baraja, otra = b === "sombra" ? "luz" : "sombra";
+    document.querySelectorAll("[data-baraja-boton]").forEach(function (btn) {
+      var largo = btn.hasAttribute("data-largo");
+      btn.setAttribute("aria-label", "Baraja de " + etiquetaBaraja(b) + ". Cambiar a la baraja de " + etiquetaBaraja(otra));
+      btn.setAttribute("aria-pressed", b === "sombra" ? "true" : "false");
+      if (largo) {
+        btn.innerHTML = (b === "sombra" ? ICONO_SOL : ICONO_LUNA) + "<span>Barajar hacia la " + etiquetaBaraja(otra) + "</span>";
+      } else {
+        btn.innerHTML = '<span class="tc-baraja-icono">' + (b === "sombra" ? ICONO_LUNA : ICONO_SOL) + "</span>" +
+          '<span class="tc-baraja-texto">' + etiquetaBaraja(b) + "</span>";
+      }
+    });
+  }
+  function aplicarBaraja(b) {
+    html.dataset.baraja = b;
+    guardarBaraja(b);
+    pintarInterruptores();
+    actualizarGraficos();
+    document.dispatchEvent(new CustomEvent("tc:baraja", { detail: b }));
+  }
+  function cambiarBaraja() {
+    var nueva = html.dataset.baraja === "sombra" ? "luz" : "sombra";
+    var reducir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var cartas = Array.prototype.slice.call(document.querySelectorAll(".arcano"));
+    if (reducir || !cartas.length) {
+      if (!reducir && document.startViewTransition) document.startViewTransition(function () { aplicarBaraja(nueva); });
+      else aplicarBaraja(nueva);
+      return;
+    }
+    cartas.forEach(function (c) { c.classList.remove("volteando"); void c.offsetWidth; c.classList.add("volteando"); });
+    setTimeout(function () { aplicarBaraja(nueva); }, 280);
+    setTimeout(function () { cartas.forEach(function (c) { c.classList.remove("volteando"); }); }, 600);
+  }
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest && e.target.closest("[data-baraja-boton]");
+    if (btn) { e.preventDefault(); cambiarBaraja(); }
+  });
+  /* Si se cambia de baraja en otra pestaña, esta también cambia */
+  window.addEventListener("storage", function (e) {
+    if (e.key === CLAVE && (e.newValue === "luz" || e.newValue === "sombra") && e.newValue !== html.dataset.baraja) {
+      aplicarBaraja(e.newValue);
+    }
+  });
+
   /* ---------- Barra superior y pie ---------- */
   function construirBarra() {
-    var area = document.documentElement.dataset.area || areaDeRuta(rutaActual);
-    if (area && !document.documentElement.dataset.area) document.documentElement.dataset.area = area;
+    var area = html.dataset.area || areaDeRuta(rutaActual);
+    if (area && !html.dataset.area) html.dataset.area = area;
 
     var migas = [];
     var segs = rutaActual ? rutaActual.split("/") : [];
@@ -330,6 +585,7 @@
         '<a class="tc-firma" href="' + RAIZ.href + '" aria-label="Inicio del portfolio"><span class="tc-sello" aria-hidden="true">TC</span><span class="tc-nombre">Tomás Cabrolier</span></a>' +
         (migas.length ? '<nav class="tc-migas" aria-label="Estás en">' + migasHTML + "</nav>" : "") +
         '<nav class="tc-nav" aria-label="Áreas">' + nav + "</nav>" +
+        '<button type="button" class="tc-baraja" data-baraja-boton></button>' +
       "</div>";
     document.body.insertBefore(barra, document.body.firstChild);
 
@@ -338,7 +594,8 @@
     pie.setAttribute("role", "contentinfo");
     pie.innerHTML =
       '<div class="tc-pie-in">' +
-        "<span>Tomás Cabrolier, Santiago de Chile</span>" +
+        '<span class="tc-pie-firma">Tomás Cabrolier · Teoc</span>' +
+        "<span>Santiago de Chile</span>" +
         '<span class="tc-pie-enlaces">' +
           '<a href="' + RAIZ.href + '">Inicio</a>' +
           '<a href="https://www.wattpad.com/user/Teoc679" target="_blank" rel="noopener">Wattpad</a>' +
@@ -371,19 +628,20 @@
       barra.style.setProperty("max-width", "none", "important");
     }
     if (abajo || izq || der) {
-      pie.style.setProperty("margin", (abajo ? 24 : 0) + "px " + (-der) + "px " + (-abajo) + "px " + (-izq) + "px", "important");
+      pie.style.setProperty("margin", "56px " + (-der) + "px " + (-abajo) + "px " + (-izq) + "px", "important");
       pie.style.setProperty("width", ancho, "important");
       pie.style.setProperty("max-width", "none", "important");
     }
   }
 
   /* ---------- Arcanos ---------- */
-  function arcanoHTML(k, conPie, etiqueta) {
+  function arcanoHTML(k, conPie, esEnlace) {
     var a = AREAS[k];
-    var tag = etiqueta ? "a" : "div";
-    return "<" + tag + ' class="arcano" data-area="' + k + '"' + (etiqueta ? ' href="' + enlace(a.url) + '"' : ' aria-hidden="true"') + ">" +
+    var tag = esEnlace ? "a" : "div";
+    return "<" + tag + ' class="arcano" data-area="' + k + '"' + (esEnlace ? ' href="' + enlace(a.url) + '"' : ' aria-hidden="true"') + ">" +
+      adornosCarta() +
       '<span class="arcano-num">' + a.num + "</span>" + glifo(k) +
-      (conPie ? '<span class="arcano-pie"><span class="arcano-area">' + esc(a.nombre) + '</span><span class="arcano-carta">' + esc(a.carta) + "</span></span>" : "<span></span>") +
+      (conPie ? '<span class="arcano-pie"><span class="arcano-area">' + esc(a.nombre) + '</span><span class="arcano-carta">' + esc(a.carta) + "</span></span>" : "") +
       "</" + tag + ">";
   }
 
@@ -399,9 +657,11 @@
       ? '<a href="' + esc(url) + '"' + (externo ? ' target="_blank" rel="noopener"' : "") + ">" + esc(it.t) + "</a>"
       : esc(it.t);
     var area = conArea ? '<span class="obra-area">' + esc(AREAS[conArea].nombre) + "</span>" : "";
-    var color = conArea ? ' style="--obra-color: var(--tc-' + conArea + ')"' : "";
+    var color = conArea
+      ? ' style="--obra-color: var(--a-' + conArea + '-relleno); --obra-suave: var(--a-' + conArea + '-suave); --obra-tinta: var(--a-' + conArea + ')"'
+      : "";
     return '<li class="obra' + (url ? "" : " pendiente") + '"' + color + ">" +
-      '<div>' + area + '<h3 class="obra-titulo">' + titulo + "</h3></div>" +
+      "<div>" + area + '<h3 class="obra-titulo">' + titulo + "</h3></div>" +
       '<span class="obra-tipo">' + esc(it.tipo || "") + "</span>" +
       (it.d ? '<p class="obra-desc">' + esc(it.d) + "</p>" : "") +
       "</li>";
@@ -412,17 +672,17 @@
     var id = main.dataset.indice, h = CATALOGO[id];
     if (!h) return;
     var a = AREAS[h.area];
-    document.documentElement.dataset.area = h.area;
+    html.dataset.area = h.area;
     var esArea = AREAS[id];
-    var html =
-      '<header class="cabecera-area"><div class="tc-contenedor">' + arcanoHTML(h.area, false, false) +
-        "<div>" + '<p class="carta">' + (esArea ? a.num + ", " + esc(a.carta) : esc(a.nombre)) + "</p>" +
+    var out =
+      '<header class="cielo cabecera-area"><div class="escena"></div><div class="tc-contenedor">' + arcanoHTML(h.area, false, false) +
+        "<div>" + '<p class="carta">' + (esArea ? a.num + " · " + esc(a.carta) : esc(a.nombre)) + "</p>" +
         "<h1>" + esc(h.titulo) + "</h1>" +
         '<p class="intro">' + esc(h.intro) + "</p></div>" +
       "</div></header>";
 
     if (h.estante) {
-      html += '<section class="grupo tc-contenedor"><h2>Historias</h2><p>Toca una portada para leerla en Wattpad.</p><ul class="estante">' +
+      out += '<section class="grupo tc-contenedor"><h2>Historias</h2><p>Toca una portada para leerla en Wattpad.</p><ul class="estante">' +
         h.estante.map(function (l) {
           return '<li class="libro"><a href="' + esc(l.url) + '" target="_blank" rel="noopener">' +
             '<img src="' + esc(enlace(l.img)) + '" alt="Portada de ' + esc(l.t) + '" loading="lazy" width="300" height="450">' +
@@ -430,16 +690,15 @@
         }).join("") + "</ul></section>";
     }
     (h.grupos || []).forEach(function (g) {
-      html += '<section class="grupo tc-contenedor"><h2>' + esc(g.titulo) + "</h2>" +
+      out += '<section class="grupo tc-contenedor"><h2>' + esc(g.titulo) + "</h2>" +
         (g.bajada ? "<p>" + esc(g.bajada) + "</p>" : "") +
         '<ul class="obras">' + g.items.map(function (it) { return filaHTML(it); }).join("") + "</ul></section>";
     });
     if (!h.grupos.length && !h.estante) {
-      html += '<section class="grupo tc-contenedor"><h2>Todavía no hay trabajos aquí</h2>' +
+      out += '<section class="grupo tc-contenedor"><h2>Todavía no hay trabajos aquí</h2>' +
         '<p>Los iré subiendo a medida que avance el ramo. Mientras tanto, revisa el resto de <a href="' + enlace("pedagogia/") + '">Pedagogía</a>.</p></section>';
     }
-    main.innerHTML = html;
-    if (!document.title || /^\s*$/.test(document.title)) document.title = h.titulo + " | Tomás Cabrolier";
+    main.innerHTML = out;
   }
 
   /* ---------- Portada ---------- */
@@ -448,8 +707,7 @@
     if (tirada) {
       tirada.innerHTML = ORDEN.map(function (k, i) {
         var a = AREAS[k];
-        var n = k === "estudio" ? 0 : contar(k);
-        return '<li style="--i:' + i + ";--dx:" + ((ORDEN.length - 1) / 2 - i) * 164 + 'px">' +
+        return '<li style="--i:' + i + ";--dx:" + ((ORDEN.length - 1) / 2 - i) * 170 + 'px">' +
           arcanoHTML(k, true, true) +
           '<span class="tirada-nota">' + esc(a.nota) + "</span></li>";
       }).join("");
@@ -461,7 +719,7 @@
         var n = k === "estudio" ? 0 : contar(k);
         function leer() {
           if (!lectura) return;
-          lectura.innerHTML = "<h2><small>" + a.num + ", " + esc(a.carta) + "</small>" + esc(a.nombre) + "</h2>" +
+          lectura.innerHTML = "<h2><small>" + a.num + " · " + esc(a.carta) + "</small>" + esc(a.nombre) + "</h2>" +
             "<p>" + esc(a.nota) + (n ? " " + plural(n) + "." : "") + "</p>";
         }
         carta.addEventListener("mouseenter", leer);
@@ -473,7 +731,7 @@
       var reducir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (!reducir) {
         tirada.classList.add("repartir");
-        var ultima = tirada.querySelector("li:last-child .arcano");
+        var ultima = tirada.querySelector("li:last-child");
         var fin = function () { tirada.classList.remove("repartir"); };
         ultima.addEventListener("animationend", fin);
         setTimeout(fin, 2200);
@@ -496,9 +754,11 @@
     var main = document.querySelector("[data-indice]");
     if (main) construirIndice(main);
     if (document.querySelector("[data-tirada]")) construirPortada();
+    pintarEscenas();
+    pintarInterruptores();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", iniciar);
   else iniciar();
 
-  window.TC = { AREAS: AREAS, CATALOGO: CATALOGO };
+  window.TC = { AREAS: AREAS, CATALOGO: CATALOGO, color: resolverColor, cambiarBaraja: cambiarBaraja };
 })();

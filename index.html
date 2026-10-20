@@ -4,20 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tomás Cabrolier | Portfolio</title>
-  <meta name="description" content="Portfolio de Tomás Cabrolier: pedagogía en educación básica, historias, código y juegos, tarot y sitios web.">
+  <meta name="description" content="Portfolio de Tomás Cabrolier (Teoc): pedagogía en educación básica, historias, código y juegos, tarot y sitios web.">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/site.css">
-  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/site.js"></script>
 </head>
 <body class="tc">
   <main>
-    <section class="portada-cielo">
+    <header class="cielo portada">
+      <div class="escena"></div>
       <div class="tc-contenedor">
         <div class="portada-intro">
           <h1>Tomás Cabrolier</h1>
-          <p>Estudio Pedagogía en Educación Básica. Fuera del aula escribo historias, programo juegos y leo el tarot. Todo lo que hago vive aquí.</p>
+          <span class="alias">también Teoc</span>
+          <p class="bajada">Estudio Pedagogía en Educación Básica. Fuera del aula escribo fantasía, programo juegos y leo el tarot con dos barajas: una de luz y una de sombra. Esta página también tiene las dos.</p>
         </div>
-        <p class="tirada-instruccion">Elige una carta para entrar.</p>
+        <div class="tirada-cabeza">
+          <p class="tirada-instruccion">Elige una carta para entrar.</p>
+          <button type="button" class="boton secundario" data-baraja-boton data-largo>Cambiar de baraja</button>
+        </div>
         <ul class="tirada" data-tirada aria-label="Áreas del portfolio">
           <li><a href="pedagogia/">Pedagogía</a></li>
           <li><a href="letras/">Letras</a></li>
@@ -27,14 +32,15 @@
           <li><a href="sitios/">Sitios web</a></li>
         </ul>
         <div class="lectura" data-lectura aria-live="polite">
-          <p>Cada carta es un área de mi trabajo. Pasa el cursor por una para leerla.</p>
+          <h2><small>Seis arcanos</small>Un área en cada carta</h2>
+          <p>Pasa el cursor por una para leerla.</p>
         </div>
       </div>
-    </section>
+    </header>
 
     <section class="seccion">
       <div class="tc-contenedor">
-        <h2>Algunos trabajos</h2>
+        <h2 class="seccion-titulo">Algunos trabajos</h2>
         <p class="seccion-bajada">Una muestra de distintas áreas. Cada carta guarda el resto.</p>
         <ul class="obras" data-destacados></ul>
       </div>
@@ -42,14 +48,16 @@
 
     <section class="seccion">
       <div class="tc-contenedor sobre">
-        <img src="assets/img/tomas.jpg" alt="Tomás Cabrolier" width="160" height="160">
+        <figure class="sobre-foto" style="margin:0">
+          <img src="assets/img/tomas.jpg" alt="Tomás Cabrolier" width="170" height="170">
+        </figure>
         <div>
-          <h2 style="font-size:1.6rem;margin-bottom:12px">Sobre mí</h2>
-          <p>Estoy en cuarto año de Pedagogía en Educación Básica y hago mi práctica en séptimo básico. Me interesa diseñar material que los estudiantes quieran usar: escape rooms, generadores, guías interactivas.</p>
+          <h2 class="seccion-titulo" style="margin-bottom:14px">Sobre mí</h2>
+          <p>Estoy en cuarto año de Pedagogía en Educación Básica y hago mi práctica en séptimo básico. Me gusta diseñar material que los estudiantes quieran usar: escape rooms, generadores, guías interactivas.</p>
           <p>También trabajo en una tienda de velas, escribo fantasía, programo en Unity, Godot, Java y Python, y con Francisco llevamos Digital Monster, nuestro estudio indie.</p>
           <ul class="enlaces">
-            <li><a href="https://www.wattpad.com/user/Teoc679" target="_blank" rel="noopener">Leer en Wattpad</a></li>
-            <li><a href="https://github.com/TeocHub" target="_blank" rel="noopener">Ver GitHub</a></li>
+            <li><a class="boton" href="https://www.wattpad.com/user/Teoc679" target="_blank" rel="noopener">Leer en Wattpad</a></li>
+            <li><a class="boton secundario" href="https://github.com/TeocHub" target="_blank" rel="noopener">Ver GitHub</a></li>
           </ul>
         </div>
       </div>

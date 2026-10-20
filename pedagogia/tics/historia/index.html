@@ -8,27 +8,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #0051a8;
-            --secondary-color: #e31e24;
-            --accent-color: #f5f5f5;
-            --text-color: #333;
-            --light-blue: #e6f2ff;
-            --success-green: #28a745;
-            --warning-yellow: #ffc107;
+            --primary-color: var(--acento);
+            --secondary-color: var(--h2);
+            --accent-color: var(--tinta);
+            --text-color: var(--tinta-2);
+            --light-blue: var(--fondo);
+            --success-green: var(--exito);
+            --warning-yellow: var(--h1);
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--text-color);
-            background-color: #f9f9f9;
+            font-family: var(--texto);
+            color: var(--tinta-2);
+            background-color: var(--fondo);
             line-height: 1.6;
         }
         
         .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
+            background: linear-gradient(135deg, var(--acento-relleno), var(--h2-relleno));
+            color: var(--tinta);
             padding: 2rem 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: var(--sombra-suave);
         }
         
         .step-container {
@@ -46,56 +46,56 @@
         }
 
         .section-card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: var(--superficie);
+            border-radius: var(--radio-sm);
+            box-shadow: var(--sombra-suave);
             padding: 2rem;
             margin-bottom: 2rem;
-            border-left: 5px solid var(--primary-color);
+            border-left: 5px solid var(--acento);
         }
         
         .reference-box {
-            background-color: #eef7ff;
-            border: 1px dashed #0051a8;
-            border-radius: 8px;
+            background-color: var(--fondo);
+            border: 1px dashed var(--acento);
+            border-radius: var(--radio-sm);
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
         .reference-box h5 {
-            color: var(--primary-color);
+            color: var(--acento);
             font-weight: bold;
         }
 
         .example-box {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
+            background-color: var(--fondo);
+            border: 1px solid var(--linea);
+            border-radius: var(--radio-sm);
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
 
         .example-box h5 {
-            color: var(--primary-color);
+            color: var(--acento);
             font-weight: bold;
         }
 
         .power-box {
             padding: 1.5rem;
             margin: 1rem 0;
-            border-radius: 8px;
+            border-radius: var(--radio-sm);
             transition: all 0.3s ease;
         }
         
-        .power-legislativo { background-color: var(--light-blue); border-left: 5px solid var(--primary-color); }
-        .power-ejecutivo { background-color: #fff0e6; border-left: 5px solid #ff7f00; }
-        .power-judicial { background-color: #e6ffe6; border-left: 5px solid #00a000; }
-        .power-ciudadano { background-color: #f0e6ff; border-left: 5px solid #7f00ff; }
+        .power-legislativo { background-color: var(--fondo); border-left: 5px solid var(--acento); }
+        .power-ejecutivo { background-color: var(--fondo); border-left: 5px solid var(--h1); }
+        .power-judicial { background-color: var(--fondo); border-left: 5px solid var(--exito); }
+        .power-ciudadano { background-color: var(--fondo); border-left: 5px solid var(--h4); }
         
         .sticky-note {
-            background-color: #fff8c4;
+            background-color: var(--fondo);
             padding: 1rem;
-            border-radius: 5px;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            border-radius: var(--radio-sm);
+            box-shadow: var(--sombra-suave);
             margin: 0.5rem;
             display: inline-block;
             min-width: 180px;
@@ -105,9 +105,9 @@
         .news-headline {
             font-size: 1.8rem;
             font-weight: bold;
-            color: var(--primary-color);
+            color: var(--acento);
             margin-bottom: 1rem;
-            border-bottom: 3px solid var(--secondary-color);
+            border-bottom: 3px solid var(--h2);
             padding-bottom: 0.5rem;
         }
         
@@ -116,13 +116,13 @@
             line-height: 1.6;
         }
         
-        .btn-primary { background-color: var(--primary-color); border-color: var(--primary-color); }
-        .btn-secondary { background-color: #6c757d; border-color: #6c757d; }
-        .btn-success { background-color: var(--success-green); border-color: var(--success-green); }
+        .btn-primary { background-color: var(--acento-relleno); border-color: var(--acento); }
+        .btn-secondary { background-color: var(--acento-relleno); border-color: var(--trazo); }
+        .btn-success { background-color: var(--acento-relleno); border-color: var(--exito); }
 
         .progress-container {
-            background-color: #e9ecef;
-            border-radius: 10px;
+            background-color: var(--fondo);
+            border-radius: var(--radio-sm);
             padding: 1rem;
             margin-bottom: 2rem;
             position: sticky;
@@ -132,31 +132,32 @@
 
         .progress-step {
             text-align: center;
-            color: #aaa;
+            color: var(--tinta-3);
             font-size: 0.9rem;
         }
         .progress-step.active {
-            color: var(--primary-color);
+            color: var(--acento);
             font-weight: bold;
         }
         .progress-step.completed {
-            color: var(--success-green);
+            color: var(--exito);
         }
 
 
         .final-news-preview {
-            border: 1px solid #ddd;
+            border: 1px solid var(--linea);
             padding: 2rem;
-            background-color: white;
+            background-color: var(--superficie);
             margin-top: 2rem;
-            border-radius: 8px;
+            border-radius: var(--radio-sm);
         }
     </style>
 
   <link rel="icon" href="../../../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../../assets/css/site.css">
   <link rel="stylesheet" href="../../../assets/css/armonia.css">
-  <script src="../../../assets/js/site.js" defer></script>
+  <script src="../../../assets/js/site.js"></script>
+  <!-- barajas aplicadas -->
 </head>
 <body>
     <!-- Header -->
@@ -195,8 +196,8 @@
     <main class="container my-5">
         
         <!-- OBJETIVOS DE APRENDIZAJE -->
-        <div class="section-card" style="background-color: #e6f2ff; border-left: 5px solid var(--primary-color);">
-            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem;">
+        <div class="section-card" style="background-color: var(--fondo); border-left: 5px solid var(--acento);">
+            <h3 style="color: var(--acento); margin-bottom: 1.5rem;">
                 <i class="fas fa-book"></i> Historia - 6to Básico
             </h3>
             <p style="margin-bottom: 1rem;"><strong>Objetivo: Explicar algunos elementos fundamentales de la organización democrática de Chile, incluyendo:</strong></p>
@@ -465,12 +466,12 @@
                     <p class="text-danger"><em>❌ Incorrecto: Un juez juzga, no ejecuta obras. Eso es función del Alcalde o Presidente.</em></p>
                 </div>
 
-                <div class="mt-5 p-4 bg-light rounded" style="border: 2px solid var(--primary-color);">
-                    <h5 style="color: var(--primary-color); margin-bottom: 2rem;">
+                <div class="mt-5 p-4 bg-light rounded" style="border: 2px solid var(--acento);">
+                    <h5 style="color: var(--acento); margin-bottom: 2rem;">
                         <i class="fas fa-lightbulb"></i> Pregunta de Cierre para Reflexionar
                     </h5>
                     
-                    <div style="background-color: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border-left: 4px solid var(--secondary-color);">
+                    <div style="background-color: var(--superficie); padding: 1.5rem; border-radius: var(--radio-sm); margin-bottom: 2rem; border-left: 4px solid var(--h2);">
                         <p style="font-size: 1.1rem; font-weight: 500; line-height: 1.8; margin: 0;">
                             "¿Por qué si no hubiéramos incluido a los Ciudadanos (Participación) nuestra noticia no sería una historia completa?"
                         </p>
@@ -480,7 +481,7 @@
                         <button class="btn btn-outline-primary" onclick="toggleAnswer(event)" style="width: 100%; padding: 0.75rem;">
                             <i class="fas fa-eye"></i> Ver Respuesta de Ejemplo
                         </button>
-                        <div id="answerExample" style="display: none; margin-top: 1rem; padding: 1rem; background-color: #e6f2ff; border-radius: 5px; border-left: 4px solid var(--primary-color);">
+                        <div id="answerExample" style="display: none; margin-top: 1rem; padding: 1rem; background-color: var(--fondo); border-radius: var(--radio-sm); border-left: 4px solid var(--acento);">
                             <p style="margin: 0; font-style: italic;">
                                 "Porque la democracia se trata de representar la voluntad de la gente. Sin los ciudadanos, no hay democracia."
                             </p>
@@ -489,12 +490,12 @@
 
                     <hr style="margin: 2rem 0;">
 
-                    <p style="color: var(--primary-color); font-weight: bold; margin-bottom: 1rem;">
+                    <p style="color: var(--acento); font-weight: bold; margin-bottom: 1rem;">
                         <i class="fas fa-pen"></i> Ahora, escribe TU respuesta:
                     </p>
                     <textarea class="form-control" id="studentAnswer" rows="4" placeholder="Reflexiona: ¿Por qué crees que los ciudadanos son importantes para una historia completa? Escribe tu propia respuesta..." oninput="saveData()" style="margin-bottom: 1.5rem;"></textarea>
                     
-                    <p style="font-size: 0.9rem; color: #666; text-align: center;">
+                    <p style="font-size: 0.9rem; color: var(--tinta-3); text-align: center;">
                         <i class="fas fa-info-circle"></i> Tu respuesta se incluirá en el PDF que descargarás.
                     </p>
                 </div>

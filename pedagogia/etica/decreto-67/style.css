@@ -1,11 +1,11 @@
 /* Importar fuentes de Google Fonts */
 :root {
-    --primary-color: #2D7A57; /* Verde oscuro, similar al color de acento de la página de ejemplo */
-    --secondary-color: #3E9670; /* Verde claro */
-    --background-color: #EEF1F6; /* Gris claro para el fondo */
-    --text-color: #1A1C2E; /* Color de texto principal */
-    --card-background: #ffffff; /* Fondo blanco para las tarjetas */
-    --shadow-color: rgba(0, 0, 0, 0.1); /* Sombra suave para las tarjetas */
+    --primary-color: var(--acento); /* Verde oscuro, similar al color de acento de la página de ejemplo */
+    --secondary-color: var(--acento); /* Verde claro */
+    --background-color: var(--fondo); /* Gris claro para el fondo */
+    --text-color: var(--h3); /* Color de texto principal */
+    --card-background: var(--superficie); /* Fondo blanco para las tarjetas */
+    --shadow-color: rgb(var(--tinta-rgb) / 0.1); /* Sombra suave para las tarjetas */
 }
 
 /* Estilos Generales y Reset */
@@ -16,10 +16,10 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--texto);
     line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--background-color);
+    color: var(--h3);
+    background-color: var(--fondo);
 }
 
 .container {
@@ -30,14 +30,14 @@ body {
 
 /* Header (Hero Section) */
 .hero {
-    background: var(--primary-color);
-    color: #fff;
+    background: var(--acento-relleno);
+    color: var(--tinta);
     padding: 4rem 1rem;
     text-align: center;
 }
 
 .hero-title {
-    font-family: 'Roboto', serif;
+    font-family: var(--display);
     font-size: 3rem;
     margin-bottom: 0.5rem;
 }
@@ -48,9 +48,9 @@ body {
 
 /* Títulos de Sección */
 .section-title {
-    font-family: 'Roboto', serif;
+    font-family: var(--display);
     font-size: 2.5rem;
-    color: var(--primary-color);
+    color: var(--acento);
     text-align: center;
     margin-bottom: 2rem;
 }
@@ -63,10 +63,10 @@ body {
 }
 
 .card {
-    background: var(--card-background);
+    background: var(--superficie);
     padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px var(--shadow-color);
+    border-radius: var(--radio-sm);
+    box-shadow: var(--sombra-suave);
     transition: transform 0.3s ease;
 }
 
@@ -75,9 +75,9 @@ body {
 }
 
 .card-title {
-    font-family: 'Roboto', serif;
+    font-family: var(--display);
     font-size: 1.5rem;
-    color: var(--secondary-color);
+    color: var(--acento);
     margin-bottom: 1rem;
 }
 
@@ -90,24 +90,24 @@ body {
     display: block;
     width: 100%;
     padding: 0.75rem;
-    background-color: var(--secondary-color);
-    color: #fff;
+    background-color: var(--acento-relleno);
+    color: var(--tinta);
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radio-sm);
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.3s ease;
 }
 
 .expand-btn:hover {
-    background-color: #2D7A57;
+    background-color: var(--acento-relleno);
 }
 
 .expandable-content {
     display: none; /* Oculto por defecto */
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid #E1E5EE;
+    border-top: 1px solid var(--linea);
 }
 
 .expandable-content.show {
@@ -129,30 +129,30 @@ body {
 }
 
 .accordion-item {
-    background: var(--card-background);
-    border-radius: 8px;
+    background: var(--superficie);
+    border-radius: var(--radio-sm);
     margin-bottom: 1rem;
-    box-shadow: 0 2px 4px var(--shadow-color);
+    box-shadow: var(--sombra-suave);
     overflow: hidden;
 }
 
 .accordion-title {
     padding: 1.5rem;
-    background-color: var(--secondary-color);
-    color: #fff;
+    background-color: var(--acento-relleno);
+    color: var(--tinta);
     cursor: pointer;
-    font-family: 'Roboto', serif;
+    font-family: var(--display);
     font-size: 1.25rem;
     transition: background-color 0.3s ease;
 }
 
 .accordion-title:hover {
-    background-color: #2D7A57;
+    background-color: var(--acento-relleno);
 }
 
 .accordion-content {
     padding: 1.5rem;
-    border-top: 1px solid #E1E5EE;
+    border-top: 1px solid var(--linea);
     display: none; /* Oculto por defecto */
 }
 
@@ -164,8 +164,8 @@ body {
 .footer {
     text-align: center;
     padding: 2rem 1rem;
-    background: var(--primary-color);
-    color: #fff;
+    background: var(--acento-relleno);
+    color: var(--tinta);
     margin-top: 2rem;
 }
 

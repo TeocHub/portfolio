@@ -1,0 +1,174 @@
+/* ==========================================================
+   Las dos barajas: tokens de color
+   ----------------------------------------------------------
+   Archivo generado. Cada color se guarda como tripleta RGB
+   (--x-rgb) para que Tailwind pueda usar transparencias, y
+   como color listo para usar (--x).
+   Baraja de Luz: cielo, sol, chicle; trazo grueso de tinta.
+   Baraja de Sombra: tinta verde-negra, latón, cobre, relojería.
+   ========================================================== */
+
+:root,
+:root[data-baraja="luz"] {
+  color-scheme: light;
+  --fondo-rgb: 230 244 254;
+  --fondo-2-rgb: 210 235 252;
+  --superficie-rgb: 255 255 255;
+  --superficie-2-rgb: 255 244 207;
+  --tinta-rgb: 28 37 65;
+  --tinta-2-rgb: 70 82 117;
+  --tinta-3-rgb: 108 118 153;
+  --linea-rgb: 188 211 230;
+  --trazo-rgb: 28 37 65;
+  --resalte-rgb: 255 203 61;
+  --resalte-tinta-rgb: 138 88 0;
+  --boton-rgb: 28 37 65;
+  --sobre-boton-rgb: 255 255 255;
+  --peligro-rgb: 200 36 59;
+  --exito-rgb: 23 128 63;
+  --h1-rgb: 138 88 0;
+  --h1-relleno-rgb: 255 203 61;
+  --h1-suave-rgb: 255 242 196;
+  --h2-rgb: 180 36 90;
+  --h2-relleno-rgb: 255 141 179;
+  --h2-suave-rgb: 255 227 237;
+  --h3-rgb: 21 95 166;
+  --h3-relleno-rgb: 108 196 255;
+  --h3-suave-rgb: 221 240 255;
+  --h4-rgb: 106 63 201;
+  --h4-relleno-rgb: 185 160 255;
+  --h4-suave-rgb: 236 229 255;
+  --a-pedagogia-rgb: 21 122 67;
+  --a-pedagogia-relleno-rgb: 99 210 122;
+  --a-pedagogia-suave-rgb: 220 246 225;
+  --a-letras-rgb: 180 36 90;
+  --a-letras-relleno-rgb: 255 141 179;
+  --a-letras-suave-rgb: 255 227 237;
+  --a-codigo-rgb: 21 95 166;
+  --a-codigo-relleno-rgb: 108 196 255;
+  --a-codigo-suave-rgb: 221 240 255;
+  --a-esoterico-rgb: 106 63 201;
+  --a-esoterico-relleno-rgb: 185 160 255;
+  --a-esoterico-suave-rgb: 236 229 255;
+  --a-estudio-rgb: 143 85 0;
+  --a-estudio-relleno-rgb: 255 197 77;
+  --a-estudio-suave-rgb: 255 240 207;
+  --a-sitios-rgb: 11 116 104;
+  --a-sitios-relleno-rgb: 94 216 201;
+  --a-sitios-suave-rgb: 216 247 243;
+}
+:root[data-baraja="sombra"] {
+  color-scheme: dark;
+  --fondo-rgb: 15 26 25;
+  --fondo-2-rgb: 19 34 32;
+  --superficie-rgb: 23 40 37;
+  --superficie-2-rgb: 31 51 47;
+  --tinta-rgb: 239 230 207;
+  --tinta-2-rgb: 191 181 157;
+  --tinta-3-rgb: 148 140 119;
+  --linea-rgb: 48 69 63;
+  --trazo-rgb: 184 146 74;
+  --resalte-rgb: 217 176 97;
+  --resalte-tinta-rgb: 230 197 127;
+  --boton-rgb: 217 176 97;
+  --sobre-boton-rgb: 22 32 30;
+  --peligro-rgb: 232 128 110;
+  --exito-rgb: 131 204 162;
+  --h1-rgb: 230 197 127;
+  --h1-relleno-rgb: 92 71 24;
+  --h1-suave-rgb: 44 38 23;
+  --h2-rgb: 233 154 134;
+  --h2-relleno-rgb: 110 47 40;
+  --h2-suave-rgb: 53 32 28;
+  --h3-rgb: 148 194 230;
+  --h3-relleno-rgb: 36 69 95;
+  --h3-suave-rgb: 23 42 54;
+  --h4-rgb: 194 168 238;
+  --h4-relleno-rgb: 70 50 111;
+  --h4-suave-rgb: 37 30 55;
+  --a-pedagogia-rgb: 128 201 168;
+  --a-pedagogia-relleno-rgb: 44 92 75;
+  --a-pedagogia-suave-rgb: 26 54 48;
+  --a-letras-rgb: 233 154 139;
+  --a-letras-relleno-rgb: 110 45 43;
+  --a-letras-suave-rgb: 55 30 30;
+  --a-codigo-rgb: 148 194 230;
+  --a-codigo-relleno-rgb: 36 69 95;
+  --a-codigo-suave-rgb: 23 42 54;
+  --a-esoterico-rgb: 194 168 238;
+  --a-esoterico-relleno-rgb: 70 50 111;
+  --a-esoterico-suave-rgb: 37 30 55;
+  --a-estudio-rgb: 230 192 104;
+  --a-estudio-relleno-rgb: 93 71 25;
+  --a-estudio-suave-rgb: 48 40 26;
+  --a-sitios-rgb: 125 211 199;
+  --a-sitios-relleno-rgb: 31 80 74;
+  --a-sitios-suave-rgb: 22 48 45;
+}
+
+:root {
+  --fondo: rgb(var(--fondo-rgb));
+  --fondo-2: rgb(var(--fondo-2-rgb));
+  --superficie: rgb(var(--superficie-rgb));
+  --superficie-2: rgb(var(--superficie-2-rgb));
+  --tinta: rgb(var(--tinta-rgb));
+  --tinta-2: rgb(var(--tinta-2-rgb));
+  --tinta-3: rgb(var(--tinta-3-rgb));
+  --linea: rgb(var(--linea-rgb));
+  --trazo: rgb(var(--trazo-rgb));
+  --resalte: rgb(var(--resalte-rgb));
+  --resalte-tinta: rgb(var(--resalte-tinta-rgb));
+  --boton: rgb(var(--boton-rgb));
+  --sobre-boton: rgb(var(--sobre-boton-rgb));
+  --peligro: rgb(var(--peligro-rgb));
+  --exito: rgb(var(--exito-rgb));
+  --h1: rgb(var(--h1-rgb));
+  --h1-relleno: rgb(var(--h1-relleno-rgb));
+  --h1-suave: rgb(var(--h1-suave-rgb));
+  --h2: rgb(var(--h2-rgb));
+  --h2-relleno: rgb(var(--h2-relleno-rgb));
+  --h2-suave: rgb(var(--h2-suave-rgb));
+  --h3: rgb(var(--h3-rgb));
+  --h3-relleno: rgb(var(--h3-relleno-rgb));
+  --h3-suave: rgb(var(--h3-suave-rgb));
+  --h4: rgb(var(--h4-rgb));
+  --h4-relleno: rgb(var(--h4-relleno-rgb));
+  --h4-suave: rgb(var(--h4-suave-rgb));
+  --a-pedagogia: rgb(var(--a-pedagogia-rgb));
+  --a-pedagogia-relleno: rgb(var(--a-pedagogia-relleno-rgb));
+  --a-pedagogia-suave: rgb(var(--a-pedagogia-suave-rgb));
+  --a-letras: rgb(var(--a-letras-rgb));
+  --a-letras-relleno: rgb(var(--a-letras-relleno-rgb));
+  --a-letras-suave: rgb(var(--a-letras-suave-rgb));
+  --a-codigo: rgb(var(--a-codigo-rgb));
+  --a-codigo-relleno: rgb(var(--a-codigo-relleno-rgb));
+  --a-codigo-suave: rgb(var(--a-codigo-suave-rgb));
+  --a-esoterico: rgb(var(--a-esoterico-rgb));
+  --a-esoterico-relleno: rgb(var(--a-esoterico-relleno-rgb));
+  --a-esoterico-suave: rgb(var(--a-esoterico-suave-rgb));
+  --a-estudio: rgb(var(--a-estudio-rgb));
+  --a-estudio-relleno: rgb(var(--a-estudio-relleno-rgb));
+  --a-estudio-suave: rgb(var(--a-estudio-suave-rgb));
+  --a-sitios: rgb(var(--a-sitios-rgb));
+  --a-sitios-relleno: rgb(var(--a-sitios-relleno-rgb));
+  --a-sitios-suave: rgb(var(--a-sitios-suave-rgb));
+  /* Acento del área actual (por defecto, Pedagogía) */
+  --acento-rgb: var(--a-pedagogia-rgb);
+  --acento-relleno-rgb: var(--a-pedagogia-relleno-rgb);
+  --acento-suave-rgb: var(--a-pedagogia-suave-rgb);
+  --acento: rgb(var(--acento-rgb));
+  --acento-relleno: rgb(var(--acento-relleno-rgb));
+  --acento-suave: rgb(var(--acento-suave-rgb));
+}
+[data-area="pedagogia"] { --acento-rgb: var(--a-pedagogia-rgb); --acento-relleno-rgb: var(--a-pedagogia-relleno-rgb); --acento-suave-rgb: var(--a-pedagogia-suave-rgb); }
+[data-area="letras"] { --acento-rgb: var(--a-letras-rgb); --acento-relleno-rgb: var(--a-letras-relleno-rgb); --acento-suave-rgb: var(--a-letras-suave-rgb); }
+[data-area="codigo"] { --acento-rgb: var(--a-codigo-rgb); --acento-relleno-rgb: var(--a-codigo-relleno-rgb); --acento-suave-rgb: var(--a-codigo-suave-rgb); }
+[data-area="esoterico"] { --acento-rgb: var(--a-esoterico-rgb); --acento-relleno-rgb: var(--a-esoterico-relleno-rgb); --acento-suave-rgb: var(--a-esoterico-suave-rgb); }
+[data-area="estudio"] { --acento-rgb: var(--a-estudio-rgb); --acento-relleno-rgb: var(--a-estudio-relleno-rgb); --acento-suave-rgb: var(--a-estudio-suave-rgb); }
+[data-area="sitios"] { --acento-rgb: var(--a-sitios-rgb); --acento-relleno-rgb: var(--a-sitios-relleno-rgb); --acento-suave-rgb: var(--a-sitios-suave-rgb); }
+/* Recalcular los derivados dentro de cada área */
+[data-area] {
+  --acento: rgb(var(--acento-rgb));
+  --acento-relleno: rgb(var(--acento-relleno-rgb));
+  --acento-suave: rgb(var(--acento-suave-rgb));
+}
