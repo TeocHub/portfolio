@@ -1,738 +1,157 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-area="pedagogia">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporteros de la Democracia - Tu Misión como Periodista</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: var(--acento);
-            --secondary-color: var(--h2);
-            --accent-color: var(--tinta);
-            --text-color: var(--tinta-2);
-            --light-blue: var(--fondo);
-            --success-green: var(--exito);
-            --warning-yellow: var(--h1);
-        }
-        
-        body {
-            font-family: var(--texto);
-            color: var(--tinta-2);
-            background-color: var(--fondo);
-            line-height: 1.6;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, var(--acento-relleno), var(--h2-relleno));
-            color: var(--tinta);
-            padding: 2rem 0;
-            box-shadow: var(--sombra-suave);
-        }
-        
-        .step-container {
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-        
-        .step-container.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section-card {
-            background-color: var(--superficie);
-            border-radius: var(--radio-sm);
-            box-shadow: var(--sombra-suave);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-left: 5px solid var(--acento);
-        }
-        
-        .reference-box {
-            background-color: var(--fondo);
-            border: 1px dashed var(--acento);
-            border-radius: var(--radio-sm);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        .reference-box h5 {
-            color: var(--acento);
-            font-weight: bold;
-        }
-
-        .example-box {
-            background-color: var(--fondo);
-            border: 1px solid var(--linea);
-            border-radius: var(--radio-sm);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .example-box h5 {
-            color: var(--acento);
-            font-weight: bold;
-        }
-
-        .power-box {
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border-radius: var(--radio-sm);
-            transition: all 0.3s ease;
-        }
-        
-        .power-legislativo { background-color: var(--fondo); border-left: 5px solid var(--acento); }
-        .power-ejecutivo { background-color: var(--fondo); border-left: 5px solid var(--h1); }
-        .power-judicial { background-color: var(--fondo); border-left: 5px solid var(--exito); }
-        .power-ciudadano { background-color: var(--fondo); border-left: 5px solid var(--h4); }
-        
-        .sticky-note {
-            background-color: var(--fondo);
-            padding: 1rem;
-            border-radius: var(--radio-sm);
-            box-shadow: var(--sombra-suave);
-            margin: 0.5rem;
-            display: inline-block;
-            min-width: 180px;
-            font-style: italic;
-        }
-        
-        .news-headline {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--acento);
-            margin-bottom: 1rem;
-            border-bottom: 3px solid var(--h2);
-            padding-bottom: 0.5rem;
-        }
-        
-        .news-lead {
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-        
-        .btn-primary { background-color: var(--acento-relleno); border-color: var(--acento); }
-        .btn-secondary { background-color: var(--acento-relleno); border-color: var(--trazo); }
-        .btn-success { background-color: var(--acento-relleno); border-color: var(--exito); }
-
-        .progress-container {
-            background-color: var(--fondo);
-            border-radius: var(--radio-sm);
-            padding: 1rem;
-            margin-bottom: 2rem;
-            position: sticky;
-            top: 20px;
-            z-index: 10;
-        }
-
-        .progress-step {
-            text-align: center;
-            color: var(--tinta-3);
-            font-size: 0.9rem;
-        }
-        .progress-step.active {
-            color: var(--acento);
-            font-weight: bold;
-        }
-        .progress-step.completed {
-            color: var(--exito);
-        }
-
-
-        .final-news-preview {
-            border: 1px solid var(--linea);
-            padding: 2rem;
-            background-color: var(--superficie);
-            margin-top: 2rem;
-            border-radius: var(--radio-sm);
-        }
-    </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reporteros de la democracia | Tomás Cabrolier</title>
+  <meta name="description" content="Tu misión: crear una noticia que muestre cómo Chile resuelve sus problemas. Al final descargas tu noticia en PDF.">
   <link rel="icon" href="../../../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../../assets/css/site.css">
-  <link rel="stylesheet" href="../../../assets/css/armonia.css">
+  <link rel="stylesheet" href="../../../assets/css/paginas.css">
   <script src="../../../assets/js/site.js"></script>
-  <!-- barajas aplicadas -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'></script>
 </head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container text-center">
-            <h1 class="display-4 fw-bold">📰 Reporteros de la Democracia</h1>
-            <p class="lead">Tu Misión: Crear una noticia que muestre cómo Chile resuelve sus problemas.</p>
-        </div>
-    </header>
-
-    <!-- Progress Bar -->
-    <div class="container">
-        <div class="progress-container">
-            <div class="row text-center">
-                <div class="col progress-step completed" id="progress-step-1">
-                    <i class="fas fa-check-circle fa-2x"></i>
-                    <p>1. Inicio</p>
-                </div>
-                <div class="col progress-step" id="progress-step-2">
-                    <i class="fas fa-circle fa-2x"></i>
-                    <p>2. Herramientas</p>
-                </div>
-                <div class="col progress-step" id="progress-step-3">
-                    <i class="fas fa-circle fa-2x"></i>
-                    <p>3. Borrador</p>
-                </div>
-                <div class="col progress-step" id="progress-step-4">
-                    <i class="fas fa-circle fa-2x"></i>
-                    <p>4. Final</p>
-                </div>
-            </div>
-        </div>
+<body class="tc pagina">
+  <header class="cielo cabecera-pagina">
+    <div class="escena"></div>
+    <div class="tc-contenedor">
+      <p class="carta">Actividad · Historia · 6.º básico</p>
+      <h1>Reporteros de la democracia</h1>
+      <p class="intro">Tu misión: crear una noticia que muestre cómo Chile resuelve sus problemas. Al final descargas tu noticia en PDF.</p>
+        <ul class="meta"><li><b>Curso</b>6.º básico</li><li><b>Pasos</b>4</li></ul>
     </div>
+  </header>
+  <div class="tc-contenedor lectura sin-indice">
+    
+    <main class="cuerpo">
+<div class="nota">
+        <span class="titulo-nota">Objetivo de aprendizaje</span>
+        <p>Explicar elementos fundamentales de la organización democrática de Chile:</p>
+        <ul>
+          <li>La división de poderes del Estado.</li>
+          <li>La representación mediante cargos de elección popular: concejales, alcaldes, diputados, senadores y Presidente.</li>
+          <li>La importancia de la participación ciudadana.</li>
+        </ul>
+      </div>
 
-    <!-- Main Content -->
-    <main class="container my-5">
-        
-        <!-- OBJETIVOS DE APRENDIZAJE -->
-        <div class="section-card" style="background-color: var(--fondo); border-left: 5px solid var(--acento);">
-            <h3 style="color: var(--acento); margin-bottom: 1.5rem;">
-                <i class="fas fa-book"></i> Historia - 6to Básico
-            </h3>
-            <p style="margin-bottom: 1rem;"><strong>Objetivo: Explicar algunos elementos fundamentales de la organización democrática de Chile, incluyendo:</strong></p>
-            <ul style="margin-left: 1.5rem;">
-                <li>La división de poderes del Estado</li>
-                <li>La representación a través de cargos de elección popular (concejales, alcaldes, diputados, senadores y Presidente)</li>
-                <li>La importancia de la participación ciudadana</li>
-            </ul>
-        </div>
-        
-        <!-- PASO 1: INICIO -->
-        <div id="step1" class="step-container active">
-            <section class="section-card">
-                <h2 class="mb-4">🎤 Paso 1: Entendiendo el Periodismo y el Problema</h2>
-                <p><strong>Tu misión aquí:</strong> Aprender las partes de una noticia y elegir un problema real de Chile para tu reportaje.</p>
-                
-                <h4 class="mt-4">A. Los Elementos Clave de una Noticia</h4>
-                <p>Toda buena noticia responde a seis preguntas clave: Qué, Quién, Cuándo, Dónde, Por qué y Cómo. Mira este ejemplo real:</p>
-                
-                <div class="example-box">
-                    <h5><i class="fas fa-newspaper"></i> Noticia de Ejemplo: "Nueva ley de reciclaje busca reducir basura en las costas"</h5>
-                    <ul>
-                        <li><strong>QUÉ:</strong> Se promulgó una nueva ley de reciclaje.</li>
-                        <li><strong>QUIÉN:</strong> El Presidente Gabriel Boric (Ejecutivo) y el Congreso Nacional (Legislativo), impulsado por comunidades costeras (Ciudadanos).</li>
-                        <li><strong>CUÁNDO:</strong> Ayer, en una ceremonia en La Moneda.</li>
-                        <li><strong>DÓNDE:</strong> A nivel nacional, con énfasis en las costas chilenas.</li>
-                        <li><strong>POR QUÉ:</strong> Para responder a la creciente contaminación marina y la demanda de organizaciones ambientalistas.</li>
-                        <li><strong>CÓMO:</strong> Los ciudadanos protestaron y presentaron propuestas → El Congreso <strong>legisló</strong> y aprobó la ley → El Presidente la <strong>promulgó</strong> (ejecutó).</li>
-                    </ul>
-                </div>
-                <p class="text-muted"><em>Como ves, el "Quién" y el "Cómo" son clave para entender la democracia en acción.</em></p>
+      <div data-recorrido>
+        <section class="paso-recorrido" data-titulo="Inicio">
+          <h2>Paso 1: el periodismo y el problema</h2>
+          <p class="bajada">Aprende las partes de una noticia y elige un problema real de Chile para tu reportaje.</p>
+          <h3>Las seis preguntas de una noticia</h3>
+          <p>Toda buena noticia responde qué, quién, cuándo, dónde, por qué y cómo. Mira este ejemplo:</p>
+          <div class="ficha resalte" style="max-width:46rem">
+            <h4>«Nueva ley de reciclaje busca reducir la basura en las costas»</h4>
+            <dl class="glosario" style="margin:0">
+              <div class="termino"><dt>Qué</dt><dd>Se promulgó una nueva ley de reciclaje.</dd></div>
+              <div class="termino"><dt>Quién</dt><dd>El Presidente (Ejecutivo) y el Congreso Nacional (Legislativo), impulsados por comunidades costeras (ciudadanos).</dd></div>
+              <div class="termino"><dt>Cuándo</dt><dd>Ayer, en una ceremonia en La Moneda.</dd></div>
+              <div class="termino"><dt>Dónde</dt><dd>En todo el país, con énfasis en las costas.</dd></div>
+              <div class="termino"><dt>Por qué</dt><dd>Para responder a la contaminación marina y a la demanda de organizaciones ambientalistas.</dd></div>
+              <div class="termino"><dt>Cómo</dt><dd>Los ciudadanos protestaron y propusieron → el Congreso legisló y aprobó la ley → el Presidente la promulgó.</dd></div>
+            </dl>
+          </div>
+          <p>El «quién» y el «cómo» son clave para entender la democracia en acción.</p>
+          <h3>Elige un problema</h3>
+          <p>Toca una idea para usarla, o escribe la tuya.</p>
+          <div class="botones" data-ideas>
+            <button type="button" class="boton chico secundario">Falta de agua en zonas rurales</button>
+            <button type="button" class="boton chico secundario">Contaminación del aire en Santiago</button>
+            <button type="button" class="boton chico secundario">Inseguridad y delitos en tu comuna</button>
+            <button type="button" class="boton chico secundario">Colapso del transporte público</button>
+            <button type="button" class="boton chico secundario">Basura en las playas</button>
+            <button type="button" class="boton chico secundario">Faltan plazas y parques</button>
+          </div>
+          <div class="campo" style="max-width:46rem">
+            <label for="problema">Problema que elige tu grupo</label>
+            <input id="problema" type="text" required placeholder="Ej.: basura en la playa de mi comuna">
+          </div>
+        </section>
 
-                <hr>
+        <section class="paso-recorrido" data-titulo="Herramientas">
+          <h2>Paso 2: tu caja de herramientas democráticas</h2>
+          <p class="bajada">Conoce a los actores de la democracia y sus funciones para usarlos bien en tu noticia.</p>
+          <p class="nota idea"><b>Tu tema:</b> <span data-ver="problema">(todavía no eliges un problema)</span></p>
+          <h3>Los tres poderes del Estado</h3>
+          <p>En Chile el poder está dividido para evitar abusos. Cada poder tiene una función principal.</p>
+          <ul class="fichas">
+            <li class="ficha"><span class="etiqueta">Legislar</span><h4>Poder Legislativo</h4><p><b>Quiénes:</b> diputados, senadores, concejales.</p><p><b>Qué hacen:</b> crean, debaten y aprueban leyes, y fiscalizan al Ejecutivo.</p><p><em>«El Senado aprobó ayer la ley tras una larga sesión…»</em></p></li>
+            <li class="ficha"><span class="etiqueta">Ejecutar</span><h4>Poder Ejecutivo</h4><p><b>Quiénes:</b> Presidente, ministros, alcaldes, seremis.</p><p><b>Qué hacen:</b> cumplen y hacen cumplir las leyes, administran el país y proponen leyes.</p><p><em>«La Presidenta anunció un plan de obras públicas para mejorar la conectividad en la Araucanía…»</em></p></li>
+            <li class="ficha"><span class="etiqueta">Juzgar</span><h4>Poder Judicial</h4><p><b>Quiénes:</b> jueces, Cortes de Apelaciones, Corte Suprema.</p><p><b>Qué hacen:</b> interpretan las leyes, resuelven conflictos y aseguran que todos actúen dentro de la ley.</p><p><em>«La Corte Suprema falló a favor de los trabajadores…»</em></p></li>
+          </ul>
+          <h3>El actor más importante: la ciudadanía</h3>
+          <div class="ficha acento" style="max-width:46rem">
+            <p><b>Quiénes:</b> tú, tu familia, tus vecinos, las organizaciones sociales.</p>
+            <p><b>Qué hacen:</b> votan, protestan pacíficamente, se organizan, proponen ideas y fiscalizan a las autoridades.</p>
+            <p><em>«Vecinos de Maipú reunieron más de 10 mil firmas para exigir un nuevo consultorio, y el alcalde incluyó el proyecto en el presupuesto municipal…»</em></p>
+          </div>
+        </section>
 
-                <h4 class="mt-4">B. Lluvia de Ideas: ¿Qué problema resolveremos?</h4>
-                <p>Una buena noticia trata de un problema real. Aquí hay algunos ejemplos de temas que afectan a Chile. Elige uno que te interese o escribe el tuyo.</p>
-                
-                <div class="d-flex flex-wrap justify-content-center">
-                    <div class="sticky-note">Falta de agua en zonas rurales</div>
-                    <div class="sticky-note">Contaminación del aire en Santiago</div>
-                    <div class="sticky-note">Inseguridad y delito en tu comuna</div>
-                    <div class="sticky-note">Colapso del transporte público</div>
-                    <div class="sticky-note">Problemas con la basura en la playa</div>
-                    <div class="sticky-note">Necesidad de más plazas y parques</div>
-                </div>
+        <section class="paso-recorrido" data-titulo="Borrador">
+          <h2>Paso 3: crea tu noticia</h2>
+          <p class="bajada">Conecta el problema con la solución democrática.</p>
+          <p class="nota idea"><b>Tu tema:</b> <span data-ver="problema">(todavía no eliges un problema)</span></p>
+          <h3>El escenario de la solución</h3>
+          <details class="desplegable" style="max-width:46rem">
+            <summary><span>Ver un ejemplo<small>Problema: basura en la playa</small></span></summary>
+            <div class="contenido">
+              <ol class="pasos">
+                <li><b>Acción ciudadana</b>Surfistas y vecinos se organizan por redes sociales, limpian la playa y juntan firmas para exigir una solución permanente.</li>
+                <li><b>Acción legislativa</b>Un concejal, apoyado por la comunidad, presenta una ordenanza que prohíbe los plásticos de un solo uso en el comercio costero.</li>
+                <li><b>Acción ejecutiva</b>El alcalde ejecuta un plan con más basureros, personal de limpieza y campañas en las escuelas.</li>
+              </ol>
+            </div>
+          </details>
+          <div class="campo" style="max-width:46rem;margin-top:16px">
+            <label for="escenario">Escribe el escenario de tu noticia</label>
+            <small>¿Cómo empiezan los ciudadanos? ¿Qué hace el poder legislativo? ¿Qué ejecuta el poder ejecutivo?</small>
+            <textarea id="escenario" required rows="5"></textarea>
+          </div>
+          <h3>Responde las seis preguntas</h3>
+          <div class="campos" style="max-width:46rem">
+            <div class="campo"><label for="que">Qué</label><input id="que" type="text" required></div>
+            <div class="campo"><label for="quien">Quién</label><input id="quien" type="text" required></div>
+            <div class="campo"><label for="cuando">Cuándo</label><input id="cuando" type="text" required></div>
+            <div class="campo"><label for="donde">Dónde</label><input id="donde" type="text" required></div>
+            <div class="campo"><label for="porque">Por qué</label><input id="porque" type="text" required></div>
+            <div class="campo"><label for="como">Cómo</label><input id="como" type="text" required></div>
+          </div>
+        </section>
 
-                <div class="mt-4 p-3 bg-light rounded">
-                    <label for="chosenProblem" class="form-label"><strong>Problema que tu grupo elegirá para la noticia:</strong></label>
-                    <textarea class="form-control" id="chosenProblem" rows="2" placeholder="Escribe aquí el problema seleccionado..." oninput="saveData()"></textarea>
-                </div>
-
-                <div class="text-end mt-4">
-                    <button class="btn btn-primary btn-lg" onclick="nextStep(2)">
-                        Siguiente: Herramientas Democráticas <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </section>
-        </div>
-
-        <!-- PASO 2: DESARROLLO I -->
-        <div id="step2" class="step-container">
-            <section class="section-card">
-                <h2 class="mb-4">🛠️ Paso 2: Tu Caja de Herramientas Democráticas</h2>
-                <p><strong>Tu misión aquí:</strong> Conocer a los "actores" de la democracia y sus funciones para que puedas usarlos correctamente en tu noticia.</p>
-                
-                <!-- Reference Box -->
-                <div class="reference-box">
-                    <h5><i class="fas fa-lightbulb"></i> No olvides tu tema</h5>
-                    <p id="ref-problem">Tu problema seleccionado aparecerá aquí.</p>
-                </div>
-                
-                <h4 class="mt-4">A. Los Tres Poderes del Estado</h4>
-                <p>En Chile, el poder está dividido para evitar abusos. Cada poder tiene una función principal.</p>
-                
-                <div class="power-box power-legislativo">
-                    <h4><i class="fas fa-gavel"></i> FUNCIÓN: LEGISLAR (Poder Legislativo)</h4>
-                    <p><strong>Actores Clave:</strong> Diputados, Senadores, Concejales.</p>
-                    <p><strong>Su Trabajo:</strong> Crear, debatir y aprobar leyes. Fiscalizar al Ejecutivo.</p>
-                    <div class="example-box">
-                        <h5><i class="fas fa-quote-left"></i> En una noticia se lee así...</h5>
-                        <p>"El Senado <strong>aprobó</strong> ayer la ley que permite el retiro del 10% de los fondos de pensiones, tras una larga sesión..."</p>
-                    </div>
-                </div>
-                
-                <div class="power-box power-ejecutivo">
-                    <h4><i class="fas fa-landmark"></i> FUNCIÓN: EJECUTAR (Poder Ejecutivo)</h4>
-                    <p><strong>Actores Clave:</strong> Presidente, Ministros, Alcaldes, Seremis.</p>
-                    <p><strong>Su Trabajo:</strong> Cumplir y hacer cumplir las leyes. Administrar el país. Proponer nuevas leyes.</p>
-                    <div class="example-box">
-                        <h5><i class="fas fa-quote-left"></i> En una noticia se lee así...</h5>
-                        <p>"La Presidenta de la República, Michelle Bachelet, <strong>anunció</strong> un nuevo plan de obras públicas para mejorar la conectividad en la Araucanía..."</p>
-                    </div>
-                </div>
-                
-                <div class="power-box power-judicial">
-                    <h4><i class="fas fa-balance-scale"></i> FUNCIÓN: JUZGAR (Poder Judicial)</h4>
-                    <p><strong>Actores Clave:</strong> Jueces, Cortes de Apelaciones, Corte Suprema.</p>
-                    <p><strong>Su Trabajo:</strong> Interpretar las leyes y resolver conflictos. Asegurar que todos actúen dentro de la ley.</p>
-                    <div class="example-box">
-                        <h5><i class="fas fa-quote-left"></i> En una noticia se lee así...</h5>
-                        <p>"La Corte Suprema <strong>falló</strong> a favor de los trabajadores, determinando que el despido fue injustificado y por tanto ilegal..."</p>
-                    </div>
-                </div>
-
-                <hr>
-
-                <h4 class="mt-4">B. El Actor Más Importante: La Ciudadanía</h4>
-                <p>La democracia no funciona sin la gente. Los ciudadanos son el motor del cambio.</p>
-                
-                <div class="power-box power-ciudadano">
-                    <h4><i class="fas fa-users"></i> PARTICIPACIÓN CIUDADANA</h4>
-                    <p><strong>Actores Clave:</strong> Tú, tu familia, tus vecinos, las organizaciones sociales.</p>
-                    <p><strong>Su Trabajo:</strong> Votar, protestar pacíficamente, organizarse, proponer ideas, fiscalizar a las autoridades.</p>
-                    <div class="example-box">
-                        <h5><i class="fas fa-quote-left"></i> En una noticia se lee así...</h5>
-                        <p>"Vecinos de Maipú <strong>recolectaron más de 10 mil firmas</strong> para exigir la construcción de un nuevo consultorio, logrando que el alcalde incluyera el proyecto en el presupuesto municipal..."</p>
-                    </div>
-                </div>
-
-                <div class="text-end mt-4">
-                    <button class="btn btn-secondary btn-lg me-2" onclick="nextStep(1)">
-                        <i class="fas fa-arrow-left"></i> Anterior
-                    </button>
-                    <button class="btn btn-primary btn-lg" onclick="nextStep(3)">
-                        Siguiente: Escribiendo la Noticia <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </section>
-        </div>
-
-        <!-- PASO 3: DESARROLLO II -->
-        <div id="step3" class="step-container">
-            <section class="section-card">
-                <h2 class="mb-4">✍️ Paso 3: ¡Manos a la Obra! Creando tu Noticia</h2>
-                <p><strong>Tu misión aquí:</strong> Usar todo lo que aprendiste para construir el borrador de tu noticia, conectando el problema con la solución democrática.</p>
-                
-                <!-- Reference Box -->
-                <div class="reference-box">
-                    <h5><i class="fas fa-lightbulb"></i> Tu tema a resolver</h5>
-                    <p id="ref-problem-3">Tu problema seleccionado aparecerá aquí.</p>
-                </div>
-                
-                <h4 class="mt-4">A. Define el Escenario de la Solución</h4>
-                <p>Recuerda el problema que elegiste. Ahora, imagina cómo se resolvería. Una buena historia democrática siempre involucra a los ciudadanos.</p>
-                
-                <div class="example-box">
-                    <h5><i class="fas fa-lightbulb"></i> Ejemplo de Escenario (Problema: Basura en la playa)</h5>
-                    <p><strong>1. Acción Ciudadana:</strong> Un grupo de surfistas y vecinos de la costanera se organiza a través de redes sociales. Cansados de ver la playa sucia, <strong>lanzan una campaña</strong> para limpiarla y exigir una solución permanente. Juntan firmas.</p>
-                    <p><strong>2. Acción Legislativa:</strong> Un concejal del municipio, apoyado por la comunidad, <strong>presenta una ordenanza municipal</strong> para prohibir el uso de plásticos de un solo uso en los comercios de la costa.</p>
-                    <p><strong>3. Acción Ejecutiva:</strong> El alcalde, presionado por la campaña y la nueva ordenanza, <strong>ejecuta un plan</strong> que incluye más basureros, personal de limpieza y campañas educativas en las escuelas locales.</p>
-                </div>
-
-                <div class="mt-4 p-3 bg-light rounded">
-                    <label for="scenario" class="form-label"><strong>Escribe el escenario de tu noticia:</strong> (¿Cómo inician los ciudadanos? ¿Qué hace el poder legislativo? ¿Qué ejecuta el poder ejecutivo?)</label>
-                    <textarea class="form-control" id="scenario" rows="5" placeholder="Describe la secuencia de eventos que resuelve tu problema..." oninput="saveData()"></textarea>
-                </div>
-
-                <hr>
-
-                <h4 class="mt-4">B. Responde las Seis Preguntas Clave para tu Noticia</h4>
-                <p>Ahora, llena los datos de tu propia noticia usando la plantilla.</p>
-                
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Pregunta Clave</th>
-                                <th>Tu Respuesta (Usa lenguaje democrático)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>QUÉ</strong></td>
-                                <td><input type="text" class="form-control" id="news-what" placeholder="Ej: Se aprobó una nueva ordenanza de limpieza..." oninput="saveData()"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>QUIÉN</strong></td>
-                                <td><input type="text" class="form-control" id="news-who" placeholder="Ej: Los vecinos, el Concejal y el Alcalde..." oninput="saveData()"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>CUÁNDO</strong></td>
-                                <td><input type="text" class="form-control" id="news-when" placeholder="Ej: Esta mañana, en el Concejo Municipal..." oninput="saveData()"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>DÓNDE</strong></td>
-                                <td><input type="text" class="form-control" id="news-where" placeholder="Ej: En la comuna de Reñaca..." oninput="saveData()"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>POR QUÉ</strong></td>
-                                <td><input type="text" class="form-control" id="news-why" placeholder="Ej: Por la creciente contaminación de la playa..." oninput="saveData()"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>CÓMO</strong></td>
-                                <td><input type="text" class="form-control" id="news-how" placeholder="Ej: Los ciudadanos presionaron, el Concejal legisló y el Alcalde ejecutó..." oninput="saveData()"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="text-end mt-4">
-                    <button class="btn btn-secondary btn-lg me-2" onclick="nextStep(2)">
-                        <i class="fas fa-arrow-left"></i> Anterior
-                    </button>
-                    <button class="btn btn-primary btn-lg" onclick="nextStep(4)">
-                        Siguiente: Tu Noticia Final <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </section>
-        </div>
-
-        <!-- PASO 4: CIERRE -->
-        <div id="step4" class="step-container">
-            <section class="section-card">
-                <h2 class="mb-4">📢 Paso 4: ¡Tu Noticia está Lista!</h2>
-                <p><strong>Tu misión final:</strong> Redactar un titular y un párrafo principal impactantes, y revisar que tu noticia sea democráticamente correcta.</p>
-                
-                <!-- Reference Box with all data -->
-                <div class="reference-box">
-                    <h5><i class="fas fa-clipboard-list"></i> Tu Información Recopilada (Usa esto para escribir)</h5>
-                    <p><strong>Problema:</strong> <span id="ref-problem-4">...</span></p>
-                    <p><strong>Escenario:</strong> <span id="ref-scenario">...</span></p>
-                    <p><strong>QUÉ:</strong> <span id="ref-what">...</span></p>
-                    <p><strong>QUIÉN:</strong> <span id="ref-who">...</span></p>
-                    <p><strong>CUÁNDO:</strong> <span id="ref-when">...</span></p>
-                    <p><strong>DÓNDE:</strong> <span id="ref-where">...</span></p>
-                    <p><strong>POR QUÉ:</strong> <span id="ref-why">...</span></p>
-                    <p><strong>CÓMO:</strong> <span id="ref-how">...</span></p>
-                </div>
-
-                <h4 class="mt-4">A. Redacción Final: Titular y Lead</h4>
-                <p>Usa toda la información que recopilaste para escribir la parte más importante de tu noticia. Un buen titular debe ser corto y directo. El párrafo principal (o "lead") debe resumir las 6 Ws.</p>
-                
-                <div class="mb-3">
-                    <label for="final-headline" class="form-label"><strong>TITULAR FINAL:</strong></label>
-                    <input type="text" class="form-control" id="final-headline" placeholder="Ej: Ciudadanos de Reñaca logran ley para salvar sus playas" oninput="saveData()">
-                </div>
-                
-                <div class="mb-3">
-                    <label for="final-lead" class="form-label"><strong>PÁRRAFO PRINCIPAL (Lead):</strong></label>
-                    <textarea class="form-control" rows="4" id="final-lead" placeholder="Ej: Gracias a la movilización de miles de vecinos, esta mañana el Concejal Martínez logró aprobar una ordenanza que prohibirá los plásticos de un solo uso en la comuna. El alcalde Pérez anunció la ejecución inmediata del plan 'Playa Limpia', que incluye más personal de aseo y campañas educativas, respondiendo así a una demanda ciudadana que llevaba meses exigiendo una solución a la creciente contaminación." oninput="saveData()"></textarea>
-                </div>
-
-                <button class="btn btn-success mb-4" onclick="generatePreview()">
-                    <i class="fas fa-eye"></i> Generar Vista Previa de la Noticia
-                </button>
-
-                <div id="final-news-preview" class="final-news-preview" style="display: none;">
-                    <h3 class="news-headline" id="preview-headline-text"></h3>
-                    <p class="news-lead" id="preview-lead-text"></p>
-                </div>
-                
-                <hr>
-
-                <h4 class="mt-4">B. Revisión Final: ¿Es Democráticamente Correcta?</h4>
-                <p>Antes de publicar, asegúrate de que tu noticia no tenga errores. Revisa estos puntos:</p>
-                
-                <div class="example-box">
-                    <h5><i class="fas fa-check-circle text-success"></i> Ejemplo Correcto:</h5>
-                    <p>"El <strong>Alcalde</strong> <strong>ejecutó</strong> el plan de seguridad tras la <strong>protesta</strong> de los vecinos."</p>
-                    <p class="text-success"><em>✅ Correcto: El alcalde ejecuta, los ciudadanos participan.</em></p>
-                </div>
-                
-                <div class="example-box">
-                    <h5><i class="fas fa-times-circle text-danger"></i> Ejemplo Incorrecto:</h5>
-                    <p>"El <strong>Juez</strong> <strong>construyó</strong> un nuevo hospital para la comunidad."</p>
-                    <p class="text-danger"><em>❌ Incorrecto: Un juez juzga, no ejecuta obras. Eso es función del Alcalde o Presidente.</em></p>
-                </div>
-
-                <div class="mt-5 p-4 bg-light rounded" style="border: 2px solid var(--acento);">
-                    <h5 style="color: var(--acento); margin-bottom: 2rem;">
-                        <i class="fas fa-lightbulb"></i> Pregunta de Cierre para Reflexionar
-                    </h5>
-                    
-                    <div style="background-color: var(--superficie); padding: 1.5rem; border-radius: var(--radio-sm); margin-bottom: 2rem; border-left: 4px solid var(--h2);">
-                        <p style="font-size: 1.1rem; font-weight: 500; line-height: 1.8; margin: 0;">
-                            "¿Por qué si no hubiéramos incluido a los Ciudadanos (Participación) nuestra noticia no sería una historia completa?"
-                        </p>
-                    </div>
-                    
-                    <div style="margin-bottom: 2rem;">
-                        <button class="btn btn-outline-primary" onclick="toggleAnswer(event)" style="width: 100%; padding: 0.75rem;">
-                            <i class="fas fa-eye"></i> Ver Respuesta de Ejemplo
-                        </button>
-                        <div id="answerExample" style="display: none; margin-top: 1rem; padding: 1rem; background-color: var(--fondo); border-radius: var(--radio-sm); border-left: 4px solid var(--acento);">
-                            <p style="margin: 0; font-style: italic;">
-                                "Porque la democracia se trata de representar la voluntad de la gente. Sin los ciudadanos, no hay democracia."
-                            </p>
-                        </div>
-                    </div>
-
-                    <hr style="margin: 2rem 0;">
-
-                    <p style="color: var(--acento); font-weight: bold; margin-bottom: 1rem;">
-                        <i class="fas fa-pen"></i> Ahora, escribe TU respuesta:
-                    </p>
-                    <textarea class="form-control" id="studentAnswer" rows="4" placeholder="Reflexiona: ¿Por qué crees que los ciudadanos son importantes para una historia completa? Escribe tu propia respuesta..." oninput="saveData()" style="margin-bottom: 1.5rem;"></textarea>
-                    
-                    <p style="font-size: 0.9rem; color: var(--tinta-3); text-align: center;">
-                        <i class="fas fa-info-circle"></i> Tu respuesta se incluirá en el PDF que descargarás.
-                    </p>
-                </div>
-
-                <div class="text-center mt-5">
-                    <h3>¡Felicidades, Reportero!</h3>
-                    <p>Has completado tu misión. Ahora sabes cómo funciona la democracia y cómo contar una noticia que lo demuestre.</p>
-                    <button class="btn btn-primary btn-lg" onclick="downloadNews()">
-                        <i class="fas fa-download"></i> Descargar tu Noticia en PDF
-                    </button>
-                </div>
-                
-                <div class="text-end mt-4">
-                    <button class="btn btn-secondary btn-lg" onclick="nextStep(3)">
-                        <i class="fas fa-arrow-left"></i> Anterior
-                    </button>
-                </div>
-            </section>
-        </div>
-
+        <section class="paso-recorrido" data-titulo="Final">
+          <h2>Paso 4: tu noticia final</h2>
+          <p class="bajada">Escribe un titular y un párrafo principal, y revisa que tu noticia sea democráticamente correcta.</p>
+          <details class="desplegable" style="max-width:46rem" open>
+            <summary><span>Lo que reuniste</span></summary>
+            <div class="contenido">
+              <dl class="glosario" data-resumen></dl>
+            </div>
+          </details>
+          <h3>Titular y párrafo principal</h3>
+          <p>Un buen titular es corto y directo. El párrafo principal (lead) resume las seis preguntas.</p>
+          <div class="campo" style="max-width:46rem"><label for="titular">Titular</label><input id="titular" type="text" required></div>
+          <div class="campo" style="max-width:46rem;margin-top:12px"><label for="lead">Párrafo principal</label><textarea id="lead" rows="4" required></textarea></div>
+          <div class="botones"><button type="button" class="boton secundario" data-vista>Ver cómo queda</button></div>
+          <article class="ficha" data-vista-previa hidden style="max-width:46rem">
+            <span class="etiqueta">Noticia</span>
+            <h3 data-vp-titular></h3>
+            <p data-vp-lead></p>
+          </article>
+          <h3>Revisión: ¿es democráticamente correcta?</h3>
+          <ul class="fichas dos">
+            <li class="ficha acento"><span class="etiqueta">✅ Correcto</span><p>«El alcalde ejecutó el plan de seguridad tras la protesta de los vecinos.»</p><p>El alcalde ejecuta; los ciudadanos participan.</p></li>
+            <li class="ficha" style="background:var(--h2-suave)"><span class="etiqueta">❌ Incorrecto</span><p>«El juez construyó un nuevo hospital para la comunidad.»</p><p>Un juez juzga, no ejecuta obras: eso lo hace el alcalde o el Presidente.</p></li>
+          </ul>
+          <h3>Para reflexionar</h3>
+          <p><b>¿Por qué, si no hubiéramos incluido a los ciudadanos, nuestra noticia no sería una historia completa?</b></p>
+          <details class="mas"><summary>Ver una respuesta de ejemplo</summary><p>«Porque la democracia se trata de representar la voluntad de la gente. Sin los ciudadanos, no hay democracia.»</p></details>
+          <div class="campo" style="max-width:46rem;margin-top:12px"><label for="reflexion">Tu respuesta</label><small>Se incluirá en el PDF.</small><textarea id="reflexion" rows="3" required></textarea></div>
+          <p class="aviso-campos" data-aviso-pdf hidden role="alert">Completa el titular, el párrafo principal y tu reflexión para descargar.</p>
+          <div class="botones"><button type="button" class="boton" data-pdf>Descargar mi noticia en PDF</button></div>
+        </section>
+      </div>
     </main>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script>
-        let currentStep = 1;
-        let newsData = {
-            problem: '',
-            scenario: '',
-            what: '',
-            who: '',
-            when: '',
-            where: '',
-            why: '',
-            how: '',
-            finalHeadline: '',
-            finalLead: '',
-            studentAnswer: ''
-        };
-
-        function saveData() {
-            newsData.problem = document.getElementById('chosenProblem').value;
-            newsData.scenario = document.getElementById('scenario').value;
-            newsData.what = document.getElementById('news-what').value;
-            newsData.who = document.getElementById('news-who').value;
-            newsData.when = document.getElementById('news-when').value;
-            newsData.where = document.getElementById('news-where').value;
-            newsData.why = document.getElementById('news-why').value;
-            newsData.how = document.getElementById('news-how').value;
-            newsData.finalHeadline = document.getElementById('final-headline').value;
-            newsData.finalLead = document.getElementById('final-lead').value;
-            const studentAnswerField = document.getElementById('studentAnswer');
-            if (studentAnswerField) {
-                newsData.studentAnswer = studentAnswerField.value;
-            }
-        }
-
-        function toggleAnswer(event) {
-            event.preventDefault();
-            const answerDiv = document.getElementById('answerExample');
-            const button = event.target.closest('button');
-            
-            if (answerDiv.style.display === 'none') {
-                answerDiv.style.display = 'block';
-                button.innerHTML = '<i class="fas fa-eye-slash"></i> Ocultar Respuesta de Ejemplo';
-            } else {
-                answerDiv.style.display = 'none';
-                button.innerHTML = '<i class="fas fa-eye"></i> Ver Respuesta de Ejemplo';
-            }
-        }
-
-        function showStep(step) {
-            document.querySelectorAll('.step-container').forEach(container => {
-                container.classList.remove('active');
-            });
-            document.getElementById(`step${step}`).classList.add('active');
-
-            // Update progress bar
-            for (let i = 1; i <= 4; i++) {
-                const progressStep = document.getElementById(`progress-step-${i}`);
-                progressStep.classList.remove('active', 'completed');
-                if (i < step) {
-                    progressStep.classList.add('completed');
-                    progressStep.innerHTML = `<i class="fas fa-check-circle fa-2x"></i><p>${i}. ${getStepName(i)}</p>`;
-                } else if (i === step) {
-                    progressStep.classList.add('active');
-                    progressStep.innerHTML = `<i class="fas fa-circle fa-2x"></i><p>${i}. ${getStepName(i)}</p>`;
-                } else {
-                    progressStep.innerHTML = `<i class="far fa-circle fa-2x"></i><p>${i}. ${getStepName(i)}</p>`;
-                }
-            }
-            window.scrollTo(0, 0);
-        }
-        
-        function getStepName(step) {
-            const names = ['', 'Inicio', 'Herramientas', 'Borrador', 'Final'];
-            return names[step];
-        }
-
-        function validateStep(fromStep) {
-            // Validate required fields before moving to next step
-            if (fromStep === 1) {
-                const problem = document.getElementById('chosenProblem').value.trim();
-                if (!problem) {
-                    alert('⚠️ Por favor, completa el campo "Problema que tu grupo elegirá para la noticia" antes de continuar.');
-                    return false;
-                }
-            }
-            if (fromStep === 3) {
-                const scenario = document.getElementById('scenario').value.trim();
-                const what = document.getElementById('news-what').value.trim();
-                const who = document.getElementById('news-who').value.trim();
-                const when = document.getElementById('news-when').value.trim();
-                const where = document.getElementById('news-where').value.trim();
-                const why = document.getElementById('news-why').value.trim();
-                const how = document.getElementById('news-how').value.trim();
-                
-                if (!scenario || !what || !who || !when || !where || !why || !how) {
-                    alert('⚠️ Por favor, completa todos los campos de la noticia antes de continuar:\n- Escenario de la noticia\n- QUÉ\n- QUIÉN\n- CUÁNDO\n- DÓNDE\n- POR QUÉ\n- CÓMO');
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        function nextStep(step) {
-            // Validate current step before moving
-            if (!validateStep(currentStep)) {
-                return;
-            }
-            
-            saveData(); // Save current data before moving
-            currentStep = step;
-            showStep(step);
-            
-            // Populate reference boxes when moving to a new step
-            if (step === 2) {
-                document.getElementById('ref-problem').textContent = newsData.problem || '(Aún no se ha seleccionado un problema)';
-            }
-            if (step === 3) {
-                document.getElementById('ref-problem-3').textContent = newsData.problem || '(Aún no se ha seleccionado un problema)';
-            }
-            if (step === 4) {
-                document.getElementById('ref-problem-4').textContent = newsData.problem || '...';
-                document.getElementById('ref-scenario').textContent = newsData.scenario || '...';
-                document.getElementById('ref-what').textContent = newsData.what || '...';
-                document.getElementById('ref-who').textContent = newsData.who || '...';
-                document.getElementById('ref-when').textContent = newsData.when || '...';
-                document.getElementById('ref-where').textContent = newsData.where || '...';
-                document.getElementById('ref-why').textContent = newsData.why || '...';
-                document.getElementById('ref-how').textContent = newsData.how || '...';
-            }
-        }
-        
-        function generatePreview() {
-            const headline = document.getElementById('final-headline').value;
-            const lead = document.getElementById('final-lead').value;
-
-            if (headline && lead) {
-                document.getElementById('preview-headline-text').textContent = headline;
-                document.getElementById('preview-lead-text').textContent = lead;
-                document.getElementById('final-news-preview').style.display = 'block';
-            } else {
-                alert('Por favor, completa tanto el titular como el párrafo principal para generar la vista previa.');
-            }
-        }
-
-        function downloadNews() {
-            // Validate that all required fields are filled
-            const headline = document.getElementById('final-headline').value.trim();
-            const lead = document.getElementById('final-lead').value.trim();
-            const studentAnswer = document.getElementById('studentAnswer').value.trim();
-            
-            if (!headline || !lead || !studentAnswer) {
-                alert('⚠️ Por favor, completa todos los campos antes de descargar:\n- TITULAR FINAL\n- PÁRRAFO PRINCIPAL (Lead)\n- Tu respuesta de reflexión personal');
-                return;
-            }
-            
-            saveData(); // Ensure the latest data is saved
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            doc.setFontSize(20);
-            doc.text('Reportero de la Democracia: Mi Noticia', 20, 20);
-            
-            doc.setFontSize(16);
-            doc.text('TITULAR:', 20, 40);
-            doc.setFontSize(14);
-            doc.text(newsData.finalHeadline, 20, 50);
-
-            doc.setFontSize(16);
-            doc.text('PÁRRAFO PRINCIPAL:', 20, 70);
-            doc.setFontSize(12);
-            const splitLead = doc.splitTextToSize(newsData.finalLead, 170);
-            doc.text(splitLead, 20, 80);
-
-            doc.addPage();
-            doc.setFontSize(16);
-            doc.text('DETALLES DE LA INVESTIGACIÓN', 20, 20);
-            
-            doc.setFontSize(14);
-            doc.text('Problema Abordado:', 20, 40);
-            doc.setFontSize(12);
-            doc.text(newsData.problem, 20, 50);
-
-            doc.setFontSize(14);
-            doc.text('Escenario de Solución:', 20, 70);
-            doc.setFontSize(12);
-            const splitScenario = doc.splitTextToSize(newsData.scenario, 170);
-            doc.text(splitScenario, 20, 80);
-
-            doc.setFontSize(14);
-            doc.text('Los Elementos Clave de la Noticia:', 20, 120);
-            doc.setFontSize(12);
-            doc.text(`QUÉ: ${newsData.what}`, 20, 130);
-            doc.text(`QUIÉN: ${newsData.who}`, 20, 140);
-            doc.text(`CUÁNDO: ${newsData.when}`, 20, 150);
-            doc.text(`DÓNDE: ${newsData.where}`, 20, 160);
-            doc.text(`POR QUÉ: ${newsData.why}`, 20, 170);
-            doc.text(`CÓMO: ${newsData.how}`, 20, 180);
-
-            doc.addPage();
-            doc.setFontSize(16);
-            doc.text('Mi Reflexión: Respuesta Personal', 20, 20);
-            
-            doc.setFontSize(14);
-            doc.text('Pregunta: ¿Por qué si no hubiéramos incluido a los', 20, 40);
-            doc.text('Ciudadanos (Participación) nuestra noticia no sería', 20, 48);
-            doc.text('una historia completa?', 20, 56);
-            
-            doc.setFontSize(12);
-            const splitAnswer = doc.splitTextToSize(newsData.studentAnswer || '(Sin respuesta)', 170);
-            doc.text(splitAnswer, 20, 70);
-
-            doc.save('mi_noticia_democracia.pdf');
-        }
-    </script>
+  </div>
+  <script src="noticia.js"></script>
 </body>
 </html>

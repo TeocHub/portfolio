@@ -1,90 +1,92 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-area="pedagogia">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desarrollo de la Comprensión Lectora</title>
-    <link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desarrollo de la comprensión lectora | Tomás Cabrolier</title>
+  <meta name="description" content="Por qué la comprensión lectora sigue baja, qué modelos se han usado para enseñarla y qué propone hoy el modelo equilibrado.">
   <link rel="icon" href="../../../../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../../../assets/css/site.css">
-  <link rel="stylesheet" href="../../../../assets/css/armonia.css">
+  <link rel="stylesheet" href="../../../../assets/css/paginas.css">
   <script src="../../../../assets/js/site.js"></script>
-  <!-- barajas aplicadas -->
 </head>
-<body>
+<body class="tc pagina">
+  <header class="cielo cabecera-pagina">
+    <div class="escena"></div>
+    <div class="tc-contenedor">
+      <p class="carta">Lectura guiada · Lenguaje</p>
+      <h1>Desarrollo de la comprensión lectora</h1>
+      <p class="intro">Por qué la comprensión lectora sigue baja, qué modelos se han usado para enseñarla y qué propone hoy el modelo equilibrado.</p>
+        <ul class="meta"><li><b>Autora</b>Viviana Galdames</li></ul>
+    </div>
+  </header>
+  <div class="tc-contenedor lectura">
+    <nav class="indice" data-indice-pagina aria-label="En esta página"></nav>
+    <main class="cuerpo">
+<section class="bloque" id="problema">
+        <h2>El problema</h2>
+        <p>Los bajos niveles de comprensión lectora son una preocupación mundial desde hace décadas, y la desigualdad social los agrava: afectan sobre todo a estudiantes de entornos desfavorecidos.</p>
+        <p>Como respuesta, se propone entender la lectura como una práctica cultural situada y revisar los modelos pedagógicos con que se enseña.</p>
+      </section>
 
-    <header class="header">
-        <h1 class="nav-title">Desarrollo de la Comprensión Lectora</h1>
-    </header>
-
-    <main class="main-content">
-        <p class="description">
-            La constante preocupación por los bajos niveles de comprensión lectora es una problemática global que se mantiene desde hace décadas. La desigualdad social agrava esta situación, afectando principalmente a los estudiantes de entornos desfavorecidos. En respuesta a este desafío, se propone una evolución del concepto de lectura, viéndola como una práctica cultural situada, y se analizan distintos modelos pedagógicos para su enseñanza.
-        </p>
-
-        <h3 class="section-subtitle">Modelos de Enseñanza de la Lectura</h3>
-        <div class="cards-container">
-            <div class="card">
-                <h4>Modelo Ascendente (Bottom-up)</h4>
-                <p>Este enfoque tradicional se basa en la idea de que la comprensión se logra a través de la decodificación secuencial del texto.</p>
-                <button class="toggle-button">Ver más</button>
-                <div class="hidden-content">
-                    <p>La comprensión es un resultado directo de la suma de unidades más pequeñas (letras, sílabas, palabras). El significado reside exclusivamente en el texto y la tarea del lector es reproducirlo fielmente. Este modelo, asociado a la era industrial, privilegiaba la enseñanza del código a través de silabarios y evaluaba la comprensión con preguntas de tipo literal, con una única respuesta correcta.</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <h4>Modelo Descendente (Top-down)</h4>
-                <p>Surgió como una reacción al modelo anterior, proponiendo que el lector es el constructor del significado a partir de sus conocimientos previos.</p>
-                <button class="toggle-button">Ver más</button>
-                <div class="hidden-content">
-                    <p>Este enfoque, también conocido como holístico, promovía la inmersión en una variedad de textos auténticos para que los niños "descubrieran" el código de forma natural. Si bien mostró resultados positivos en niños de entornos letrados, resultó ineficaz para aquellos en contextos de marginalidad, ya que no enseña de forma explícita las bases de la decodificación. Aquí, el significado es aportado por el lector, lo que permite comprensiones divergentes.</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <h4>Modelo Equilibrado (Balanced approach)</h4>
-                <p>Considerado el más adecuado para el siglo XXI, es un enfoque interactivo que combina lo mejor de ambos modelos.</p>
-                <button class="toggle-button">Ver más</button>
-                <div class="hidden-content">
-                    <p>Este modelo reconoce la importancia tanto del texto (código) como del lector (experiencia y conocimiento previo). Su objetivo principal es desarrollar la "literacidad", un concepto que va más allá de la lectura y la escritura, incluyendo la comunicación, el pensamiento crítico y la reflexión. Propone una inmersión temprana en contextos letrados y, simultáneamente, el desarrollo explícito de habilidades como la conciencia fonológica y el conocimiento del código. Estudios como los de Pressley y el National Research Council respaldan su superioridad.</p>
-                </div>
-            </div>
+      <section class="bloque" id="modelos">
+        <h2>Tres modelos de enseñanza</h2>
+        <div class="pestanas" data-pestanas>
+          <div role="tablist" aria-label="Modelos de enseñanza de la lectura">
+            <button role="tab" type="button">Ascendente</button>
+            <button role="tab" type="button">Descendente</button>
+            <button role="tab" type="button">Equilibrado</button>
+          </div>
+          <div role="tabpanel">
+            <h3>Modelo ascendente <small>(bottom-up)</small></h3>
+            <p>El enfoque tradicional: la comprensión se logra decodificando el texto en secuencia, como suma de unidades cada vez mayores (letras, sílabas, palabras).</p>
+            <p>El significado está solo en el texto y el lector debe reproducirlo fielmente. Asociado a la era industrial, privilegiaba el código mediante silabarios y evaluaba con preguntas literales de una sola respuesta correcta.</p>
+          </div>
+          <div role="tabpanel">
+            <h3>Modelo descendente <small>(top-down)</small></h3>
+            <p>Surge como reacción al anterior: el lector construye el significado desde sus conocimientos previos. También se le llama holístico.</p>
+            <p>Propone sumergir a los niños en textos auténticos para que «descubran» el código. Funcionó con niños de entornos letrados, pero fue ineficaz en contextos de marginalidad, porque no enseña explícitamente las bases de la decodificación. El significado lo aporta el lector, lo que admite comprensiones divergentes.</p>
+          </div>
+          <div role="tabpanel">
+            <h3>Modelo equilibrado <small>(balanced approach)</small></h3>
+            <p>Considerado el más adecuado para el siglo XXI: un enfoque interactivo que reconoce tanto el texto (el código) como al lector (su experiencia y conocimiento).</p>
+            <p>Su objetivo es la <strong>literacidad</strong>, que va más allá de leer y escribir: incluye comunicación, pensamiento crítico y reflexión. Combina una inmersión temprana en contextos letrados con el desarrollo explícito de la conciencia fonológica y del código. Los estudios de Pressley y del National Research Council respaldan su superioridad.</p>
+          </div>
         </div>
+      </section>
 
-        <h3 class="section-subtitle">Aportes de la Ciencia al Modelo Equilibrado</h3>
-        <div class="concepts-container">
-            <div class="concept-item">
-                <h4>Neurociencias</h4>
-                <p>Aportan la comprensión de que el cerebro no está biológicamente "cableado" para el lenguaje escrito. Por ello, es crucial una exposición temprana al lenguaje escrito para construir las redes neuronales necesarias. También destacan el papel de las emociones y el ambiente de aprendizaje en la memorización y el aprendizaje.</p>
-            </div>
-            <div class="concept-item">
-                <h4>Psicolingüística y Sociolingüística</h4>
-                <p>Ambas ciencias enfatizan el papel de las competencias lingüísticas orales, el propósito del lector y el contexto sociocultural como elementos clave para la construcción del significado.</p>
-            </div>
-            <div class="concept-item">
-                <h4>Teorías Constructivistas</h4>
-                <p>Autores como Vygotsky y Bruner fundamentan la idea de que el aprendizaje es un proceso de construcción activa. El lector no es un simple receptor de información, sino un participante activo en la creación del significado del texto.</p>
-            </div>
-        </div>
+      <section class="bloque" id="aportes">
+        <h2 data-corto="Aportes de la ciencia">Aportes de la ciencia al modelo equilibrado</h2>
+        <ul class="fichas">
+          <li class="ficha">
+            <h3>Neurociencias</h3>
+            <p>El cerebro no está «cableado» para lo escrito: la exposición temprana construye las redes neuronales necesarias. Las emociones y el ambiente influyen en la memoria y el aprendizaje.</p>
+          </li>
+          <li class="ficha">
+            <h3>Psicolingüística y sociolingüística</h3>
+            <p>Las competencias orales, el propósito del lector y el contexto sociocultural son clave para construir significado.</p>
+          </li>
+          <li class="ficha">
+            <h3>Teorías constructivistas</h3>
+            <p>Vygotsky y Bruner: aprender es construir activamente. El lector participa en la creación del significado del texto.</p>
+          </li>
+        </ul>
+      </section>
 
-        <h3 class="section-subtitle extra-info-section">Estrategias Metacognitivas Clave</h3>
-        <div class="info-item">
-            <h4>Formar lectores metacognitivos</h4>
-            <p>El documento subraya la importancia de formar lectores conscientes y estratégicos. Se propone el uso de las siguientes siete estrategias, recomendadas por el "United States National Reading Panel", para desarrollar la comprensión lectora de manera efectiva:</p>
-            <ul>
-                <li>Autorregulación: Pausar para verificar la comprensión y conectar el texto con la vida personal.</li>
-                <li>Aprendizaje colaborativo: Participar en grupos para apoyarse mutuamente en la comprensión del texto.</li>
-                <li>Organizadores gráficos: Usar diagramas, mapas conceptuales o gráficos para representar el contenido.</li>
-                <li>Respuesta a preguntas: Contestar preguntas literales, inferenciales y críticas.</li>
-                <li>Generación de preguntas: Crear preguntas propias sobre el texto para profundizar en el tema.</li>
-                <li>Esquemas de texto: Utilizar la estructura del texto para recordar detalles importantes (e.j., causa-efecto, problema-solución).</li>
-                <li>Resumen: Sintetizar el texto para integrar las ideas principales y generalizar.</li>
-            </ul>
-        </div>
+      <section class="bloque" id="estrategias">
+        <h2>Siete estrategias metacognitivas</h2>
+        <p class="bajada">Para formar lectores conscientes y estratégicos, según el National Reading Panel de Estados Unidos.</p>
+        <dl class="glosario">
+          <div class="termino"><dt>Autorregulación</dt><dd>Pausar para verificar la comprensión y conectar el texto con la vida personal.</dd></div>
+          <div class="termino"><dt>Aprendizaje colaborativo</dt><dd>Trabajar en grupos para apoyarse en la comprensión del texto.</dd></div>
+          <div class="termino"><dt>Organizadores gráficos</dt><dd>Diagramas, mapas conceptuales o gráficos para representar el contenido.</dd></div>
+          <div class="termino"><dt>Respuesta a preguntas</dt><dd>Contestar preguntas literales, inferenciales y críticas.</dd></div>
+          <div class="termino"><dt>Generación de preguntas</dt><dd>Crear preguntas propias para profundizar en el tema.</dd></div>
+          <div class="termino"><dt>Esquemas de texto</dt><dd>Usar la estructura del texto (causa-efecto, problema-solución) para recordar lo importante.</dd></div>
+          <div class="termino"><dt>Resumen</dt><dd>Sintetizar para integrar las ideas principales y generalizar.</dd></div>
+        </dl>
+      </section>
     </main>
-
-    <script src="script.js"></script>
+  </div>
 </body>
 </html>

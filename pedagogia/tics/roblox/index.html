@@ -1,503 +1,135 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-area="pedagogia">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análisis Interactivo de Roblox: Riesgos y Seguridad</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  <script>/* Tailwind con los tokens de las dos barajas */if(window.tailwind)tailwind.config={"theme":{"extend":{"fontFamily":{"sans":["Atkinson Hyperlegible","system-ui","sans-serif"],"serif":["Fraunces","Georgia","serif"],"display":["Fraunces","Georgia","serif"]},"backgroundColor":{"slate":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"gray":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"zinc":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"neutral":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"stone":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"red":{"50":"rgb(var(--h2-suave-rgb) / <alpha-value>)","100":"rgb(var(--h2-suave-rgb) / <alpha-value>)","200":"rgb(var(--h2-suave-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h2-relleno-rgb) / <alpha-value>)"},"rose":{"50":"rgb(var(--h2-suave-rgb) / <alpha-value>)","100":"rgb(var(--h2-suave-rgb) / <alpha-value>)","200":"rgb(var(--h2-suave-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h2-relleno-rgb) / <alpha-value>)"},"pink":{"50":"rgb(var(--h2-suave-rgb) / <alpha-value>)","100":"rgb(var(--h2-suave-rgb) / <alpha-value>)","200":"rgb(var(--h2-suave-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h2-relleno-rgb) / <alpha-value>)"},"orange":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"amber":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"yellow":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"lime":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"green":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"emerald":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"teal":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"cyan":{"50":"rgb(var(--h3-suave-rgb) / <alpha-value>)","100":"rgb(var(--h3-suave-rgb) / <alpha-value>)","200":"rgb(var(--h3-suave-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h3-relleno-rgb) / <alpha-value>)"},"sky":{"50":"rgb(var(--h3-suave-rgb) / <alpha-value>)","100":"rgb(var(--h3-suave-rgb) / <alpha-value>)","200":"rgb(var(--h3-suave-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h3-relleno-rgb) / <alpha-value>)"},"blue":{"50":"rgb(var(--h3-suave-rgb) / <alpha-value>)","100":"rgb(var(--h3-suave-rgb) / <alpha-value>)","200":"rgb(var(--h3-suave-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h3-relleno-rgb) / <alpha-value>)"},"indigo":{"50":"rgb(var(--h3-suave-rgb) / <alpha-value>)","100":"rgb(var(--h3-suave-rgb) / <alpha-value>)","200":"rgb(var(--h3-suave-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h3-relleno-rgb) / <alpha-value>)"},"violet":{"50":"rgb(var(--h4-suave-rgb) / <alpha-value>)","100":"rgb(var(--h4-suave-rgb) / <alpha-value>)","200":"rgb(var(--h4-suave-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h4-relleno-rgb) / <alpha-value>)"},"purple":{"50":"rgb(var(--h4-suave-rgb) / <alpha-value>)","100":"rgb(var(--h4-suave-rgb) / <alpha-value>)","200":"rgb(var(--h4-suave-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h4-relleno-rgb) / <alpha-value>)"},"fuchsia":{"50":"rgb(var(--h4-suave-rgb) / <alpha-value>)","100":"rgb(var(--h4-suave-rgb) / <alpha-value>)","200":"rgb(var(--h4-suave-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h4-relleno-rgb) / <alpha-value>)"},"white":"rgb(var(--superficie-rgb) / <alpha-value>)","black":"rgb(var(--tinta-rgb) / <alpha-value>)"},"textColor":{"slate":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-3-rgb) / <alpha-value>)","400":"rgb(var(--tinta-3-rgb) / <alpha-value>)","500":"rgb(var(--tinta-3-rgb) / <alpha-value>)","600":"rgb(var(--tinta-2-rgb) / <alpha-value>)","700":"rgb(var(--tinta-rgb) / <alpha-value>)","800":"rgb(var(--tinta-rgb) / <alpha-value>)","900":"rgb(var(--tinta-rgb) / <alpha-value>)","950":"rgb(var(--tinta-rgb) / <alpha-value>)"},"gray":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-3-rgb) / <alpha-value>)","400":"rgb(var(--tinta-3-rgb) / <alpha-value>)","500":"rgb(var(--tinta-3-rgb) / <alpha-value>)","600":"rgb(var(--tinta-2-rgb) / <alpha-value>)","700":"rgb(var(--tinta-rgb) / <alpha-value>)","800":"rgb(var(--tinta-rgb) / <alpha-value>)","900":"rgb(var(--tinta-rgb) / <alpha-value>)","950":"rgb(var(--tinta-rgb) / <alpha-value>)"},"zinc":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-3-rgb) / <alpha-value>)","400":"rgb(var(--tinta-3-rgb) / <alpha-value>)","500":"rgb(var(--tinta-3-rgb) / <alpha-value>)","600":"rgb(var(--tinta-2-rgb) / <alpha-value>)","700":"rgb(var(--tinta-rgb) / <alpha-value>)","800":"rgb(var(--tinta-rgb) / <alpha-value>)","900":"rgb(var(--tinta-rgb) / <alpha-value>)","950":"rgb(var(--tinta-rgb) / <alpha-value>)"},"neutral":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-3-rgb) / <alpha-value>)","400":"rgb(var(--tinta-3-rgb) / <alpha-value>)","500":"rgb(var(--tinta-3-rgb) / <alpha-value>)","600":"rgb(var(--tinta-2-rgb) / <alpha-value>)","700":"rgb(var(--tinta-rgb) / <alpha-value>)","800":"rgb(var(--tinta-rgb) / <alpha-value>)","900":"rgb(var(--tinta-rgb) / <alpha-value>)","950":"rgb(var(--tinta-rgb) / <alpha-value>)"},"stone":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-3-rgb) / <alpha-value>)","400":"rgb(var(--tinta-3-rgb) / <alpha-value>)","500":"rgb(var(--tinta-3-rgb) / <alpha-value>)","600":"rgb(var(--tinta-2-rgb) / <alpha-value>)","700":"rgb(var(--tinta-rgb) / <alpha-value>)","800":"rgb(var(--tinta-rgb) / <alpha-value>)","900":"rgb(var(--tinta-rgb) / <alpha-value>)","950":"rgb(var(--tinta-rgb) / <alpha-value>)"},"red":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h2-rgb) / <alpha-value>)","500":"rgb(var(--h2-rgb) / <alpha-value>)","600":"rgb(var(--h2-rgb) / <alpha-value>)","700":"rgb(var(--h2-rgb) / <alpha-value>)","800":"rgb(var(--h2-rgb) / <alpha-value>)","900":"rgb(var(--h2-rgb) / <alpha-value>)","950":"rgb(var(--h2-rgb) / <alpha-value>)"},"rose":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h2-rgb) / <alpha-value>)","500":"rgb(var(--h2-rgb) / <alpha-value>)","600":"rgb(var(--h2-rgb) / <alpha-value>)","700":"rgb(var(--h2-rgb) / <alpha-value>)","800":"rgb(var(--h2-rgb) / <alpha-value>)","900":"rgb(var(--h2-rgb) / <alpha-value>)","950":"rgb(var(--h2-rgb) / <alpha-value>)"},"pink":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h2-rgb) / <alpha-value>)","500":"rgb(var(--h2-rgb) / <alpha-value>)","600":"rgb(var(--h2-rgb) / <alpha-value>)","700":"rgb(var(--h2-rgb) / <alpha-value>)","800":"rgb(var(--h2-rgb) / <alpha-value>)","900":"rgb(var(--h2-rgb) / <alpha-value>)","950":"rgb(var(--h2-rgb) / <alpha-value>)"},"orange":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--acento-rgb) / <alpha-value>)","500":"rgb(var(--acento-rgb) / <alpha-value>)","600":"rgb(var(--acento-rgb) / <alpha-value>)","700":"rgb(var(--acento-rgb) / <alpha-value>)","800":"rgb(var(--acento-rgb) / <alpha-value>)","900":"rgb(var(--acento-rgb) / <alpha-value>)","950":"rgb(var(--acento-rgb) / <alpha-value>)"},"amber":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--acento-rgb) / <alpha-value>)","500":"rgb(var(--acento-rgb) / <alpha-value>)","600":"rgb(var(--acento-rgb) / <alpha-value>)","700":"rgb(var(--acento-rgb) / <alpha-value>)","800":"rgb(var(--acento-rgb) / <alpha-value>)","900":"rgb(var(--acento-rgb) / <alpha-value>)","950":"rgb(var(--acento-rgb) / <alpha-value>)"},"yellow":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--acento-rgb) / <alpha-value>)","500":"rgb(var(--acento-rgb) / <alpha-value>)","600":"rgb(var(--acento-rgb) / <alpha-value>)","700":"rgb(var(--acento-rgb) / <alpha-value>)","800":"rgb(var(--acento-rgb) / <alpha-value>)","900":"rgb(var(--acento-rgb) / <alpha-value>)","950":"rgb(var(--acento-rgb) / <alpha-value>)"},"lime":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--exito-rgb) / <alpha-value>)","500":"rgb(var(--exito-rgb) / <alpha-value>)","600":"rgb(var(--exito-rgb) / <alpha-value>)","700":"rgb(var(--exito-rgb) / <alpha-value>)","800":"rgb(var(--exito-rgb) / <alpha-value>)","900":"rgb(var(--exito-rgb) / <alpha-value>)","950":"rgb(var(--exito-rgb) / <alpha-value>)"},"green":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--exito-rgb) / <alpha-value>)","500":"rgb(var(--exito-rgb) / <alpha-value>)","600":"rgb(var(--exito-rgb) / <alpha-value>)","700":"rgb(var(--exito-rgb) / <alpha-value>)","800":"rgb(var(--exito-rgb) / <alpha-value>)","900":"rgb(var(--exito-rgb) / <alpha-value>)","950":"rgb(var(--exito-rgb) / <alpha-value>)"},"emerald":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--exito-rgb) / <alpha-value>)","500":"rgb(var(--exito-rgb) / <alpha-value>)","600":"rgb(var(--exito-rgb) / <alpha-value>)","700":"rgb(var(--exito-rgb) / <alpha-value>)","800":"rgb(var(--exito-rgb) / <alpha-value>)","900":"rgb(var(--exito-rgb) / <alpha-value>)","950":"rgb(var(--exito-rgb) / <alpha-value>)"},"teal":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--exito-rgb) / <alpha-value>)","500":"rgb(var(--exito-rgb) / <alpha-value>)","600":"rgb(var(--exito-rgb) / <alpha-value>)","700":"rgb(var(--exito-rgb) / <alpha-value>)","800":"rgb(var(--exito-rgb) / <alpha-value>)","900":"rgb(var(--exito-rgb) / <alpha-value>)","950":"rgb(var(--exito-rgb) / <alpha-value>)"},"cyan":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h3-rgb) / <alpha-value>)","500":"rgb(var(--h3-rgb) / <alpha-value>)","600":"rgb(var(--h3-rgb) / <alpha-value>)","700":"rgb(var(--h3-rgb) / <alpha-value>)","800":"rgb(var(--h3-rgb) / <alpha-value>)","900":"rgb(var(--h3-rgb) / <alpha-value>)","950":"rgb(var(--h3-rgb) / <alpha-value>)"},"sky":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h3-rgb) / <alpha-value>)","500":"rgb(var(--h3-rgb) / <alpha-value>)","600":"rgb(var(--h3-rgb) / <alpha-value>)","700":"rgb(var(--h3-rgb) / <alpha-value>)","800":"rgb(var(--h3-rgb) / <alpha-value>)","900":"rgb(var(--h3-rgb) / <alpha-value>)","950":"rgb(var(--h3-rgb) / <alpha-value>)"},"blue":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h3-rgb) / <alpha-value>)","500":"rgb(var(--h3-rgb) / <alpha-value>)","600":"rgb(var(--h3-rgb) / <alpha-value>)","700":"rgb(var(--h3-rgb) / <alpha-value>)","800":"rgb(var(--h3-rgb) / <alpha-value>)","900":"rgb(var(--h3-rgb) / <alpha-value>)","950":"rgb(var(--h3-rgb) / <alpha-value>)"},"indigo":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h3-rgb) / <alpha-value>)","500":"rgb(var(--h3-rgb) / <alpha-value>)","600":"rgb(var(--h3-rgb) / <alpha-value>)","700":"rgb(var(--h3-rgb) / <alpha-value>)","800":"rgb(var(--h3-rgb) / <alpha-value>)","900":"rgb(var(--h3-rgb) / <alpha-value>)","950":"rgb(var(--h3-rgb) / <alpha-value>)"},"violet":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h4-rgb) / <alpha-value>)","500":"rgb(var(--h4-rgb) / <alpha-value>)","600":"rgb(var(--h4-rgb) / <alpha-value>)","700":"rgb(var(--h4-rgb) / <alpha-value>)","800":"rgb(var(--h4-rgb) / <alpha-value>)","900":"rgb(var(--h4-rgb) / <alpha-value>)","950":"rgb(var(--h4-rgb) / <alpha-value>)"},"purple":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h4-rgb) / <alpha-value>)","500":"rgb(var(--h4-rgb) / <alpha-value>)","600":"rgb(var(--h4-rgb) / <alpha-value>)","700":"rgb(var(--h4-rgb) / <alpha-value>)","800":"rgb(var(--h4-rgb) / <alpha-value>)","900":"rgb(var(--h4-rgb) / <alpha-value>)","950":"rgb(var(--h4-rgb) / <alpha-value>)"},"fuchsia":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h4-rgb) / <alpha-value>)","500":"rgb(var(--h4-rgb) / <alpha-value>)","600":"rgb(var(--h4-rgb) / <alpha-value>)","700":"rgb(var(--h4-rgb) / <alpha-value>)","800":"rgb(var(--h4-rgb) / <alpha-value>)","900":"rgb(var(--h4-rgb) / <alpha-value>)","950":"rgb(var(--h4-rgb) / <alpha-value>)"},"white":"rgb(var(--tinta-rgb) / <alpha-value>)","black":"rgb(var(--tinta-rgb) / <alpha-value>)"},"borderColor":{"slate":{"50":"rgb(var(--linea-rgb) / <alpha-value>)","100":"rgb(var(--linea-rgb) / <alpha-value>)","200":"rgb(var(--linea-rgb) / <alpha-value>)","300":"rgb(var(--linea-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--trazo-rgb) / <alpha-value>)","700":"rgb(var(--trazo-rgb) / <alpha-value>)","800":"rgb(var(--trazo-rgb) / <alpha-value>)","900":"rgb(var(--trazo-rgb) / <alpha-value>)","950":"rgb(var(--trazo-rgb) / <alpha-value>)"},"gray":{"50":"rgb(var(--linea-rgb) / <alpha-value>)","100":"rgb(var(--linea-rgb) / <alpha-value>)","200":"rgb(var(--linea-rgb) / <alpha-value>)","300":"rgb(var(--linea-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--trazo-rgb) / <alpha-value>)","700":"rgb(var(--trazo-rgb) / <alpha-value>)","800":"rgb(var(--trazo-rgb) / <alpha-value>)","900":"rgb(var(--trazo-rgb) / <alpha-value>)","950":"rgb(var(--trazo-rgb) / <alpha-value>)"},"zinc":{"50":"rgb(var(--linea-rgb) / <alpha-value>)","100":"rgb(var(--linea-rgb) / <alpha-value>)","200":"rgb(var(--linea-rgb) / <alpha-value>)","300":"rgb(var(--linea-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--trazo-rgb) / <alpha-value>)","700":"rgb(var(--trazo-rgb) / <alpha-value>)","800":"rgb(var(--trazo-rgb) / <alpha-value>)","900":"rgb(var(--trazo-rgb) / <alpha-value>)","950":"rgb(var(--trazo-rgb) / <alpha-value>)"},"neutral":{"50":"rgb(var(--linea-rgb) / <alpha-value>)","100":"rgb(var(--linea-rgb) / <alpha-value>)","200":"rgb(var(--linea-rgb) / <alpha-value>)","300":"rgb(var(--linea-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--trazo-rgb) / <alpha-value>)","700":"rgb(var(--trazo-rgb) / <alpha-value>)","800":"rgb(var(--trazo-rgb) / <alpha-value>)","900":"rgb(var(--trazo-rgb) / <alpha-value>)","950":"rgb(var(--trazo-rgb) / <alpha-value>)"},"stone":{"50":"rgb(var(--linea-rgb) / <alpha-value>)","100":"rgb(var(--linea-rgb) / <alpha-value>)","200":"rgb(var(--linea-rgb) / <alpha-value>)","300":"rgb(var(--linea-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--trazo-rgb) / <alpha-value>)","700":"rgb(var(--trazo-rgb) / <alpha-value>)","800":"rgb(var(--trazo-rgb) / <alpha-value>)","900":"rgb(var(--trazo-rgb) / <alpha-value>)","950":"rgb(var(--trazo-rgb) / <alpha-value>)"},"red":{"50":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-rgb) / <alpha-value>)","500":"rgb(var(--h2-rgb) / <alpha-value>)","600":"rgb(var(--h2-rgb) / <alpha-value>)","700":"rgb(var(--h2-rgb) / <alpha-value>)","800":"rgb(var(--h2-rgb) / <alpha-value>)","900":"rgb(var(--h2-rgb) / <alpha-value>)","950":"rgb(var(--h2-rgb) / <alpha-value>)"},"rose":{"50":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-rgb) / <alpha-value>)","500":"rgb(var(--h2-rgb) / <alpha-value>)","600":"rgb(var(--h2-rgb) / <alpha-value>)","700":"rgb(var(--h2-rgb) / <alpha-value>)","800":"rgb(var(--h2-rgb) / <alpha-value>)","900":"rgb(var(--h2-rgb) / <alpha-value>)","950":"rgb(var(--h2-rgb) / <alpha-value>)"},"pink":{"50":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-rgb) / <alpha-value>)","500":"rgb(var(--h2-rgb) / <alpha-value>)","600":"rgb(var(--h2-rgb) / <alpha-value>)","700":"rgb(var(--h2-rgb) / <alpha-value>)","800":"rgb(var(--h2-rgb) / <alpha-value>)","900":"rgb(var(--h2-rgb) / <alpha-value>)","950":"rgb(var(--h2-rgb) / <alpha-value>)"},"orange":{"50":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","100":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","200":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-rgb) / <alpha-value>)","500":"rgb(var(--acento-rgb) / <alpha-value>)","600":"rgb(var(--acento-rgb) / <alpha-value>)","700":"rgb(var(--acento-rgb) / <alpha-value>)","800":"rgb(var(--acento-rgb) / <alpha-value>)","900":"rgb(var(--acento-rgb) / <alpha-value>)","950":"rgb(var(--acento-rgb) / <alpha-value>)"},"amber":{"50":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","100":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","200":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-rgb) / <alpha-value>)","500":"rgb(var(--acento-rgb) / <alpha-value>)","600":"rgb(var(--acento-rgb) / <alpha-value>)","700":"rgb(var(--acento-rgb) / <alpha-value>)","800":"rgb(var(--acento-rgb) / <alpha-value>)","900":"rgb(var(--acento-rgb) / <alpha-value>)","950":"rgb(var(--acento-rgb) / <alpha-value>)"},"yellow":{"50":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","100":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","200":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-rgb) / <alpha-value>)","500":"rgb(var(--acento-rgb) / <alpha-value>)","600":"rgb(var(--acento-rgb) / <alpha-value>)","700":"rgb(var(--acento-rgb) / <alpha-value>)","800":"rgb(var(--acento-rgb) / <alpha-value>)","900":"rgb(var(--acento-rgb) / <alpha-value>)","950":"rgb(var(--acento-rgb) / <alpha-value>)"},"lime":{"50":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","100":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","200":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--exito-rgb) / <alpha-value>)","500":"rgb(var(--exito-rgb) / <alpha-value>)","600":"rgb(var(--exito-rgb) / <alpha-value>)","700":"rgb(var(--exito-rgb) / <alpha-value>)","800":"rgb(var(--exito-rgb) / <alpha-value>)","900":"rgb(var(--exito-rgb) / <alpha-value>)","950":"rgb(var(--exito-rgb) / <alpha-value>)"},"green":{"50":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","100":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","200":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--exito-rgb) / <alpha-value>)","500":"rgb(var(--exito-rgb) / <alpha-value>)","600":"rgb(var(--exito-rgb) / <alpha-value>)","700":"rgb(var(--exito-rgb) / <alpha-value>)","800":"rgb(var(--exito-rgb) / <alpha-value>)","900":"rgb(var(--exito-rgb) / <alpha-value>)","950":"rgb(var(--exito-rgb) / <alpha-value>)"},"emerald":{"50":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","100":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","200":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--exito-rgb) / <alpha-value>)","500":"rgb(var(--exito-rgb) / <alpha-value>)","600":"rgb(var(--exito-rgb) / <alpha-value>)","700":"rgb(var(--exito-rgb) / <alpha-value>)","800":"rgb(var(--exito-rgb) / <alpha-value>)","900":"rgb(var(--exito-rgb) / <alpha-value>)","950":"rgb(var(--exito-rgb) / <alpha-value>)"},"teal":{"50":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","100":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","200":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--exito-rgb) / <alpha-value>)","500":"rgb(var(--exito-rgb) / <alpha-value>)","600":"rgb(var(--exito-rgb) / <alpha-value>)","700":"rgb(var(--exito-rgb) / <alpha-value>)","800":"rgb(var(--exito-rgb) / <alpha-value>)","900":"rgb(var(--exito-rgb) / <alpha-value>)","950":"rgb(var(--exito-rgb) / <alpha-value>)"},"cyan":{"50":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-rgb) / <alpha-value>)","500":"rgb(var(--h3-rgb) / <alpha-value>)","600":"rgb(var(--h3-rgb) / <alpha-value>)","700":"rgb(var(--h3-rgb) / <alpha-value>)","800":"rgb(var(--h3-rgb) / <alpha-value>)","900":"rgb(var(--h3-rgb) / <alpha-value>)","950":"rgb(var(--h3-rgb) / <alpha-value>)"},"sky":{"50":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-rgb) / <alpha-value>)","500":"rgb(var(--h3-rgb) / <alpha-value>)","600":"rgb(var(--h3-rgb) / <alpha-value>)","700":"rgb(var(--h3-rgb) / <alpha-value>)","800":"rgb(var(--h3-rgb) / <alpha-value>)","900":"rgb(var(--h3-rgb) / <alpha-value>)","950":"rgb(var(--h3-rgb) / <alpha-value>)"},"blue":{"50":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-rgb) / <alpha-value>)","500":"rgb(var(--h3-rgb) / <alpha-value>)","600":"rgb(var(--h3-rgb) / <alpha-value>)","700":"rgb(var(--h3-rgb) / <alpha-value>)","800":"rgb(var(--h3-rgb) / <alpha-value>)","900":"rgb(var(--h3-rgb) / <alpha-value>)","950":"rgb(var(--h3-rgb) / <alpha-value>)"},"indigo":{"50":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-rgb) / <alpha-value>)","500":"rgb(var(--h3-rgb) / <alpha-value>)","600":"rgb(var(--h3-rgb) / <alpha-value>)","700":"rgb(var(--h3-rgb) / <alpha-value>)","800":"rgb(var(--h3-rgb) / <alpha-value>)","900":"rgb(var(--h3-rgb) / <alpha-value>)","950":"rgb(var(--h3-rgb) / <alpha-value>)"},"violet":{"50":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-rgb) / <alpha-value>)","500":"rgb(var(--h4-rgb) / <alpha-value>)","600":"rgb(var(--h4-rgb) / <alpha-value>)","700":"rgb(var(--h4-rgb) / <alpha-value>)","800":"rgb(var(--h4-rgb) / <alpha-value>)","900":"rgb(var(--h4-rgb) / <alpha-value>)","950":"rgb(var(--h4-rgb) / <alpha-value>)"},"purple":{"50":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-rgb) / <alpha-value>)","500":"rgb(var(--h4-rgb) / <alpha-value>)","600":"rgb(var(--h4-rgb) / <alpha-value>)","700":"rgb(var(--h4-rgb) / <alpha-value>)","800":"rgb(var(--h4-rgb) / <alpha-value>)","900":"rgb(var(--h4-rgb) / <alpha-value>)","950":"rgb(var(--h4-rgb) / <alpha-value>)"},"fuchsia":{"50":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-rgb) / <alpha-value>)","500":"rgb(var(--h4-rgb) / <alpha-value>)","600":"rgb(var(--h4-rgb) / <alpha-value>)","700":"rgb(var(--h4-rgb) / <alpha-value>)","800":"rgb(var(--h4-rgb) / <alpha-value>)","900":"rgb(var(--h4-rgb) / <alpha-value>)","950":"rgb(var(--h4-rgb) / <alpha-value>)"},"white":"rgb(var(--superficie-rgb) / <alpha-value>)","black":"rgb(var(--tinta-rgb) / <alpha-value>)"},"colors":{"slate":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"gray":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"zinc":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"neutral":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"stone":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"red":{"50":"rgb(var(--h2-suave-rgb) / <alpha-value>)","100":"rgb(var(--h2-suave-rgb) / <alpha-value>)","200":"rgb(var(--h2-suave-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h2-relleno-rgb) / <alpha-value>)"},"rose":{"50":"rgb(var(--h2-suave-rgb) / <alpha-value>)","100":"rgb(var(--h2-suave-rgb) / <alpha-value>)","200":"rgb(var(--h2-suave-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h2-relleno-rgb) / <alpha-value>)"},"pink":{"50":"rgb(var(--h2-suave-rgb) / <alpha-value>)","100":"rgb(var(--h2-suave-rgb) / <alpha-value>)","200":"rgb(var(--h2-suave-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h2-relleno-rgb) / <alpha-value>)"},"orange":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"amber":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"yellow":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"lime":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"green":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"emerald":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"teal":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"cyan":{"50":"rgb(var(--h3-suave-rgb) / <alpha-value>)","100":"rgb(var(--h3-suave-rgb) / <alpha-value>)","200":"rgb(var(--h3-suave-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h3-relleno-rgb) / <alpha-value>)"},"sky":{"50":"rgb(var(--h3-suave-rgb) / <alpha-value>)","100":"rgb(var(--h3-suave-rgb) / <alpha-value>)","200":"rgb(var(--h3-suave-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h3-relleno-rgb) / <alpha-value>)"},"blue":{"50":"rgb(var(--h3-suave-rgb) / <alpha-value>)","100":"rgb(var(--h3-suave-rgb) / <alpha-value>)","200":"rgb(var(--h3-suave-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h3-relleno-rgb) / <alpha-value>)"},"indigo":{"50":"rgb(var(--h3-suave-rgb) / <alpha-value>)","100":"rgb(var(--h3-suave-rgb) / <alpha-value>)","200":"rgb(var(--h3-suave-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h3-relleno-rgb) / <alpha-value>)"},"violet":{"50":"rgb(var(--h4-suave-rgb) / <alpha-value>)","100":"rgb(var(--h4-suave-rgb) / <alpha-value>)","200":"rgb(var(--h4-suave-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h4-relleno-rgb) / <alpha-value>)"},"purple":{"50":"rgb(var(--h4-suave-rgb) / <alpha-value>)","100":"rgb(var(--h4-suave-rgb) / <alpha-value>)","200":"rgb(var(--h4-suave-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h4-relleno-rgb) / <alpha-value>)"},"fuchsia":{"50":"rgb(var(--h4-suave-rgb) / <alpha-value>)","100":"rgb(var(--h4-suave-rgb) / <alpha-value>)","200":"rgb(var(--h4-suave-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h4-relleno-rgb) / <alpha-value>)"},"white":"rgb(var(--superficie-rgb) / <alpha-value>)","black":"rgb(var(--tinta-rgb) / <alpha-value>)"},"boxShadow":{"sm":"var(--sombra-suave)","DEFAULT":"var(--sombra-suave)","md":"var(--sombra-suave)","lg":"var(--sombra-alta)","xl":"var(--sombra-alta)","2xl":"var(--sombra-alta)"},"borderRadius":{"md":"var(--radio-sm)","lg":"var(--radio-sm)","xl":"var(--radio)","2xl":"var(--radio)"}}}};</script>
-  
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: var(--texto);
-            background-color: var(--fondo);
-            color: var(--tinta-2);
-        }
-        .nav-button {
-            transition: all 0.3s ease;
-        }
-        .nav-button.active {
-            background-color: var(--h2-relleno);
-            color: var(--tinta);
-            font-weight: 700;
-        }
-        .nav-button:not(.active):hover {
-            background-color: var(--fondo);
-        }
-        .content-section {
-            display: none;
-        }
-        .content-section.active {
-            display: block;
-        }
-        .card {
-            background-color: var(--superficie);
-            border: 1px solid var(--linea);
-            border-radius: var(--radio-sm);
-            box-shadow: var(--sombra-suave);
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 450px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 350px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
-        }
-        .comparison-table-row {
-            transition: background-color 0.2s ease-in-out;
-        }
-        .comparison-table-row:hover {
-            background-color: var(--fondo);
-        }
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-        .accordion-header.active span {
-            transform: rotate(180deg);
-        }
-        .podcast-btn {
-            background-color: var(--h2-relleno);
-            color: var(--tinta);
-            font-weight: 500;
-            padding: 0.75rem 1.5rem;
-            border-radius: 9999px;
-            box-shadow: var(--sombra-suave);
-            transition: background-color 0.2s ease, box-shadow 0.2s ease;
-        }
-        .podcast-btn:hover:not(:disabled) {
-            background-color: var(--h2-relleno);
-            box-shadow: var(--sombra-suave);
-        }
-        .podcast-btn:disabled {
-            background-color: var(--acento-relleno);
-            cursor: not-allowed;
-        }
-        /* Nueva clase para el botón del podcast en la barra de navegación */
-        .nav-podcast-btn {
-            background-color: var(--h2-relleno);
-            color: var(--tinta);
-        }
-        .nav-podcast-btn:hover:not(.active) {
-            background-color: var(--h2-relleno);
-        }
-    </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roblox: guía de seguridad | Tomás Cabrolier</title>
+  <meta name="description" content="Qué es Roblox, qué riesgos tiene para niños y adolescentes, cómo funciona su economía y qué pueden hacer apoderados, docentes y la industria.">
   <link rel="icon" href="../../../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../../assets/css/site.css">
-  <link rel="stylesheet" href="../../../assets/css/armonia.css">
+  <link rel="stylesheet" href="../../../assets/css/paginas.css">
   <script src="../../../assets/js/site.js"></script>
-  <!-- barajas aplicadas -->
 </head>
-<body class="antialiased">
-
-    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
-        
-        <header class="text-center mb-8 md:mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-[color:var(--h2)] mb-2">Roblox: Guía Interactiva de Seguridad</h1>
-            <p class="text-lg text-gray-600">Una herramienta para docentes, educadores y apoderados.</p>
-        </header>
-
-        <!-- Menú de navegación principal con el botón de podcast integrado -->
-        <nav class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12">
-            <button data-target="fenomeno" class="nav-button active text-sm md:text-base font-medium py-2 px-4 rounded-full">El Fenómeno</button>
-            <button data-target="riesgos" class="nav-button text-sm md:text-base font-medium py-2 px-4 rounded-full">Riesgos Clave</button>
-            <button data-target="economia" class="nav-button text-sm md:text-base font-medium py-2 px-4 rounded-full">La Economía</button>
-            <button data-target="comparativa" class="nav-button text-sm md:text-base font-medium py-2 px-4 rounded-full">Comparativa</button>
-            <button data-target="guia" class="nav-button text-sm md:text-base font-medium py-2 px-4 rounded-full">Guía de Seguridad</button>
-            <!-- Botón de podcast ahora con su propia clase -->
-            <button id="podcastButton" class="podcast-btn text-sm md:text-base font-medium py-2 px-4 rounded-full">
-                ▶ Escuchar Podcast
-            </button>
-        </nav>
-
-        <main>
-            <!-- Sección 1: El Fenómeno Roblox -->
-            <section id="fenomeno" class="content-section active">
-                <div class="card p-6 md:p-8">
-                    <h2 class="text-2xl md:text-3xl font-bold text-[color:var(--h2)] mb-4">1. Contextualización del Fenómeno Roblox</h2>
-                    <p class="mb-6 text-gray-700">Roblox no es solo un juego; es un metaverso, una plataforma social donde millones de usuarios, en su mayoría jóvenes, crean y comparten sus propias "experiencias" virtuales. Esta sección explora su escala masiva y por qué su modelo de contenido generado por usuarios presenta desafíos de seguridad únicos.</p>
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <div>
-                            <!-- Datos clave de la plataforma reubicados y agrupados -->
-                            <h3 class="text-xl font-semibold mb-3 text-[color:var(--h2)]">Datos Clave de la Plataforma</h3>
-                            <div class="space-y-4">
-                                <div class="p-4 bg-amber-50 rounded-lg border border-amber-200">
-                                    <h4 class="font-bold text-amber-800">79.5 Millones</h4>
-                                    <p class="text-sm text-amber-700">Usuarios activos diarios (Q2 2024)</p>
-                                </div>
-                                <div class="p-4 bg-teal-50 rounded-lg border border-teal-200">
-                                    <h4 class="font-bold text-teal-800">380 Millones</h4>
-                                    <p class="text-sm text-teal-700">Usuarios activos mensuales (2024)</p>
-                                </div>
-                                <div class="p-4 bg-gray-100 rounded-lg border border-gray-200">
-                                    <h4 class="font-bold text-gray-800">17.5+ mil millones</h4>
-                                    <p class="text-sm text-gray-700">Horas de interacción (primer semestre 2024)</p>
-                                </div>
-                                <div class="p-4 bg-gray-100 rounded-lg border border-gray-200">
-                                    <h4 class="font-bold text-gray-800">66+ millones</h4>
-                                    <p class="text-sm text-gray-700">Experiencias creadas por usuarios</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-3 text-center text-[color:var(--h2)]">Demografía de Usuarios</h3>
-                            <div class="chart-container">
-                                <canvas id="demographicsChart"></canvas>
-                            </div>
-                            <p class="text-center text-sm text-gray-500 mt-2">La base de usuarios es predominantemente joven, lo que exige un mayor nivel de responsabilidad y protección.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Sección 2: Riesgos Clave -->
-            <section id="riesgos" class="content-section">
-                <div class="card p-6 md:p-8">
-                    <h2 class="text-2xl md:text-3xl font-bold text-[color:var(--h2)] mb-4">2. Acoso, Abuso y Seguridad: La Cara Oculta</h2>
-                    <p class="mb-6 text-gray-700">La libertad de interacción en Roblox puede exponer a los menores a riesgos significativos como el ciberacoso y el "grooming". Esta sección detalla estas amenazas y analiza las deficiencias del sistema de moderación de la plataforma.</p>
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2 text-[color:var(--h2)]">Acoso y Ciberacoso</h3>
-                            <p>Incluye lenguaje agresivo, propagación de rumores o la creación de "experiencias" que simulan actos violentos o inapropiados. Aunque las normas lo prohíben, la moderación a menudo es insuficiente para prevenirlo.</p>
-                        </div>
-                        <div class="p-4 border-l-4 border-red-500 bg-red-50 rounded-r-lg">
-                            <h3 class="text-xl font-semibold mb-2 text-red-800">El Peligro del "Grooming"</h3>
-                            <p class="text-red-700">Es el proceso de manipulación de un menor con fines sexuales. Los depredadores usan el chat del juego para ganar confianza, a menudo ofreciendo Robux, para luego mover la conversación a plataformas no moderadas como Discord o Snapchat. Se han reportado casos graves que han terminado en secuestros.</p>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2 text-[color:var(--h2)]">Deficiencias en la Moderación</h3>
-                            <p>A pesar de contar con miles de moderadores, el sistema ha sido criticado por su ineficacia. Los filtros de chat pueden ser evadidos y la compañía ha sido señalada por no responsabilizarse cuando el contacto se traslada fuera de su plataforma. La controversial respuesta de Roblox hacia los "vigilantes" que exponían depredadores subraya las limitaciones de su enfoque.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Sección 3: La Economía -->
-            <section id="economia" class="content-section">
-                <div class="card p-6 md:p-8">
-                    <h2 class="text-2xl md:text-3xl font-bold text-[color:var(--h2)] mb-4">3. La Economía del Juego: ¿Explotación o Emprendimiento?</h2>
-                    <p class="mb-6 text-gray-700">La economía de Roblox se basa en la moneda virtual "Robux". Este modelo incentiva el gasto y plantea un debate sobre si la creación de juegos por menores es una oportunidad de emprendimiento o una forma de explotación laboral no regulada.</p>
-                    <div class="grid md:grid-cols-2 gap-8 items-start">
-                        <div>
-                            <h3 class="text-xl font-semibold mb-3 text-[color:var(--h2)]">Psicología del Gasto con Robux</h3>
-                            <p class="mb-4">El uso de una moneda virtual crea una desconexión con el dinero real, facilitando el gasto. Tácticas como eventos de tiempo limitado y la presión social por tener avatares "cool" incentivan las compras. La falta de un historial de transacciones claro dificulta que los padres supervisen el gasto total, pudiendo llevar a facturas inesperadas.</p>
-                            <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                                <h4 class="font-bold text-blue-800">Debate: ¿Emprendimiento o Explotación?</h4>
-                                <p class="text-sm text-blue-700">Roblox promueve la idea de que los jóvenes pueden ganar dinero real como desarrolladores. Si bien hay historias de éxito, la mayoría de los creadores no son remunerados. El sistema de reparto de ingresos ha sido criticado por ser opaco y desproporcionadamente favorable a la corporación.</p>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-3 text-center text-[color:var(--h2)]">Reparto de Ingresos: Roblox vs. Otros</h3>
-                            <div class="chart-container h-80 md:h-96">
-                                <canvas id="revenueChart"></canvas>
-                            </div>
-                             <p class="text-center text-sm text-gray-500 mt-2">Porcentaje de ingresos que la plataforma se queda. Cifras más bajas son mejores para el creador.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Sección 4: Comparativa -->
-            <section id="comparativa" class="content-section">
-                <div class="card p-6 md:p-8">
-                    <h2 class="text-2xl md:text-3xl font-bold text-[color:var(--h2)] mb-4">4. Responsabilidad Corporativa: Comparación con Otras Compañías</h2>
-                    <p class="mb-6 text-gray-700">Al comparar Roblox con otras plataformas, se evidencian diferencias clave en las filosofías de seguridad y control parental. Ecosistemas más cerrados como Nintendo o plataformas con supervisión centralizada como Minecraft ofrecen lecciones valiosas sobre la protección de usuarios menores de edad.</p>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="bg-gray-100">
-                                    <th class="p-3 font-semibold text-sm">Función de Control</th>
-                                    <th class="p-3 font-semibold text-sm text-center">Roblox</th>
-                                    <th class="p-3 text-2xl font-semibold text-center">Nintendo</th>
-                                    <th class="p-3 text-2xl font-semibold text-center">PlayStation</th>
-                                    <th class="p-3 text-2xl font-semibold text-center">Fortnite</th>
-                                    <th class="p-3 text-2xl font-semibold text-center">Minecraft</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="comparison-table-row border-b">
-                                    <td class="p-3">Límite de Gasto</td>
-                                    <td class="p-3 text-center text-2xl">✅</td>
-                                    <td class="p-3 text-center text-2xl">✅</td>
-                                    <td class="p-3 text-center text-2xl">✅</td>
-                                    <td class="p-3 text-center text-2xl">✅</td>
-                                    <td class="p-3 text-center text-2xl">⚠️</td>
-                                </tr>
-                                <tr class="comparison-table-row border-b">
-                                    <td class="p-3">Control de Chat</td>
-                                    <td class="p-3 text-center text-2xl">✅</td>
-                                    <td class="p-3 text-center text-2xl">✅</td>
-                                    <td class="p-3 text-center text-2xl">✅</td>
-                                    <td class="p-3 text-center text-2xl">✅</td>
-                                    <td class="p-3 text-center text-2xl">✅</td>
-                                </tr>
-                                <tr class="comparison-table-row border-b">
-                                    <td class="p-3">Filtros de Contenido (Edad)</td>
-                                    <td class="p-3 text-center text-2xl">✅</td>
-                                    <td class="p-3 text-center text-2xl">✅</td>
-                                    <td class="p-3 text-center text-2xl">✅</td>
-                                    <td class="p-3 text-center text-2xl">✅</td>
-                                    <td class="p-3 text-center text-2xl">✅</td>
-                                </tr>
-                                <tr class="comparison-table-row">
-                                    <td class="p-3">Sistema de Denuncia Avanzado</td>
-                                    <td class="p-3 text-center text-2xl">❌</td>
-                                    <td class="p-3 text-center text-2xl">⚠️</td>
-                                    <td class="p-3 text-center text-2xl">⚠️</td>
-                                    <td class="p-3 text-center text-2xl">✅</td>
-                                    <td class="p-3 text-center text-2xl">✅</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                         <p class="text-xs text-gray-500 mt-2">✅: Robusto | ⚠️: Depende de la plataforma/consola | ❌: Considerado deficiente en comparación.</p>
-                    </div>
-                    <div class="mt-6 p-4 bg-stone-100 rounded-lg">
-                        <h3 class="font-semibold text-stone-800">Conclusión Clave:</h3>
-                        <p class="text-sm text-stone-700">Roblox ha priorizado la libertad de creación y la escala sobre un control de seguridad centralizado. A diferencia de competidores como Minecraft, que ofrecen sistemas de denuncia más transparentes (incluyendo contexto de la conversación), el enfoque de Roblox crea una brecha de seguridad que otras plataformas han logrado evitar en gran medida.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Sección 5: Guía de Seguridad -->
-            <section id="guia" class="content-section">
-                 <div class="card p-6 md:p-8">
-                    <h2 class="text-2xl md:text-3xl font-bold text-[color:var(--h2)] mb-4">5. Propuestas y Recomendaciones Prácticas</h2>
-                    <p class="mb-6 text-gray-700">La seguridad digital es una responsabilidad compartida. La tecnología por sí sola no es suficiente. Un enfoque integral que combine herramientas técnicas, educación y supervisión activa es la estrategia más efectiva. Aquí encontrará guías prácticas para apoderados, educadores y la industria.</p>
-                    <div class="space-y-4" id="accordion-container">
-                        <div class="accordion-item border rounded-lg">
-                            <button class="accordion-header w-full text-left p-4 font-semibold text-lg bg-gray-50 hover:bg-gray-100 flex justify-between items-center">
-                                Guía para Apoderados y Adultos
-                                <span class="transform transition-transform duration-300">▼</span>
-                            </button>
-                            <div class="accordion-content border-t">
-                                <div class="p-4">
-                                    <p class="mb-4">La herramienta más poderosa es la comunicación y la supervisión activa. Juegue con sus hijos para entender la plataforma. Siga estos pasos:</p>
-                                    <ol class="list-decimal list-inside space-y-2">
-                                        <li><strong>Vincular cuenta parental:</strong> Verifique su edad para acceder a todas las opciones de supervisión.</li>
-                                        <li><strong>Establecer un PIN:</strong> Cree un PIN de 4 dígitos para que los niños no puedan cambiar la configuración.</li>
-                                        <li><strong>Restringir comunicación:</strong> Limite el chat a "Amigos" o "Nadie" para evitar contacto con extraños.</li>
-                                        <li><strong>Fijar límites de gasto:</strong> Configure límites mensuales y notificaciones de compra.</li>
-                                        <li><strong>Fomentar el diálogo:</strong> Eduque sobre los riesgos de compartir información personal y la importancia de denunciar.</li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item border rounded-lg">
-                            <button class="accordion-header w-full text-left p-4 font-semibold text-lg bg-gray-50 hover:bg-gray-100 flex justify-between items-center">
-                                Guía para Docentes y Educadores
-                                <span class="transform transition-transform duration-300">▼</span>
-                            </button>
-                            <div class="accordion-content border-t">
-                                <div class="p-4">
-                                    <p>Integre el fenómeno de los metaversos en el currículo de alfabetización digital para fomentar el pensamiento crítico.</p>
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li>Analizar las "normas de la comunidad" de las plataformas.</li>
-                                        <li>Discutir los riesgos inherentes del metaverso y la identidad digital.</li>
-                                        <li>Fomentar el pensamiento crítico sobre la economía de los videojuegos y el valor del dinero.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                         <div class="accordion-item border rounded-lg">
-                            <button class="accordion-header w-full text-left p-4 font-semibold text-lg bg-gray-50 hover:bg-gray-100 flex justify-between items-center">
-                                Medidas para la Industria
-                                <span class="transform transition-transform duration-300">▼</span>
-                            </button>
-                            <div class="accordion-content border-t">
-                                <div class="p-4">
-                                    <p>Las plataformas tienen la responsabilidad de crear entornos más seguros.</p>
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li><strong>Transparencia financiera:</strong> Implementar un historial de gastos claro y accesible.</li>
-                                        <li><strong>Mejora de la moderación:</strong> Invertir en filtros de chat más sofisticados y sistemas de denuncia más eficaces que incluyan contexto.</li>
-                                        <li><strong>Autorregulación:</strong> Abordar proactivamente mecánicas de azar como las "cajas de recompensas" (loot boxes).</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-            </section>
-        </main>
-
-        <footer class="text-center mt-12">
-            <p class="text-gray-500">Este es un llamado a la acción colaborativa. La seguridad digital es una responsabilidad compartida.</p>
-            <p class="text-xs text-gray-500 mt-2">Los datos estadísticos y financieros fueron recopilados en base a los reportes del 2º trimestre (Q2) de 2024.</p>
-            <p class="text-xs text-gray-500 mt-2">El resto de la información corresponde a un análisis general de la plataforma y sus riesgos.</p>
-        </footer>
-
+<body class="tc pagina">
+  <header class="cielo cabecera-pagina">
+    <div class="escena"></div>
+    <div class="tc-contenedor">
+      <p class="carta">Ensayo interactivo · Tecnología</p>
+      <h1>Roblox: guía interactiva de seguridad</h1>
+      <p class="intro">Qué es Roblox, qué riesgos tiene para niños y adolescentes, cómo funciona su economía y qué pueden hacer apoderados, docentes y la industria.</p>
+        <ul class="meta"><li><b>Para</b>Docentes, educadores y apoderados</li><li><b>Datos</b>2.º trimestre de 2024</li></ul>
+        <div class="podcast">
+          <span class="icono" aria-hidden="true">🎧</span>
+          <div><b>Escucha el podcast</b><span>Riesgos y seguridad en Roblox, conversado.</span></div>
+          <audio controls preload="none" src="roblox.m4a"></audio>
+        </div>
     </div>
+  </header>
+  <div class="tc-contenedor lectura">
+    <nav class="indice" data-indice-pagina aria-label="En esta página"></nav>
+    <main class="cuerpo">
+<section class="bloque" id="fenomeno">
+        <h2>El fenómeno Roblox</h2>
+        <p>Roblox no es solo un juego: es un metaverso, una plataforma social donde millones de usuarios, en su mayoría jóvenes, crean y comparten sus propias «experiencias». Su escala y su modelo de contenido creado por usuarios plantean desafíos de seguridad únicos.</p>
+        <ul class="datos">
+          <li class="dato"><span class="cifra">79,5 M</span><span class="que">usuarios activos diarios (2.º trimestre 2024)</span></li>
+          <li class="dato"><span class="cifra">380 M</span><span class="que">usuarios activos mensuales (2024)</span></li>
+          <li class="dato"><span class="cifra">17 500 M+</span><span class="que">horas de interacción (primer semestre 2024)</span></li>
+          <li class="dato"><span class="cifra">66 M+</span><span class="que">experiencias creadas por usuarios</span></li>
+        </ul>
+        <h3>¿Quiénes juegan?</h3>
+        <ul class="barras" aria-label="Distribución de edad de los usuarios">
+          <li style="--v:56"><span class="rotulo">Menores de 16 años</span><span class="barra"></span><span class="valor">56 %</span></li>
+          <li class="secundaria" style="--v:44"><span class="rotulo">16 años o más</span><span class="barra"></span><span class="valor">44 %</span></li>
+        </ul>
+        <p class="pie-grafico">La mayoría de los usuarios son menores, lo que exige más responsabilidad y protección.</p>
+      </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Se selecciona únicamente los botones de navegación, excluyendo el de podcast
-            const navButtons = document.querySelectorAll('.nav-button');
-            const contentSections = document.querySelectorAll('.content-section');
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-            const podcastButton = document.getElementById('podcastButton');
-            let audioPlayer = null;
-            let isPlaying = false;
+      <section class="bloque" id="riesgos">
+        <h2>Acoso, abuso y moderación</h2>
+        <p class="bajada">La libertad de interacción puede exponer a los menores a riesgos graves.</p>
+        <ul class="fichas">
+          <li class="ficha"><h3>Acoso y ciberacoso</h3><p>Lenguaje agresivo, rumores o «experiencias» que simulan actos violentos o inapropiados. Las normas lo prohíben, pero la moderación a menudo no alcanza.</p></li>
+          <li class="ficha"><h3>El peligro del grooming</h3><p>Manipulación de un menor con fines sexuales. Los agresores ganan confianza por el chat, a menudo ofreciendo Robux, y luego llevan la conversación a plataformas sin moderación como Discord o Snapchat. Se han reportado casos graves.</p></li>
+          <li class="ficha"><h3>Deficiencias en la moderación</h3><p>Pese a miles de moderadores, los filtros de chat se pueden evadir y la compañía ha sido criticada por no responsabilizarse cuando el contacto sale de su plataforma.</p></li>
+        </ul>
+      </section>
 
-            function showSection(targetId) {
-                contentSections.forEach(section => {
-                    section.classList.toggle('active', section.id === targetId);
-                });
-                navButtons.forEach(button => {
-                    button.classList.toggle('active', button.dataset.target === targetId);
-                });
-            }
-            
-            navButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    showSection(button.dataset.target);
-                });
-            });
+      <section class="bloque" id="economia">
+        <h2>La economía del juego</h2>
+        <p class="bajada">¿Emprendimiento o explotación? La moneda virtual Robux incentiva el gasto y abre un debate sobre el trabajo de los creadores menores de edad.</p>
+        <h3>La psicología del gasto</h3>
+        <p>Una moneda virtual desconecta del dinero real y facilita el gasto. Los eventos por tiempo limitado y la presión por tener un avatar «cool» empujan a comprar. Sin un historial claro de transacciones, a las familias les cuesta supervisar el gasto total, lo que puede terminar en cuentas inesperadas.</p>
+        <div class="nota aviso">
+          <span class="titulo-nota">Debate: ¿emprendimiento o explotación?</span>
+          <p>Roblox promueve que los jóvenes pueden ganar dinero real como desarrolladores. Hay historias de éxito, pero la mayoría de los creadores no recibe pago, y el reparto de ingresos ha sido criticado por opaco y favorable a la empresa.</p>
+        </div>
+        <h3>Cuánto se queda cada plataforma</h3>
+        <ul class="barras" aria-label="Porcentaje de ingresos que retiene cada plataforma">
+          <li style="--v:72"><span class="rotulo">Roblox</span><span class="barra"></span><span class="valor">~72 %</span></li>
+          <li class="secundaria" style="--v:30"><span class="rotulo">Steam</span><span class="barra"></span><span class="valor">~30 %</span></li>
+          <li class="secundaria" style="--v:12"><span class="rotulo">Epic Games</span><span class="barra"></span><span class="valor">~12 %</span></li>
+        </ul>
+        <p class="pie-grafico">Porcentaje de los ingresos del creador que retiene la plataforma. Menos es mejor para el creador.</p>
+      </section>
 
-            // Lógica de acordeón corregida para que funcione como un interruptor.
-            accordionHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const content = header.nextElementSibling;
-                    const isCurrentlyActive = header.classList.contains('active');
+      <section class="bloque" id="comparativa">
+        <h2 data-corto="Comparación con otras">Responsabilidad corporativa</h2>
+        <p>Frente a otras plataformas se ven diferencias claras en seguridad y control parental. Ecosistemas más cerrados, como Nintendo, o con supervisión centralizada, como Minecraft, ofrecen lecciones valiosas.</p>
+        <div class="tabla comparar">
+          <table>
+            <thead><tr><th scope="col">Función</th><th scope="col">Roblox</th><th scope="col">Nintendo</th><th scope="col">PlayStation</th><th scope="col">Fortnite</th><th scope="col">Minecraft</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Límite de gasto</th><td>✅ Sí</td><td>✅ Sí</td><td>✅ Sí</td><td>✅ Sí</td><td>⚠️ Depende</td></tr>
+              <tr><th scope="row">Control de chat</th><td>✅ Sí</td><td>✅ Sí</td><td>✅ Sí</td><td>✅ Sí</td><td>✅ Sí</td></tr>
+              <tr><th scope="row">Filtros por edad</th><td>✅ Sí</td><td>✅ Sí</td><td>✅ Sí</td><td>✅ Sí</td><td>✅ Sí</td></tr>
+              <tr><th scope="row">Denuncia avanzada</th><td>❌ Deficiente</td><td>⚠️ Depende</td><td>⚠️ Depende</td><td>✅ Sí</td><td>✅ Sí</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><small>✅ robusto · ⚠️ depende de la plataforma o consola · ❌ deficiente en comparación.</small></p>
+        <div class="nota"><span class="titulo-nota">Conclusión</span><p>Roblox ha priorizado la libertad de creación y la escala por sobre un control de seguridad centralizado. A diferencia de Minecraft, cuyos sistemas de denuncia incluyen el contexto de la conversación, deja una brecha de seguridad que otras plataformas han logrado evitar.</p></div>
+      </section>
 
-                    // Cierra todos los demás acordeones
-                    accordionHeaders.forEach(otherHeader => {
-                        if (otherHeader !== header) {
-                            otherHeader.classList.remove('active');
-                            otherHeader.nextElementSibling.style.maxHeight = '0px';
-                        }
-                    });
-
-                    // Si el acordeón clicado no estaba activo, lo abre. Si estaba activo, lo cierra.
-                    if (!isCurrentlyActive) {
-                        header.classList.add('active');
-                        content.style.maxHeight = content.scrollHeight + 'px';
-                    } else {
-                        header.classList.remove('active');
-                        content.style.maxHeight = '0px';
-                    }
-                });
-            });
-
-            // Chart.js Initializations
-            Chart.defaults.font.family = "'Inter', sans-serif";
-            Chart.defaults.color = 'var(--tinta-2)';
-
-            // Demographics Chart
-            const demographicsCtx = document.getElementById('demographicsChart').getContext('2d');
-            new Chart(demographicsCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Menores de 16 años', '16 años o más'],
-                    datasets: [{
-                        label: 'Distribución de Edad',
-                        data: [56, 44],
-                        backgroundColor: ['var(--tinta-3)', 'var(--tinta-3)'],
-                        borderColor: 'var(--superficie)',
-                        borderWidth: 4,
-                        hoverOffset: 8
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.raw}%`;
-                                }
-                            }
-                        }
-                    },
-                    cutout: '60%'
-                }
-            });
-
-            // Revenue Share Chart
-            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-            new Chart(revenueCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Roblox', 'Steam', 'Epic Games'],
-                    datasets: [{
-                        label: 'Comisión de la Plataforma (%)',
-                        data: [72, 30, 12],
-                        backgroundColor: ['var(--tinta-3)', 'var(--h2)', 'var(--h2)'],
-                        borderRadius: 6
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return ` La plataforma retiene ~${context.raw}% de los ingresos del creador.`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Porcentaje retenido por la plataforma'
-                            }
-                        }
-                    }
-                }
-            });
-            
-            // Lógica para reproducir el podcast desde un archivo .m4a
-            podcastButton.addEventListener('click', () => {
-                // Reemplaza esta URL con el nombre exacto de tu archivo M4A, si está en la misma carpeta.
-                // Ejemplo: 'mi-podcast.m4a'
-                const podcastUrl = 'roblox.m4a'; 
-
-                if (!audioPlayer) {
-                    audioPlayer = new Audio(podcastUrl);
-                    audioPlayer.onended = () => {
-                        isPlaying = false;
-                        podcastButton.innerHTML = '▶ Escuchar Podcast';
-                    };
-                }
-
-                if (isPlaying) {
-                    audioPlayer.pause();
-                    isPlaying = false;
-                    podcastButton.innerHTML = '▶ Reanudar Podcast';
-                } else {
-                    audioPlayer.play().then(() => {
-                        isPlaying = true;
-                        podcastButton.innerHTML = '❚❚ Pausar Podcast';
-                    }).catch(error => {
-                        console.error('Error al reproducir el audio:', error);
-                        podcastButton.innerHTML = 'Error al reproducir';
-                    });
-                }
-            });
-            
-            // Initial active section
-            showSection('fenomeno');
-        });
-    </script>
+      <section class="bloque" id="guia">
+        <h2>Recomendaciones prácticas</h2>
+        <p class="bajada">La seguridad digital es una responsabilidad compartida: herramientas técnicas, educación y supervisión activa.</p>
+        <div class="pestanas" data-pestanas>
+          <div role="tablist" aria-label="Recomendaciones por actor">
+            <button role="tab" type="button">Apoderados</button>
+            <button role="tab" type="button">Docentes</button>
+            <button role="tab" type="button">Industria</button>
+          </div>
+          <div role="tabpanel">
+            <p>La herramienta más poderosa es la comunicación y la supervisión activa. Jueguen juntos para entender la plataforma, y sigan estos pasos:</p>
+            <ol class="pasos">
+              <li><b>Vincular la cuenta parental</b>Verificar la edad para acceder a todas las opciones de supervisión.</li>
+              <li><b>Establecer un PIN</b>Un PIN de 4 dígitos para que los niños no cambien la configuración.</li>
+              <li><b>Restringir la comunicación</b>Limitar el chat a «Amigos» o «Nadie».</li>
+              <li><b>Fijar límites de gasto</b>Límites mensuales y avisos de compra.</li>
+              <li><b>Conversar</b>Sobre los riesgos de compartir información personal y la importancia de denunciar.</li>
+            </ol>
+          </div>
+          <div role="tabpanel">
+            <p>Integrar los metaversos en la alfabetización digital para fomentar el pensamiento crítico:</p>
+            <ul class="fichas">
+              <li class="ficha"><p>Analizar las «normas de la comunidad» de las plataformas.</p></li>
+              <li class="ficha"><p>Discutir los riesgos del metaverso y la identidad digital.</p></li>
+              <li class="ficha"><p>Pensar críticamente la economía de los videojuegos y el valor del dinero.</p></li>
+            </ul>
+          </div>
+          <div role="tabpanel">
+            <p>Las plataformas tienen la responsabilidad de crear entornos más seguros:</p>
+            <dl class="glosario">
+              <div class="termino"><dt>Transparencia financiera</dt><dd>Un historial de gastos claro y accesible.</dd></div>
+              <div class="termino"><dt>Mejor moderación</dt><dd>Filtros de chat más sofisticados y denuncias que incluyan contexto.</dd></div>
+              <div class="termino"><dt>Autorregulación</dt><dd>Abordar mecánicas de azar como las cajas de recompensa (loot boxes).</dd></div>
+            </dl>
+          </div>
+        </div>
+        <p><small>Los datos estadísticos y financieros provienen de los reportes del segundo trimestre de 2024; el resto es un análisis general de la plataforma.</small></p>
+      </section>
+    </main>
+  </div>
 </body>
 </html>

@@ -132,7 +132,7 @@
 .tc-miga { display: inline-flex; align-items: center; gap: 6px; flex: none; }
 .tc-miga:last-child { flex: 0 1 auto; min-width: 0; overflow: hidden; }
 .tc-migas a { color: var(--tinta-2); cursor: pointer; white-space: nowrap; }
-.tc-migas .tc-sep { color: var(--tinta-3); }
+.tc-migas .tc-sep { color: var(--tinta-2); }
 .tc-migas .tc-actual {
   color: var(--tinta);
   font-weight: 700;
@@ -409,7 +409,7 @@ body.tc :where(h1, h2, h3) {
   font-size: clamp(.95rem, 2.2vw, 1.08rem);
   text-wrap: balance;
 }
-.arcano-carta { display: block; font-size: .78rem; margin-top: 3px; color: var(--tinta-2); }
+.arcano-carta { display: block; font-size: .78rem; margin-top: 3px; color: var(--tinta); }
 
 /* Adornos de cada baraja dentro de la carta */
 .arcano .adorno { position: absolute; z-index: 1; pointer-events: none; }
@@ -474,7 +474,7 @@ body.tc :where(h1, h2, h3) {
   font-variant-caps: small-caps;
   letter-spacing: .04em;
 }
-:root[data-baraja="sombra"] .arcano-carta { color: var(--tinta-3); font-style: italic; }
+:root[data-baraja="sombra"] .arcano-carta { color: var(--tinta-2); font-style: italic; }
 :root[data-baraja="sombra"] .arcano .nube { display: none; }
 :root[data-baraja="sombra"] .arcano .engranaje {
   display: block;
@@ -626,7 +626,7 @@ body.tc :where(h1, h2, h3) {
 .tirada li { min-width: 0; position: relative; }
 .tirada-nota { display: block; margin-top: 12px; font-size: .95rem; line-height: 1.45; }
 :root[data-baraja="sombra"] .tirada-nota { color: var(--tinta-2); }
-.lectura { display: none; }
+.lectura-carta { display: none; }
 
 @media (min-width: 600px) {
   .tirada { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px 24px; }
@@ -657,7 +657,7 @@ body.tc :where(h1, h2, h3) {
     transform: translateY(calc(var(--y) - 38px)) rotate(0deg) scale(1.07);
   }
   .tirada-nota { display: none; }
-  .lectura {
+  .lectura-carta {
     display: block;
     min-height: 8.5rem;
     max-width: 38rem;
@@ -665,12 +665,12 @@ body.tc :where(h1, h2, h3) {
     padding: 72px 0 150px;
     text-align: center;
   }
-  .lectura h2 { font-size: 1.9rem; }
-  .lectura h2 small { display: block; font-family: var(--texto); font-size: .95rem; font-weight: 700; margin-bottom: 4px; }
-  .lectura p { margin: 8px 0 0; font-size: 1.08rem; }
-  :root[data-baraja="sombra"] .lectura { padding-bottom: 72px; }
-  :root[data-baraja="sombra"] .lectura h2 small { color: var(--resalte); font-weight: 400; font-style: italic; }
-  :root[data-baraja="sombra"] .lectura p { color: var(--tinta-2); }
+  .lectura-carta h2 { font-size: 1.9rem; }
+  .lectura-carta h2 small { display: block; font-family: var(--texto); font-size: .95rem; font-weight: 700; margin-bottom: 4px; }
+  .lectura-carta p { margin: 8px 0 0; font-size: 1.08rem; }
+  :root[data-baraja="sombra"] .lectura-carta { padding-bottom: 72px; }
+  :root[data-baraja="sombra"] .lectura-carta h2 small { color: var(--resalte); font-weight: 400; font-style: italic; }
+  :root[data-baraja="sombra"] .lectura-carta p { color: var(--tinta-2); }
   /* Reparto de cartas: el único movimiento automático de la portada */
   .js .tirada.repartir li { animation: repartir .9s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--i) * 90ms); }
   @keyframes repartir {
@@ -894,3 +894,5 @@ body.tc :where(h1, h2, h3) {
   .escena .constelacion { display: none !important; }
   .cabecera-area .escena .sol { top: 30px; }
 }
+
+@media (max-width: 1499px) { .portada .escena .n1 { display: none; } }
