@@ -193,3 +193,22 @@ html body :is(.tab-btn, .ing-tab, .process-tab, .nav-button):is(.active, [aria-s
   border-bottom: 2px solid var(--resalte) !important;
   box-shadow: none !important;
 }
+
+/* Panel de Código 4D: pestañas y botones de la barra con la forma común */
+html body :is(.tbtn, .fsb) {
+  border: 2.5px solid var(--trazo) !important;
+  border-radius: 999px !important;
+  background: var(--superficie) !important;
+  color: var(--tinta) !important;
+  box-shadow: 3px 3px 0 var(--trazo) !important;
+}
+html body .top :is(.tab, .sec) {
+  border: 2px solid var(--trazo) !important;
+  border-radius: 999px !important;
+  background: var(--superficie) !important;
+  color: var(--tinta) !important;
+}
+html body .top :is(.tab, .sec).on { background: var(--acento-relleno) !important; box-shadow: 3px 3px 0 var(--trazo) !important; }
+:root[data-baraja="sombra"] body :is(.tbtn, .fsb) { border: 1px solid var(--trazo) !important; border-radius: 3px !important; background: transparent !important; color: var(--resalte) !important; box-shadow: none !important; }
+:root[data-baraja="sombra"] body .top :is(.tab, .sec) { border: 0 !important; border-bottom: 1px solid var(--linea) !important; border-radius: 0 !important; background: transparent !important; color: var(--tinta-2) !important; }
+:root[data-baraja="sombra"] body .top :is(.tab, .sec).on { color: var(--resalte) !important; border-bottom: 2px solid var(--resalte) !important; box-shadow: none !important; }

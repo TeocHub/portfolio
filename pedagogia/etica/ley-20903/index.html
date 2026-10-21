@@ -1,187 +1,141 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-area="pedagogia">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ley 20.903</title>
-    <link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ley 20.903 | Tomás Cabrolier</title>
+  <meta name="description" content="La ley que crea la carrera docente en Chile: formación continua, inducción para quienes comienzan y tramos de desarrollo profesional.">
   <link rel="icon" href="../../../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../../assets/css/site.css">
-  <link rel="stylesheet" href="../../../assets/css/armonia.css">
+  <link rel="stylesheet" href="../../../assets/css/paginas.css">
   <script src="../../../assets/js/site.js"></script>
-  <!-- barajas aplicadas -->
 </head>
-<body>
-    <header>
-        <h1>Ley 20.903: Sistema de Desarrollo Profesional Docente</h1>
-    </header>
+<body class="tc pagina">
+  <header class="cielo cabecera-pagina">
+    <div class="escena"></div>
+    <div class="tc-contenedor">
+      <p class="carta">Resumen · Ética docente</p>
+      <h1>Ley 20.903: Sistema de Desarrollo Profesional Docente</h1>
+      <p class="intro">La ley que crea la carrera docente en Chile: formación continua, inducción para quienes comienzan y tramos de desarrollo profesional.</p>
+        <ul class="meta"><li><b>Publicada</b>1 de abril de 2016</li><li><b>Modifica</b>DFL N° 1 de 1996</li></ul>
+    </div>
+  </header>
+  <div class="tc-contenedor lectura">
+    <nav class="indice" data-indice-pagina aria-label="En esta página"></nav>
+    <main class="cuerpo">
+<section class="bloque" id="introduccion">
+        <h2>Introducción</h2>
+        <p>La Ley N° 20.903, publicada el 1 de abril de 2016, establece un Sistema de Desarrollo Profesional Docente en Chile. Busca reconocer, promover y fortalecer la profesión docente, ofrecer una trayectoria de desarrollo atractiva y continua, y modificar diversas normativas preexistentes.</p>
+      </section>
 
-    <main>
-        <section id="introduccion">
-            <h2>Introducción a la Ley</h2>
-            <p>
-                La Ley N° 20.903, publicada el 1 de abril de 2016, tiene como objetivo principal establecer un Sistema de Desarrollo Profesional Docente en Chile. Esta ley busca reconocer, promover y fortalecer la profesión docente, ofreciendo una trayectoria de desarrollo atractiva y continua, además de modificar diversas normativas preexistentes.
-            </p>
-        </section>
-        
-        <hr>
+      <section class="bloque" id="definiciones">
+        <h2 data-corto="Definiciones y roles">Nuevas definiciones y roles clave</h2>
+        <p class="bajada">La ley introduce y redefine conceptos fundamentales para la labor educativa y el desarrollo profesional.</p>
+        <ul class="fichas dos">
+          <li class="ficha">
+            <h3>Actividades curriculares no lectivas</h3>
+            <p>Labores complementarias a la docencia de aula, orientadas a mejorar la enseñanza y el aprendizaje: preparación de clases, evaluación, desarrollo profesional y trabajo colaborativo.</p>
+            <details class="mas"><summary>Más información</summary>
+              <p>También consideran labores que contribuyen a la comunidad escolar, como la atención de estudiantes y apoderados, el trabajo en equipo con otros profesionales y las actividades extraescolares o vinculadas a instituciones externas. Los directores deben asegurar que al menos el 40 % de las horas no lectivas se destinen a preparar clases y evaluar aprendizajes.</p>
+            </details>
+          </li>
+          <li class="ficha">
+            <h3>Inhabilidades docentes</h3>
+            <p>No pueden ejercer la docencia quienes hayan sido condenados por ciertos delitos, como los contemplados en la Ley N° 20.000 y otros párrafos del Código Penal.</p>
+            <details class="mas"><summary>Más información</summary>
+              <p>Un profesional de la educación sometido a prisión preventiva por alguno de estos delitos puede ser suspendido de sus funciones, con o sin remuneración, mientras dure la medida cautelar.</p>
+            </details>
+          </li>
+        </ul>
+        <dl class="glosario">
+          <div class="termino"><dt>DFL N° 1 de 1996</dt><dd>Decreto con fuerza de ley que fija el texto refundido de la Ley N° 19.070, modificada por la Ley 20.903.</dd></div>
+          <div class="termino"><dt>Docente principiante</dt><dd>Profesional que ha ejercido la docencia menos de un año, o menos de dos si fue contratado durante el primer año escolar en el establecimiento.</dd></div>
+        </dl>
+      </section>
 
-        <section id="nuevas-definiciones">
-            <h2>Nuevas Definiciones y Roles Clave</h2>
-            <p>La ley introduce y redefine varios conceptos fundamentales para la labor educativa y el desarrollo de los profesionales.</p>
-            <div class="card-container">
-                <div class="card">
-                    <h3>Actividades Curriculares No Lectivas</h3>
-                    <p>
-                        Se definen como labores complementarias a la docencia de aula, orientadas a la mejora del proceso de enseñanza-aprendizaje. Incluyen la preparación de clases, evaluación, desarrollo profesional y trabajo colaborativo.
-                    </p>
-                    <div class="hidden-info" id="info-no-lectivas">
-                        <p>
-                            Estas actividades también consideran labores que contribuyen a la comunidad escolar, como la atención de estudiantes y apoderados, trabajo en equipo con otros profesionales y actividades extraescolares o vinculadas a instituciones externas. Los directores deben asegurar que al menos el 40% de las horas no lectivas se destinen a la preparación de clases y evaluación de aprendizajes.
-                        </p>
-                    </div>
-                    <button class="toggle-btn" data-target="info-no-lectivas">Más información</button>
-                </div>
-                <div class="card">
-                    <h3>Inhabilidades Docentes</h3>
-                    <p>
-                        Se establecen inhabilidades para ejercer la docencia a quienes hayan sido condenados por ciertos delitos, como los contemplados en la ley N° 20.000 y otros párrafos del Código Penal.
-                    </p>
-                    <div class="hidden-info" id="info-inhabilidades">
-                        <p>
-                            Un profesional de la educación que sea sometido a prisión preventiva por alguno de estos delitos podrá ser suspendido de sus funciones, con o sin remuneración, durante el tiempo que dure la medida cautelar.
-                        </p>
-                    </div>
-                    <button class="toggle-btn" data-target="info-inhabilidades">Más información</button>
-                </div>
-            </div>
-            
-            <div class="conceptos-claves">
-                <h3>Conceptos Claves y Definiciones</h3>
-                <ul>
-                    <li><strong>DFL N°1 de 1996</strong>: Decreto con fuerza de ley que fija el texto refundido de la Ley N° 19.070, la cual es modificada por la Ley 20.903.</li>
-                    <li><strong>Docente Principiante</strong>: Profesional de la educación que ha ejercido la docencia por un lapso inferior a un año o a dos años si fue contratado durante el primer año escolar en el establecimiento.</li>
-                </ul>
-            </div>
-        </section>
+      <section class="bloque" id="formacion">
+        <h2 data-corto="Formación continua">Formación continua y capacitación</h2>
+        <p class="bajada">La formación continua es un derecho y una responsabilidad de los docentes.</p>
+        <ul class="fichas dos">
+          <li class="ficha">
+            <h3>Formación en universidades</h3>
+            <p>La formación docente debe impartirse en universidades acreditadas, con carreras de pedagogía también acreditadas.</p>
+            <details class="mas"><summary>Más información</summary>
+              <p>Las universidades en proceso de licenciamiento, bajo supervisión del Consejo Nacional de Educación, pueden impartir pedagogía hasta lograr su plena autonomía; desde ese momento tienen un plazo máximo de dos años para acreditarse.</p>
+            </details>
+          </li>
+          <li class="ficha">
+            <h3>Rol del CPEIP</h3>
+            <p>El Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas colabora en el desarrollo docente con programas gratuitos, cursos o becas, directamente o junto a universidades acreditadas.</p>
+            <details class="mas"><summary>Más información</summary>
+              <p>El CPEIP certifica cursos y programas de otras instituciones, públicas o privadas, para garantizar su calidad y pertinencia, y lleva un registro público de docentes principiantes y mentores.</p>
+            </details>
+          </li>
+        </ul>
+      </section>
 
-        <hr>
+      <section class="bloque" id="acompanamiento">
+        <h2 data-corto="Acompañamiento e inducción">Acompañamiento e inducción docente</h2>
+        <p class="bajada">Procesos para apoyar a los docentes, especialmente a quienes se inician en la profesión.</p>
+        <ul class="fichas dos">
+          <li class="ficha">
+            <h3>Acompañamiento local</h3>
+            <p>Lineamientos para que cada establecimiento mejore continuamente el trabajo de sus docentes, con trabajo colaborativo y retroalimentación pedagógica.</p>
+            <details class="mas"><summary>Más información</summary>
+              <p>Se compone de dos subprocesos: la formación local para el desarrollo profesional y la inducción al ejercicio docente. Los planes locales los aprueba el sostenedor y forman parte del Plan de Mejoramiento Educativo.</p>
+            </details>
+          </li>
+          <li class="ficha">
+            <h3>Inducción</h3>
+            <p>Proceso formativo que acompaña a los docentes principiantes en su primer año de ejercicio y facilita su inserción en la comunidad educativa.</p>
+            <details class="mas"><summary>Más información</summary>
+              <p>Dura diez meses, con una dedicación semanal de 4 a 6 horas, y el docente principiante es apoyado por un mentor. Algunos establecimientos de alto desempeño pueden administrar su propio proceso de inducción.</p>
+            </details>
+          </li>
+        </ul>
+        <ul class="datos">
+          <li class="dato"><span class="cifra">10 meses</span><span class="que">dura la inducción</span></li>
+          <li class="dato"><span class="cifra">4 a 6 h</span><span class="que">de dedicación semanal</span></li>
+        </ul>
+        <dl class="glosario">
+          <div class="termino"><dt>Docente mentor</dt><dd>Profesional que acompaña y apoya al docente principiante durante la inducción.</dd></div>
+          <div class="termino"><dt>Plan de mentoría</dt><dd>Conjunto sistemático de actividades diseñado, ejecutado y evaluado por el docente mentor.</dd></div>
+        </dl>
+      </section>
 
-        <section id="formacion-continua">
-            <h2>Formación Continua y Capacitación</h2>
-            <p>La ley promueve la formación continua como un derecho y una responsabilidad de los docentes para su desarrollo profesional.</p>
-            <div class="card-container">
-                <div class="card">
-                    <h3>Formación en Universidades</h3>
-                    <p>
-                        La formación de los docentes debe ser impartida por universidades acreditadas, cuyas carreras de pedagogía también cuenten con acreditación.
-                    </p>
-                    <div class="hidden-info" id="info-universidades">
-                        <p>
-                           Las universidades que se encuentren en proceso de licenciamiento y bajo la supervisión del Consejo Nacional de Educación podrán impartir carreras de pedagogía hasta lograr su plena autonomía, momento en el que deberán acreditarse en un plazo no superior a dos años.
-                        </p>
-                    </div>
-                    <button class="toggle-btn" data-target="info-universidades">Más información</button>
-                </div>
-                <div class="card">
-                    <h3>Rol del CPEIP</h3>
-                    <p>
-                        El Centro de Perfeccionamiento, Experimentación e Investigaciones Pedagógicas (CPEIP) colaborará en el desarrollo docente, ejecutando programas gratuitos, cursos o becas, directamente o en colaboración con universidades acreditadas.
-                    </p>
-                    <div class="hidden-info" id="info-cpeip">
-                        <p>
-                            El CPEIP también es responsable de certificar cursos o programas impartidos por otras instituciones, públicas o privadas, para garantizar su calidad y pertinencia. Además, debe llevar un registro público de docentes principiantes y mentores.
-                        </p>
-                    </div>
-                    <button class="toggle-btn" data-target="info-cpeip">Más información</button>
-                </div>
-            </div>
-        </section>
-
-        <hr>
-
-        <section id="acompanamiento-docente">
-            <h2>Acompañamiento e Inducción Docente</h2>
-            <p>Se establecen procesos para apoyar a los docentes, especialmente a aquellos que se inician en la profesión.</p>
-            <div class="card-container">
-                <div class="card">
-                    <h3>Proceso de Acompañamiento Local</h3>
-                    <p>
-                        Este proceso busca establecer lineamientos para que los establecimientos educacionales instauren mejoras continuas para sus docentes, fomentando el trabajo colaborativo y la retroalimentación pedagógica.
-                    </p>
-                    <div class="hidden-info" id="info-acompanamiento">
-                        <p>
-                            Este proceso se compone de dos subprocesos: la formación local para el desarrollo profesional y el proceso de inducción al ejercicio profesional docente. Los planes locales deben ser aprobados por el sostenedor y formar parte del Plan de Mejoramiento Educativo.
-                        </p>
-                    </div>
-                    <button class="toggle-btn" data-target="info-acompanamiento">Más información</button>
-                </div>
-                <div class="card">
-                    <h3>Proceso de Inducción</h3>
-                    <p>
-                        Es un proceso formativo que tiene como objetivo acompañar y apoyar a los docentes principiantes en su primer año de ejercicio profesional, facilitando su inserción en la comunidad educativa.
-                    </p>
-                    <div class="hidden-info" id="info-induccion">
-                        <p>
-                           La inducción tiene una duración de diez meses y requiere una dedicación semanal de entre 4 y 6 horas. Durante este período, el docente principiante es apoyado por un docente mentor. Algunos establecimientos de alto desempeño pueden administrar sus propios procesos de inducción.
-                        </p>
-                    </div>
-                    <button class="toggle-btn" data-target="info-induccion">Más información</button>
-                </div>
-            </div>
-            
-            <div class="conceptos-claves">
-                <h3>Conceptos Claves y Definiciones</h3>
-                <ul>
-                    <li><strong>Docente Mentor</strong>: Profesional que acompaña y apoya al docente principiante durante el proceso de inducción.</li>
-                    <li><strong>Plan de Mentoría</strong>: Conjunto sistemático de actividades diseñado, ejecutado y evaluado por el docente mentor.</li>
-                </ul>
-            </div>
-        </section>
-
-        <hr>
-
-        <section id="carrera-profesional">
-            <h2>Sistema de Carrera Profesional Docente</h2>
-            <p>La ley crea un sistema de reconocimiento y promoción que busca una trayectoria profesional atractiva para los docentes, basándose en la evaluación de sus competencias.</p>
-            <div class="card-container">
-                <div class="card">
-                    <h3>Sistema de Reconocimiento</h3>
-                    <p>
-                        El sistema reconoce y promueve el avance de los profesionales de la educación hasta un nivel esperado de desarrollo profesional. Se aplican instrumentos de evaluación como el portafolio profesional y la prueba de conocimientos disciplinarios y pedagógicos.
-                    </p>
-                    <div class="hidden-info" id="info-reconocimiento">
-                        <p>
-                            Los resultados de los instrumentos de evaluación se utilizarán para ubicar a los docentes en los diferentes tramos profesionales, como el inicial, temprano, avanzado, experto I y experto II.
-                        </p>
-                    </div>
-                    <button class="toggle-btn" data-target="info-reconocimiento">Más información</button>
-                </div>
-                <div class="card">
-                    <h3>Tramos y Progresión</h3>
-                    <p>
-                        El sistema establece diferentes tramos (niveles) profesionales. Los docentes pueden progresar a través de estos tramos en función de su desarrollo y los resultados de las evaluaciones, lo que puede significar mejoras en sus asignaciones salariales.
-                    </p>
-                    <div class="hidden-info" id="info-tramos">
-                        <p>
-                            El tramo profesional avanzado, por ejemplo, es la etapa donde el docente ha consolidado sus competencias y demuestra una capacidad especial para lograr el aprendizaje de todos sus estudiantes, según el Marco para la Buena Enseñanza.
-                        </p>
-                    </div>
-                    <button class="toggle-btn" data-target="info-tramos">Más información</button>
-                </div>
-            </div>
-            
-            <div class="conceptos-claves">
-                <h3>Conceptos Claves y Definiciones</h3>
-                <ul>
-                    <li><strong>Portafolio Profesional</strong>: Instrumento de evaluación que se aplica al profesional de la educación cada cuatro años para el reconocimiento de su desarrollo profesional.</li>
-                    <li><strong>Marco para la Buena Enseñanza</strong>: Criterios que guían la progresión profesional, demostrando las competencias que se esperan en cada tramo.</li>
-                </ul>
-            </div>
-        </section>
+      <section class="bloque" id="carrera">
+        <h2 data-corto="Carrera docente">Sistema de carrera profesional docente</h2>
+        <p class="bajada">Un sistema de reconocimiento y promoción que evalúa competencias y ofrece una trayectoria atractiva.</p>
+        <ul class="fichas dos">
+          <li class="ficha">
+            <h3>Reconocimiento</h3>
+            <p>Promueve el avance de los docentes hasta un nivel esperado de desarrollo profesional, con instrumentos como el portafolio y la prueba de conocimientos disciplinarios y pedagógicos.</p>
+            <details class="mas"><summary>Más información</summary>
+              <p>Los resultados ubican a cada docente en un tramo profesional.</p>
+            </details>
+          </li>
+          <li class="ficha">
+            <h3>Tramos y progresión</h3>
+            <p>Los docentes avanzan por tramos según su desarrollo y los resultados de sus evaluaciones, lo que puede significar mejores asignaciones salariales.</p>
+            <details class="mas"><summary>Más información</summary>
+              <p>El tramo avanzado, por ejemplo, es la etapa en que el docente ha consolidado sus competencias y logra el aprendizaje de todos sus estudiantes, según el Marco para la Buena Enseñanza.</p>
+            </details>
+          </li>
+        </ul>
+        <h3>Los tramos, en orden</h3>
+        <ol class="pasos">
+          <li><b>Inicial</b></li>
+          <li><b>Temprano</b></li>
+          <li><b>Avanzado</b></li>
+          <li><b>Experto I</b></li>
+          <li><b>Experto II</b></li>
+        </ol>
+        <dl class="glosario">
+          <div class="termino"><dt>Portafolio profesional</dt><dd>Instrumento de evaluación que se aplica cada cuatro años para reconocer el desarrollo profesional.</dd></div>
+          <div class="termino"><dt>Marco para la Buena Enseñanza</dt><dd>Criterios que guían la progresión profesional y describen las competencias esperadas en cada tramo. <a href="../marco-para-la-buena-ensenanza/">Ver el resumen del MBE</a>.</dd></div>
+        </dl>
+      </section>
     </main>
-
-    <script src="script.js"></script>
+  </div>
 </body>
 </html>

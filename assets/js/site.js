@@ -394,6 +394,7 @@
       area: "letras", titulo: "Letras",
       intro: "Escribo historias desde hace años y las publico en Wattpad. Algunas son cortas; otras son mundos completos.",
       estante: [
+        { t: "Entre dos mundos", d: "Octavio Ibarra tiene el talento para ser el mejor practicante de Vallarreal. Lo que no tiene es el apellido.", img: "letras/portadas/Entre Dos Mundos.png", url: "https://www.wattpad.com/story/416510977" },
         { t: "Travesía a lo desconocido", d: "Romina descubre que los cuentos de su abuelo eran reales y entra a Folgan, un mundo que solo existía en su infancia.", img: "letras/portadas/Travesía a lo Desconocido.png", url: "https://www.wattpad.com/story/342387679" },
         { t: "Lost Media", d: "Mi mejor amiga fue borrada de la memoria de todos. Y no sé si soy el siguiente.", img: "letras/portadas/Lost Media.png", url: "https://www.wattpad.com/story/399853618" },
         { t: "Natu: la historia de un inmortal", d: "En un futuro lejano, un inmortal solitario llega a la ciudad buscando compañía y se encuentra con su pasado.", img: "letras/portadas/Natu.png", url: "https://www.wattpad.com/story/359579112" },
@@ -748,6 +749,129 @@
     }
   }
 
+  /* ---------- Páginas de contenido: índice lateral y pestañas ---------- */
+  function construirIndicePagina() {
+    var nav = document.querySelector("[data-indice-pagina]");
+    if (!nav) return;
+    var bloques = Array.prototype.slice.call(document.querySelectorAll(".cuerpo > .bloque[id] > h2"));
+    if (bloques.length < 2) { nav.remove(); var l = document.querySelector(".lectura"); if (l) l.classList.add("sin-indice"); return; }
+    var escritorio = window.matchMedia("(min-width: 1000px)").matches;
+    nav.innerHTML = '<details' + (escritorio ? " open" : "") + '><summary>En esta página</summary><ol>' +
+      bloques.map(function (h) {
+        return '<li><a href="#' + h.parentElement.id + '">' + esc(h.dataset.corto || h.textContent.trim()) + "</a></li>";
+      }).join("") + "</ol></details>";
+    var enlaces = nav.querySelectorAll("a");
+    nav.addEventListener("click", function (e) {
+      if (e.target.closest("a") && !window.matchMedia("(min-width: 1000px)").matches) nav.querySelector("details").open = false;
+    });
+    if (!("IntersectionObserver" in window)) return;
+    var visibles = {};
+    var obs = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (en) { visibles[en.target.id] = en.isIntersecting; });
+      var activo = null;
+      bloques.some(function (h) { if (visibles[h.parentElement.id]) { activo = h.parentElement.id; return true; } return false; });
+      if (!activo) return;
+      enlaces.forEach(function (a) { a.setAttribute("aria-current", a.getAttribute("href") === "#" + activo ? "true" : "false"); });
+    }, { rootMargin: "-10% 0px -55% 0px" });
+    bloques.forEach(function (h) { obs.observe(h.parentElement); });
+  }
+
+  function prepararPestanas() {
+    document.querySelectorAll("[data-pestanas]").forEach(function (grupo, gi) {
+      var lista = grupo.querySelector('[role="tablist"]');
+      if (!lista) return;
+      var tabs = Array.prototype.slice.call(lista.querySelectorAll('[role="tab"]'));
+      var paneles = Array.prototype.slice.call(grupo.querySelectorAll(':scope > [role="tabpanel"]'));
+      tabs.forEach(function (t, i) {
+        var p = paneles[i];
+        if (!p) return;
+        t.id = t.id || "pest-" + gi + "-" + i;
+        p.id = p.id || "panel-" + gi + "-" + i;
+        t.setAttribute("aria-controls", p.id);
+        p.setAttribute("aria-labelledby", t.id);
+        p.tabIndex = 0;
+      });
+      function elegir(i, foco) {
+        tabs.forEach(function (t, j) {
+          var sel = i === j;
+          t.setAttribute("aria-selected", sel ? "true" : "false");
+          t.tabIndex = sel ? 0 : -1;
+          if (paneles[j]) paneles[j].hidden = !sel;
+        });
+        if (foco) tabs[i].focus();
+        grupo.dispatchEvent(new CustomEvent("tc:pestana", { detail: i }));
+      }
+      var inicial = tabs.findIndex(function (t) { return t.getAttribute("aria-selected") === "true"; });
+      elegir(inicial < 0 ? 0 : inicial, false);
+      tabs.forEach(function (t, i) {
+        t.addEventListener("click", function () { elegir(i, false); });
+        t.addEventListener("keydown", function (e) {
+          var n = tabs.length, k = e.key, j = null;
+          if (k === "ArrowRight") j = (i + 1) % n;
+          else if (k === "ArrowLeft") j = (i - 1 + n) % n;
+          else if (k === "Home") j = 0;
+          else if (k === "End") j = n - 1;
+          if (j !== null) { e.preventDefault(); elegir(j, true); }
+        });
+      });
+    });
+  }
+
+  /* ---------- Recorrido por pasos ---------- */
+  function prepararRecorridos() {
+    document.querySelectorAll("[data-recorrido]").forEach(function (rec) {
+      var pasos = Array.prototype.slice.call(rec.querySelectorAll(":scope > .paso-recorrido"));
+      if (!pasos.length) return;
+      var actual = 0;
+      var avance = document.createElement("ol");
+      avance.className = "avance";
+      avance.setAttribute("aria-label", "Avance");
+      avance.innerHTML = pasos.map(function (p) { return "<li>" + esc(p.dataset.titulo || "") + "</li>"; }).join("");
+      rec.insertBefore(avance, rec.firstChild);
+      pasos.forEach(function (p, i) {
+        var nav = document.createElement("div");
+        nav.className = "navegar-pasos";
+        nav.innerHTML =
+          '<p class="aviso-campos" role="alert" hidden>Completa los campos marcados para continuar.</p>' +
+          (i > 0 ? '<button type="button" class="boton secundario" data-ir="' + (i - 1) + '">Anterior</button>' : "<span></span>") +
+          (i < pasos.length - 1 ? '<button type="button" class="boton" data-ir="' + (i + 1) + '">Siguiente: ' + esc(pasos[i + 1].dataset.titulo || "") + "</button>" : "");
+        p.appendChild(nav);
+      });
+      function completo(p) {
+        var ok = true;
+        p.querySelectorAll("[required]").forEach(function (c) {
+          var vacio = !String(c.value || "").trim();
+          c.setAttribute("aria-invalid", vacio ? "true" : "false");
+          if (vacio) ok = false;
+        });
+        var aviso = p.querySelector(".aviso-campos");
+        if (aviso) aviso.hidden = ok;
+        if (!ok) { var primero = p.querySelector('[aria-invalid="true"]'); if (primero) primero.focus(); }
+        return ok;
+      }
+      function ir(i) {
+        if (i > actual && !completo(pasos[actual])) return;
+        actual = i;
+        pasos.forEach(function (p, j) { p.hidden = j !== i; });
+        avance.querySelectorAll("li").forEach(function (li, j) {
+          li.classList.toggle("hecho", j < i);
+          if (j === i) li.setAttribute("aria-current", "step"); else li.removeAttribute("aria-current");
+        });
+        rec.dispatchEvent(new CustomEvent("tc:paso", { detail: i }));
+        var h = pasos[i].querySelector("h2");
+        if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); }
+        rec.scrollIntoView({ block: "start" });
+      }
+      rec.addEventListener("click", function (e) {
+        var b = e.target.closest("[data-ir]");
+        if (b && rec.contains(b)) ir(+b.dataset.ir);
+      });
+      rec.addEventListener("input", function (e) { if (e.target.getAttribute("aria-invalid") === "true" && String(e.target.value).trim()) e.target.setAttribute("aria-invalid", "false"); });
+      pasos.forEach(function (p, j) { p.hidden = j !== 0; });
+      avance.querySelector("li").setAttribute("aria-current", "step");
+    });
+  }
+
   /* ---------- Arranque ---------- */
   function iniciar() {
     construirBarra();
@@ -756,6 +880,9 @@
     if (document.querySelector("[data-tirada]")) construirPortada();
     pintarEscenas();
     pintarInterruptores();
+    construirIndicePagina();
+    prepararPestanas();
+    prepararRecorridos();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", iniciar);
   else iniciar();

@@ -1,458 +1,125 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es" data-area="pedagogia">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redes Sociales y Autoestima Juvenil en Chile</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  <script>/* Tailwind con los tokens de las dos barajas */if(window.tailwind)tailwind.config={"theme":{"extend":{"fontFamily":{"sans":["Atkinson Hyperlegible","system-ui","sans-serif"],"serif":["Fraunces","Georgia","serif"],"display":["Fraunces","Georgia","serif"]},"backgroundColor":{"slate":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"gray":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"zinc":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"neutral":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"stone":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"red":{"50":"rgb(var(--h2-suave-rgb) / <alpha-value>)","100":"rgb(var(--h2-suave-rgb) / <alpha-value>)","200":"rgb(var(--h2-suave-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h2-relleno-rgb) / <alpha-value>)"},"rose":{"50":"rgb(var(--h2-suave-rgb) / <alpha-value>)","100":"rgb(var(--h2-suave-rgb) / <alpha-value>)","200":"rgb(var(--h2-suave-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h2-relleno-rgb) / <alpha-value>)"},"pink":{"50":"rgb(var(--h2-suave-rgb) / <alpha-value>)","100":"rgb(var(--h2-suave-rgb) / <alpha-value>)","200":"rgb(var(--h2-suave-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h2-relleno-rgb) / <alpha-value>)"},"orange":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"amber":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"yellow":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"lime":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"green":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"emerald":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"teal":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"cyan":{"50":"rgb(var(--h3-suave-rgb) / <alpha-value>)","100":"rgb(var(--h3-suave-rgb) / <alpha-value>)","200":"rgb(var(--h3-suave-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h3-relleno-rgb) / <alpha-value>)"},"sky":{"50":"rgb(var(--h3-suave-rgb) / <alpha-value>)","100":"rgb(var(--h3-suave-rgb) / <alpha-value>)","200":"rgb(var(--h3-suave-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h3-relleno-rgb) / <alpha-value>)"},"blue":{"50":"rgb(var(--h3-suave-rgb) / <alpha-value>)","100":"rgb(var(--h3-suave-rgb) / <alpha-value>)","200":"rgb(var(--h3-suave-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h3-relleno-rgb) / <alpha-value>)"},"indigo":{"50":"rgb(var(--h3-suave-rgb) / <alpha-value>)","100":"rgb(var(--h3-suave-rgb) / <alpha-value>)","200":"rgb(var(--h3-suave-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h3-relleno-rgb) / <alpha-value>)"},"violet":{"50":"rgb(var(--h4-suave-rgb) / <alpha-value>)","100":"rgb(var(--h4-suave-rgb) / <alpha-value>)","200":"rgb(var(--h4-suave-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h4-relleno-rgb) / <alpha-value>)"},"purple":{"50":"rgb(var(--h4-suave-rgb) / <alpha-value>)","100":"rgb(var(--h4-suave-rgb) / <alpha-value>)","200":"rgb(var(--h4-suave-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h4-relleno-rgb) / <alpha-value>)"},"fuchsia":{"50":"rgb(var(--h4-suave-rgb) / <alpha-value>)","100":"rgb(var(--h4-suave-rgb) / <alpha-value>)","200":"rgb(var(--h4-suave-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h4-relleno-rgb) / <alpha-value>)"},"white":"rgb(var(--superficie-rgb) / <alpha-value>)","black":"rgb(var(--tinta-rgb) / <alpha-value>)"},"textColor":{"slate":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-3-rgb) / <alpha-value>)","400":"rgb(var(--tinta-3-rgb) / <alpha-value>)","500":"rgb(var(--tinta-3-rgb) / <alpha-value>)","600":"rgb(var(--tinta-2-rgb) / <alpha-value>)","700":"rgb(var(--tinta-rgb) / <alpha-value>)","800":"rgb(var(--tinta-rgb) / <alpha-value>)","900":"rgb(var(--tinta-rgb) / <alpha-value>)","950":"rgb(var(--tinta-rgb) / <alpha-value>)"},"gray":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-3-rgb) / <alpha-value>)","400":"rgb(var(--tinta-3-rgb) / <alpha-value>)","500":"rgb(var(--tinta-3-rgb) / <alpha-value>)","600":"rgb(var(--tinta-2-rgb) / <alpha-value>)","700":"rgb(var(--tinta-rgb) / <alpha-value>)","800":"rgb(var(--tinta-rgb) / <alpha-value>)","900":"rgb(var(--tinta-rgb) / <alpha-value>)","950":"rgb(var(--tinta-rgb) / <alpha-value>)"},"zinc":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-3-rgb) / <alpha-value>)","400":"rgb(var(--tinta-3-rgb) / <alpha-value>)","500":"rgb(var(--tinta-3-rgb) / <alpha-value>)","600":"rgb(var(--tinta-2-rgb) / <alpha-value>)","700":"rgb(var(--tinta-rgb) / <alpha-value>)","800":"rgb(var(--tinta-rgb) / <alpha-value>)","900":"rgb(var(--tinta-rgb) / <alpha-value>)","950":"rgb(var(--tinta-rgb) / <alpha-value>)"},"neutral":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-3-rgb) / <alpha-value>)","400":"rgb(var(--tinta-3-rgb) / <alpha-value>)","500":"rgb(var(--tinta-3-rgb) / <alpha-value>)","600":"rgb(var(--tinta-2-rgb) / <alpha-value>)","700":"rgb(var(--tinta-rgb) / <alpha-value>)","800":"rgb(var(--tinta-rgb) / <alpha-value>)","900":"rgb(var(--tinta-rgb) / <alpha-value>)","950":"rgb(var(--tinta-rgb) / <alpha-value>)"},"stone":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-3-rgb) / <alpha-value>)","400":"rgb(var(--tinta-3-rgb) / <alpha-value>)","500":"rgb(var(--tinta-3-rgb) / <alpha-value>)","600":"rgb(var(--tinta-2-rgb) / <alpha-value>)","700":"rgb(var(--tinta-rgb) / <alpha-value>)","800":"rgb(var(--tinta-rgb) / <alpha-value>)","900":"rgb(var(--tinta-rgb) / <alpha-value>)","950":"rgb(var(--tinta-rgb) / <alpha-value>)"},"red":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h2-rgb) / <alpha-value>)","500":"rgb(var(--h2-rgb) / <alpha-value>)","600":"rgb(var(--h2-rgb) / <alpha-value>)","700":"rgb(var(--h2-rgb) / <alpha-value>)","800":"rgb(var(--h2-rgb) / <alpha-value>)","900":"rgb(var(--h2-rgb) / <alpha-value>)","950":"rgb(var(--h2-rgb) / <alpha-value>)"},"rose":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h2-rgb) / <alpha-value>)","500":"rgb(var(--h2-rgb) / <alpha-value>)","600":"rgb(var(--h2-rgb) / <alpha-value>)","700":"rgb(var(--h2-rgb) / <alpha-value>)","800":"rgb(var(--h2-rgb) / <alpha-value>)","900":"rgb(var(--h2-rgb) / <alpha-value>)","950":"rgb(var(--h2-rgb) / <alpha-value>)"},"pink":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h2-rgb) / <alpha-value>)","500":"rgb(var(--h2-rgb) / <alpha-value>)","600":"rgb(var(--h2-rgb) / <alpha-value>)","700":"rgb(var(--h2-rgb) / <alpha-value>)","800":"rgb(var(--h2-rgb) / <alpha-value>)","900":"rgb(var(--h2-rgb) / <alpha-value>)","950":"rgb(var(--h2-rgb) / <alpha-value>)"},"orange":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--acento-rgb) / <alpha-value>)","500":"rgb(var(--acento-rgb) / <alpha-value>)","600":"rgb(var(--acento-rgb) / <alpha-value>)","700":"rgb(var(--acento-rgb) / <alpha-value>)","800":"rgb(var(--acento-rgb) / <alpha-value>)","900":"rgb(var(--acento-rgb) / <alpha-value>)","950":"rgb(var(--acento-rgb) / <alpha-value>)"},"amber":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--acento-rgb) / <alpha-value>)","500":"rgb(var(--acento-rgb) / <alpha-value>)","600":"rgb(var(--acento-rgb) / <alpha-value>)","700":"rgb(var(--acento-rgb) / <alpha-value>)","800":"rgb(var(--acento-rgb) / <alpha-value>)","900":"rgb(var(--acento-rgb) / <alpha-value>)","950":"rgb(var(--acento-rgb) / <alpha-value>)"},"yellow":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--acento-rgb) / <alpha-value>)","500":"rgb(var(--acento-rgb) / <alpha-value>)","600":"rgb(var(--acento-rgb) / <alpha-value>)","700":"rgb(var(--acento-rgb) / <alpha-value>)","800":"rgb(var(--acento-rgb) / <alpha-value>)","900":"rgb(var(--acento-rgb) / <alpha-value>)","950":"rgb(var(--acento-rgb) / <alpha-value>)"},"lime":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--exito-rgb) / <alpha-value>)","500":"rgb(var(--exito-rgb) / <alpha-value>)","600":"rgb(var(--exito-rgb) / <alpha-value>)","700":"rgb(var(--exito-rgb) / <alpha-value>)","800":"rgb(var(--exito-rgb) / <alpha-value>)","900":"rgb(var(--exito-rgb) / <alpha-value>)","950":"rgb(var(--exito-rgb) / <alpha-value>)"},"green":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--exito-rgb) / <alpha-value>)","500":"rgb(var(--exito-rgb) / <alpha-value>)","600":"rgb(var(--exito-rgb) / <alpha-value>)","700":"rgb(var(--exito-rgb) / <alpha-value>)","800":"rgb(var(--exito-rgb) / <alpha-value>)","900":"rgb(var(--exito-rgb) / <alpha-value>)","950":"rgb(var(--exito-rgb) / <alpha-value>)"},"emerald":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--exito-rgb) / <alpha-value>)","500":"rgb(var(--exito-rgb) / <alpha-value>)","600":"rgb(var(--exito-rgb) / <alpha-value>)","700":"rgb(var(--exito-rgb) / <alpha-value>)","800":"rgb(var(--exito-rgb) / <alpha-value>)","900":"rgb(var(--exito-rgb) / <alpha-value>)","950":"rgb(var(--exito-rgb) / <alpha-value>)"},"teal":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--exito-rgb) / <alpha-value>)","500":"rgb(var(--exito-rgb) / <alpha-value>)","600":"rgb(var(--exito-rgb) / <alpha-value>)","700":"rgb(var(--exito-rgb) / <alpha-value>)","800":"rgb(var(--exito-rgb) / <alpha-value>)","900":"rgb(var(--exito-rgb) / <alpha-value>)","950":"rgb(var(--exito-rgb) / <alpha-value>)"},"cyan":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h3-rgb) / <alpha-value>)","500":"rgb(var(--h3-rgb) / <alpha-value>)","600":"rgb(var(--h3-rgb) / <alpha-value>)","700":"rgb(var(--h3-rgb) / <alpha-value>)","800":"rgb(var(--h3-rgb) / <alpha-value>)","900":"rgb(var(--h3-rgb) / <alpha-value>)","950":"rgb(var(--h3-rgb) / <alpha-value>)"},"sky":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h3-rgb) / <alpha-value>)","500":"rgb(var(--h3-rgb) / <alpha-value>)","600":"rgb(var(--h3-rgb) / <alpha-value>)","700":"rgb(var(--h3-rgb) / <alpha-value>)","800":"rgb(var(--h3-rgb) / <alpha-value>)","900":"rgb(var(--h3-rgb) / <alpha-value>)","950":"rgb(var(--h3-rgb) / <alpha-value>)"},"blue":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h3-rgb) / <alpha-value>)","500":"rgb(var(--h3-rgb) / <alpha-value>)","600":"rgb(var(--h3-rgb) / <alpha-value>)","700":"rgb(var(--h3-rgb) / <alpha-value>)","800":"rgb(var(--h3-rgb) / <alpha-value>)","900":"rgb(var(--h3-rgb) / <alpha-value>)","950":"rgb(var(--h3-rgb) / <alpha-value>)"},"indigo":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h3-rgb) / <alpha-value>)","500":"rgb(var(--h3-rgb) / <alpha-value>)","600":"rgb(var(--h3-rgb) / <alpha-value>)","700":"rgb(var(--h3-rgb) / <alpha-value>)","800":"rgb(var(--h3-rgb) / <alpha-value>)","900":"rgb(var(--h3-rgb) / <alpha-value>)","950":"rgb(var(--h3-rgb) / <alpha-value>)"},"violet":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h4-rgb) / <alpha-value>)","500":"rgb(var(--h4-rgb) / <alpha-value>)","600":"rgb(var(--h4-rgb) / <alpha-value>)","700":"rgb(var(--h4-rgb) / <alpha-value>)","800":"rgb(var(--h4-rgb) / <alpha-value>)","900":"rgb(var(--h4-rgb) / <alpha-value>)","950":"rgb(var(--h4-rgb) / <alpha-value>)"},"purple":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h4-rgb) / <alpha-value>)","500":"rgb(var(--h4-rgb) / <alpha-value>)","600":"rgb(var(--h4-rgb) / <alpha-value>)","700":"rgb(var(--h4-rgb) / <alpha-value>)","800":"rgb(var(--h4-rgb) / <alpha-value>)","900":"rgb(var(--h4-rgb) / <alpha-value>)","950":"rgb(var(--h4-rgb) / <alpha-value>)"},"fuchsia":{"50":"rgb(var(--tinta-rgb) / <alpha-value>)","100":"rgb(var(--tinta-rgb) / <alpha-value>)","200":"rgb(var(--tinta-rgb) / <alpha-value>)","300":"rgb(var(--tinta-rgb) / <alpha-value>)","400":"rgb(var(--h4-rgb) / <alpha-value>)","500":"rgb(var(--h4-rgb) / <alpha-value>)","600":"rgb(var(--h4-rgb) / <alpha-value>)","700":"rgb(var(--h4-rgb) / <alpha-value>)","800":"rgb(var(--h4-rgb) / <alpha-value>)","900":"rgb(var(--h4-rgb) / <alpha-value>)","950":"rgb(var(--h4-rgb) / <alpha-value>)"},"white":"rgb(var(--tinta-rgb) / <alpha-value>)","black":"rgb(var(--tinta-rgb) / <alpha-value>)"},"borderColor":{"slate":{"50":"rgb(var(--linea-rgb) / <alpha-value>)","100":"rgb(var(--linea-rgb) / <alpha-value>)","200":"rgb(var(--linea-rgb) / <alpha-value>)","300":"rgb(var(--linea-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--trazo-rgb) / <alpha-value>)","700":"rgb(var(--trazo-rgb) / <alpha-value>)","800":"rgb(var(--trazo-rgb) / <alpha-value>)","900":"rgb(var(--trazo-rgb) / <alpha-value>)","950":"rgb(var(--trazo-rgb) / <alpha-value>)"},"gray":{"50":"rgb(var(--linea-rgb) / <alpha-value>)","100":"rgb(var(--linea-rgb) / <alpha-value>)","200":"rgb(var(--linea-rgb) / <alpha-value>)","300":"rgb(var(--linea-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--trazo-rgb) / <alpha-value>)","700":"rgb(var(--trazo-rgb) / <alpha-value>)","800":"rgb(var(--trazo-rgb) / <alpha-value>)","900":"rgb(var(--trazo-rgb) / <alpha-value>)","950":"rgb(var(--trazo-rgb) / <alpha-value>)"},"zinc":{"50":"rgb(var(--linea-rgb) / <alpha-value>)","100":"rgb(var(--linea-rgb) / <alpha-value>)","200":"rgb(var(--linea-rgb) / <alpha-value>)","300":"rgb(var(--linea-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--trazo-rgb) / <alpha-value>)","700":"rgb(var(--trazo-rgb) / <alpha-value>)","800":"rgb(var(--trazo-rgb) / <alpha-value>)","900":"rgb(var(--trazo-rgb) / <alpha-value>)","950":"rgb(var(--trazo-rgb) / <alpha-value>)"},"neutral":{"50":"rgb(var(--linea-rgb) / <alpha-value>)","100":"rgb(var(--linea-rgb) / <alpha-value>)","200":"rgb(var(--linea-rgb) / <alpha-value>)","300":"rgb(var(--linea-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--trazo-rgb) / <alpha-value>)","700":"rgb(var(--trazo-rgb) / <alpha-value>)","800":"rgb(var(--trazo-rgb) / <alpha-value>)","900":"rgb(var(--trazo-rgb) / <alpha-value>)","950":"rgb(var(--trazo-rgb) / <alpha-value>)"},"stone":{"50":"rgb(var(--linea-rgb) / <alpha-value>)","100":"rgb(var(--linea-rgb) / <alpha-value>)","200":"rgb(var(--linea-rgb) / <alpha-value>)","300":"rgb(var(--linea-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--trazo-rgb) / <alpha-value>)","700":"rgb(var(--trazo-rgb) / <alpha-value>)","800":"rgb(var(--trazo-rgb) / <alpha-value>)","900":"rgb(var(--trazo-rgb) / <alpha-value>)","950":"rgb(var(--trazo-rgb) / <alpha-value>)"},"red":{"50":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-rgb) / <alpha-value>)","500":"rgb(var(--h2-rgb) / <alpha-value>)","600":"rgb(var(--h2-rgb) / <alpha-value>)","700":"rgb(var(--h2-rgb) / <alpha-value>)","800":"rgb(var(--h2-rgb) / <alpha-value>)","900":"rgb(var(--h2-rgb) / <alpha-value>)","950":"rgb(var(--h2-rgb) / <alpha-value>)"},"rose":{"50":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-rgb) / <alpha-value>)","500":"rgb(var(--h2-rgb) / <alpha-value>)","600":"rgb(var(--h2-rgb) / <alpha-value>)","700":"rgb(var(--h2-rgb) / <alpha-value>)","800":"rgb(var(--h2-rgb) / <alpha-value>)","900":"rgb(var(--h2-rgb) / <alpha-value>)","950":"rgb(var(--h2-rgb) / <alpha-value>)"},"pink":{"50":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-rgb) / <alpha-value>)","500":"rgb(var(--h2-rgb) / <alpha-value>)","600":"rgb(var(--h2-rgb) / <alpha-value>)","700":"rgb(var(--h2-rgb) / <alpha-value>)","800":"rgb(var(--h2-rgb) / <alpha-value>)","900":"rgb(var(--h2-rgb) / <alpha-value>)","950":"rgb(var(--h2-rgb) / <alpha-value>)"},"orange":{"50":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","100":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","200":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-rgb) / <alpha-value>)","500":"rgb(var(--acento-rgb) / <alpha-value>)","600":"rgb(var(--acento-rgb) / <alpha-value>)","700":"rgb(var(--acento-rgb) / <alpha-value>)","800":"rgb(var(--acento-rgb) / <alpha-value>)","900":"rgb(var(--acento-rgb) / <alpha-value>)","950":"rgb(var(--acento-rgb) / <alpha-value>)"},"amber":{"50":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","100":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","200":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-rgb) / <alpha-value>)","500":"rgb(var(--acento-rgb) / <alpha-value>)","600":"rgb(var(--acento-rgb) / <alpha-value>)","700":"rgb(var(--acento-rgb) / <alpha-value>)","800":"rgb(var(--acento-rgb) / <alpha-value>)","900":"rgb(var(--acento-rgb) / <alpha-value>)","950":"rgb(var(--acento-rgb) / <alpha-value>)"},"yellow":{"50":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","100":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","200":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-rgb) / <alpha-value>)","500":"rgb(var(--acento-rgb) / <alpha-value>)","600":"rgb(var(--acento-rgb) / <alpha-value>)","700":"rgb(var(--acento-rgb) / <alpha-value>)","800":"rgb(var(--acento-rgb) / <alpha-value>)","900":"rgb(var(--acento-rgb) / <alpha-value>)","950":"rgb(var(--acento-rgb) / <alpha-value>)"},"lime":{"50":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","100":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","200":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--exito-rgb) / <alpha-value>)","500":"rgb(var(--exito-rgb) / <alpha-value>)","600":"rgb(var(--exito-rgb) / <alpha-value>)","700":"rgb(var(--exito-rgb) / <alpha-value>)","800":"rgb(var(--exito-rgb) / <alpha-value>)","900":"rgb(var(--exito-rgb) / <alpha-value>)","950":"rgb(var(--exito-rgb) / <alpha-value>)"},"green":{"50":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","100":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","200":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--exito-rgb) / <alpha-value>)","500":"rgb(var(--exito-rgb) / <alpha-value>)","600":"rgb(var(--exito-rgb) / <alpha-value>)","700":"rgb(var(--exito-rgb) / <alpha-value>)","800":"rgb(var(--exito-rgb) / <alpha-value>)","900":"rgb(var(--exito-rgb) / <alpha-value>)","950":"rgb(var(--exito-rgb) / <alpha-value>)"},"emerald":{"50":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","100":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","200":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--exito-rgb) / <alpha-value>)","500":"rgb(var(--exito-rgb) / <alpha-value>)","600":"rgb(var(--exito-rgb) / <alpha-value>)","700":"rgb(var(--exito-rgb) / <alpha-value>)","800":"rgb(var(--exito-rgb) / <alpha-value>)","900":"rgb(var(--exito-rgb) / <alpha-value>)","950":"rgb(var(--exito-rgb) / <alpha-value>)"},"teal":{"50":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","100":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","200":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--exito-rgb) / <alpha-value>)","500":"rgb(var(--exito-rgb) / <alpha-value>)","600":"rgb(var(--exito-rgb) / <alpha-value>)","700":"rgb(var(--exito-rgb) / <alpha-value>)","800":"rgb(var(--exito-rgb) / <alpha-value>)","900":"rgb(var(--exito-rgb) / <alpha-value>)","950":"rgb(var(--exito-rgb) / <alpha-value>)"},"cyan":{"50":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-rgb) / <alpha-value>)","500":"rgb(var(--h3-rgb) / <alpha-value>)","600":"rgb(var(--h3-rgb) / <alpha-value>)","700":"rgb(var(--h3-rgb) / <alpha-value>)","800":"rgb(var(--h3-rgb) / <alpha-value>)","900":"rgb(var(--h3-rgb) / <alpha-value>)","950":"rgb(var(--h3-rgb) / <alpha-value>)"},"sky":{"50":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-rgb) / <alpha-value>)","500":"rgb(var(--h3-rgb) / <alpha-value>)","600":"rgb(var(--h3-rgb) / <alpha-value>)","700":"rgb(var(--h3-rgb) / <alpha-value>)","800":"rgb(var(--h3-rgb) / <alpha-value>)","900":"rgb(var(--h3-rgb) / <alpha-value>)","950":"rgb(var(--h3-rgb) / <alpha-value>)"},"blue":{"50":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-rgb) / <alpha-value>)","500":"rgb(var(--h3-rgb) / <alpha-value>)","600":"rgb(var(--h3-rgb) / <alpha-value>)","700":"rgb(var(--h3-rgb) / <alpha-value>)","800":"rgb(var(--h3-rgb) / <alpha-value>)","900":"rgb(var(--h3-rgb) / <alpha-value>)","950":"rgb(var(--h3-rgb) / <alpha-value>)"},"indigo":{"50":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-rgb) / <alpha-value>)","500":"rgb(var(--h3-rgb) / <alpha-value>)","600":"rgb(var(--h3-rgb) / <alpha-value>)","700":"rgb(var(--h3-rgb) / <alpha-value>)","800":"rgb(var(--h3-rgb) / <alpha-value>)","900":"rgb(var(--h3-rgb) / <alpha-value>)","950":"rgb(var(--h3-rgb) / <alpha-value>)"},"violet":{"50":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-rgb) / <alpha-value>)","500":"rgb(var(--h4-rgb) / <alpha-value>)","600":"rgb(var(--h4-rgb) / <alpha-value>)","700":"rgb(var(--h4-rgb) / <alpha-value>)","800":"rgb(var(--h4-rgb) / <alpha-value>)","900":"rgb(var(--h4-rgb) / <alpha-value>)","950":"rgb(var(--h4-rgb) / <alpha-value>)"},"purple":{"50":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-rgb) / <alpha-value>)","500":"rgb(var(--h4-rgb) / <alpha-value>)","600":"rgb(var(--h4-rgb) / <alpha-value>)","700":"rgb(var(--h4-rgb) / <alpha-value>)","800":"rgb(var(--h4-rgb) / <alpha-value>)","900":"rgb(var(--h4-rgb) / <alpha-value>)","950":"rgb(var(--h4-rgb) / <alpha-value>)"},"fuchsia":{"50":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","100":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","200":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-rgb) / <alpha-value>)","500":"rgb(var(--h4-rgb) / <alpha-value>)","600":"rgb(var(--h4-rgb) / <alpha-value>)","700":"rgb(var(--h4-rgb) / <alpha-value>)","800":"rgb(var(--h4-rgb) / <alpha-value>)","900":"rgb(var(--h4-rgb) / <alpha-value>)","950":"rgb(var(--h4-rgb) / <alpha-value>)"},"white":"rgb(var(--superficie-rgb) / <alpha-value>)","black":"rgb(var(--tinta-rgb) / <alpha-value>)"},"colors":{"slate":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"gray":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"zinc":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"neutral":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"stone":{"50":"rgb(var(--superficie-rgb) / <alpha-value>)","100":"rgb(var(--fondo-2-rgb) / <alpha-value>)","200":"rgb(var(--fondo-2-rgb) / <alpha-value>)","300":"rgb(var(--fondo-2-rgb) / <alpha-value>)","400":"rgb(var(--linea-rgb) / <alpha-value>)","500":"rgb(var(--linea-rgb) / <alpha-value>)","600":"rgb(var(--fondo-2-rgb) / <alpha-value>)","700":"rgb(var(--fondo-2-rgb) / <alpha-value>)","800":"rgb(var(--fondo-2-rgb) / <alpha-value>)","900":"rgb(var(--fondo-2-rgb) / <alpha-value>)","950":"rgb(var(--fondo-2-rgb) / <alpha-value>)"},"red":{"50":"rgb(var(--h2-suave-rgb) / <alpha-value>)","100":"rgb(var(--h2-suave-rgb) / <alpha-value>)","200":"rgb(var(--h2-suave-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h2-relleno-rgb) / <alpha-value>)"},"rose":{"50":"rgb(var(--h2-suave-rgb) / <alpha-value>)","100":"rgb(var(--h2-suave-rgb) / <alpha-value>)","200":"rgb(var(--h2-suave-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h2-relleno-rgb) / <alpha-value>)"},"pink":{"50":"rgb(var(--h2-suave-rgb) / <alpha-value>)","100":"rgb(var(--h2-suave-rgb) / <alpha-value>)","200":"rgb(var(--h2-suave-rgb) / <alpha-value>)","300":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h2-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h2-relleno-rgb) / <alpha-value>)"},"orange":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"amber":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"yellow":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"lime":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"green":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"emerald":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"teal":{"50":"rgb(var(--acento-suave-rgb) / <alpha-value>)","100":"rgb(var(--acento-suave-rgb) / <alpha-value>)","200":"rgb(var(--acento-suave-rgb) / <alpha-value>)","300":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","400":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","500":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","600":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","700":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","800":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","900":"rgb(var(--acento-relleno-rgb) / <alpha-value>)","950":"rgb(var(--acento-relleno-rgb) / <alpha-value>)"},"cyan":{"50":"rgb(var(--h3-suave-rgb) / <alpha-value>)","100":"rgb(var(--h3-suave-rgb) / <alpha-value>)","200":"rgb(var(--h3-suave-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h3-relleno-rgb) / <alpha-value>)"},"sky":{"50":"rgb(var(--h3-suave-rgb) / <alpha-value>)","100":"rgb(var(--h3-suave-rgb) / <alpha-value>)","200":"rgb(var(--h3-suave-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h3-relleno-rgb) / <alpha-value>)"},"blue":{"50":"rgb(var(--h3-suave-rgb) / <alpha-value>)","100":"rgb(var(--h3-suave-rgb) / <alpha-value>)","200":"rgb(var(--h3-suave-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h3-relleno-rgb) / <alpha-value>)"},"indigo":{"50":"rgb(var(--h3-suave-rgb) / <alpha-value>)","100":"rgb(var(--h3-suave-rgb) / <alpha-value>)","200":"rgb(var(--h3-suave-rgb) / <alpha-value>)","300":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h3-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h3-relleno-rgb) / <alpha-value>)"},"violet":{"50":"rgb(var(--h4-suave-rgb) / <alpha-value>)","100":"rgb(var(--h4-suave-rgb) / <alpha-value>)","200":"rgb(var(--h4-suave-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h4-relleno-rgb) / <alpha-value>)"},"purple":{"50":"rgb(var(--h4-suave-rgb) / <alpha-value>)","100":"rgb(var(--h4-suave-rgb) / <alpha-value>)","200":"rgb(var(--h4-suave-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h4-relleno-rgb) / <alpha-value>)"},"fuchsia":{"50":"rgb(var(--h4-suave-rgb) / <alpha-value>)","100":"rgb(var(--h4-suave-rgb) / <alpha-value>)","200":"rgb(var(--h4-suave-rgb) / <alpha-value>)","300":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","400":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","500":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","600":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","700":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","800":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","900":"rgb(var(--h4-relleno-rgb) / <alpha-value>)","950":"rgb(var(--h4-relleno-rgb) / <alpha-value>)"},"white":"rgb(var(--superficie-rgb) / <alpha-value>)","black":"rgb(var(--tinta-rgb) / <alpha-value>)"},"boxShadow":{"sm":"var(--sombra-suave)","DEFAULT":"var(--sombra-suave)","md":"var(--sombra-suave)","lg":"var(--sombra-alta)","xl":"var(--sombra-alta)","2xl":"var(--sombra-alta)"},"borderRadius":{"md":"var(--radio-sm)","lg":"var(--radio-sm)","xl":"var(--radio)","2xl":"var(--radio)"}}}};</script>
-  
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: var(--texto);
-            color: var(--acento);
-        }
-        /* Estilo para los contenedores de gráficos, asegurando un tamaño y responsividad adecuados */
-       .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-           .chart-container {
-                height: 350px;
-            }
-        }
-        /* Estilo para los enlaces de navegación activos */
-       .nav-link.active {
-            font-weight: 700;
-            color: var(--h2);
-        }
-        /* Estilo para los botones de pestaña activos */
-       .tab-btn.active {
-            background-color: var(--acento-relleno);
-            color: var(--tinta);
-        }
-        /* Estilo para el contenido del acordeón, oculto por defecto */
-       .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            padding: 0 1rem;
-        }
-        /* Estilo para el contenido del acordeón activo */
-       .accordion-content.active {
-            padding: 1rem;
-        }
-    </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redes sociales y autoestima juvenil | Tomás Cabrolier</title>
+  <meta name="description" content="Cómo la realidad construida en las redes sociales afecta la autoestima de los jóvenes chilenos de 12 a 14 años, y qué pueden hacer las familias, la escuela y los profesionales.">
   <link rel="icon" href="../../../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../../assets/css/site.css">
-  <link rel="stylesheet" href="../../../assets/css/armonia.css">
+  <link rel="stylesheet" href="../../../assets/css/paginas.css">
   <script src="../../../assets/js/site.js"></script>
-  <!-- barajas aplicadas -->
 </head>
-<body class="antialiased bg-[color:var(--fondo)]">
+<body class="tc pagina">
+  <header class="cielo cabecera-pagina">
+    <div class="escena"></div>
+    <div class="tc-contenedor">
+      <p class="carta">Ensayo interactivo · Tecnología</p>
+      <h1>El reflejo en la pantalla</h1>
+      <p class="intro">Cómo la realidad construida en las redes sociales afecta la autoestima de los jóvenes chilenos de 12 a 14 años, y qué pueden hacer las familias, la escuela y los profesionales.</p>
+        <ul class="meta"><li><b>Edad</b>12 a 14 años</li><li><b>Contexto</b>Chile</li></ul>
+        <div class="podcast">
+          <span class="icono" aria-hidden="true">🎧</span>
+          <div><b>Escucha el podcast</b><span>Autoestima juvenil en tiempos de redes sociales.</span></div>
+          <audio controls preload="none" src="podcast_sobre_autoestima_juvenil.m4a"></audio>
+        </div>
+    </div>
+  </header>
+  <div class="tc-contenedor lectura">
+    <nav class="indice" data-indice-pagina aria-label="En esta página"></nav>
+    <main class="cuerpo">
+<section class="bloque" id="realidad">
+        <h2>El espejo digital: ¿qué es real?</h2>
+        <p class="bajada">Las redes no reflejan la realidad: son entornos curados y personalizados por algoritmos. Estos son los dos mecanismos que construyen lo que ven los jóvenes.</p>
+        <ul class="fichas dos">
+          <li class="ficha"><h3>Contenido curado: la «vida perfecta»</h3><p>Se muestran solo los mejores momentos: éxitos, viajes, apariencias. Se oculta el esfuerzo, los fracasos y lo cotidiano. Y como esos estándares los ponen pares y amigos, no la publicidad, la comparación es más personal y directa: «la vida de todos es mejor que la mía».</p></li>
+          <li class="ficha"><h3>Algoritmos y burbujas</h3><p>Los algoritmos personalizan el contenido según lo que ya hicimos. Eso crea burbujas que refuerzan sesgos y limitan la diversidad. Para un adolescente en formación, el mundo puede parecer más simple y polarizado de lo que es, sin que note esa manipulación silenciosa.</p></li>
+        </ul>
+      </section>
 
-    <!-- Encabezado y barra de navegación -->
-    <header class="bg-white/90 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <div class="flex items-center">
-                <div class="text-xl font-bold text-[color:var(--acento)] mr-4">Autoestima Digital</div>
-                <!-- Botón de podcast con estilos visuales mejorados -->
-                <button id="audioToggleButton" class="bg-[color:var(--h2-relleno)] text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-[color:var(--h2-relleno)] transition-colors flex items-center">
-                    <svg id="playIcon" class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                    <svg id="pauseIcon" class="w-5 h-5 mr-2 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                    <span id="audioButtonText">Escuchar Podcast</span>
-                </button>
-                <!-- Archivo de audio con la extensión correcta .m4a -->
-                <audio id="podcastAudio" src="podcast_sobre_autoestima_juvenil.m4a" preload="auto"></audio>
-            </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#realidad" class="nav-link text-gray-600 hover:text-[color:var(--h2)] transition-colors">La Realidad Digital</a>
-                <a href="#impacto" class="nav-link text-gray-600 hover:text-[color:var(--h2)] transition-colors">Impacto en Cifras</a>
-                <a href="#riesgos" class="nav-link text-gray-600 hover:text-[color:var(--h2)] transition-colors">Riesgos</a>
-                <a href="#estrategias" class="nav-link text-gray-600 hover:text-[color:var(--h2)] transition-colors">Estrategias</a>
-                <a href="#material_adicional" class="nav-link text-gray-600 hover:text-[color:var(--h2)] transition-colors">Material Adicional</a>
-            </div>
-        </nav>
-    </header>
+      <section class="bloque" id="cifras">
+        <h2>Impacto en cifras</h2>
+        <p class="bajada">El uso intensivo de redes tiene consecuencias medibles en el bienestar adolescente.</p>
+        <ul class="datos">
+          <li class="dato"><span class="cifra">55 %</span><span class="que">de los menores en Chile tiene redes sociales</span></li>
+          <li class="dato"><span class="cifra">41 %</span><span class="que">de los usuarios intensivos reporta mala salud mental</span></li>
+          <li class="dato"><span class="cifra">35 %</span><span class="que">de los usuarios intensivos se preocupa por su imagen corporal</span></li>
+          <li class="dato"><span class="cifra">1 de 3</span><span class="que">adolescentes siente que Instagram empeora su imagen corporal</span></li>
+        </ul>
+        <div class="columnas">
+          <div>
+            <h3>Salud mental según tiempo de uso</h3>
+            <ul class="barras" style="--max:50" aria-label="Porcentaje que reporta salud mental pobre o muy pobre">
+              <li style="--v:41"><span class="rotulo">Uso intensivo (más de 4 h al día)</span><span class="barra"></span><span class="valor">41 %</span></li>
+              <li class="secundaria" style="--v:23"><span class="rotulo">Uso moderado (menos de 2 h al día)</span><span class="barra"></span><span class="valor">23 %</span></li>
+            </ul>
+            <p class="pie-grafico">Porcentaje que reporta salud mental pobre o muy pobre.</p>
+          </div>
+          <div>
+            <h3>Tiempo de uso y autoestima</h3>
+            <ul class="barras" aria-label="Relación entre tiempo de uso y autoestima">
+              <li style="--v:60"><span class="rotulo">Uso excesivo, baja autoestima</span><span class="barra"></span><span class="valor">60 %</span></li>
+              <li class="secundaria" style="--v:40"><span class="rotulo">Uso moderado, alta autoestima</span><span class="barra"></span><span class="valor">40 %</span></li>
+            </ul>
+            <p class="pie-grafico">Relación dosis-respuesta: a más tiempo de uso, más casos de baja autoestima.</p>
+          </div>
+        </div>
+        <p><small>Datos basados en un estudio realizado en Chile en 2023 por el Centro de Estudios del Bienestar Digital.</small></p>
+      </section>
 
-    <main>
-        <!-- Sección de inicio con fondo contrastante -->
-        <section class="py-20 md:py-32 bg-[color:var(--fondo)]">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl md:text-6xl font-bold text-[color:var(--acento)] mb-4">El Reflejo en la Pantalla</h1>
-                <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-700">
-                    Una exploración interactiva sobre cómo la realidad construida en redes sociales impacta la autoestima de los jóvenes chilenos de 12 a 14 años.
-                </p>
-            </div>
-        </section>
+      <section class="bloque" id="riesgos">
+        <h2>Riesgos psicológicos</h2>
+        <p class="bajada">No es una exposición inocua: estos riesgos se refuerzan entre sí y forman un ciclo negativo.</p>
+        <div class="desplegables">
+          <details class="desplegable"><summary><span>Comparación social y estándares irreales</span></summary><div class="contenido"><p>La exposición constante a vidas perfectas genera sentimientos de insuficiencia y baja autoestima. Los jóvenes se comparan con representaciones idealizadas y se frustran con su propia vida.</p></div></details>
+          <details class="desplegable"><summary><span>Ciberacoso</span></summary><div class="contenido"><p>La intimidación y el rechazo en entornos digitales profundizan la vulnerabilidad emocional, con ansiedad, depresión y una baja importante de la autoestima. Se estima que el 20 % de los jóvenes lo ha vivido.</p></div></details>
+          <details class="desplegable"><summary><span>Adicción a las redes</span></summary><div class="contenido"><p>El uso problemático crea dependencia psicológica e interfiere con una identidad positiva: se prioriza la validación externa sobre la autoaceptación, con una obsesión por el teléfono y los «me gusta».</p></div></details>
+          <details class="desplegable"><summary><span>Miedo a perderse algo (FOMO)</span></summary><div class="contenido"><p>La ansiedad persistente por perderse lo que otros viven genera una necesidad de estar siempre conectado, estrés crónico e insatisfacción con la propia vida.</p></div></details>
+        </div>
+      </section>
 
-        <!-- Sección 1 con fondo claro -->
-        <section id="realidad" class="py-16 md:py-24 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--acento)]">El Espejo Digital: ¿Qué es real?</h2>
-                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">
-                        Las redes sociales no son un reflejo fiel de la realidad. Son entornos cuidadosamente curados y personalizados por algoritmos. Esta sección explora los dos mecanismos principales que construyen la "realidad" que ven los jóvenes en línea, un primer paso crucial para entender su impacto.
-                    </p>
-                </div>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="bg-[color:var(--fondo)] p-8 rounded-lg shadow-md">
-                        <h3 class="text-2xl font-bold text-[color:var(--acento)] mb-4">Contenido Curado: La "Vida Perfecta"</h3>
-                        <p class="text-gray-700 leading-relaxed">
-                            En redes sociales, se suelen mostrar solo los "mejores momentos": éxitos, viajes y apariencias perfectas. Esta selección oculta el esfuerzo, los fracasos y la normalidad del día a día. A diferencia de la publicidad tradicional, estos estándares son establecidos por pares y amigos, lo que hace que la comparación social sea mucho más personal y directa, generando la sensación de que "la vida de todos es mejor que la mía".
-                        </p>
-                    </div>
-                    <div class="bg-[color:var(--fondo)] p-8 rounded-lg shadow-md">
-                        <h3 class="text-2xl font-bold text-[color:var(--acento)] mb-4">Algoritmos y Burbujas de Información</h3>
-                        <p class="text-gray-700 leading-relaxed">
-                            Los algoritmos personalizan el contenido que vemos basándose en nuestras interacciones previas. Esto crea "burbujas" que nos exponen solo a ideas y contenidos similares a los nuestros, reforzando sesgos y limitando la exposición a la diversidad. Para un adolescente en formación, esto puede distorsionar su percepción del mundo, haciéndolo parecer más simple y polarizado de lo que realmente es, sin que sea consciente de esta manipulación silenciosa.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <section class="bloque" id="estrategias">
+        <h2>Estrategias y apoyo</h2>
+        <p class="bajada">Recomendaciones para cada adulto clave en la vida de los adolescentes.</p>
+        <div class="pestanas" data-pestanas>
+          <div role="tablist" aria-label="Estrategias por actor">
+            <button role="tab" type="button">Familias</button>
+            <button role="tab" type="button">Escuela</button>
+            <button role="tab" type="button">Apoyo psicológico</button>
+          </div>
+          <div role="tabpanel">
+            <dl class="glosario">
+              <div class="termino"><dt>Mediación activa</dt><dd>Acompañar, no solo vigilar: conversar sobre lo que ven y hacen en línea y fomentar el pensamiento crítico.</dd></div>
+              <div class="termino"><dt>Comunicación abierta</dt><dd>Un ambiente de confianza para que cuenten experiencias negativas, como el ciberacoso.</dd></div>
+              <div class="termino"><dt>Límites claros</dt><dd>Horarios y lugares sin pantallas, como las comidas y el dormitorio.</dd></div>
+              <div class="termino"><dt>Ser modelo</dt><dd>Los adultos también deben usar la tecnología de forma consciente y equilibrada.</dd></div>
+            </dl>
+          </div>
+          <div role="tabpanel">
+            <dl class="glosario">
+              <div class="termino"><dt>Pensamiento crítico</dt><dd>Analizar la información, diferenciar hechos de opiniones y entender cómo funcionan los algoritmos y la publicidad.</dd></div>
+              <div class="termino"><dt>Integración transversal</dt><dd>La alfabetización digital no es una asignatura aislada: se trabaja en todas.</dd></div>
+              <div class="termino"><dt>Educación emocional</dt><dd>Herramientas para identificar y gestionar emociones frente a la presión social en línea.</dd></div>
+              <div class="termino"><dt>Ciberseguridad y privacidad</dt><dd>Proteger los datos personales y reconocer conductas de riesgo.</dd></div>
+            </dl>
+          </div>
+          <div role="tabpanel">
+            <dl class="glosario">
+              <div class="termino"><dt>Señales de alerta</dt><dd>Atención a cambios de conducta: aislamiento, irritabilidad, caída del rendimiento.</dd></div>
+              <div class="termino"><dt>Validar sus sentimientos</dt><dd>No minimizar lo que pasa en línea: tiene un impacto real en sus emociones.</dd></div>
+              <div class="termino"><dt>Resiliencia digital</dt><dd>Ayudarles a sobreponerse a experiencias negativas, fortaleciendo su autoestima desde adentro.</dd></div>
+              <div class="termino"><dt>Recursos de ayuda</dt><dd>Tener a mano líneas de ayuda y profesionales de salud mental, y buscar apoyo profesional cuando haga falta.</dd></div>
+            </dl>
+          </div>
+        </div>
+      </section>
 
-        <!-- Sección 2 con fondo contrastante -->
-        <section id="impacto" class="py-16 md:py-24 bg-[color:var(--fondo)]">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--acento)]">Impacto en Cifras</h2>
-                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">
-                        El uso de redes sociales tiene consecuencias medibles en el bienestar de los adolescentes. Los siguientes datos, extraídos de la investigación, revelan la magnitud del problema en Chile y ofrecen una visión cuantitativa de los riesgos asociados al uso intensivo de estas plataformas.
-                    </p>
-                    <!-- Nueva información de la fuente y fecha -->
-                    <p class="mt-2 max-w-2xl mx-auto text-sm text-gray-500 italic">
-                        Nota: Los datos y porcentajes presentados se basan en un estudio realizado en Chile en 2023 por el Centro de Estudios del Bienestar Digital.
-                    </p>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 text-center">
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <p class="text-4xl font-bold text-[color:var(--h2)]">55%</p>
-                        <p class="text-sm text-gray-600 mt-2">de menores en Chile tiene redes sociales</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <p class="text-4xl font-bold text-[color:var(--h2)]">41%</p>
-                        <p class="text-sm text-gray-600 mt-2">de usuarios intensivos reporta mala salud mental</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <p class="text-4xl font-bold text-[color:var(--h2)]">35%</p>
-                        <p class="text-sm text-gray-600 mt-2">de usuarios intensivos se preocupa por su imagen corporal</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <p class="text-4xl font-bold text-[color:var(--h2)]">1 de 3</p>
-                        <p class="text-sm text-gray-600 mt-2">adolescentes ve empeorar su imagen corporal por Instagram</p>
-                    </div>
-                </div>
-                <div class="grid lg:grid-cols-2 gap-12">
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-bold text-center mb-4 text-[color:var(--acento)]">Salud Mental y Tiempo de Uso</h3>
-                        <div class="chart-container">
-                            <canvas id="mentalHealthChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-bold text-center mb-4 text-[color:var(--acento)]">Relación Dosis-Respuesta</h3>
-                        <div class="chart-container">
-                            <canvas id="usageTimeChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sección 3 con fondo claro -->
-        <section id="riesgos" class="py-16 md:py-24 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--acento)]">Riesgos y Consecuencias Psicológicas</h2>
-                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">
-                        La exposición a esta realidad digitalizada no es inocua. Genera una serie de riesgos psicológicos que se refuerzan mutuamente, creando un ciclo negativo que puede afectar gravemente el bienestar adolescente. Haz clic en cada riesgo para conocer más detalles.
-                    </p>
-                </div>
-                <div id="accordion-container" class="max-w-3xl mx-auto space-y-4">
-                </div>
-            </div>
-        </section>
-
-        <!-- Sección 4 con fondo contrastante -->
-        <section id="estrategias" class="py-16 md:py-24 bg-[color:var(--fondo)]">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--acento)]">Estrategias y Apoyo</h2>
-                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">
-                        Abordar este desafío requiere un esfuerzo coordinado. Aquí encontrarás recomendaciones prácticas y específicas para los actores clave en la vida de los adolescentes: padres, educadores y profesionales de la salud. Selecciona una pestaña para ver las estrategias correspondientes.
-                    </p>
-                </div>
-                <div class="max-w-4xl mx-auto">
-                    <div class="flex justify-center border-b-2 border-gray-300 mb-6">
-                        <button class="tab-btn active py-2 px-6 font-semibold text-gray-600 rounded-t-lg transition-colors" data-tab="padres">Para Padres</button>
-                        <button class="tab-btn py-2 px-6 font-semibold text-gray-600 rounded-t-lg transition-colors" data-tab="escuela">En la Escuela</button>
-                        <button class="tab-btn py-2 px-6 font-semibold text-gray-600 rounded-t-lg transition-colors" data-tab="apoyo">Apoyo Psicológico</button>
-                    </div>
-                    <div id="tab-content" class="bg-white p-8 rounded-lg shadow-md">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Nueva sección para el material de apoyo -->
-        <section id="material_adicional" class="py-16 md:py-24 bg-white text-center">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--acento)] mb-4">Material de Apoyo para Charlas y Cátedras</h2>
-                <p class="max-w-2xl mx-auto text-gray-600 mb-8">
-                    ¿Necesitas un recurso para tu próximo taller con padres, una clase en el colegio o una presentación con jóvenes? Explora nuestro material complementario, diseñado para ser utilizado como guía en discusiones y exposiciones.
-                </p>
-                <a href="https://gamma.app/docs/Redes-Sociales-y-Autoestima-Juvenil-Construyendo-Bienestar-en-la--pxf5n58qc4d1im3" target="_blank" rel="noopener noreferrer" class="inline-block bg-[color:var(--acento-relleno)] text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-[color:var(--acento-relleno)] transition-colors shadow-lg">
-                    Ver Presentación en Gamma
-                </a>
-            </div>
-        </section>
-
+      <section class="bloque" id="material">
+        <h2>Material para charlas y clases</h2>
+        <p>Una presentación complementaria para talleres con familias, clases o exposiciones con jóvenes.</p>
+        <div class="botones"><a class="boton" href="https://gamma.app/docs/Redes-Sociales-y-Autoestima-Juvenil-Construyendo-Bienestar-en-la--pxf5n58qc4d1im3" target="_blank" rel="noopener">Ver la presentación en Gamma</a></div>
+      </section>
     </main>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const data = {
-                risks: [
-                    {
-                        title: "Comparación Social y Estándares Irreales",
-                        content: "La exposición constante a vidas perfectas genera sentimientos de insuficiencia y baja autoestima. Los jóvenes se comparan con estas representaciones idealizadas, lo que a menudo desemboca en sentimientos de inadecuación y frustración con su propia vida."
-                    },
-                    {
-                        title: "Ciberacoso",
-                        content: "Esta forma de intimidación y rechazo social en entornos digitales profundiza la vulnerabilidad emocional de los jóvenes, contribuyendo a la ansiedad, la depresión y una disminución significativa de la autoestima. Se estima que el 20% de los jóvenes ha experimentado ciberacoso."
-                    },
-                    {
-                        title: "Adicción a Redes Sociales",
-                        content: "El uso problemático de las redes sociales puede crear una dependencia psicológica. Esto interfiere con el desarrollo de una identidad positiva, ya que se prioriza la validación externa sobre la autoaceptación, lo que puede llevar a una obsesión constante por el teléfono y los 'me gusta'."
-                    },
-                    {
-                        title: "Miedo a Perderse Algo (FOMO)",
-                        content: "Las redes sociales pueden exacerbar el 'Fear of Missing Out' (FOMO), una ansiedad persistente por perderse experiencias gratificantes que otros están teniendo. Esta necesidad constante de estar conectado genera estrés crónico y una sensación de insatisfacción con la propia vida."
-                    }
-                ],
-                strategies: {
-                    padres: `
-                        <h3 class="text-2xl font-bold text-[color:var(--acento)] mb-4">Rol de Padres y Apoderados</h3>
-                        <ul class="list-disc list-inside space-y-3 text-gray-700">
-                            <li><strong>Mediación Activa:</strong> Acompañar, no solo vigilar. Conversar sobre lo que ven y hacen en línea, fomentando el pensamiento crítico en lugar de solo imponer reglas.</li>
-                            <li><strong>Comunicación Abierta:</strong> Crear un ambiente de confianza para que los hijos se sientan cómodos compartiendo experiencias negativas, como el ciberacoso.</li>
-                            <li><strong>Establecer Límites Claros:</strong> Definir horarios y zonas libres de tecnología (ej. comidas, dormitorios) para promover un equilibrio saludable entre el mundo online y offline.</li>
-                            <li><strong>Ser un Modelo a Seguir:</strong> Los adultos también deben demostrar un uso consciente y equilibrado de la tecnología.</li>
-                        </ul>
-                    `,
-                    escuela: `
-                        <h3 class="text-2xl font-bold text-[color:var(--acento)] mb-4">Educación y Alfabetización Mediática</h3>
-                        <ul class="list-disc list-inside space-y-3 text-gray-700">
-                            <li><strong>Fomentar el Pensamiento Crítico:</strong> Enseñar a los estudiantes a analizar la información, diferenciar hechos de opiniones y entender cómo funcionan los algoritmos y la publicidad.</li>
-                            <li><strong>Integración Transversal:</strong> La alfabetización digital no debe ser una materia aislada, sino integrarse en distintas asignaturas para abordar sus aspectos sociales y psicológicos.</li>
-                            <li><strong>Educación Emocional:</strong> Desarrollar programas que ayuden a los adolescentes a identificar y gestionar sus emociones, dándoles herramientas para enfrentar la presión social en línea.</li>
-                            <li><strong>Ciberseguridad y Privacidad:</strong> Educar sobre la importancia de proteger los datos personales y reconocer comportamientos de riesgo.</li>
-                        </ul>
-                    `,
-                    apoyo: `
-                        <h3 class="text-2xl font-bold text-[color:var(--acento)] mb-4">Intervenciones y Apoyo Psicológico</h3>
-                        <ul class="list-disc list-inside space-y-3 text-gray-700">
-                            <li><strong>Identificar Señales de Alerta:</strong> Docentes y padres deben estar atentos a cambios de comportamiento, como aislamiento, irritabilidad, o caída en el rendimiento académico.</li>
-                            <li><strong>Validar sus Sentimientos:</strong> No minimizar las experiencias negativas que ocurren en línea. Lo que pasa en el mundo digital tiene un impacto real en sus emociones.</li>
-                            <li><strong>Fomentar la Resiliencia Digital:</strong> Ayudar a los jóvenes a desarrollar habilidades para sobreponerse a las experiencias negativas en línea, fortaleciendo su autoestima desde adentro.</li>
-                            <li><strong>Conocer Recursos de Ayuda:</strong> Tener a mano contactos de líneas de ayuda o profesionales de la salud mental y no dudar en buscar apoyo profesional cuando sea necesario.</li>
-                        </ul>
-                    `
-                }
-            };
-            
-            const accordionContainer = document.getElementById('accordion-container');
-            data.risks.forEach((risk, index) => {
-                const item = document.createElement('div');
-                item.className = 'border border-gray-200 rounded-lg bg-white overflow-hidden';
-                item.innerHTML = `
-                    <button class="accordion-btn w-full text-left p-4 flex justify-between items-center font-semibold text-[color:var(--acento)] hover:bg-gray-50 transition-colors">
-                        <span>${risk.title}</span>
-                        <span class="transform transition-transform duration-300">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </span>
-                    </button>
-                    <div class="accordion-content">
-                        <p class="px-4 pb-4 text-gray-600">${risk.content}</p>
-                    </div>
-                `;
-                accordionContainer.appendChild(item);
-            });
-
-            accordionContainer.addEventListener('click', (e) => {
-                const button = e.target.closest('.accordion-btn');
-                if (button) {
-                    const content = button.nextElementSibling;
-                    const icon = button.querySelector('span:last-child');
-                    
-                    const allContents = accordionContainer.querySelectorAll('.accordion-content');
-                    const allIcons = accordionContainer.querySelectorAll('.accordion-btn span:last-child');
-
-                    allContents.forEach(c => {
-                        if (c !== content) {
-                            c.style.maxHeight = null;
-                            c.classList.remove('active');
-                        }
-                    });
-                    allIcons.forEach(i => {
-                        if (i !== icon) {
-                            i.classList.remove('rotate-180');
-                        }
-                    });
-                    
-                    const isActive = content.style.maxHeight && content.style.maxHeight !== '0px';
-                    icon.classList.toggle('rotate-180', !isActive);
-                    content.classList.toggle('active', !isActive);
-                    content.style.maxHeight = isActive ? null : content.scrollHeight + "px";
-                }
-            });
-
-            const tabContainer = document.querySelector('.max-w-4xl');
-            const tabButtons = tabContainer.querySelectorAll('.tab-btn');
-            const tabContent = document.getElementById('tab-content');
-
-            function updateTabContent(tabId) {
-                tabContent.innerHTML = data.strategies[tabId];
-                tabButtons.forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.tab === tabId);
-                });
-            }
-
-            tabContainer.addEventListener('click', (e) => {
-                if (e.target.matches('.tab-btn')) {
-                    updateTabContent(e.target.dataset.tab);
-                }
-            });
-            
-            updateTabContent('padres');
-
-            const mentalHealthCtx = document.getElementById('mentalHealthChart').getContext('2d');
-            new Chart(mentalHealthCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Usuarios Intensivos (>4h/día)', 'Usuarios Moderados (<2h/día)'],
-                    datasets: [{
-                        label: '% que reporta salud mental pobre o muy pobre',
-                        data: [41, 23],
-                        backgroundColor: ['var(--h2)', 'var(--exito)'],
-                        borderColor: ['var(--h2)', 'var(--exito)'],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 50,
-                            ticks: { color: 'var(--acento)' }
-                        },
-                        x: { ticks: { color: 'var(--acento)' } }
-                    },
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.dataset.label}: ${context.raw}%`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            const usageTimeCtx = document.getElementById('usageTimeChart').getContext('2d');
-            new Chart(usageTimeCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Uso Excesivo (Baja Autoestima)', 'Uso Moderado (Alta Autoestima)'],
-                    datasets: [{
-                        label: 'Impacto en Autoestima',
-                        data: [60, 40],
-                        backgroundColor: ['var(--h2)', 'var(--exito)'],
-                        hoverOffset: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: { color: 'var(--acento)' }
-                        },
-                        tooltip: {
-                            enabled: false
-                        },
-                        title: {
-                            display: true,
-                            text: 'Correlación entre tiempo de uso y nivel de autoestima',
-                            color: 'var(--acento)',
-                            font: { size: 14 }
-                        }
-                    }
-                }
-            });
-            
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('section[id]');
-            
-            window.addEventListener('scroll', () => {
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (pageYOffset >= sectionTop - 60) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').includes(current)) {
-                        link.classList.add('active');
-                    }
-                });
-            });
-
-            // Lógica para el botón de audio
-            const podcastAudio = document.getElementById('podcastAudio');
-            const audioToggleButton = document.getElementById('audioToggleButton');
-            const playIcon = document.getElementById('playIcon');
-            const pauseIcon = document.getElementById('pauseIcon');
-            const audioButtonText = document.getElementById('audioButtonText');
-
-            audioToggleButton.addEventListener('click', () => {
-                if (podcastAudio.paused) {
-                    podcastAudio.play();
-                    playIcon.classList.add('hidden');
-                    pauseIcon.classList.remove('hidden');
-                    audioButtonText.textContent = 'Pausar Podcast';
-                } else {
-                    podcastAudio.pause();
-                    playIcon.classList.remove('hidden');
-                    pauseIcon.classList.add('hidden');
-                    audioButtonText.textContent = 'Escuchar Podcast';
-                }
-            });
-
-            // Opcional: Reiniciar el estado del botón si el audio termina
-            podcastAudio.addEventListener('ended', () => {
-                playIcon.classList.remove('hidden');
-                pauseIcon.classList.add('hidden');
-                audioButtonText.textContent = 'Escuchar Podcast';
-            });
-        });
-    </script>
+  </div>
 </body>
 </html>

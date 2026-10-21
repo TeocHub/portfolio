@@ -1,125 +1,114 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-area="pedagogia">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Condemarin</title>
-    <link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Condemarín | Tomás Cabrolier</title>
+  <meta name="description" content="Una propuesta que parte del lenguaje oral, valora la lengua materna y la identidad cultural, e integra el modelo holístico con el de destrezas.">
   <link rel="icon" href="../../../../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../../../assets/css/site.css">
-  <link rel="stylesheet" href="../../../../assets/css/armonia.css">
+  <link rel="stylesheet" href="../../../../assets/css/paginas.css">
   <script src="../../../../assets/js/site.js"></script>
-  <!-- barajas aplicadas -->
 </head>
-<body>
-    <main>
-        <section class="section">
-            <h2 class="section-title">Planteamientos Básicos</h2>
-            <p class="section-description">La propuesta se basa en la estimulación del lenguaje oral y el posterior desarrollo de la lectura y escritura, valorando la lengua materna y la identidad cultural de los alumnos.</p>
-            <div class="card-container">
-                <div class="card">
-                    <h3 class="card-title">Valorización de la Lengua Materna</h3>
-                    <p class="card-description">La lengua materna es el medio natural de expresión y un vehículo para integrar al niño a su cultura y comunidad.</p>
-                    <button class="card-button" onclick="showInfo('valorizacion')">Ver acciones educativas</button>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">Enriquecimiento de la Lengua</h3>
-                    <p class="card-description">El maestro debe guiar a los alumnos para que dominen distintos estilos y registros lingüísticos, incluyendo el lenguaje normativo.</p>
-                    <button class="card-button" onclick="showInfo('enriquecimiento')">Ver acciones de enriquecimiento</button>
-                </div>
-            </div>
-            <div id="info-valorizacion" class="hidden additional-info">
-                <h4>Acciones para Valorizar la Lengua Materna y la Identidad Cultural</h4>
-                <ul>
-                    <li>Escuchar a los alumnos con interés, sin interrumpirlos o corregirlos con referencia al habla normativa.</li>
-                    <li>Promover conversaciones naturales y modelar la narración de anécdotas y noticias.</li>
-                    <li>Invitar a los alumnos a realizar entrevistas a personas de la comunidad y recopilar tradiciones.</li>
-                    <li>Organizar visitas a lugares interesantes y proyectos que beneficien su entorno.</li>
-                </ul>
-            </div>
-            <div id="info-enriquecimiento" class="hidden additional-info">
-                <h4>Acciones para Enriquecer la Lengua Materna</h4>
-                <ul>
-                    <li>Estimular imitaciones y juegos de roles para explorar diferentes registros lingüísticos.</li>
-                    <li>Crear juegos de diálogos con temas de interés para los alumnos.</li>
-                    <li>Estimular la actividad de "mostrar y decir", donde los alumnos preparan y exponen sobre un objeto de su interés.</li>
-                    <li>Formular preguntas que animen a los alumnos a clarificar, calificar o elaborar sus respuestas.</li>
-                </ul>
-            </div>
-        </section>
-        <div class="line"></div>
-        <section class="section">
-            <h2 class="section-title">Aprendizaje y Desarrollo de la Lectura y Escritura</h2>
-            <p class="section-description">La propuesta integra dos modelos principales: el holístico y el de destrezas, reconociendo la importancia de ambos para un aprendizaje completo.</p>
-            <div class="card-container">
-                <div class="card">
-                    <h3 class="card-title">Modelo Holístico</h3>
-                    <p class="card-description">Se centra en la construcción de significado por parte del lector, utilizando su competencia lingüística y su experiencia. Considera la lectura como una extensión natural del lenguaje oral.  </p>
-                    <button class="card-button" onclick="showInfo('holistico')">Ver conceptos clave</button>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">Modelo de Destrezas</h3>
-                    <p class="card-description">Enfoca la lectura como una destreza compleja compuesta por subdestrezas que deben ser enseñadas de forma sistemática y secuencial. El profesor tiene un rol directivo.  </p>
-                    <button class="card-button" onclick="showInfo('destrezas')">Ver conceptos clave</button>
-                </div>
-            </div>
-            <div id="info-holistico" class="hidden additional-info">
-                <h4>Conceptos Clave del Modelo Holístico</h4>
-                <ul>
-                    <li><strong>Psicolingüística:</strong> El aprendizaje de la lectura se basa en la competencia lingüística. El lector es un ser activo en la construcción del significado.</li>
-                    <li><strong>Sociolingüística:</strong> El aprendizaje del lenguaje ocurre a través de su uso funcional en un contexto ambiental y lingüístico. Los niños aprenden las reglas del lenguaje al usarlo.</li>
-                    <li><strong>Teoría del Discurso:</strong> Se enfatiza la importancia de las gramáticas textuales y la pragmática. El texto debe tener cohesión y coherencia.</li>
-                </ul>
-                <button class="card-button" onclick="showMoreInfo('holistico-acciones')">Ver acciones pedagógicas</button>
-            </div>
-            <div id="holistico-acciones" class="hidden additional-info">
-                <h4>Acciones Pedagógicas del Modelo Holístico</h4>
-                <ul>
-                    <li>Crear un ambiente de inmersión en el lenguaje escrito con rótulos y biblioteca de aula.</li>
-                    <li>Brindar muchas experiencias de escuchar cuentos y leer "lecturas predecibles".</li>
-                    <li>Estimular la lectura de textos funcionales del entorno (letreros, propagandas).</li>
-                    <li>Promover la lectura y escritura de registros de experiencias y textos con diferentes propósitos.</li>
-                </ul>
-            </div>
-            <div id="info-destrezas" class="hidden additional-info">
-                <h4>Conceptos Clave del Modelo de Destrezas</h4>
-                <ul>
-                    <li><strong>Psicología Conductista:</strong> Considera que la lectura es una destreza unitaria y compleja, compuesta por subdestrezas que se aprenden secuencialmente.</li>
-                    <li><strong>Instrucción directa:</strong> El profesor guía el aprendizaje de las subdestrezas, que son observables y evaluables.</li>
-                    <li><strong>Secuenciación:</strong> Las destrezas se ordenan de las más simples a las más complejas, y los alumnos deben seguir esta secuencia.</li>
-                </ul>
-                <button class="card-button" onclick="showMoreInfo('destrezas-acciones')">Ver acciones pedagógicas</button>
-            </div>
-            <div id="destrezas-acciones" class="hidden additional-info">
-                <h4>Acciones Pedagógicas del Modelo de Destrezas</h4>
-                <ul>
-                    <li>Estimular el reconocimiento de palabras a primera vista (vocabulario visual).</li>
-                    <li>Enseñar las letras del alfabeto y su secuencia.</li>
-                    <li>Desarrollar la conciencia fonológica: rimas, sílabas, fonemas.</li>
-                    <li>Enseñar sistemáticamente un modelo caligráfico y la creación de una conciencia ortográfica.</li>
-                </ul>
-            </div>
-        </section>
-        <div class="line"></div>
-        <section class="section">
-            <h2 class="section-title">Integración y Comentario</h2>
-            <p class="section-description">La propuesta subraya la necesidad de integrar ambos modelos para evitar las limitaciones de una aplicación exclusiva de cualquiera de ellos.  </p>
-            <div class="card-container">
-                <div class="card">
-                    <h3 class="card-title">Riesgos del Modelo de Destrezas Exclusivo</h3>
-                    <p class="card-description">Puede fragmentar la lectura, ignorar los recursos lingüísticos del niño y no enfatizar el carácter funcional del lenguaje.</p>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">Riesgos del Modelo Holístico Exclusivo</h3>
-                    <p class="card-description">Puede ser limitado en la etapa inicial si excluye la enseñanza directa de lo fónico, que se ha demostrado que mejora el rendimiento lector.</p>
-                </div>
-            </div>
-            <div class="conclusion">
-                <p>En el aula, los maestros están logrando esta integración al usar estrategias tradicionales (silabarios, caligrafía) y al mismo tiempo incorporar nuevos enfoques (caminatas de lectura, lecturas predecibles, escritura creativa).  </p>
-            </div>
-        </section>
+<body class="tc pagina">
+  <header class="cielo cabecera-pagina">
+    <div class="escena"></div>
+    <div class="tc-contenedor">
+      <p class="carta">Lectura guiada · Lenguaje</p>
+      <h1>Condemarín: del lenguaje oral a la lectura y la escritura</h1>
+      <p class="intro">Una propuesta que parte del lenguaje oral, valora la lengua materna y la identidad cultural, e integra el modelo holístico con el de destrezas.</p>
+        <ul class="meta"><li><b>Autora</b>Mabel Condemarín</li></ul>
+    </div>
+  </header>
+  <div class="tc-contenedor lectura">
+    <nav class="indice" data-indice-pagina aria-label="En esta página"></nav>
+    <main class="cuerpo">
+<section class="bloque" id="planteamientos">
+        <h2>Planteamientos básicos</h2>
+        <p class="bajada">Primero se estimula el lenguaje oral; después se desarrollan la lectura y la escritura, valorando la lengua materna y la identidad cultural de los alumnos.</p>
+        <ul class="fichas dos">
+          <li class="ficha">
+            <h3>Valorizar la lengua materna</h3>
+            <p>La lengua materna es el medio natural de expresión y el vehículo que integra al niño a su cultura y comunidad.</p>
+            <details class="mas"><summary>Acciones educativas</summary>
+              <ul>
+                <li>Escuchar a los alumnos con interés, sin interrumpirlos ni corregirlos según el habla normativa.</li>
+                <li>Promover conversaciones naturales y modelar la narración de anécdotas y noticias.</li>
+                <li>Invitarlos a entrevistar a personas de la comunidad y recopilar tradiciones.</li>
+                <li>Organizar visitas a lugares interesantes y proyectos que beneficien su entorno.</li>
+              </ul>
+            </details>
+          </li>
+          <li class="ficha">
+            <h3>Enriquecer la lengua</h3>
+            <p>El docente guía a los alumnos para que dominen distintos estilos y registros, incluido el lenguaje normativo.</p>
+            <details class="mas"><summary>Acciones de enriquecimiento</summary>
+              <ul>
+                <li>Estimular imitaciones y juegos de roles para explorar registros lingüísticos.</li>
+                <li>Crear juegos de diálogo con temas que interesen a los alumnos.</li>
+                <li>Hacer «mostrar y decir»: cada alumno prepara y expone sobre un objeto que le interese.</li>
+                <li>Formular preguntas que los animen a aclarar, precisar o desarrollar sus respuestas.</li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </section>
+
+      <section class="bloque" id="modelos">
+        <h2>Dos modelos de aprendizaje</h2>
+        <p class="bajada">La propuesta integra el modelo holístico y el de destrezas: ambos son necesarios para un aprendizaje completo.</p>
+        <div class="pestanas" data-pestanas>
+          <div role="tablist" aria-label="Modelos">
+            <button role="tab" type="button">Modelo holístico</button>
+            <button role="tab" type="button">Modelo de destrezas</button>
+          </div>
+          <div role="tabpanel">
+            <p>Se centra en la construcción de significado por parte del lector, a partir de su competencia lingüística y su experiencia. La lectura es una extensión natural del lenguaje oral.</p>
+            <h3>Fundamentos</h3>
+            <dl class="glosario">
+              <div class="termino"><dt>Psicolingüística</dt><dd>Leer se basa en la competencia lingüística; el lector construye activamente el significado.</dd></div>
+              <div class="termino"><dt>Sociolingüística</dt><dd>El lenguaje se aprende usándolo con funciones reales en un contexto; así los niños aprenden sus reglas.</dd></div>
+              <div class="termino"><dt>Teoría del discurso</dt><dd>Importan las gramáticas textuales y la pragmática: el texto debe tener cohesión y coherencia.</dd></div>
+            </dl>
+            <h3>Acciones pedagógicas</h3>
+            <ul class="fichas dos">
+              <li class="ficha"><p>Crear un ambiente de inmersión en lo escrito, con rótulos y biblioteca de aula.</p></li>
+              <li class="ficha"><p>Dar muchas experiencias de escuchar cuentos y leer «lecturas predecibles».</p></li>
+              <li class="ficha"><p>Leer textos funcionales del entorno: letreros, propaganda.</p></li>
+              <li class="ficha"><p>Leer y escribir registros de experiencias y textos con distintos propósitos.</p></li>
+            </ul>
+          </div>
+          <div role="tabpanel">
+            <p>Entiende la lectura como una destreza compleja hecha de subdestrezas que se enseñan de forma sistemática y secuencial. El profesor tiene un rol directivo.</p>
+            <h3>Fundamentos</h3>
+            <dl class="glosario">
+              <div class="termino"><dt>Psicología conductista</dt><dd>La lectura es una destreza unitaria y compleja, compuesta por subdestrezas que se aprenden en secuencia.</dd></div>
+              <div class="termino"><dt>Instrucción directa</dt><dd>El profesor guía el aprendizaje de subdestrezas observables y evaluables.</dd></div>
+              <div class="termino"><dt>Secuenciación</dt><dd>Las destrezas van de las más simples a las más complejas, y los alumnos siguen ese orden.</dd></div>
+            </dl>
+            <h3>Acciones pedagógicas</h3>
+            <ul class="fichas dos">
+              <li class="ficha"><p>Estimular el reconocimiento de palabras a primera vista (vocabulario visual).</p></li>
+              <li class="ficha"><p>Enseñar las letras del alfabeto y su secuencia.</p></li>
+              <li class="ficha"><p>Desarrollar la conciencia fonológica: rimas, sílabas, fonemas.</p></li>
+              <li class="ficha"><p>Enseñar sistemáticamente un modelo caligráfico y crear conciencia ortográfica.</p></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="bloque" id="integracion">
+        <h2>Integración</h2>
+        <p class="bajada">Aplicar solo uno de los modelos tiene límites.</p>
+        <ul class="fichas dos">
+          <li class="ficha"><h3>Solo destrezas</h3><p>Puede fragmentar la lectura, ignorar los recursos lingüísticos del niño y descuidar el carácter funcional del lenguaje.</p></li>
+          <li class="ficha"><h3>Solo holístico</h3><p>Puede quedarse corto en la etapa inicial si excluye la enseñanza directa de lo fónico, que mejora el rendimiento lector.</p></li>
+        </ul>
+        <div class="nota idea">
+          <p>En el aula, los docentes ya integran ambos: usan estrategias tradicionales, como silabarios y caligrafía, junto con caminatas de lectura, lecturas predecibles y escritura creativa.</p>
+        </div>
+      </section>
     </main>
-    <script src="script.js"></script>
+  </div>
 </body>
 </html>

@@ -1,322 +1,65 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-area="letras">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Editorial Maestra</title>
-    <style>
-        :root {
-            --primary: var(--h2);
-            --secondary: var(--h2);
-            --bg: var(--fondo);
-            --card: var(--superficie);
-            --text: var(--h3);
-            --border: var(--h3);
-            --danger: var(--h2);
-        }
-
-        body {
-            font-family: var(--texto);
-            background-color: var(--fondo);
-            color: var(--h3);
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .container {
-            background: var(--superficie);
-            padding: 2rem;
-            border-radius: var(--radio-sm);
-            box-shadow: var(--sombra-suave);
-            width: 100%;
-            max-width: 600px;
-        }
-
-        h1 {
-            text-align: center;
-            color: var(--h3);
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .section {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--h3);
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .row {
-            display: flex;
-            gap: 12px;
-        }
-
-        .col {
-            flex: 1;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 0.6rem;
-            border: 1px solid var(--h3);
-            border-radius: var(--radio-sm);
-            font-size: 1rem;
-            box-sizing: border-box;
-        }
-        
-        input:focus, select:focus {
-            outline: 2px solid var(--h2);
-            border-color: transparent;
-        }
-
-        .helper {
-            font-size: 0.75rem;
-            color: var(--h3);
-            margin-top: 4px;
-        }
-
-        /* Botones y lista */
-        .btn-add {
-            background: var(--h2-relleno);
-            color: var(--tinta);
-            border: none;
-            padding: 0 1.5rem;
-            border-radius: var(--radio-sm);
-            font-weight: 600;
-            cursor: pointer;
-        }
-        
-        .btn-add:hover { background: var(--h2-relleno); }
-
-        .chapter-list {
-            margin-top: 10px;
-            max-height: 180px;
-            overflow-y: auto;
-            background: var(--fondo);
-            border: 1px solid var(--h3);
-            border-radius: var(--radio-sm);
-        }
-
-        .chapter-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 12px;
-            border-bottom: 1px solid var(--h3);
-            font-size: 0.9rem;
-            align-items: center;
-        }
-        
-        .chapter-item:nth-child(even) { background: var(--superficie); }
-
-        .btn-del {
-            color: var(--h2);
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2rem;
-            line-height: 1;
-        }
-
-        /* Resultados Divididos */
-        .results-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 1rem;
-        }
-
-        .result-card {
-            background: var(--fondo);
-            padding: 1rem;
-            border-radius: var(--radio-sm);
-            text-align: center;
-            border: 1px solid var(--h2);
-        }
-
-        .result-card.secondary {
-            background: var(--fondo); /* Un tono rojizo/rosado suave para diferenciar */
-            border-color: var(--h2);
-        }
-
-        .result-value {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--h2);
-        }
-        
-        .result-card.secondary .result-value {
-            color: var(--h2);
-        }
-
-        .result-title {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--h3);
-            font-weight: 700;
-        }
-        
-        .result-sub {
-            font-size: 0.75rem;
-            color: var(--h3);
-            margin-top: 5px;
-        }
-        
-        .total-summary {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 0.85rem;
-            color: var(--h3);
-        }
-
-    </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora editorial | Tomás Cabrolier</title>
+  <meta name="description" content="Calcula cuántas páginas y hojas tendrá tu libro a partir de las palabras de cada capítulo.">
   <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/site.css">
-  <link rel="stylesheet" href="../../assets/css/armonia.css">
+  <link rel="stylesheet" href="../../assets/css/paginas.css">
   <script src="../../assets/js/site.js"></script>
-  <!-- barajas aplicadas -->
 </head>
-<body>
-
-<div class="container">
-    <h1>Calculadora de Libro</h1>
-
-    <div class="section">
-        <div class="row">
-            <div class="col">
-                <label>Formato / Tamaño</label>
-                <select id="density" onchange="calc()">
-                    <option value="250">Bolsillo (250 pal/pág)</option>
-                    <option value="300" selected>Estándar (300 pal/pág)</option>
-                    <option value="350">Literario (350 pal/pág)</option>
-                    <option value="450">Grande (450 pal/pág)</option>
-                </select>
-            </div>
-            <div class="col">
-                <label>Páginas Extra</label>
-                <input type="number" id="extras" value="8" min="0" onchange="calc()">
-                <div class="helper">Portadas, legales, blancas</div>
-            </div>
-        </div>
+<body class="tc pagina">
+  <header class="cielo cabecera-pagina">
+    <div class="escena"></div>
+    <div class="tc-contenedor">
+      <p class="carta">Herramienta · Letras</p>
+      <h1>Calculadora editorial</h1>
+      <p class="intro">Calcula cuántas páginas y hojas tendrá tu libro a partir de las palabras de cada capítulo.</p>
+        <ul class="meta"><li><b>Supone</b>cada capítulo empieza en una página nueva</li></ul>
     </div>
-
-    <div class="section">
-        <label>Ingresar Capítulos (Palabras)</label>
-        <div class="row">
-            <div class="col">
-                <input type="number" id="chapInput" placeholder="Ej: 2500" onkeypress="enterKey(event)">
-            </div>
-            <button class="btn-add" onclick="addChap()">+</button>
-        </div>
-        
-        <div class="chapter-list" id="listContainer" style="display: none;"></div>
-        
-        <div style="text-align: right; margin-top: 5px;">
-             <span id="chapCount" style="font-size: 0.8rem; color: var(--h3); margin-right: 10px;">0 caps</span>
-             <a href="#" onclick="clearAll()" style="color: var(--h2); font-size: 0.8rem; text-decoration: none;">Borrar todo</a>
-        </div>
-    </div>
-
-    <div class="results-grid">
-        <div class="result-card">
-            <div class="result-title">Páginas (Caras)</div>
-            <div class="result-value" id="resPages">0</div>
-            <div class="result-sub">Números a pie de pág.</div>
-        </div>
-
-        <div class="result-card secondary">
-            <div class="result-title">Hojas de Papel</div>
-            <div class="result-value" id="resSheets">0</div>
-            <div class="result-sub">Hojas físicas</div>
-        </div>
-    </div>
+  </header>
+  <div class="tc-contenedor lectura sin-indice">
     
-    <div class="total-summary" id="wordSummary">
-        Total palabras manuscrito: 0
-    </div>
-</div>
-
-<script>
-    let chapters = [];
-
-    function addChap() {
-        const val = parseInt(document.getElementById('chapInput').value);
-        if (val > 0) {
-            chapters.push(val);
-            document.getElementById('chapInput').value = '';
-            document.getElementById('chapInput').focus();
-            render();
-            calc();
-        }
-    }
-
-    function delChap(idx) {
-        chapters.splice(idx, 1);
-        render();
-        calc();
-    }
-    
-    function clearAll() {
-        chapters = [];
-        render();
-        calc();
-    }
-
-    function enterKey(e) {
-        if(e.key === 'Enter') addChap();
-    }
-
-    function render() {
-        const box = document.getElementById('listContainer');
-        box.innerHTML = '';
-        box.style.display = chapters.length ? 'block' : 'none';
-        
-        chapters.forEach((w, i) => {
-            box.innerHTML += `
-                <div class="chapter-item">
-                    <span><strong>Cap ${i+1}:</strong> ${w} pal.</span>
-                    <button class="btn-del" onclick="delChap(${i})">&times;</button>
-                </div>
-            `;
-        });
-        document.getElementById('chapCount').innerText = `${chapters.length} caps`;
-    }
-
-    function calc() {
-        const density = parseInt(document.getElementById('density').value);
-        const extras = parseInt(document.getElementById('extras').value) || 0;
-        
-        let contentPages = 0; // Caras numeradas
-        let totalWords = 0;
-
-        // Lógica de salto de página simple
-        chapters.forEach(w => {
-            totalWords += w;
-            // Si el cap ocupa 3.1 páginas reales, ocupa 4 caras numeradas
-            // porque la siguiente empieza limpia en la siguiente cara.
-            contentPages += Math.ceil(w / density);
-        });
-
-        const totalPages = contentPages + extras;
-        
-        // Cálculo de hojas físicas: Cada hoja tiene 2 caras.
-        // Si tengo 151 páginas, necesito 76 hojas (la última hoja tendrá la cara trasera blanca).
-        const totalSheets = Math.ceil(totalPages / 2);
-
-        // Mostrar
-        document.getElementById('resPages').innerText = totalPages;
-        document.getElementById('resSheets').innerText = totalSheets;
-        document.getElementById('wordSummary').innerText = `Total palabras manuscrito: ${totalWords.toLocaleString()}`;
-    }
-</script>
-
+    <main class="cuerpo">
+<section class="bloque" id="calculadora">
+        <div class="herramienta">
+          <div class="campos">
+            <div class="campo">
+              <label for="densidad">Formato</label>
+              <select id="densidad">
+                <option value="250">Bolsillo (250 palabras por página)</option>
+                <option value="300" selected>Estándar (300 palabras por página)</option>
+                <option value="350">Literario (350 palabras por página)</option>
+                <option value="450">Grande (450 palabras por página)</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="extras">Páginas extra</label>
+              <input id="extras" type="number" value="8" min="0" inputmode="numeric">
+              <small>Portadas, página legal, páginas en blanco.</small>
+            </div>
+          </div>
+          <form class="campos" id="form-capitulo" style="margin-top:18px">
+            <div class="campo">
+              <label for="palabras">Palabras del capítulo</label>
+              <input id="palabras" type="number" min="1" placeholder="Ej.: 2500" inputmode="numeric">
+            </div>
+            <div class="campo"><button class="boton" type="submit">Agregar capítulo</button></div>
+          </form>
+          <ol class="capitulos" id="capitulos" aria-live="polite"></ol>
+          <p class="resultado vacio" id="sin-capitulos" style="min-height:0;padding:10px 14px">Todavía no agregas capítulos.</p>
+        </div>
+        <ul class="datos" aria-live="polite">
+          <li class="dato"><span class="cifra" id="paginas">8</span><span class="que">páginas (caras numeradas)</span></li>
+          <li class="dato"><span class="cifra" id="hojas">4</span><span class="que">hojas de papel</span></li>
+          <li class="dato"><span class="cifra" id="total-palabras">0</span><span class="que">palabras en el manuscrito</span></li>
+        </ul>
+        <div class="botones"><button class="boton secundario" type="button" id="borrar-todo">Borrar todos los capítulos</button></div>
+      </section>
+    </main>
+  </div>
+  <script src="calculadora.js"></script>
 </body>
 </html>
