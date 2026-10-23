@@ -12,7 +12,7 @@
    4. Arcanos (cartas)
    5. Cielo: cabecera de portada e índices
    6. Portada
-   7. Índices de área y estante de libros
+   7. Índices de área (la Rueda está al final)
    ========================================================== */
 
 @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&display=swap");
@@ -842,43 +842,7 @@ body.tc :where(h1, h2, h3) {
 .grupo { padding-top: 44px; }
 .grupo h2 { font-size: 1.7rem; margin-bottom: 4px; }
 .grupo > p { margin: 0 0 18px; color: var(--tinta-2); max-width: 42rem; }
-.grupo h2 + .obras, .grupo h2 + .estante { margin-top: 16px; }
-
-/* Estante de libros (Letras) */
-.estante {
-  list-style: none;
-  margin: 18px 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 34px 26px;
-}
-.libro a { display: block; text-decoration: none; }
-.libro img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
-  background: var(--linea);
-  border: var(--borde);
-  border-radius: 4px 12px 12px 4px;
-  box-shadow: var(--pegatina);
-  transition: transform .2s;
-}
-.libro:nth-child(odd) img { transform: rotate(-1.5deg); }
-.libro:nth-child(even) img { transform: rotate(1.2deg); }
-.libro a:hover img { transform: rotate(0) translateY(-4px); }
-.libro h3 { font-size: 1.12rem; margin-top: 14px; }
-.libro p { margin: 4px 0 0; font-size: .93rem; line-height: 1.5; color: var(--tinta-2); }
-.libro a:hover h3 { text-decoration: underline; text-decoration-color: var(--acento-relleno); text-decoration-thickness: 3px; text-underline-offset: 3px; }
-:root[data-baraja="sombra"] .libro img {
-  transform: none;
-  border-radius: 2px;
-  box-shadow: 0 0 0 4px var(--fondo), 0 0 0 5px rgb(var(--trazo-rgb) / .45), 0 24px 30px -20px #000;
-}
-:root[data-baraja="sombra"] .libro a:hover img { transform: translateY(-3px); }
-:root[data-baraja="sombra"] .libro a:hover h3 { text-decoration-color: var(--resalte); text-decoration-thickness: 1px; }
+.grupo h2 + .obras { margin-top: 16px; }
 
 /* Detalles de las escenas y glifos */
 .escena > span { display: none; }
@@ -898,3 +862,453 @@ body.tc :where(h1, h2, h3) {
 }
 
 @media (max-width: 1499px) { .portada .escena .n1 { display: none; } }
+
+/* ==========================================================
+   La Rueda: cómo se exploran las áreas (arcano X)
+   Luz: ruleta de feria con trazo de pegatina.
+   Sombra: astrolabio de latón grabado.
+   ========================================================== */
+.rueda-zona {
+  display: grid;
+  grid-template-columns: minmax(0, 540px) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+  padding-block: clamp(40px, 6vw, 76px) clamp(48px, 7vw, 88px);
+  overflow-x: clip;   /* al girar, el cuadrado de la rueda no ensancha la página */
+}
+.rueda-escena { position: relative; min-width: 0; }
+.rueda {
+  --giro: 0deg;
+  --dur: 900ms;
+  --curva: cubic-bezier(.18, .8, .22, 1);
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+.rueda.arrastrando { cursor: grabbing; }
+.rueda::before {           /* sombra fija: no gira con la rueda */
+  content: "";
+  position: absolute;
+  inset: 0.5%;
+  border-radius: 50%;
+  box-shadow: 8px 8px 0 var(--trazo);
+}
+.rueda-giro {
+  position: absolute;
+  inset: 0;
+  transform: rotate(var(--giro));
+  transition: transform var(--dur) var(--curva);
+}
+.rueda-fondo { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.rueda-fondo .disco { fill: var(--superficie); }
+.rueda-fondo .cara { fill: var(--gs); }
+.rueda-fondo .banda { fill: var(--g); }
+.rueda-fondo .aro { fill: none; stroke: var(--trazo); stroke-width: 3; }
+.rueda-fondo .aro.borde { stroke-width: 5; }
+.rueda-fondo .aro.interior { stroke-width: 2; stroke-dasharray: 2 9; stroke-linecap: round; }
+.rueda-fondo .radio { stroke: var(--trazo); stroke-width: 3; }
+.rueda-fondo .radio.fino { stroke: rgb(var(--trazo-rgb) / .28); stroke-width: 2; stroke-dasharray: 3 7; stroke-linecap: round; }
+.rueda-fondo .marca { display: none; }
+.rueda-fondo .foco { fill: var(--resalte); stroke: var(--trazo); stroke-width: 3; }
+.rueda.girando .foco { animation: foco .32s steps(1) infinite; }
+.rueda.girando .foco:nth-of-type(even) { animation-delay: .16s; }
+@keyframes foco { 50% { fill: var(--superficie); } }
+.rueda-fondo .rotulo {
+  font: 700 calc(var(--esc, 1) * 15px)/1 var(--texto);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  fill: var(--tinta);
+}
+.rueda-fondo .rotulo.aparece { animation: rotulo .35s ease-out; }
+@keyframes rotulo { from { opacity: 0; } }
+
+/* Medallones */
+.rueda-medallones { position: absolute; inset: 0; }
+.medallon {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--med);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--tinta);
+  -webkit-tap-highlight-color: transparent;
+}
+.rueda.arrastrando .medallon { cursor: grabbing; }
+.medallon > span {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--superficie);
+  border: 3px solid var(--trazo);
+  box-shadow: 3px 3px 0 var(--trazo);
+  transform: rotate(calc(-1 * var(--giro)));
+  transition: transform var(--dur) var(--curva), scale .25s, background-color .25s, box-shadow .25s;
+}
+.medallon .rueda-icono {
+  width: 50%;
+  height: 50%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.medallon.con-portada > span { background: var(--trazo); }
+.medallon img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 18%;
+  pointer-events: none;
+}
+.medallon:hover > span { scale: 1.07; }
+.medallon[aria-pressed="true"] > span {
+  scale: 1.16;
+  background: var(--resalte);
+  box-shadow: 4px 4px 0 var(--trazo), 0 0 0 6px rgb(var(--resalte-rgb) / .35);
+}
+.medallon.pendiente > span { border-style: dashed; box-shadow: none; }
+.medallon.pendiente .rueda-icono { opacity: .6; }
+.medallon:focus-visible { outline: none; }
+.medallon:focus-visible > span { outline: 3px solid var(--trazo); outline-offset: 5px; }
+.medallon-nombre {             /* nombre al pasar el mouse */
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  translate: -50% 4px;
+  width: max-content;
+  max-width: 13rem;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: var(--trazo);
+  color: var(--fondo);
+  font: 700 .82rem/1.3 var(--texto);
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s, translate .15s;
+  z-index: 3;
+}
+@media (hover: hover) {
+  .medallon:hover .medallon-nombre { opacity: 1; translate: -50% 0; }
+  .rueda.arrastrando .medallon-nombre { opacity: 0; }
+}
+.medallon:hover { z-index: 4; }
+
+.hueco {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: calc(var(--med) * .55);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border: 2.5px dashed rgb(var(--trazo-rgb) / .35);
+  border-radius: 50%;
+}
+:root[data-baraja="sombra"] .hueco { border-width: 1px; border-style: dotted; border-color: rgb(var(--trazo-rgb) / .6); }
+
+/* Centro: tirar la rueda */
+.rueda-centro {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 38%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 2px;
+  padding: 0;
+  border: var(--borde);
+  border-radius: 50%;
+  background: var(--acento-relleno);
+  box-shadow: 4px 4px 0 var(--trazo);
+  color: var(--tinta);
+  font: 800 .95rem/1 var(--texto);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+  z-index: 2;
+}
+div.rueda-centro { cursor: default; }
+.rueda-centro .glifo {
+  width: 54%;
+  height: auto;
+  fill: none;
+  stroke: var(--trazo);
+  stroke-width: 4.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+.rueda-centro .glifo .area { fill: var(--superficie); }
+.rueda-centro .glifo .tinta { fill: var(--trazo); stroke: none; }
+.rueda-centro .glifo .papel { fill: var(--superficie); }
+.rueda-centro .glifo .llama { fill: #FF8A3D; }
+.rueda-centro .glifo .sol { fill: var(--resalte); }
+.rueda-centro span {
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--superficie);
+  border: 2px solid var(--trazo);
+}
+button.rueda-centro:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--trazo); }
+button.rueda-centro:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--trazo); }
+.rueda.girando .rueda-centro .glifo { animation: tambaleo .5s ease-in-out infinite alternate; }
+@keyframes tambaleo { from { rotate: -8deg; } to { rotate: 8deg; } }
+
+/* Aguja: a la derecha (apunta a la lectura); abajo en el celular */
+.rueda-aguja {
+  position: absolute;
+  top: 50%;
+  right: -40px;
+  width: 48px;
+  height: 48px;
+  translate: 0 -50%;
+  fill: var(--resalte);
+  stroke: var(--trazo);
+  stroke-width: 3.5;
+  stroke-linejoin: round;
+  filter: drop-shadow(3px 3px 0 var(--trazo));
+  z-index: 3;
+  pointer-events: none;
+}
+
+.rueda-pista { margin: 30px 0 0; text-align: center; font-size: .92rem; color: var(--tinta-2); }
+.rueda-grupos { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 14px; }
+.rueda-grupos button {
+  padding: 5px 14px;
+  border: 2px solid var(--trazo);
+  border-radius: 999px;
+  background: var(--g);
+  color: var(--tinta);
+  font: 700 .86rem/1.2 var(--texto);
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--trazo);
+}
+.rueda-grupos button:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--trazo); }
+
+/* Lectura: el trabajo frente a la aguja */
+.rueda-lectura {
+  position: relative;
+  min-width: 0;
+  padding: clamp(24px, 3.4vw, 36px);
+  background: var(--superficie);
+  border: var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--pegatina);
+}
+.rueda-lectura::before {       /* franja del color del grupo */
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 12px;
+  background: var(--g);
+  border-bottom: var(--borde);
+  border-radius: calc(var(--radio) - 3px) calc(var(--radio) - 3px) 0 0;
+}
+.rueda-contenido { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 22px; align-items: start; padding-top: 8px; }
+.rueda-lectura.cambia .rueda-contenido { animation: lectura .45s var(--curva, ease-out); }
+.rueda-lectura.esperando .rueda-contenido { opacity: .25; transition: opacity .3s; }
+@keyframes lectura { from { opacity: 0; transform: translateY(10px); } }
+.rueda-emblema {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--g);
+  border: var(--borde);
+  box-shadow: var(--pegatina-sm);
+}
+.rueda-emblema .rueda-icono { width: 52%; fill: none; stroke: var(--tinta); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.rueda-portada {
+  width: 128px;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border: var(--borde);
+  border-radius: 4px 10px 10px 4px;
+  box-shadow: var(--pegatina-sm);
+  transform: rotate(-2deg);
+}
+.rueda-kicker { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; font-size: .86rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--tinta-2); }
+.rueda-num {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.1em;
+  height: 2.1em;
+  padding: 0 .4em;
+  border: 2px solid var(--trazo);
+  border-radius: 999px;
+  background: var(--resalte);
+  color: var(--tinta);
+  font-family: var(--display);
+  letter-spacing: 0;
+}
+.rueda-texto h2 { margin: 0; font-size: clamp(1.6rem, 3.2vw, 2.25rem); line-height: 1.1; }
+.rueda-tipo { margin: 8px 0 0; font-weight: 700; color: var(--tinta); }
+.rueda-tipo::before { content: "✦ "; color: var(--gt); }
+.rueda-desc { margin: 12px 0 0; font-size: 1.05rem; line-height: 1.6; color: var(--tinta-2); max-width: 36rem; }
+.rueda-hijos { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-top: 16px; }
+.rueda-hijos > span { width: 100%; font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--tinta-2); }
+.rueda-hijos a, .rueda-hijos em {
+  padding: 2px 11px;
+  border: 1.5px solid var(--trazo);
+  border-radius: 999px;
+  background: var(--gs);
+  color: var(--tinta);
+  font-size: .86rem;
+  font-style: normal;
+  font-weight: 700;
+  text-decoration: none;
+}
+.rueda-hijos em { background: transparent; border-style: dashed; font-weight: 400; }
+.rueda-hijos a:hover { background: var(--g); }
+.rueda-abrir { margin-top: 22px; }
+.rueda-pronto { display: inline-block; padding: 8px 16px; border: 2px dashed var(--trazo); border-radius: 999px; font-weight: 700; color: var(--tinta-2); }
+.rueda-pasos { display: flex; align-items: center; justify-content: flex-end; gap: 12px; margin-top: 24px; padding-top: 16px; border-top: 2px dashed rgb(var(--trazo-rgb) / .25); font-weight: 700; font-variant-numeric: tabular-nums; color: var(--tinta-2); }
+.rueda-pasos button {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 2px solid var(--trazo);
+  border-radius: 50%;
+  background: var(--superficie);
+  color: var(--tinta);
+  box-shadow: 2px 2px 0 var(--trazo);
+  cursor: pointer;
+}
+.rueda-pasos button:hover { background: var(--resalte); }
+.rueda-pasos svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+
+@media (max-width: 759px) {
+  .rueda-zona { grid-template-columns: minmax(0, 1fr); gap: 30px; }
+  .rueda-escena { max-width: 440px; width: 100%; margin-inline: auto; }
+  .rueda-escena .rueda { width: calc(100% - 12px); }
+  .rueda-aguja { top: auto; right: auto; bottom: -40px; left: 50%; translate: -50% 0; rotate: -90deg; filter: drop-shadow(3px -3px 0 var(--trazo)); }
+  .rueda-pista { margin-top: 48px; }
+  .rueda-contenido { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .rueda-emblema { width: 60px; }
+  .rueda-portada { width: 104px; }
+  .rueda-fondo .rotulo { font-size: calc(var(--esc, 1) * 17px); }
+  .medallon-nombre { display: none; }
+}
+
+/* ----- Sombra: astrolabio de latón ----- */
+:root[data-baraja="sombra"] .rueda::before {
+  inset: -3%;
+  box-shadow: none;
+  background: radial-gradient(closest-side, rgb(var(--resalte-rgb) / .10), transparent 72%);
+}
+:root[data-baraja="sombra"] .rueda-fondo .disco { fill: var(--fondo-2); }
+:root[data-baraja="sombra"] .rueda-fondo .cara { fill: rgb(var(--resalte-rgb) / .025); }
+:root[data-baraja="sombra"] .rueda-fondo .banda { fill: rgb(var(--resalte-rgb) / .06); }
+:root[data-baraja="sombra"] .rueda-fondo .aro { stroke-width: 1.2; }
+:root[data-baraja="sombra"] .rueda-fondo .aro.borde { stroke-width: 1.6; }
+:root[data-baraja="sombra"] .rueda-fondo .aro.interior { stroke-width: 1; stroke-dasharray: 1 5; }
+:root[data-baraja="sombra"] .rueda-fondo .radio { stroke-width: 1.2; }
+:root[data-baraja="sombra"] .rueda-fondo .radio.fino { stroke: rgb(var(--trazo-rgb) / .4); stroke-width: 1; stroke-dasharray: 1 5; }
+:root[data-baraja="sombra"] .rueda-fondo .marca { display: inline; stroke: var(--trazo); stroke-width: 1; }
+:root[data-baraja="sombra"] .rueda-fondo .foco { display: none; }
+:root[data-baraja="sombra"] .rueda-fondo .rotulo {
+  font: italic 400 calc(var(--esc, 1) * 17px)/1 var(--display);
+  letter-spacing: .12em;
+  text-transform: none;
+  fill: var(--resalte);
+}
+:root[data-baraja="sombra"] .medallon { color: var(--resalte); }
+:root[data-baraja="sombra"] .medallon > span {
+  background: var(--fondo);
+  border: 1px solid var(--trazo);
+  box-shadow: 0 0 0 4px var(--fondo-2), 0 0 0 5px rgb(var(--trazo-rgb) / .35);
+}
+:root[data-baraja="sombra"] .medallon .rueda-icono { stroke-width: 1.4; }
+:root[data-baraja="sombra"] .medallon[aria-pressed="true"] > span {
+  background: rgb(var(--acento-rgb) / .16);
+  border-color: var(--resalte);
+  box-shadow: 0 0 0 4px var(--fondo-2), 0 0 0 5px var(--resalte), 0 0 30px rgb(var(--resalte-rgb) / .35);
+}
+:root[data-baraja="sombra"] .medallon.pendiente > span { border-style: dashed; }
+:root[data-baraja="sombra"] .medallon:focus-visible > span { outline: 1px solid var(--resalte); outline-offset: 8px; }
+:root[data-baraja="sombra"] .medallon-nombre {
+  border: 1px solid var(--trazo);
+  border-radius: 3px;
+  background: var(--fondo);
+  color: var(--tinta);
+  font: italic 400 .95rem/1.3 var(--display);
+}
+:root[data-baraja="sombra"] .rueda-centro {
+  border: 1px solid var(--trazo);
+  background: radial-gradient(circle, var(--fondo-2), var(--fondo));
+  box-shadow: inset 0 0 0 6px var(--fondo), inset 0 0 0 7px rgb(var(--trazo-rgb) / .5);
+  color: var(--resalte);
+  font: italic 400 1rem/1 var(--display);
+  letter-spacing: .1em;
+  text-transform: none;
+}
+:root[data-baraja="sombra"] .rueda-centro .glifo { stroke: var(--resalte); stroke-width: 1.8; width: 50%; }
+:root[data-baraja="sombra"] .rueda-centro .glifo .area { fill: rgb(var(--acento-rgb) / .16); stroke: var(--acento); }
+:root[data-baraja="sombra"] .rueda-centro .glifo .tinta { fill: var(--resalte); }
+:root[data-baraja="sombra"] .rueda-centro .glifo .papel { fill: none; }
+:root[data-baraja="sombra"] .rueda-centro .glifo .llama { fill: #E79A4E; }
+:root[data-baraja="sombra"] .rueda-centro span { padding: 0; border: 0; background: none; }
+:root[data-baraja="sombra"] button.rueda-centro:hover { transform: none; box-shadow: inset 0 0 0 6px var(--fondo), inset 0 0 0 7px var(--resalte), 0 0 26px rgb(var(--resalte-rgb) / .25); }
+:root[data-baraja="sombra"] button.rueda-centro:active { transform: scale(.98); }
+:root[data-baraja="sombra"] .rueda-aguja { fill: var(--resalte); stroke: none; filter: drop-shadow(0 0 6px rgb(var(--resalte-rgb) / .5)); }
+:root[data-baraja="sombra"] .rueda-aguja path { d: path("M2 20L38 15v10z"); }
+:root[data-baraja="sombra"] .rueda-grupos button {
+  border: 1px solid var(--trazo);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--tinta-2);
+  box-shadow: none;
+  font-weight: 400;
+}
+:root[data-baraja="sombra"] .rueda-grupos button:hover { color: var(--resalte); border-color: var(--resalte); transform: none; }
+:root[data-baraja="sombra"] .rueda-lectura {
+  background: linear-gradient(var(--fondo-2), var(--fondo));
+  border: 1px solid var(--trazo);
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 5px var(--fondo), inset 0 0 0 6px rgb(var(--trazo-rgb) / .35), 0 30px 50px -30px #000;
+}
+:root[data-baraja="sombra"] .rueda-lectura::before { inset: 14px auto auto 50%; width: 80px; height: 1px; translate: -50% 0; background: var(--resalte); border: 0; border-radius: 0; }
+:root[data-baraja="sombra"] .rueda-emblema { background: transparent; border: 1px solid var(--trazo); box-shadow: 0 0 0 4px var(--fondo), 0 0 0 5px rgb(var(--trazo-rgb) / .35); }
+:root[data-baraja="sombra"] .rueda-emblema .rueda-icono { stroke: var(--resalte); stroke-width: 1.4; }
+:root[data-baraja="sombra"] .rueda-portada { transform: none; border-radius: 2px; box-shadow: 0 0 0 4px var(--fondo), 0 0 0 5px rgb(var(--trazo-rgb) / .45), 0 20px 30px -18px #000; }
+:root[data-baraja="sombra"] .rueda-kicker { font-weight: 400; color: var(--tinta-2); }
+:root[data-baraja="sombra"] .rueda-num { border: 1px solid var(--trazo); background: transparent; color: var(--resalte); font-style: italic; }
+:root[data-baraja="sombra"] .rueda-tipo { font-weight: 400; font-style: italic; color: var(--resalte); }
+:root[data-baraja="sombra"] .rueda-tipo::before { color: var(--resalte); }
+:root[data-baraja="sombra"] .rueda-hijos a, :root[data-baraja="sombra"] .rueda-hijos em { border: 1px solid rgb(var(--trazo-rgb) / .6); border-radius: 3px; background: transparent; color: var(--tinta); font-weight: 400; }
+:root[data-baraja="sombra"] .rueda-hijos a:hover { border-color: var(--resalte); color: var(--resalte); }
+:root[data-baraja="sombra"] .rueda-pronto { border: 1px dashed var(--trazo); border-radius: 3px; font-weight: 400; font-style: italic; }
+:root[data-baraja="sombra"] .rueda-pasos { border-top: 1px solid rgb(var(--trazo-rgb) / .35); font-weight: 400; }
+:root[data-baraja="sombra"] .rueda-pasos button { border: 1px solid var(--trazo); background: transparent; color: var(--resalte); box-shadow: none; }
+:root[data-baraja="sombra"] .rueda-pasos button:hover { background: rgb(var(--resalte-rgb) / .1); }
+@media (max-width: 759px) {
+  :root[data-baraja="sombra"] .rueda-aguja { filter: drop-shadow(0 0 6px rgb(var(--resalte-rgb) / .5)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rueda.girando .foco, .rueda.girando .rueda-centro .glifo, .rueda-lectura.cambia .rueda-contenido { animation: none; }
+}
