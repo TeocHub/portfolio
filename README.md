@@ -21,6 +21,7 @@ assets/
   css/barajas.css     Colores de las dos barajas (generado por herramientas/barajas.py)
   css/site.css        Barra, pie, arcanos, portada e índices
   css/paginas.css     Plantilla común de las subpáginas: cabecera, índice lateral y componentes
+  css/areas.css       Páginas de área: papel y tinta, EB Garamond y la rueda como volvelle
   css/armonia.css     Capa de compatibilidad para el panel de Código 4D (app de proyección)
   js/site.js          Baraja activa, catálogo, barra, índice de la página, pestañas y recorridos
   js/autores.js       Directorio y comparador de autores de las guías de lectura
@@ -134,7 +135,8 @@ No hace falta CSS propio; si algo no existe en la plantilla, agrégalo a `pagina
 
 ## La Rueda (páginas de cada área)
 
-Las páginas de área (Pedagogía, Letras, Código, Esotérico, Sitios y los ramos) no muestran listas: muestran una rueda.
+Las páginas de área (Pedagogía, Letras, Código, Esotérico, Sitios, Propuestas y los ramos) no muestran listas: muestran una rueda.
+Su aspecto vive en `assets/css/areas.css`, que cada página de área carga después de `site.css`.
 Cada trabajo del catálogo es un medallón; se gira arrastrando, con las flechas o tocando un medallón, y el que queda frente a la aguja se lee al lado.
 Un segundo toque lo abre. El centro tira la rueda al azar. La página recuerda el último medallón al volver.
 

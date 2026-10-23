@@ -747,6 +747,33 @@
   };
   var ICONO_TITULO = { "Velas de cera de abeja": "vela", "Lecturas de tarot": "luna", "Mar y Ola": "vela", "Digital Monster": "monstruo", "¿De qué dios serías hijo o hija?": "rayo",
     "Cuestionario definitivo de FNAF": "oso", "Percy Jackson Quest": "tridente", "Avatar Quest": "espiral", "Desvelo": "cartas" };
+  /* Nombres cortos para escribir en la rueda (la ficha usa el nombre completo) */
+  var CORTOS = {
+    "Marco para la Buena Enseñanza 2021": "Marco para la Buena Enseñanza", "El amor como principio educativo": "El amor como principio",
+    "Desarrollo de la comprensión lectora": "Comprensión lectora", "Glosario de lectoescritura": "Glosario",
+    "Pensar la historia, enseñar la historia": "Pensar la historia", "Redes sociales y autoestima juvenil": "Redes y autoestima",
+    "Roblox: guía de seguridad": "Roblox", "Código 4D: panel de la sala": "Panel de Código 4D",
+    "Generador de haikus escolares": "Generador de haikus", "Haikus del 7° del Pablo Neruda": "Haikus del Neruda",
+    "El acceso al entorno de aprendizaje II": "Acceso al aprendizaje", "Escritura creativa en Chile": "Escritura creativa",
+    "Modelo de escritura Didactext": "Didactext", "Generador de líneas aleatorias": "Líneas aleatorias",
+    "Guía operacional PAES 2026": "Guía PAES", "Natu: la historia de un inmortal": "Natu",
+    "Cuestionario definitivo de FNAF": "FNAF", "Travesía a lo desconocido": "Travesía a lo desconocido"
+  };
+  var GRUPOS_CORTOS = {
+    "Para el trabajo docente": "Docencia", "En la sala y en la tesis": "Sala y tesis", "Recomendaciones literarias": "Recomendaciones",
+    "Páginas para estudiantes": "Para estudiantes", "Referencias y herramientas": "Referencias", "Intervenciones en aula": "En el aula"
+  };
+  function partirNombre(s, max) {
+    var palabras = s.split(" "), lineas = [""];
+    palabras.forEach(function (w) {
+      var l = lineas[lineas.length - 1];
+      if (!l) lineas[lineas.length - 1] = w;
+      else if ((l + " " + w).length <= max) lineas[lineas.length - 1] = l + " " + w;
+      else lineas.push(w);
+    });
+    return lineas;
+  }
+
   /* Color de cada grupo de la rueda: el del área y luego los secundarios */
   var COLOR_GRUPO = ["acento", "h1", "h3", "h4", "h2"];
 
@@ -817,6 +844,7 @@
       s += '<path id="' + id + '" fill="none" d="M' + punto(R.rotulo, a1) + "A" + R.rotulo + " " + R.rotulo + " 0 " + grande + " 1 " + punto(R.rotulo, fin) + '"/>';
       s += '<path id="' + id + 'b" fill="none" d="M' + punto(R.rotulo + 12, fin) + "A" + (R.rotulo + 12) + " " + (R.rotulo + 12) + " 0 " + grande + " 0 " + punto(R.rotulo + 12, a1) + '"/>';
       var texto = datos.grupos[t.g], arcoLargo = largo * Math.PI / 180 * R.rotulo * 0.9;
+      if (texto.length * 15 * 0.6 > arcoLargo && GRUPOS_CORTOS[texto]) texto = GRUPOS_CORTOS[texto];
       var escala = Math.min(1, arcoLargo / (texto.length * 15 * 0.78));
       if (escala < 0.8) {
         escala = 0.8;
@@ -834,6 +862,22 @@
       var limite = ga !== gb;
       s += '<path class="radio' + (limite ? "" : " fino") + '" d="M' + punto(R.centro, ang) + "L" + punto(limite ? R.borde : R.cara, ang) + '"/>';
     }
+    items.forEach(function (it, i) {
+      var a = i * paso, h = paso / 2 * 0.9, arco = h * 2 * Math.PI / 180 * 210;
+      var nombre = CORTOS[it.t] || it.t, fs = 15;
+      var max = Math.floor(arco / (fs * 0.47));
+      var lineas = partirNombre(nombre, max);
+      if (lineas.length > 2) { fs = 13; max = Math.floor(arco / (fs * 0.47)); lineas = partirNombre(nombre, max); }
+      if (lineas.length > 2) { lineas = lineas.slice(0, 2); lineas[1] = lineas[1].replace(/\s*\S*$/, "") + "…"; }
+      var radios = lineas.length === 1 ? [[208, 213]] : [[219, 202], [201, 220]];
+      lineas.forEach(function (l, k) {
+        var r = radios[k][0], rb = radios[k][1], id = uid + "-n" + i + "-" + k;
+        s += '<path id="' + id + '" fill="none" d="M' + punto(r, a - h) + "A" + r + " " + r + " 0 0 1 " + punto(r, a + h) + '"/>';
+        s += '<path id="' + id + 'b" fill="none" d="M' + punto(rb, a + h) + "A" + rb + " " + rb + " 0 0 0 " + punto(rb, a - h) + '"/>';
+        s += '<text class="nombre' + (it.url && !it.vacio ? "" : " pendiente") + '" data-i="' + i + '" data-medio="' + a + '" data-id="' + id + '" style="--fs:' + fs + 'px">' +
+          '<textPath href="#' + id + '" startOffset="50%" text-anchor="middle">' + esc(l) + "</textPath></text>";
+      });
+    });
     s += '<circle class="aro" r="' + R.centro + '"/><circle class="aro" r="' + R.cara + '"/><circle class="aro borde" r="' + R.borde + '"/>';
     for (var m = 0; m < 72; m++) {
       var larga = m % 6 === 0;
@@ -876,6 +920,7 @@
         '<div class="rueda" style="--med:' + med.toFixed(2) + '%">' +
           '<div class="rueda-giro">' + ruedaSVG(datos, uid) + '<div class="rueda-medallones" role="toolbar" aria-label="Medallones de la rueda">' + huecos + meds + "</div></div>" +
           tirar +
+          '<svg class="rueda-ventana" viewBox="-300 -300 600 600" aria-hidden="true"><path d="' + sector(R.centro + 4, R.cara - 4, -paso / 2 + 1.5, paso / 2 - 1.5) + '"/></svg>' +
           '<svg class="rueda-aguja" viewBox="0 0 40 40" aria-hidden="true"><path d="M3 20L37 4v32z"/></svg>' +
         "</div>" +
         '<p class="rueda-pista">' + (N > 1 ? "Gira la rueda o toca un medallón. Tócalo otra vez para abrirlo." : "Toca el medallón para abrirlo.") + "</p>" +
@@ -928,8 +973,12 @@
     var clave = "tc-rueda:" + zona.dataset.rueda;
     var actual = -1, angulo = 0, arrastrado = false, temporizador;
 
-    function aguja() { return movil.matches ? 90 : 0; }
-    var rotulos = Array.prototype.slice.call(zona.querySelectorAll(".rotulo"));
+    function aguja() {
+      var v = parseFloat(getComputedStyle(rueda).getPropertyValue("--aguja"));
+      return isNaN(v) ? (movil.matches ? 90 : 0) : v;
+    }
+    var rotulos = Array.prototype.slice.call(zona.querySelectorAll(".rueda-fondo text[data-medio]"));
+    var nombres = Array.prototype.slice.call(zona.querySelectorAll(".rueda-fondo .nombre"));
     var esperaRotulos;
     function orientar() {
       rotulos.forEach(function (r) {
@@ -960,6 +1009,7 @@
       i = ((i % N) + N) % N;
       var cambia = i !== actual;
       actual = i;
+      nombres.forEach(function (n) { n.classList.toggle("elegido", Number(n.dataset.i) === i); });
       meds.forEach(function (m, j) {
         m.setAttribute("aria-pressed", j === i ? "true" : "false");
         m.tabIndex = j === i ? 0 : -1;
