@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Instrument+Sans:wght@400..700&display=swap");
 /* ==========================================================
    PRUEBA: dirección sobria ("volvelle")
    ----------------------------------------------------------
@@ -15,6 +15,7 @@
 :root[data-baraja],
 :root[data-baraja="luz"] {
   --texto: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --display: "EB Garamond", "Iowan Old Style", Georgia, serif;
   --display-fvs: "SOFT" 30, "WONK" 0;
   --display-peso: 500;
   --display-espaciado: -0.015em;
@@ -286,4 +287,78 @@
   :root[data-baraja] .cabecera-area .tc-contenedor { padding-top: 40px; }
   :root[data-baraja] .cabecera-area .arcano { width: 76px; }
   :root[data-baraja] .rueda-portada { width: 96px; }
+}
+
+
+/* ==========================================================
+   Paso 2: más a mano, menos plantilla
+   - La rueda lleva palabras, no íconos (como un volvelle real).
+   - Una ventana fija marca lo que se lee; sin flecha.
+   - EB Garamond: una letra de libro, no de app.
+   - Fuera la cajita de la carta, el número romano y el guion largo.
+   ========================================================== */
+:root[data-baraja] body.tc :is(h1, h2, h3) { font-weight: 500; letter-spacing: -0.01em; }
+:root[data-baraja] .cabecera-area .arcano { display: none; }
+:root[data-baraja] .cabecera-area .tc-contenedor { grid-template-columns: 1fr; padding-top: 72px; }
+:root[data-baraja] .cabecera-area h1 { font-size: clamp(3rem, 7vw, 5.2rem); line-height: .95; }
+:root[data-baraja] .cabecera-area .carta { font-size: 1.15rem; margin-bottom: 14px; }
+:root[data-baraja] .tc-firma { font-size: 19px; font-weight: 500; }
+
+/* Los nombres escritos en cada sector */
+:root[data-baraja] .rueda-fondo .nombre {
+  display: inline; font: 400 var(--fs, 15px)/1 var(--display); fill: var(--tinta); letter-spacing: .005em;
+  transition: fill .3s;
+}
+:root[data-baraja] .rueda-fondo .nombre.pendiente { fill: var(--tinta-3); font-style: italic; }
+:root[data-baraja] .rueda-fondo .nombre.elegido { fill: var(--acento); font-weight: 600; }
+:root[data-baraja="sombra"] .rueda-fondo .nombre.elegido { fill: var(--resalte); }
+:root[data-baraja] .rueda-fondo .rotulo { font-size: calc(var(--esc, 1) * 17px); font-variation-settings: normal; letter-spacing: .06em; }
+
+/* La ventana: un marco fijo frente al que pasa la rueda */
+:root[data-baraja] .rueda-ventana {
+  display: block; position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 1;
+  fill: rgb(var(--acento-rgb) / .09); stroke: var(--acento); stroke-width: 1.5;
+}
+:root[data-baraja="sombra"] .rueda-ventana { fill: rgb(var(--resalte-rgb) / .07); stroke: var(--resalte); }
+:root[data-baraja] .rueda-aguja { display: none; }
+
+/* Los medallones quedan como zonas para tocar, sin dibujo */
+:root[data-baraja] .medallon > span,
+:root[data-baraja] .medallon[aria-pressed="true"] > span,
+:root[data-baraja] .medallon.con-portada > span { background: none; border: 0; box-shadow: none; }
+:root[data-baraja] .medallon > span > :is(svg, img) { display: none; }
+:root[data-baraja] .medallon-nombre { display: none; }
+:root[data-baraja] .medallon { width: calc(var(--med) * 1.25); cursor: pointer; }
+:root[data-baraja] .medallon:focus-visible > span { outline: 1.5px solid var(--acento); outline-offset: 2px; }
+:root[data-baraja] .hueco { display: none; }
+:root[data-baraja] .rueda-fondo .radio.fino { stroke: rgb(var(--tinta-rgb) / .22); }
+:root[data-baraja] .rueda-fondo .banda { fill: none; }
+
+/* El centro: el dibujo del área en una sola tinta */
+:root[data-baraja] .rueda-centro { width: 34%; font-size: 1.05rem; }
+:root[data-baraja] .rueda-centro .glifo { width: 40%; stroke-width: 2.2; }
+:root[data-baraja] .rueda-centro .glifo :is(.area, .papel) { fill: none; stroke: var(--tinta); }
+:root[data-baraja="sombra"] .rueda-centro .glifo, :root[data-baraja="sombra"] .rueda-centro .glifo :is(.area, .papel) { stroke: var(--resalte); }
+:root[data-baraja] .rueda-centro .glifo :is(.tinta, .sol, .llama) { fill: var(--tinta); }
+:root[data-baraja="sombra"] .rueda-centro .glifo :is(.tinta, .sol, .llama) { fill: var(--resalte); }
+
+/* La lectura, sin numeración ni guiones */
+:root[data-baraja] .rueda-num { display: none; }
+:root[data-baraja] .rueda-kicker { font-size: 1.15rem; margin-bottom: 10px; }
+:root[data-baraja] .rueda-texto h2 { font-size: clamp(2.3rem, 4vw, 3.3rem); line-height: 1.02; }
+:root[data-baraja] .rueda-tipo { font-size: .95rem; }
+
+/* La ventana va arriba: lo elegido siempre se lee derecho */
+:root[data-baraja] .rueda { --aguja: -90; }
+:root[data-baraja] .rueda-ventana { transform: rotate(-90deg); }
+:root[data-baraja] .rueda-fondo .aro.interior { display: none; }
+:root[data-baraja] .rueda-zona { align-items: start; }
+:root[data-baraja] .rueda-lectura { padding-top: 12px; }
+
+@media (max-width: 759px) {
+  :root[data-baraja] .cabecera-area .tc-contenedor { padding-top: 44px; }
+}
+:root[data-baraja] .medallon.con-portada[aria-pressed="true"] > span { box-shadow: none; }
+@media (max-width: 759px) {
+  :root[data-baraja] .rueda-fondo .nombre { font-size: calc(var(--fs, 15px) * 1.18); }
 }

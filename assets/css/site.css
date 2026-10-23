@@ -924,6 +924,9 @@ body.tc :where(h1, h2, h3) {
 .rueda-fondo .rotulo.aparece { animation: rotulo .35s ease-out; }
 @keyframes rotulo { from { opacity: 0; } }
 
+/* Nombres escritos y ventana: solo los usa la dirección sobria */
+.rueda-fondo .nombre, .rueda-ventana { display: none; }
+
 /* Medallones */
 .rueda-medallones { position: absolute; inset: 0; }
 .medallon {
