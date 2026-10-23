@@ -1,14 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Instrument+Sans:wght@400..700&display=swap");
 /* ==========================================================
-   PRUEBA: dirección sobria ("volvelle")
+   Páginas de área: papel, tinta y la rueda como volvelle
    ----------------------------------------------------------
-   Capa experimental que solo cargan las páginas de área.
-   Principios:
-   - Una tinta y un acento. Nada de arcoíris por grupo.
+   La cargan las páginas de cada área y de cada ramo (después de
+   site.css). Principios:
+   - Una tinta y un acento por área. Nada de arcoíris por grupo.
    - Sin sombras de pegatina ni pastillas: hilos de 1px.
-   - La tipografía hace la jerarquía; los adornos se van.
-   - Luz y Sombra comparten la misma estructura: cambia el papel.
-   Se borra este archivo para volver atrás.
+   - La tipografía hace la jerarquía (EB Garamond + Instrument Sans).
+   - Luz y Sombra comparten la estructura: Luz es papel y tinta;
+     Sombra, tinta oscura con latón.
    ========================================================== */
 
 /* ---------- Tokens ---------- */
@@ -43,6 +43,7 @@
   --a-esoterico-rgb: 92 66 120;  --a-esoterico-relleno-rgb: 92 66 120;  --a-esoterico-suave-rgb: 230 223 234;
   --a-estudio-rgb: 138 92 28;    --a-estudio-relleno-rgb: 138 92 28;    --a-estudio-suave-rgb: 240 228 206;
   --a-sitios-rgb: 34 96 90;      --a-sitios-relleno-rgb: 34 96 90;      --a-sitios-suave-rgb: 216 231 226;
+  --a-propuestas-rgb: 154 70 34; --a-propuestas-relleno-rgb: 154 70 34; --a-propuestas-suave-rgb: 242 225 212;
 }
 :root[data-baraja="sombra"] {
   --fondo-rgb: 22 21 19;
@@ -62,6 +63,7 @@
   --a-esoterico-rgb: 186 165 214;  --a-esoterico-relleno-rgb: 186 165 214;  --a-esoterico-suave-rgb: 40 35 47;
   --a-estudio-rgb: 214 172 108;    --a-estudio-relleno-rgb: 214 172 108;    --a-estudio-suave-rgb: 46 39 28;
   --a-sitios-rgb: 140 196 186;     --a-sitios-relleno-rgb: 140 196 186;     --a-sitios-suave-rgb: 30 42 40;
+  --a-propuestas-rgb: 222 160 124; --a-propuestas-relleno-rgb: 222 160 124; --a-propuestas-suave-rgb: 46 33 26;
 }
 /* los derivados se recalculan con los valores nuevos */
 :root[data-baraja] {
@@ -70,7 +72,7 @@
   --tinta: rgb(var(--tinta-rgb)); --tinta-2: rgb(var(--tinta-2-rgb)); --tinta-3: rgb(var(--tinta-3-rgb));
   --linea: rgb(var(--linea-rgb)); --trazo: rgb(var(--trazo-rgb)); --resalte: rgb(var(--resalte-rgb));
   --a-pedagogia: rgb(var(--a-pedagogia-rgb)); --a-letras: rgb(var(--a-letras-rgb)); --a-codigo: rgb(var(--a-codigo-rgb));
-  --a-esoterico: rgb(var(--a-esoterico-rgb)); --a-estudio: rgb(var(--a-estudio-rgb)); --a-sitios: rgb(var(--a-sitios-rgb));
+  --a-esoterico: rgb(var(--a-esoterico-rgb)); --a-estudio: rgb(var(--a-estudio-rgb)); --a-sitios: rgb(var(--a-sitios-rgb)); --a-propuestas: rgb(var(--a-propuestas-rgb));
 }
 :root[data-baraja] [data-area], :root[data-baraja][data-area] {
   --acento: rgb(var(--acento-rgb));
@@ -291,7 +293,7 @@
 
 
 /* ==========================================================
-   Paso 2: más a mano, menos plantilla
+   Más a mano, menos plantilla
    - La rueda lleva palabras, no íconos (como un volvelle real).
    - Una ventana fija marca lo que se lee; sin flecha.
    - EB Garamond: una letra de libro, no de app.
@@ -304,7 +306,7 @@
 :root[data-baraja] .cabecera-area .carta { font-size: 1.15rem; margin-bottom: 14px; }
 :root[data-baraja] .tc-firma { font-size: 19px; font-weight: 500; }
 
-/* Paso 3: vuelven las formas al disco; sin nombres escritos ni ventana */
+/* El disco lleva las formas (íconos y portadas); la aguja va arriba */
 :root[data-baraja] .rueda-fondo .rotulo { font-size: calc(var(--esc, 1) * 17px); font-variation-settings: normal; letter-spacing: .06em; }
 :root[data-baraja] .rueda-fondo .radio.fino { stroke: rgb(var(--tinta-rgb) / .22); }
 :root[data-baraja] .rueda-fondo .banda { fill: none; }
