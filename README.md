@@ -130,6 +130,17 @@ No hace falta CSS propio; si algo no existe en la plantilla, agrégalo a `pagina
    La ruta va siempre desde la raíz. Sin `url`, el trabajo aparece como pendiente.
    Los índices y los contadores de la portada se actualizan solos.
 
+## La Rueda (páginas de cada área)
+
+Las páginas de área (Pedagogía, Letras, Código, Esotérico, Sitios y los ramos) no muestran listas: muestran una rueda.
+Cada trabajo del catálogo es un medallón; se gira arrastrando, con las flechas o tocando un medallón, y el que queda frente a la aguja se lee al lado.
+Un segundo toque lo abre. El centro tira la rueda al azar. La página recuerda el último medallón al volver.
+
+- Cada grupo del catálogo (`grupos[].titulo`) es una franja de color con su nombre grabado en el borde.
+- El ícono sale del `tipo` (`ICONO_TIPO` en `site.js`), del ramo (`ICONO_HUB`) o del título (`ICONO_TITULO`). Si agregas un tipo nuevo, dale un ícono ahí.
+- Las historias de Letras (`estante`) se muestran con su portada.
+- Con menos de seis trabajos, la rueda deja huecos punteados para los que vengan.
+
 ## Cambiar un color
 
 Edita `herramientas/barajas.py` y ejecuta `python3 herramientas/barajas.py`. El script regenera `assets/css/barajas.css` y avisa si algún texto queda con poco contraste.

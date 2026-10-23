@@ -668,6 +668,386 @@
       "</li>";
   }
 
+  /* ---------- La Rueda: cómo se explora cada área ----------
+     Cada trabajo es un medallón en una rueda (el arcano X). Se gira
+     arrastrando, con las flechas o tocando un medallón; el que queda
+     frente a la aguja se lee al lado. El centro tira la rueda al azar. */
+  var ICONOS = {
+    libro: '<path d="M3 5.5c3-1.3 6-1 9 1v13c-3-2-6-2.3-9-1z"/><path d="M21 5.5c-3-1.3-6-1-9 1v13c3-2 6-2.3 9-1z"/>',
+    hoja: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/>',
+    pluma: '<path d="M20 3C12 5 7 11 5.5 19.5"/><path d="M20 3c-.5 6-4.5 10.5-11 12.5"/><path d="M5.5 19.5L4 22"/>',
+    letras: '<path d="M3 18l4.5-12L12 18M4.7 14h5.6"/><circle cx="17" cy="15" r="2.8"/><path d="M19.8 11.5V18"/>',
+    audifonos: '<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4.5" height="6.5" rx="1.6"/><rect x="16.5" y="14" width="4.5" height="6.5" rx="1.6"/>',
+    ventana: '<rect x="3" y="4.5" width="18" height="15" rx="2.2"/><path d="M3 9h18"/><path d="M6 6.8h.01M8.5 6.8h.01"/>',
+    bandera: '<path d="M5 21V4"/><path d="M5 4.5h12l-2.5 4 2.5 4H5"/>',
+    barras: '<path d="M4 20h16"/><path d="M7.5 20v-6M12 20V8M16.5 20v-9.5"/>',
+    formulario: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 8h.01M11 8h4.5M8.5 12h.01M11 12h4.5M8.5 16h.01M11 16h4.5"/>',
+    llave: '<circle cx="7.5" cy="12" r="4"/><path d="M11.5 12H21M18 12v3.5M21 12v2.5"/>',
+    herramienta: '<path d="M14.7 6.3a4.5 4.5 0 0 0 5.6 5.6L12 20.2a2.1 2.1 0 0 1-3-3l8.3-8.3"/><path d="M14.7 6.3l2.6-2.6a4.5 4.5 0 0 1 3 3l-2.6 2.6"/>',
+    dado: '<rect x="4" y="4" width="16" height="16" rx="3.5"/><path d="M8.5 8.5h.01M15.5 15.5h.01M12 12h.01M15.5 8.5h.01M8.5 15.5h.01"/>',
+    pdf: '<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 13h6M9 17h4"/>',
+    lupa: '<circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/>',
+    mando: '<rect x="2.5" y="7.5" width="19" height="10.5" rx="5.2"/><path d="M7 10.6v4.3M4.9 12.8h4.3M15.5 11.5h.01M18 14h.01"/>',
+    engranaje: '<circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v3M12 18.2v3M2.8 12h3M18.2 12h3M5.5 5.5l2.1 2.1M16.4 16.4l2.1 2.1M5.5 18.5l2.1-2.1M16.4 7.6l2.1-2.1"/>',
+    lapiz: '<path d="M4 20l1.2-4.6L16 4.6a2.1 2.1 0 0 1 3 3L8.2 18.4z"/><path d="M14.3 6.3l3.4 3.4"/>',
+    caja: '<rect x="3" y="4" width="18" height="5" rx="1.2"/><path d="M5 9v10.5h14V9M10 13h4"/>',
+    luna: '<path d="M15.5 3.5a8.6 8.6 0 1 0 5 13.9A7 7 0 0 1 15.5 3.5z"/>',
+    vela: '<path d="M12 3c-2.4 2.7-2.4 5.4 0 6 2.4-.6 2.4-3.3 0-6z"/><path d="M12 9v2"/><rect x="8" y="11" width="8" height="10" rx="1.5"/>',
+    balanza: '<path d="M12 4v16M8 20h8M5 7h14M12 4h.01"/><path d="M5 7l-2.6 6h5.2zM19 7l-2.6 6h5.2z"/>',
+    globo: '<path d="M4 5h16v11H10l-4.5 3.5V16H4z"/><path d="M8 9h8M8 12.3h5"/>',
+    reloj: '<path d="M7 3h10M7 21h10"/><path d="M8 3c0 5 8 6 8 9s-8 4-8 9M16 3c0 5-8 6-8 9s8 4 8 9"/>',
+    chip: '<rect x="6.5" y="6.5" width="11" height="11" rx="2"/><path d="M10 3v3.5M14 3v3.5M10 17.5V21M14 17.5V21M3 10h3.5M3 14h3.5M17.5 10H21M17.5 14H21"/>',
+    pi: '<path d="M4.5 7.5h15M9 7.5V19M15 7.5v8.5a3 3 0 0 0 3.5 3"/>',
+    matraz: '<path d="M9 3h6M10 3v6.2l-5.2 8.9A2 2 0 0 0 6.5 21h11a2 2 0 0 0 1.7-2.9L14 9.2V3"/><path d="M7.4 15h9.2"/>',
+    pizarra: '<rect x="3" y="4" width="18" height="12" rx="1.4"/><path d="M8 20.5l2-4.5M16 20.5l-2-4.5M7 8.5h6M7 11.5h8.5"/>',
+    birrete: '<path d="M2 9.5L12 5l10 4.5L12 14z"/><path d="M6.5 11.6v4.6c3 2.6 8 2.6 11 0v-4.6M22 9.5v5.5"/>',
+    carpeta: '<path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h4.6l2.2 2.3h8.2A1.5 1.5 0 0 1 21 8.8v9.7a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5z"/>',
+    monstruo: '<path d="M5 20.5V11a7 7 0 0 1 14 0v9.5l-2.4-1.8-2.3 1.8-2.3-1.8-2.3 1.8-2.3-1.8z"/><path d="M9.5 11h.01M14.5 11h.01M10 14.5q2 1.4 4 0"/>',
+    estrella: '<path d="M12 3.5l2.5 5.4 5.9.6-4.4 4 1.2 5.8L12 16.4l-5.2 2.9L8 13.5l-4.4-4 5.9-.6z"/>'
+  };
+  var ICONO_TIPO = {
+    "Lectura guiada": "libro", "Resumen": "hoja", "Ensayo": "pluma", "Glosario": "letras",
+    "Guía con podcast": "audifonos", "Interactivo con podcast": "audifonos", "Página web": "ventana",
+    "Sitio web": "ventana", "Actividad": "bandera", "Informe": "barras", "Formulario": "formulario",
+    "Escape room": "llave", "Herramienta": "herramienta", "Generador": "dado", "Propuesta": "pluma",
+    "PDF": "pdf", "Buscador": "lupa", "Guía": "hoja", "Juego web": "mando", "En desarrollo": "engranaje",
+    "Prototipo": "lapiz", "Archivo": "caja", "Próximamente": "luna"
+  };
+  var ICONO_HUB = {
+    "pedagogia/etica": "balanza", "pedagogia/lenguaje": "globo", "pedagogia/historia": "reloj",
+    "pedagogia/tics": "chip", "pedagogia/matematicas": "pi", "pedagogia/fisica-quimica": "matraz",
+    "pedagogia/practica": "pizarra", "pedagogia/tesis": "birrete", "pedagogia/recursos": "carpeta"
+  };
+  var ICONO_TITULO = { "Velas de cera de abeja": "vela", "Lecturas de tarot": "luna", "Mar y Ola": "vela", "Digital Monster": "monstruo" };
+  /* Color de cada grupo de la rueda: el del área y luego los secundarios */
+  var COLOR_GRUPO = ["acento", "h1", "h3", "h4", "h2"];
+
+  function icono(n) {
+    return '<svg class="rueda-icono" viewBox="0 0 24 24" aria-hidden="true">' + (ICONOS[n] || ICONOS.estrella) + "</svg>";
+  }
+  function romano(n) {
+    var r = "";
+    [[10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]].forEach(function (p) { while (n >= p[0]) { r += p[1]; n -= p[0]; } });
+    return r;
+  }
+  function colorGrupo(gi) {
+    var c = COLOR_GRUPO[gi % COLOR_GRUPO.length];
+    return "--g: var(--" + c + "-relleno); --gs: var(--" + c + "-suave); --gt: var(--" + c + ")";
+  }
+
+  function itemsRueda(h) {
+    var items = [], grupos = [];
+    if (h.estante) {
+      grupos.push("Historias");
+      h.estante.forEach(function (l) {
+        items.push({ t: l.t, d: l.d, url: l.url, img: l.img, tipo: "Historia en Wattpad", g: 0, ic: "libro" });
+      });
+    }
+    (h.grupos || []).forEach(function (g) {
+      grupos.push(g.titulo);
+      var gi = grupos.length - 1;
+      g.items.forEach(function (it) {
+        if (it.hub) {
+          var sub = CATALOGO[it.hub], n = contar(it.hub), hijos = [];
+          (sub.grupos || []).forEach(function (sg) { sg.items.forEach(function (x) { if (x.t) hijos.push(x); }); });
+          items.push({ t: sub.titulo, d: sub.resumen, url: it.hub + "/", tipo: n ? plural(n) : "Todavía sin trabajos", g: gi, ic: ICONO_HUB[it.hub], hijos: hijos, vacio: !n });
+        } else {
+          items.push({ t: it.t, d: it.d, url: it.url, tipo: it.tipo, g: gi, ic: ICONO_TITULO[it.t] || ICONO_TIPO[it.tipo] });
+        }
+      });
+    });
+    return { items: items, grupos: grupos, puestos: Math.max(items.length, 6) };
+  }
+
+  /* Geometría (unidades del SVG, centro en 0,0, radio 300; 0° = derecha, sentido horario) */
+  var R = { centro: 150, cara: 258, borde: 298, medallon: 204, rotulo: 270 };
+  function punto(r, a) {
+    var rad = a * Math.PI / 180;
+    return (r * Math.cos(rad)).toFixed(2) + " " + (r * Math.sin(rad)).toFixed(2);
+  }
+  function sector(r1, r2, a1, a2) {
+    if (a2 - a1 > 179) { var m = (a1 + a2) / 2; return sector(r1, r2, a1, m) + sector(r1, r2, m, a2); }
+    return "M" + punto(r2, a1) + "A" + r2 + " " + r2 + " 0 0 1 " + punto(r2, a2) +
+      "L" + punto(r1, a2) + "A" + r1 + " " + r1 + " 0 0 0 " + punto(r1, a1) + "Z";
+  }
+  function ruedaSVG(datos, uid) {
+    var items = datos.items, N = items.length, S = datos.puestos, paso = 360 / S, s = "";
+    var tramos = [];
+    items.forEach(function (it, i) {
+      var t = tramos[tramos.length - 1];
+      if (t && t.g === it.g) t.fin = i; else tramos.push({ g: it.g, ini: i, fin: i });
+    });
+    s += '<circle class="disco" r="' + R.borde + '"/>';
+    tramos.forEach(function (t, k) {
+      var a1 = t.ini * paso - paso / 2, a2 = t.fin * paso + paso / 2;
+      var estilo = ' style="' + colorGrupo(t.g) + '"';
+      s += '<path class="cara"' + estilo + ' d="' + sector(R.centro, R.cara, a1, a2) + '"/>';
+      s += '<path class="banda"' + estilo + ' d="' + sector(R.cara, R.borde, a1, a2) + '"/>';
+      var fin = Math.min(a2, a1 + 359), largo = fin - a1, grande = largo > 180 ? 1 : 0;
+      var id = uid + "-r" + k;
+      /* Dos trazos: uno para leer arriba (horario) y otro para abajo (antihorario) */
+      s += '<path id="' + id + '" fill="none" d="M' + punto(R.rotulo, a1) + "A" + R.rotulo + " " + R.rotulo + " 0 " + grande + " 1 " + punto(R.rotulo, fin) + '"/>';
+      s += '<path id="' + id + 'b" fill="none" d="M' + punto(R.rotulo + 12, fin) + "A" + (R.rotulo + 12) + " " + (R.rotulo + 12) + " 0 " + grande + " 0 " + punto(R.rotulo + 12, a1) + '"/>';
+      var texto = datos.grupos[t.g], arcoLargo = largo * Math.PI / 180 * R.rotulo * 0.9;
+      var escala = Math.min(1, arcoLargo / (texto.length * 15 * 0.78));
+      if (escala < 0.8) {
+        escala = 0.8;
+        var caben = Math.floor(arcoLargo / (12 * 0.78)) - 1;
+        if (caben < texto.length) texto = texto.slice(0, Math.max(3, caben)).replace(/\s+\S*$/, "") + "…";
+      }
+      s += '<text class="rotulo" data-medio="' + ((a1 + fin) / 2) + '" data-id="' + id + '" style="--esc:' + escala.toFixed(2) + '">' +
+        '<textPath href="#' + id + '" startOffset="50%" text-anchor="middle">' + esc(texto) + "</textPath></text>";
+    });
+    var grupoDe = function (i) { i = (i + S) % S; return i < N ? items[i].g : -1; };
+    for (var e = 0; e < S; e++) {
+      if (S === 1) break;
+      var ga = grupoDe(e - 1), gb = grupoDe(e), ang = e * paso - paso / 2;
+      if (ga === -1 && gb === -1) continue;
+      var limite = ga !== gb;
+      s += '<path class="radio' + (limite ? "" : " fino") + '" d="M' + punto(R.centro, ang) + "L" + punto(limite ? R.borde : R.cara, ang) + '"/>';
+    }
+    s += '<circle class="aro" r="' + R.centro + '"/><circle class="aro" r="' + R.cara + '"/><circle class="aro borde" r="' + R.borde + '"/>';
+    for (var m = 0; m < 72; m++) {
+      var larga = m % 6 === 0;
+      s += '<path class="marca" d="M' + punto(larga ? 284 : 290, m * 5) + "L" + punto(R.borde, m * 5) + '"/>';
+    }
+    for (var f = 0; f < 24; f++) s += '<circle class="foco" r="6" cx="' + punto(R.borde, f * 15 + 7.5).replace(" ", '" cy="') + '"/>';
+    s += '<circle class="aro interior" r="' + (R.centro - 14) + '"/>';
+    return '<svg class="rueda-fondo" viewBox="-300 -300 600 600" aria-hidden="true">' + s + "</svg>";
+  }
+
+  function ruedaHTML(h, datos, uid) {
+    var items = datos.items, N = items.length, S = datos.puestos, paso = 360 / S;
+    var med = Math.min(16, (2 * Math.PI * R.medallon / S) * 0.7 / 6);
+    var huecos = "";
+    for (var k = N; k < S; k++) {
+      var ah = k * paso * Math.PI / 180;
+      huecos += '<span class="hueco" aria-hidden="true" style="--x:' + (50 + (R.medallon / 6) * Math.cos(ah)).toFixed(2) + "%;--y:" + (50 + (R.medallon / 6) * Math.sin(ah)).toFixed(2) + '%"></span>';
+    }
+    var meds = items.map(function (it, i) {
+      var a = i * paso * Math.PI / 180;
+      var x = 50 + (R.medallon / 6) * Math.cos(a), y = 50 + (R.medallon / 6) * Math.sin(a);
+      return '<button type="button" class="medallon' + (it.url && !it.vacio ? "" : " pendiente") + (it.img ? " con-portada" : "") + '" data-i="' + i + '"' +
+        ' style="--x:' + x.toFixed(2) + "%;--y:" + y.toFixed(2) + "%;" + colorGrupo(it.g) + '"' +
+        ' aria-label="' + esc(it.t) + '" aria-pressed="false" tabindex="-1">' +
+        "<span>" + (it.img ? '<img src="' + esc(enlace(it.img)) + '" alt="" loading="lazy" draggable="false">' : icono(it.ic)) +
+        '<b class="medallon-nombre" aria-hidden="true">' + esc(it.t) + "</b></span></button>";
+    }).join("");
+    var tirar = N > 1
+      ? '<button type="button" class="rueda-centro" data-tirar aria-label="Tirar la rueda: elegir un trabajo al azar">' + glifo(h.area) + "<span>Tirar</span></button>"
+      : '<div class="rueda-centro" aria-hidden="true">' + glifo(h.area) + "</div>";
+    var grupos = datos.grupos.length > 1
+      ? '<div class="rueda-grupos" role="group" aria-label="Ir a un grupo">' + datos.grupos.map(function (g, gi) {
+          var primero = -1;
+          items.some(function (it, i) { if (it.g === gi) { primero = i; return true; } return false; });
+          return primero < 0 ? "" : '<button type="button" data-ir="' + primero + '" style="' + colorGrupo(gi) + '">' + esc(g) + "</button>";
+        }).join("") + "</div>"
+      : "";
+    return '<section class="rueda-zona tc-contenedor" data-rueda="' + uid + '" aria-label="Trabajos de ' + esc(h.titulo) + '">' +
+      '<div class="rueda-escena">' +
+        '<div class="rueda" style="--med:' + med.toFixed(2) + '%">' +
+          '<div class="rueda-giro">' + ruedaSVG(datos, uid) + '<div class="rueda-medallones" role="toolbar" aria-label="Medallones de la rueda">' + huecos + meds + "</div></div>" +
+          tirar +
+          '<svg class="rueda-aguja" viewBox="0 0 40 40" aria-hidden="true"><path d="M3 20L37 4v32z"/></svg>' +
+        "</div>" +
+        '<p class="rueda-pista">' + (N > 1 ? "Gira la rueda o toca un medallón. Tócalo otra vez para abrirlo." : "Toca el medallón para abrirlo.") + "</p>" +
+        grupos +
+      "</div>" +
+      '<div class="rueda-lectura">' +
+        '<div class="rueda-contenido" aria-live="polite"></div>' +
+        (N > 1 ? '<div class="rueda-pasos"><button type="button" data-paso="-1" aria-label="Anterior">' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>' +
+          '<span data-cuenta></span><button type="button" data-paso="1" aria-label="Siguiente">' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div>' : "") +
+      "</div>" +
+    "</section>";
+  }
+
+  function lecturaHTML(it, i, datos) {
+    var url = it.url ? enlace(it.url) : "";
+    var externo = /^https?:/.test(it.url || "");
+    var abre = !url || it.vacio ? '<span class="rueda-pronto">' + (it.vacio ? "Pronto habrá trabajos aquí" : "Próximamente") + "</span>"
+      : '<a class="boton" href="' + esc(url) + '"' + (externo ? ' target="_blank" rel="noopener"' : "") + ">" +
+        (it.img ? "Leer en Wattpad" : it.hijos ? "Entrar a " + esc(it.t) : "Abrir") + (externo ? " ↗" : " →") + "</a>";
+    var hijos = "";
+    if (it.hijos && it.hijos.length) {
+      var max = 5, resto = it.hijos.length - max;
+      hijos = '<div class="rueda-hijos"><span>Adentro</span>' + it.hijos.slice(0, max).map(function (x) {
+        var u = x.url ? enlace(x.url) : "";
+        var ext = /^https?:/.test(x.url || "");
+        return u ? '<a href="' + esc(u) + '"' + (ext ? ' target="_blank" rel="noopener"' : "") + ">" + esc(x.t) + "</a>" : "<em>" + esc(x.t) + "</em>";
+      }).join("") + (resto > 0 ? "<em>y " + resto + " más</em>" : "") + "</div>";
+    }
+    return (it.img ? '<img class="rueda-portada" src="' + esc(enlace(it.img)) + '" alt="Portada de ' + esc(it.t) + '">' : '<div class="rueda-emblema">' + icono(it.ic) + "</div>") +
+      '<div class="rueda-texto">' +
+        '<p class="rueda-kicker"><span class="rueda-num">' + romano(i + 1) + "</span>" + esc(datos.grupos[it.g]) + "</p>" +
+        "<h2>" + esc(it.t) + "</h2>" +
+        (it.tipo ? '<p class="rueda-tipo">' + esc(it.tipo) + "</p>" : "") +
+        (it.d ? '<p class="rueda-desc">' + esc(it.d) + "</p>" : "") +
+        hijos + '<div class="rueda-abrir">' + abre + "</div>" +
+      "</div>";
+  }
+
+  function prepararRueda(zona, datos) {
+    var items = datos.items, N = items.length, paso = 360 / datos.puestos;
+    var rueda = zona.querySelector(".rueda");
+    var meds = Array.prototype.slice.call(zona.querySelectorAll(".medallon"));
+    var contenido = zona.querySelector(".rueda-contenido");
+    var lectura = zona.querySelector(".rueda-lectura");
+    var cuenta = zona.querySelector("[data-cuenta]");
+    var reducir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var movil = window.matchMedia("(max-width: 759px)");
+    var clave = "tc-rueda:" + zona.dataset.rueda;
+    var actual = -1, angulo = 0, arrastrado = false, temporizador;
+
+    function aguja() { return movil.matches ? 90 : 0; }
+    var rotulos = Array.prototype.slice.call(zona.querySelectorAll(".rotulo"));
+    var esperaRotulos;
+    function orientar() {
+      rotulos.forEach(function (r) {
+        var m = (((Number(r.dataset.medio) + angulo) % 360) + 360) % 360;
+        var abajo = m > 15 && m < 165;
+        var tp = r.firstChild, href = "#" + r.dataset.id + (abajo ? "b" : "");
+        if (tp.getAttribute("href") !== href) {
+          tp.setAttribute("href", href);
+          r.classList.remove("aparece"); void r.getBBox; r.classList.add("aparece");
+        }
+      });
+    }
+    function poner(a, dur) {
+      angulo = a;
+      dur = reducir ? 0 : dur;
+      rueda.style.setProperty("--dur", dur + "ms");
+      rueda.style.setProperty("--giro", a.toFixed(2) + "deg");
+      clearTimeout(esperaRotulos);
+      if (dur) esperaRotulos = setTimeout(orientar, dur * 0.8); else orientar();
+    }
+    function destino(i, vueltas) {
+      var d = (aguja() - i * paso) - angulo;
+      d = ((d % 360) + 540) % 360 - 180;
+      return angulo + d + (vueltas || 0) * 360;
+    }
+    function elegir(i, op) {
+      op = op || {};
+      i = ((i % N) + N) % N;
+      var cambia = i !== actual;
+      actual = i;
+      meds.forEach(function (m, j) {
+        m.setAttribute("aria-pressed", j === i ? "true" : "false");
+        m.tabIndex = j === i ? 0 : -1;
+      });
+      if (op.foco) meds[i].focus({ preventScroll: true });
+      var destinoA = op.meta != null ? op.meta : destino(i, op.vueltas);
+      var dur = op.dur != null ? op.dur : Math.min(1100, 380 + Math.abs(destinoA - angulo) * 3.2);
+      poner(destinoA, dur);
+      if (op.vueltas) {
+        rueda.classList.add("girando");
+        clearTimeout(temporizador);
+        temporizador = setTimeout(function () { rueda.classList.remove("girando"); }, reducir ? 0 : dur);
+      }
+      if (cambia || op.forzar) {
+        var pintar = function () {
+          contenido.innerHTML = lecturaHTML(items[i], i, datos);
+          lectura.setAttribute("style", colorGrupo(items[i].g));
+          lectura.classList.remove("cambia"); void lectura.offsetWidth; lectura.classList.add("cambia");
+        };
+        if (op.vueltas && !reducir) { lectura.classList.add("esperando"); setTimeout(function () { lectura.classList.remove("esperando"); pintar(); }, dur - 250); }
+        else pintar();
+        if (cuenta) cuenta.textContent = (i + 1) + " de " + N;
+      }
+      try { sessionStorage.setItem(clave, String(i)); } catch (e) {}
+    }
+    function abrir(i) {
+      var it = items[i];
+      if (!it.url || it.vacio) return;
+      var url = enlace(it.url);
+      if (/^https?:/.test(it.url)) window.open(url, "_blank", "noopener");
+      else location.href = url;
+    }
+
+    meds.forEach(function (m, i) {
+      m.addEventListener("click", function () {
+        if (arrastrado) return;
+        if (i === actual) abrir(i); else elegir(i);
+      });
+      m.addEventListener("keydown", function (e) {
+        var k = e.key, j = null;
+        if (k === "ArrowRight" || k === "ArrowDown") j = i + 1;
+        else if (k === "ArrowLeft" || k === "ArrowUp") j = i - 1;
+        else if (k === "Home") j = 0;
+        else if (k === "End") j = N - 1;
+        if (j !== null) { e.preventDefault(); elegir(j, { foco: true }); }
+      });
+    });
+    zona.querySelectorAll("[data-paso]").forEach(function (b) {
+      b.addEventListener("click", function () { elegir(actual + Number(b.dataset.paso)); });
+    });
+    zona.querySelectorAll("[data-ir]").forEach(function (b) {
+      b.addEventListener("click", function () { elegir(Number(b.dataset.ir)); });
+    });
+    var tirar = zona.querySelector("[data-tirar]");
+    if (tirar) tirar.addEventListener("click", function () {
+      var j = actual;
+      while (j === actual) j = Math.floor(Math.random() * N);
+      elegir(j, { vueltas: 2, dur: 2400 });
+    });
+
+    /* Arrastrar para girar */
+    var arr = null;
+    function anguloDe(e) {
+      return Math.atan2(e.clientY - arr.cy, e.clientX - arr.cx) * 180 / Math.PI;
+    }
+    rueda.addEventListener("pointerdown", function (e) {
+      if (e.button !== 0 || e.target.closest(".rueda-centro")) return;
+      var r = rueda.getBoundingClientRect();
+      arr = { cx: r.left + r.width / 2, cy: r.top + r.height / 2, total: 0, mov: false, v: 0, t: performance.now() };
+      arr.ult = anguloDe(e);
+      arrastrado = false;
+    });
+    rueda.addEventListener("pointermove", function (e) {
+      if (!arr) return;
+      var a = anguloDe(e), d = a - arr.ult;
+      d = ((d % 360) + 540) % 360 - 180;
+      arr.ult = a; arr.total += d;
+      if (!arr.mov && Math.abs(arr.total) > 5) {
+        arr.mov = true; arrastrado = true;
+        rueda.classList.add("arrastrando");
+        try { rueda.setPointerCapture(e.pointerId); } catch (x) {}
+      }
+      if (arr.mov) {
+        var ahora = performance.now(), dt = Math.max(1, ahora - arr.t);
+        arr.v = arr.v * 0.6 + (d / dt) * 0.4; arr.t = ahora;
+        poner(angulo + d, 0);
+      }
+    });
+    function soltar(cancelado) {
+      if (!arr) return;
+      var mov = arr.mov, v = cancelado ? 0 : arr.v;
+      arr = null;
+      rueda.classList.remove("arrastrando");
+      if (!mov) return;
+      var proyectado = angulo + Math.max(-540, Math.min(540, v * 260));
+      var i = Math.round((aguja() - proyectado) / paso);
+      var meta = aguja() - i * paso;
+      elegir(i, { meta: meta, dur: Math.min(1600, 420 + Math.abs(meta - angulo) * 2.4), forzar: true });
+      setTimeout(function () { arrastrado = false; }, 30);
+    }
+    rueda.addEventListener("pointerup", function () { soltar(false); });
+    rueda.addEventListener("pointercancel", function () { soltar(true); });
+    rueda.addEventListener("lostpointercapture", function () { soltar(false); });
+
+    var cambioMovil = function () { elegir(actual, { dur: 0, forzar: false }); };
+    if (movil.addEventListener) movil.addEventListener("change", cambioMovil);
+
+    var inicial = 0;
+    try { var g = parseInt(sessionStorage.getItem(clave), 10); if (g >= 0 && g < N) inicial = g; } catch (e) {}
+    var meta0 = aguja() - inicial * paso;
+    poner(meta0 - (N > 1 ? 150 : 60), 0);
+    void rueda.offsetWidth;
+    actual = -1;
+    requestAnimationFrame(function () { requestAnimationFrame(function () { elegir(inicial, { dur: 1300 }); }); });
+  }
+
   /* ---------- Índices de área ---------- */
   function construirIndice(main) {
     var id = main.dataset.indice, h = CATALOGO[id];
@@ -682,24 +1062,15 @@
         '<p class="intro">' + esc(h.intro) + "</p></div>" +
       "</div></header>";
 
-    if (h.estante) {
-      out += '<section class="grupo tc-contenedor"><h2>Historias</h2><p>Toca una portada para leerla en Wattpad.</p><ul class="estante">' +
-        h.estante.map(function (l) {
-          return '<li class="libro"><a href="' + esc(l.url) + '" target="_blank" rel="noopener">' +
-            '<img src="' + esc(enlace(l.img)) + '" alt="Portada de ' + esc(l.t) + '" loading="lazy" width="300" height="450">' +
-            "<h3>" + esc(l.t) + "</h3>" + (l.d ? "<p>" + esc(l.d) + "</p>" : "") + "</a></li>";
-        }).join("") + "</ul></section>";
-    }
-    (h.grupos || []).forEach(function (g) {
-      out += '<section class="grupo tc-contenedor"><h2>' + esc(g.titulo) + "</h2>" +
-        (g.bajada ? "<p>" + esc(g.bajada) + "</p>" : "") +
-        '<ul class="obras">' + g.items.map(function (it) { return filaHTML(it); }).join("") + "</ul></section>";
-    });
+    var datos = itemsRueda(h);
+    if (datos.items.length) out += ruedaHTML(h, datos, id.replace(/\//g, "-"));
     if (!h.grupos.length && !h.estante) {
       out += '<section class="grupo tc-contenedor"><h2>Todavía no hay trabajos aquí</h2>' +
         '<p>Los iré subiendo a medida que avance el ramo. Mientras tanto, revisa el resto de <a href="' + enlace("pedagogia/") + '">Pedagogía</a>.</p></section>';
     }
     main.innerHTML = out;
+    var zona = main.querySelector("[data-rueda]");
+    if (zona) prepararRueda(zona, datos);
   }
 
   /* ---------- Portada ---------- */
