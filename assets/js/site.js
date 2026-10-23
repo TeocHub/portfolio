@@ -361,9 +361,12 @@
       resumen: "Intervenciones que llevé a la sala, como el escape room Código 4D, y textos de estudio.",
       intro: "Lo que diseñé para trabajar con cursos reales durante mis prácticas, y los textos que me ayudaron a prepararlas.",
       grupos: [
-        { titulo: "Intervenciones en aula", items: [
+        { titulo: "Juegos pedagógicos", items: [
           { t: "Código 4D", d: "Escape room con disco decodificador sobre las cuatro dimensiones de la sexualidad, para 7° básico.", url: "pedagogia/practica/intervenciones/codigo-4d/", tipo: "Escape room" },
           { t: "Código 4D: panel de la sala", d: "Pantalla para proyectar durante el juego, con los niveles y las pistas.", url: "pedagogia/practica/intervenciones/codigo-4d/panel/", tipo: "Herramienta" },
+          { t: "Desvelo", d: "Juego de mesa pedagógico.", tipo: "Juego de mesa" }
+        ]},
+        { titulo: "Intervenciones en aula", items: [
           { t: "Generador de haikus escolares", d: "Arma haikus nuevos con los versos que escriben los estudiantes.", url: "pedagogia/practica/intervenciones/haikus/", tipo: "Generador" },
           { t: "Haikus del 7° del Pablo Neruda", d: "El generador con los versos que escribió el curso en 2025.", url: "pedagogia/practica/intervenciones/haikus-pablo-neruda/", tipo: "Generador" }
         ]},
@@ -417,17 +420,15 @@
     },
     "codigo": {
       area: "codigo", titulo: "Código y juegos",
-      intro: "Programo en Unity, Godot, Java y Python. Aquí junto los juegos y herramientas que he hecho, incluidos los que nacieron para la sala de clases.",
+      intro: "Programo en Unity, Godot, Java y Python. Aquí junto los juegos y los tests que he hecho.",
       grupos: [
         { titulo: "Juegos", items: [
-          { t: "Cuestionario definitivo de FNAF", d: "Quiz sobre el lore de Five Nights at Freddy's con ranking global.", tipo: "Juego web" },
-          { t: "Illagers DG", d: "Add-on para Minecraft Bedrock con illagers elementales, jefes y estructuras nuevas.", tipo: "En desarrollo" },
-          { t: "Código 4D", d: "Escape room educativo con disco decodificador y panel para proyectar.", url: "pedagogia/practica/intervenciones/codigo-4d/", tipo: "Escape room" }
-        ]},
-        { titulo: "Herramientas", items: [
-          { t: "Calculadora editorial", d: "Estima páginas y formato de un libro a partir de su número de palabras.", url: "letras/calculadora-editorial/", tipo: "Herramienta" },
-          { t: "Generador de haikus escolares", d: "Lee los versos de los estudiantes desde una planilla y arma haikus al azar.", url: "pedagogia/practica/intervenciones/haikus/", tipo: "Generador" },
-          { t: "Bases curriculares", d: "Buscador de objetivos de aprendizaje por asignatura y curso.", url: "pedagogia/recursos/bases-curriculares/", tipo: "Buscador" }
+          { t: "Cuestionario definitivo de FNAF", d: "376 preguntas sobre el lore canónico de Five Nights at Freddy's, en español e inglés, con ranking global.", url: "https://teochub.github.io/fnaf-quest/", tipo: "Cuestionario" },
+          { t: "Percy Jackson Quest", d: "Tests del universo de Rick Riordan: el cuestionario definitivo, con 1379 preguntas sobre los 18 libros y las dos temporadas de la serie, y pronto un test de qué dios serías hijo o hija.", url: "https://teochub.github.io/pj-quest/", tipo: "Cuestionario y test",
+            partes: [{ t: "Cuestionario definitivo", url: "https://teochub.github.io/pj-quest/quiz/" }, { t: "¿De qué dios serías hijo o hija? (pronto)" }] },
+          { t: "Avatar Quest", d: "Tests de Avatar: el cuestionario definitivo, con 349 preguntas en cinco partes, y un test de 54 afirmaciones para saber qué elemento controlarías.", url: "https://teochub.github.io/avatar-quest/", tipo: "Cuestionario y test",
+            partes: [{ t: "Cuestionario definitivo", url: "https://teochub.github.io/avatar-quest/quiz/" }, { t: "¿Qué elemento controlarías?", url: "https://teochub.github.io/avatar-quest/elemento/" }] },
+          { t: "Illagers DG", d: "Add-on para Minecraft Bedrock con illagers elementales, jefes y estructuras nuevas.", tipo: "En desarrollo" }
         ]}
       ]
     },
@@ -721,6 +722,13 @@
     birrete: '<path d="M2 9.5L12 5l10 4.5L12 14z"/><path d="M6.5 11.6v4.6c3 2.6 8 2.6 11 0v-4.6M22 9.5v5.5"/>',
     carpeta: '<path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h4.6l2.2 2.3h8.2A1.5 1.5 0 0 1 21 8.8v9.7a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5z"/>',
     monstruo: '<path d="M5 20.5V11a7 7 0 0 1 14 0v9.5l-2.4-1.8-2.3 1.8-2.3-1.8-2.3 1.8-2.3-1.8z"/><path d="M9.5 11h.01M14.5 11h.01M10 14.5q2 1.4 4 0"/>',
+    pregunta: '<circle cx="12" cy="12" r="9"/><path d="M9.3 9.4a2.8 2.8 0 0 1 5.4 1c0 1.9-2.7 2.3-2.7 4"/><path d="M12 17.4h.01"/>',
+    brujula: '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+    oso: '<circle cx="6.8" cy="6.3" r="2.6"/><circle cx="17.2" cy="6.3" r="2.6"/><path d="M5 13.5a7 7 0 0 1 14 0v1.5a6 6 0 0 1-6 6h-2a6 6 0 0 1-6-6z"/><path d="M9.4 12.8h.01M14.6 12.8h.01M10.3 16.8h3.4"/>',
+    tridente: '<path d="M12 21.5V4.5"/><path d="M6.5 3.5V8c0 2.3 2.4 3.8 5.5 3.8s5.5-1.5 5.5-3.8V3.5"/><path d="M10 5.5l2-3 2 3"/>',
+    espiral: '<path d="M12 12.5c0-1.6 2-2 2.9-.9s0 3.8-2.9 3.8-4.6-2.6-3-5.4 6.4-3.6 8.8-.6"/><path d="M3.5 17c4 1.8 8 1.8 12 0M6 20.5c3 1 6 1 9 0"/>',
+    rayo: '<path d="M13.5 2.5L5.5 13.5h6l-1 8 8-11.5h-6z"/>',
+    cartas: '<rect x="3.5" y="6" width="10" height="14" rx="1.6" transform="rotate(-10 8.5 13)"/><rect x="10.5" y="4" width="10" height="14" rx="1.6" transform="rotate(8 15.5 11)"/>',
     estrella: '<path d="M12 3.5l2.5 5.4 5.9.6-4.4 4 1.2 5.8L12 16.4l-5.2 2.9L8 13.5l-4.4-4 5.9-.6z"/>'
   };
   var ICONO_TIPO = {
@@ -729,14 +737,16 @@
     "Sitio web": "ventana", "Actividad": "bandera", "Informe": "barras", "Formulario": "formulario",
     "Escape room": "llave", "Herramienta": "herramienta", "Generador": "dado", "Propuesta": "pluma",
     "PDF": "pdf", "Buscador": "lupa", "Guía": "hoja", "Juego web": "mando", "En desarrollo": "engranaje",
-    "Prototipo": "lapiz", "Archivo": "caja", "Próximamente": "luna"
+    "Prototipo": "lapiz", "Archivo": "caja", "Próximamente": "luna",
+    "Cuestionario": "pregunta", "Test": "brujula"
   };
   var ICONO_HUB = {
     "pedagogia/etica": "balanza", "pedagogia/lenguaje": "globo", "pedagogia/historia": "reloj",
     "pedagogia/tics": "chip", "pedagogia/matematicas": "pi", "pedagogia/fisica-quimica": "matraz",
     "pedagogia/practica": "pizarra", "pedagogia/tesis": "birrete", "pedagogia/recursos": "carpeta"
   };
-  var ICONO_TITULO = { "Velas de cera de abeja": "vela", "Lecturas de tarot": "luna", "Mar y Ola": "vela", "Digital Monster": "monstruo" };
+  var ICONO_TITULO = { "Velas de cera de abeja": "vela", "Lecturas de tarot": "luna", "Mar y Ola": "vela", "Digital Monster": "monstruo", "¿De qué dios serías hijo o hija?": "rayo",
+    "Cuestionario definitivo de FNAF": "oso", "Percy Jackson Quest": "tridente", "Avatar Quest": "espiral", "Desvelo": "cartas" };
   /* Color de cada grupo de la rueda: el del área y luego los secundarios */
   var COLOR_GRUPO = ["acento", "h1", "h3", "h4", "h2"];
 
@@ -770,7 +780,7 @@
           (sub.grupos || []).forEach(function (sg) { sg.items.forEach(function (x) { if (x.t) hijos.push(x); }); });
           items.push({ t: sub.titulo, d: sub.resumen, url: it.hub + "/", tipo: n ? plural(n) : "Todavía sin trabajos", g: gi, ic: ICONO_HUB[it.hub], hijos: hijos, vacio: !n });
         } else {
-          items.push({ t: it.t, d: it.d, url: it.url, tipo: it.tipo, g: gi, ic: ICONO_TITULO[it.t] || ICONO_TIPO[it.tipo] });
+          items.push({ t: it.t, d: it.d, url: it.url, tipo: it.tipo, g: gi, ic: ICONO_TITULO[it.t] || ICONO_TIPO[it.tipo], hijos: it.partes, partes: !!it.partes });
         }
       });
     });
@@ -886,11 +896,11 @@
     var externo = /^https?:/.test(it.url || "");
     var abre = !url || it.vacio ? '<span class="rueda-pronto">' + (it.vacio ? "Pronto habrá trabajos aquí" : "Próximamente") + "</span>"
       : '<a class="boton" href="' + esc(url) + '"' + (externo ? ' target="_blank" rel="noopener"' : "") + ">" +
-        (it.img ? "Leer en Wattpad" : it.hijos ? "Entrar a " + esc(it.t) : "Abrir") + (externo ? " ↗" : " →") + "</a>";
+        (it.img ? "Leer en Wattpad" : it.hijos && !it.partes ? "Entrar a " + esc(it.t) : it.partes ? "Ir a " + esc(it.t) : "Abrir") + (externo ? " ↗" : " →") + "</a>";
     var hijos = "";
     if (it.hijos && it.hijos.length) {
       var max = 5, resto = it.hijos.length - max;
-      hijos = '<div class="rueda-hijos"><span>Adentro</span>' + it.hijos.slice(0, max).map(function (x) {
+      hijos = '<div class="rueda-hijos"><span>' + (it.partes ? "Tests" : "Adentro") + "</span>" + it.hijos.slice(0, max).map(function (x) {
         var u = x.url ? enlace(x.url) : "";
         var ext = /^https?:/.test(x.url || "");
         return u ? '<a href="' + esc(u) + '"' + (ext ? ' target="_blank" rel="noopener"' : "") + ">" + esc(x.t) + "</a>" : "<em>" + esc(x.t) + "</em>";
