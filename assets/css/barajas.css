@@ -56,6 +56,9 @@
   --a-sitios-rgb: 11 116 104;
   --a-sitios-relleno-rgb: 94 216 201;
   --a-sitios-suave-rgb: 216 247 243;
+  --a-propuestas-rgb: 179 64 26;
+  --a-propuestas-relleno-rgb: 255 155 107;
+  --a-propuestas-suave-rgb: 255 230 218;
 }
 :root[data-baraja="sombra"] {
   color-scheme: dark;
@@ -104,6 +107,9 @@
   --a-sitios-rgb: 125 211 199;
   --a-sitios-relleno-rgb: 31 80 74;
   --a-sitios-suave-rgb: 22 48 45;
+  --a-propuestas-rgb: 237 165 126;
+  --a-propuestas-relleno-rgb: 103 54 32;
+  --a-propuestas-suave-rgb: 54 35 26;
 }
 
 :root {
@@ -152,6 +158,9 @@
   --a-sitios: rgb(var(--a-sitios-rgb));
   --a-sitios-relleno: rgb(var(--a-sitios-relleno-rgb));
   --a-sitios-suave: rgb(var(--a-sitios-suave-rgb));
+  --a-propuestas: rgb(var(--a-propuestas-rgb));
+  --a-propuestas-relleno: rgb(var(--a-propuestas-relleno-rgb));
+  --a-propuestas-suave: rgb(var(--a-propuestas-suave-rgb));
   /* Acento del área actual (por defecto, Pedagogía) */
   --acento-rgb: var(--a-pedagogia-rgb);
   --acento-relleno-rgb: var(--a-pedagogia-relleno-rgb);
@@ -166,6 +175,7 @@
 [data-area="esoterico"] { --acento-rgb: var(--a-esoterico-rgb); --acento-relleno-rgb: var(--a-esoterico-relleno-rgb); --acento-suave-rgb: var(--a-esoterico-suave-rgb); }
 [data-area="estudio"] { --acento-rgb: var(--a-estudio-rgb); --acento-relleno-rgb: var(--a-estudio-relleno-rgb); --acento-suave-rgb: var(--a-estudio-suave-rgb); }
 [data-area="sitios"] { --acento-rgb: var(--a-sitios-rgb); --acento-relleno-rgb: var(--a-sitios-relleno-rgb); --acento-suave-rgb: var(--a-sitios-suave-rgb); }
+[data-area="propuestas"] { --acento-rgb: var(--a-propuestas-rgb); --acento-relleno-rgb: var(--a-propuestas-relleno-rgb); --acento-suave-rgb: var(--a-propuestas-suave-rgb); }
 /* Recalcular los derivados dentro de cada área */
 [data-area] {
   --acento: rgb(var(--acento-rgb));
