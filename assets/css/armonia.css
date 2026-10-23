@@ -12,8 +12,8 @@
 :root {
   --sobre-relleno: var(--tinta);
   /* Luz: las tarjetas se vuelven "pegatinas" con trazo de tinta */
-  --sombra-suave: 0 0 0 2px var(--trazo), 4px 4px 0 var(--trazo);
-  --sombra-alta: 0 0 0 2.5px var(--trazo), 7px 7px 0 var(--trazo);
+  --sombra-suave: 0 0 0 2px var(--trazo), 0 0 0 transparent;
+  --sombra-alta: 0 0 0 2.5px var(--trazo), 0 0 0 transparent;
 }
 :root[data-baraja="sombra"] {
   /* Sombra: filete de latón y una sombra honda */
@@ -57,7 +57,7 @@ html body :is(button, input, select, textarea, label, .btn) { font-family: var(-
 html body :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"]), select, textarea) {
   background-color: var(--superficie);
   color: var(--tinta);
-  border: 2px solid var(--trazo);
+  border: 1px solid var(--trazo);
   border-radius: var(--radio-sm);
 }
 :root[data-baraja="sombra"] body :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"]), select, textarea) {
@@ -125,22 +125,22 @@ html body > .tc-barra { position: relative; z-index: 1000; }
 
 /* ---------- Botones de acción: la misma forma en todas las páginas ---------- */
 html body :is(.btn, .expand-btn, .toggle-btn, .toggle-button, .card-button, .btn-add, .btn-form, .accion) {
-  border: 2.5px solid var(--trazo) !important;
-  border-radius: 999px !important;
+  border: 1px solid var(--trazo) !important;
+  border-radius: var(--radio-sm) !important;
   background: var(--acento-relleno) !important;
   color: var(--tinta) !important;
-  box-shadow: 3px 3px 0 var(--trazo) !important;
+  box-shadow: 0 0 0 transparent !important;
   font-weight: 700 !important;
   text-decoration: none !important;
   transition: transform .12s, box-shadow .12s;
 }
 html body :is(.btn, .expand-btn, .toggle-btn, .toggle-button, .card-button, .btn-add, .btn-form, .accion):hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 4px 4px 0 var(--trazo) !important;
+  transform: none;
+  box-shadow: 0 0 0 transparent !important;
 }
 html body :is(.btn, .expand-btn, .toggle-btn, .toggle-button, .card-button, .btn-add, .btn-form, .accion):active {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 var(--trazo) !important;
+  transform: none;
+  box-shadow: 0 0 0 transparent !important;
 }
 /* Secundarios: blancos */
 html body :is(.btn-secondary, .btn-light, .btn-outline-secondary, .btn:not(.pri, .btn-primary, .btn-success, .btn-form, .btn-lg, [id])) {
@@ -169,8 +169,8 @@ html body .btn-del { color: var(--peligro) !important; }
 
 /* ---------- Pestañas ---------- */
 html body :is(.tab-btn, .ing-tab, .process-tab, .nav-button) {
-  border: 2px solid var(--trazo) !important;
-  border-radius: 999px !important;
+  border: 1px solid var(--trazo) !important;
+  border-radius: var(--radio-sm) !important;
   background: var(--superficie) !important;
   color: var(--tinta) !important;
   box-shadow: none !important;
@@ -178,7 +178,7 @@ html body :is(.tab-btn, .ing-tab, .process-tab, .nav-button) {
 }
 html body :is(.tab-btn, .ing-tab, .process-tab, .nav-button):is(.active, [aria-selected="true"]) {
   background: var(--acento-relleno) !important;
-  box-shadow: 3px 3px 0 var(--trazo) !important;
+  box-shadow: 0 0 0 transparent !important;
 }
 :root[data-baraja="sombra"] body :is(.tab-btn, .ing-tab, .process-tab, .nav-button) {
   border: 0 !important;
@@ -196,19 +196,19 @@ html body :is(.tab-btn, .ing-tab, .process-tab, .nav-button):is(.active, [aria-s
 
 /* Panel de Código 4D: pestañas y botones de la barra con la forma común */
 html body :is(.tbtn, .fsb) {
-  border: 2.5px solid var(--trazo) !important;
-  border-radius: 999px !important;
+  border: 1px solid var(--trazo) !important;
+  border-radius: var(--radio-sm) !important;
   background: var(--superficie) !important;
   color: var(--tinta) !important;
-  box-shadow: 3px 3px 0 var(--trazo) !important;
+  box-shadow: 0 0 0 transparent !important;
 }
 html body .top :is(.tab, .sec) {
-  border: 2px solid var(--trazo) !important;
-  border-radius: 999px !important;
+  border: 1px solid var(--trazo) !important;
+  border-radius: var(--radio-sm) !important;
   background: var(--superficie) !important;
   color: var(--tinta) !important;
 }
-html body .top :is(.tab, .sec).on { background: var(--acento-relleno) !important; box-shadow: 3px 3px 0 var(--trazo) !important; }
+html body .top :is(.tab, .sec).on { background: var(--acento-relleno) !important; box-shadow: 0 0 0 transparent !important; }
 :root[data-baraja="sombra"] body :is(.tbtn, .fsb) { border: 1px solid var(--trazo) !important; border-radius: 3px !important; background: transparent !important; color: var(--resalte) !important; box-shadow: none !important; }
 :root[data-baraja="sombra"] body .top :is(.tab, .sec) { border: 0 !important; border-bottom: 1px solid var(--linea) !important; border-radius: 0 !important; background: transparent !important; color: var(--tinta-2) !important; }
 :root[data-baraja="sombra"] body .top :is(.tab, .sec).on { color: var(--resalte) !important; border-bottom: 2px solid var(--resalte) !important; box-shadow: none !important; }
