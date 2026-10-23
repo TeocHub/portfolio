@@ -151,9 +151,11 @@
     estudio: { nombre: "Digital Monster", carta: "El Loco", num: "0", url: "digital-monster/",
       nota: "El estudio indie que formé con Francisco: cómics, series y juegos." },
     sitios: { nombre: "Sitios web", carta: "El Carro", num: "VII", url: "sitios/",
-      nota: "Páginas que diseñé y programé para negocios y organizaciones." }
+      nota: "Páginas que diseñé y programé para negocios y organizaciones." },
+    propuestas: { nombre: "Propuestas", carta: "La Estrella", num: "XVII", url: "propuestas/",
+      nota: "Proyectos que me quedan grandes y busco compartir: ideas para construir con otros." }
   };
-  var ORDEN = ["pedagogia", "letras", "codigo", "esoterico", "estudio", "sitios"];
+  var ORDEN = ["pedagogia", "letras", "codigo", "esoterico", "estudio", "sitios", "propuestas"];
   var CARPETA_AREA = { "digital-monster": "estudio" };
 
   /* Dibujos de cada arcano. Clases: .area (color del área), .tinta, .papel, .llama, .sol */
@@ -186,7 +188,12 @@
       '<path d="M12 30h76M24 45h32M24 55h20"/>' +
       '<circle class="tinta" cx="21" cy="23" r="2.2"/><circle class="tinta" cx="28" cy="23" r="2.2"/>' +
       '<circle class="papel" cx="30" cy="81" r="10"/><circle class="papel" cx="70" cy="81" r="10"/>' +
-      '<path d="M30 71v20M20 81h20M70 71v20M60 81h20"/>'
+      '<path d="M30 71v20M20 81h20M70 71v20M60 81h20"/>',
+    propuestas:
+      '<path class="sol" d="M50 6l5.6 11.8 12.9 1.7-9.4 9 2.4 12.8L50 35.1l-11.5 6.2 2.4-12.8-9.4-9 12.9-1.7z"/>' +
+      '<path class="tinta" d="M18 22l1.6 3.6 3.6 1.6-3.6 1.6-1.6 3.6-1.6-3.6-3.6-1.6 3.6-1.6zM83 30l1.4 3 3 1.4-3 1.4-1.4 3-1.4-3-3-1.4 3-1.4z"/>' +
+      '<path class="area" d="M8 90l18-30 10 12 14-26 16 24 8-10 18 30z"/>' +
+      '<path d="M50 46l-6 12 6-3 6 3zM8 90h84M32 90v-8h8v8M58 90v-10h10v10"/>'
   };
   function glifo(area) {
     return '<svg class="glifo" viewBox="0 0 100 100" aria-hidden="true">' + (GLIFOS[area] || "") + "</svg>";
@@ -442,6 +449,14 @@
         { t: "Reglamentos SmartFit", d: "Mi primer sitio, hecho rápido: contratos y reglamentos de SmartFit resumidos. Ya no refleja sus políticas actuales.", url: "sitios/smartfit/", tipo: "Archivo" },
         { t: "Digital Monster", d: "El sitio de nuestro estudio indie.", url: "digital-monster/", tipo: "Sitio web" }
       ]}]
+    },
+    "propuestas": {
+      area: "propuestas", titulo: "Propuestas",
+      intro: "Ideas que me quedan grandes para hacerlas solo. Las dejo aquí, con números y un plan, para quien quiera verlas, entusiasmarse o sumarse.",
+      grupos: [{ titulo: "Proyectos para construir con otros", items: [
+        { t: "Nuevo Mundo Mágico", d: "Un parque con el Chile actual en miniatura y dioramas de su historia, gratis o casi gratis para colegios y familias.", url: "propuestas/mundo-magico/", tipo: "Propuesta" },
+        { t: "Mundo Mágico Miniatura Escolar", d: "Para docentes: un ABP de cuatro semanas en que un 6.º básico construye y abre su propio museo de Chile en miniatura.", url: "propuestas/mundo-magico/docentes/", tipo: "Material docente" }
+      ]}]
     }
   };
 
@@ -564,6 +579,9 @@
         migas.push('<span class="tc-actual" aria-current="page">' + esc(nombre) + "</span>");
       } else if (hub) {
         migas.push('<a href="' + enlace(acumulado + "/") + '">' + esc(hub.titulo) + "</a>");
+      } else if (buscarItem(acumulado)) {
+        /* Páginas con subpáginas propias (una propuesta y su material docente) */
+        migas.push('<a href="' + enlace(acumulado + "/") + '">' + esc(buscarItem(acumulado).t) + "</a>");
       } else if (acumulado === "digital-monster") {
         migas.push('<a href="' + enlace("digital-monster/") + '">Digital Monster</a>');
       }

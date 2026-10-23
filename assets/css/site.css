@@ -640,18 +640,20 @@ body.tc :where(h1, h2, h3) {
     margin-top: 0;
   }
   .tirada li {
-    width: 182px;
-    margin: 0 -12px;
+    width: 170px;
+    margin: 0 -14px;
     transform: translateY(var(--y)) rotate(var(--rot));
     transform-origin: 50% 115%;
     transition: transform .35s cubic-bezier(.2,.8,.2,1);
   }
-  .tirada li:nth-child(1) { --rot: -14deg; --y: 50px; }
-  .tirada li:nth-child(2) { --rot: -8.5deg; --y: 17px; }
-  .tirada li:nth-child(3) { --rot: -3deg;  --y: 2px; }
-  .tirada li:nth-child(4) { --rot: 3deg;   --y: 2px; }
-  .tirada li:nth-child(5) { --rot: 8.5deg;  --y: 17px; }
-  .tirada li:nth-child(6) { --rot: 14deg;  --y: 50px; }
+  /* Siete cartas en abanico, simétricas alrededor de la del medio */
+  .tirada li:nth-child(1) { --rot: -15deg; --y: 56px; }
+  .tirada li:nth-child(2) { --rot: -10deg; --y: 25px; }
+  .tirada li:nth-child(3) { --rot: -5deg;  --y: 7px; }
+  .tirada li:nth-child(4) { --rot: 0deg;   --y: 0px; }
+  .tirada li:nth-child(5) { --rot: 5deg;   --y: 7px; }
+  .tirada li:nth-child(6) { --rot: 10deg;  --y: 25px; }
+  .tirada li:nth-child(7) { --rot: 15deg;  --y: 56px; }
   .tirada li:hover, .tirada li:focus-within {
     z-index: 5;
     transform: translateY(calc(var(--y) - 38px)) rotate(0deg) scale(1.07);
