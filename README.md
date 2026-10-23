@@ -6,12 +6,14 @@ Publicado en https://teochub.github.io/portfolio/
 
 El portfolio tiene dos estéticas, como mis dos mazos de tarot, y el botón de la barra cambia entre ellas en todo el sitio:
 
-- **Luz**: cielo, sol y colores de chicle, con trazo grueso de tinta y sombras de pegatina.
-- **Sombra**: tinta verde-negra, latón y cobre, filetes finos y relojería.
+- **Luz**: papel y tinta, con un acento terroso por área.
+- **Sombra**: tinta oscura y latón.
+
+Las dos comparten la misma estructura: hilos de 1px en vez de sombras, sin pastillas ni adornos de plantilla, y la tipografía haciendo la jerarquía.
 
 La primera visita usa la preferencia clara u oscura del dispositivo; después se recuerda la elección.
 
-Tipografías: Fraunces (títulos, con sus ejes `SOFT` y `WONK` distintos en cada baraja) y Atkinson Hyperlegible (texto).
+Tipografías: EB Garamond (títulos y rótulos) e Instrument Sans (texto).
 
 ## Estructura
 
@@ -21,7 +23,7 @@ assets/
   css/barajas.css     Colores de las dos barajas (generado por herramientas/barajas.py)
   css/site.css        Barra, pie, arcanos, portada e índices
   css/paginas.css     Plantilla común de las subpáginas: cabecera, índice lateral y componentes
-  css/areas.css       Páginas de área: papel y tinta, EB Garamond y la rueda como volvelle
+  css/areas.css       La rueda de las páginas de área, como un volvelle
   css/armonia.css     Capa de compatibilidad para el panel de Código 4D (app de proyección)
   js/site.js          Baraja activa, catálogo, barra, índice de la página, pestañas y recorridos
   js/autores.js       Directorio y comparador de autores de las guías de lectura

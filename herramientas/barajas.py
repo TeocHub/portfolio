@@ -5,48 +5,48 @@ Para cambiar un color: edítalo en LUZ, SOMBRA, AREAS_LUZ o AREAS_SOMBRA y ejecu
 El script avisa si algún par de colores queda con poco contraste."""
 import os, sys
 
-LUZ = {
-    "fondo": "#E6F4FE", "fondo-2": "#D2EBFC", "superficie": "#FFFFFF", "superficie-2": "#FFF4CF",
-    "tinta": "#1C2541", "tinta-2": "#465275", "tinta-3": "#6C7699",
-    "linea": "#BCD3E6", "trazo": "#1C2541",
-    "resalte": "#FFCB3D", "resalte-tinta": "#8A5800",
-    "boton": "#1C2541", "sobre-boton": "#FFFFFF",
-    "peligro": "#C8243B", "exito": "#17803F",
+LUZ = {   # papel y tinta
+    "fondo": "#F5F0E6", "fondo-2": "#EDE6D8", "superficie": "#FAF7F0", "superficie-2": "#F0E8D8",
+    "tinta": "#211E1B", "tinta-2": "#524B43", "tinta-3": "#6C645A",
+    "linea": "#D6CCBB", "trazo": "#211E1B",
+    "resalte": "#C48C34", "resalte-tinta": "#7A5214",
+    "boton": "#211E1B", "sobre-boton": "#FAF7F0",
+    "peligro": "#A3302E", "exito": "#3D6B3A",
     # familias secundarias: fuerte (texto), relleno, suave
-    "h1": "#8A5800", "h1-relleno": "#FFCB3D", "h1-suave": "#FFF2C4",   # sol
-    "h2": "#B4245A", "h2-relleno": "#FF8DB3", "h2-suave": "#FFE3ED",   # chicle
-    "h3": "#155FA6", "h3-relleno": "#6CC4FF", "h3-suave": "#DDF0FF",   # cielo
-    "h4": "#6A3FC9", "h4-relleno": "#B9A0FF", "h4-suave": "#ECE5FF",   # lila
+    "h1": "#7A5214", "h1-relleno": "#E2C38A", "h1-suave": "#F2E6CC",   # ocre
+    "h2": "#8C3438", "h2-relleno": "#DFA9A2", "h2-suave": "#F1DED6",   # granate
+    "h3": "#2E4E70", "h3-relleno": "#A9BDD0", "h3-suave": "#DDE3E8",   # pizarra
+    "h4": "#5C4278", "h4-relleno": "#C2B2D4", "h4-suave": "#E6DFEA",   # ciruela
 }
-SOMBRA = {
-    "fondo": "#0F1A19", "fondo-2": "#132220", "superficie": "#172825", "superficie-2": "#1F332F",
-    "tinta": "#EFE6CF", "tinta-2": "#BFB59D", "tinta-3": "#948C77",
-    "linea": "#30453F", "trazo": "#B8924A",
-    "resalte": "#D9B061", "resalte-tinta": "#E6C57F",
-    "boton": "#D9B061", "sobre-boton": "#16201E",
-    "peligro": "#E8806E", "exito": "#83CCA2",
-    "h1": "#E6C57F", "h1-relleno": "#5C4718", "h1-suave": "#2C2617",   # latón
-    "h2": "#E99A86", "h2-relleno": "#6E2F28", "h2-suave": "#35201C",   # cobre
-    "h3": "#94C2E6", "h3-relleno": "#24455F", "h3-suave": "#172A36",   # acero
-    "h4": "#C2A8EE", "h4-relleno": "#46326F", "h4-suave": "#251E37",   # amatista
+SOMBRA = {   # tinta oscura y latón
+    "fondo": "#161513", "fondo-2": "#1D1C19", "superficie": "#1B1A17", "superficie-2": "#24221E",
+    "tinta": "#E9E2D4", "tinta-2": "#BAB2A4", "tinta-3": "#968E81",
+    "linea": "#3A3731", "trazo": "#B09258",
+    "resalte": "#CDA860", "resalte-tinta": "#D8B878",
+    "boton": "#CDA860", "sobre-boton": "#161513",
+    "peligro": "#E0897A", "exito": "#A0BE96",
+    "h1": "#D8B878", "h1-relleno": "#4A3C20", "h1-suave": "#2A251A",   # latón
+    "h2": "#D69691", "h2-relleno": "#5A2E2A", "h2-suave": "#30211F",   # cobre
+    "h3": "#96B4D2", "h3-relleno": "#2A3A4C", "h3-suave": "#1F262E",   # acero
+    "h4": "#BAA5D6", "h4-relleno": "#3E3150", "h4-suave": "#28232F",   # amatista
 }
 AREAS_LUZ = {
-    "pedagogia": ("#157A43", "#63D27A", "#DCF6E1"),
-    "letras":    ("#B4245A", "#FF8DB3", "#FFE3ED"),
-    "codigo":    ("#155FA6", "#6CC4FF", "#DDF0FF"),
-    "esoterico": ("#6A3FC9", "#B9A0FF", "#ECE5FF"),
-    "estudio":   ("#8F5500", "#FFC54D", "#FFF0CF"),
-    "sitios":    ("#0B7468", "#5ED8C9", "#D8F7F3"),
-    "propuestas": ("#B3401A", "#FF9B6B", "#FFE6DA"),
+    "pedagogia": ("#40623E", "#A9BE9C", "#E1E7D6"),
+    "letras":    ("#8C3438", "#DFA9A2", "#F1DED6"),
+    "codigo":    ("#2E4E70", "#A9BDD0", "#DDE3E8"),
+    "esoterico": ("#5C4278", "#C2B2D4", "#E6DFEA"),
+    "estudio":   ("#7E5418", "#E2C38A", "#F0E4CE"),
+    "sitios":    ("#22605A", "#A2CBC3", "#D8E7E2"),
+    "propuestas": ("#9A4622", "#E7B59A", "#F2E1D4"),
 }
 AREAS_SOMBRA = {
-    "pedagogia": ("#80C9A8", "#2C5C4B", "#1A3630"),
-    "letras":    ("#E99A8B", "#6E2D2B", "#371E1E"),
-    "codigo":    ("#94C2E6", "#24455F", "#172A36"),
-    "esoterico": ("#C2A8EE", "#46326F", "#251E37"),
-    "estudio":   ("#E6C068", "#5D4719", "#30281A"),
-    "sitios":    ("#7DD3C7", "#1F504A", "#16302D"),
-    "propuestas": ("#EDA57E", "#673620", "#36231A"),
+    "pedagogia": ("#A0BE96", "#33432F", "#232A21"),
+    "letras":    ("#D69691", "#5A2E2A", "#30211F"),
+    "codigo":    ("#96B4D2", "#2A3A4C", "#1F262E"),
+    "esoterico": ("#BAA5D6", "#3E3150", "#28232F"),
+    "estudio":   ("#D6AC6C", "#4C3A1E", "#2E271B"),
+    "sitios":    ("#8CC4BA", "#24443F", "#1C2927"),
+    "propuestas": ("#DEA07C", "#563220", "#2F231C"),
 }
 
 
@@ -123,8 +123,8 @@ css = f"""/* ==========================================================
    Archivo generado. Cada color se guarda como tripleta RGB
    (--x-rgb) para que Tailwind pueda usar transparencias, y
    como color listo para usar (--x).
-   Baraja de Luz: cielo, sol, chicle; trazo grueso de tinta.
-   Baraja de Sombra: tinta verde-negra, latón, cobre, relojería.
+   Baraja de Luz: papel y tinta, un acento terroso por área.
+   Baraja de Sombra: tinta oscura y latón.
    ========================================================== */
 
 :root,
