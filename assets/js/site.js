@@ -412,14 +412,12 @@
       area: "codigo", titulo: "Código y juegos",
       intro: "Programo en Unity, Godot, Java y Python. Aquí junto los juegos y herramientas que he hecho, incluidos los que nacieron para la sala de clases.",
       grupos: [
-        { titulo: "Tests y cuestionarios", items: [
+        { titulo: "Juegos", items: [
           { t: "Cuestionario definitivo de FNAF", d: "376 preguntas sobre el lore canónico de Five Nights at Freddy's, en español e inglés, con ranking global.", url: "https://teochub.github.io/fnaf-quest/", tipo: "Cuestionario" },
           { t: "Cuestionario definitivo de Percy Jackson", d: "1379 preguntas sobre los 18 libros del universo de Rick Riordan y las dos temporadas de la serie, con ranking global.", url: "https://teochub.github.io/pj-quest/quiz/", tipo: "Cuestionario" },
           { t: "Cuestionario definitivo de Avatar", d: "349 preguntas de Avatar en cinco partes, con ranking global.", url: "https://teochub.github.io/avatar-quest/quiz/", tipo: "Cuestionario" },
           { t: "¿Qué elemento controlarías?", d: "Test de Avatar con 54 afirmaciones: agua, tierra, fuego o aire.", url: "https://teochub.github.io/avatar-quest/elemento/", tipo: "Test" },
-          { t: "¿De qué dios serías hijo o hija?", d: "El próximo test de Percy Jackson Quest.", tipo: "Próximamente" }
-        ]},
-        { titulo: "Juegos", items: [
+          { t: "¿De qué dios serías hijo o hija?", d: "El próximo test de Percy Jackson Quest.", tipo: "Próximamente" },
           { t: "Illagers DG", d: "Add-on para Minecraft Bedrock con illagers elementales, jefes y estructuras nuevas.", tipo: "En desarrollo" },
           { t: "Código 4D", d: "Escape room educativo con disco decodificador y panel para proyectar.", url: "pedagogia/practica/intervenciones/codigo-4d/", tipo: "Escape room" }
         ]},
