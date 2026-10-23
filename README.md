@@ -38,6 +38,7 @@ codigo/               Código y juegos (I, El Mago): índice
 esoterico/            Esotérico (XVIII, La Luna): índice
 digital-monster/      Digital Monster (0, El Loco): sitio con marca propia
 sitios/               Sitios web (VII, El Carro): Mar y Ola, SmartFit, SindicatoLegal
+propuestas/           Propuestas (XVII, La Estrella): proyectos para construir con otros
 ```
 
 Digital Monster, Mar y Ola, SmartFit, SindicatoLegal e Innovatech conservan su propia estética.
@@ -52,7 +53,7 @@ No hace falta CSS propio; si algo no existe en la plantilla, agrégalo a `pagina
 
    ```html
    <!DOCTYPE html>
-   <html lang="es" data-area="pedagogia">   <!-- pedagogia, letras, codigo, esoterico o sitios -->
+   <html lang="es" data-area="pedagogia">   <!-- pedagogia, letras, codigo, esoterico, sitios o propuestas -->
    <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">

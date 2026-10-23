@@ -37,6 +37,7 @@ AREAS_LUZ = {
     "esoterico": ("#6A3FC9", "#B9A0FF", "#ECE5FF"),
     "estudio":   ("#8F5500", "#FFC54D", "#FFF0CF"),
     "sitios":    ("#0B7468", "#5ED8C9", "#D8F7F3"),
+    "propuestas": ("#B3401A", "#FF9B6B", "#FFE6DA"),
 }
 AREAS_SOMBRA = {
     "pedagogia": ("#80C9A8", "#2C5C4B", "#1A3630"),
@@ -45,6 +46,7 @@ AREAS_SOMBRA = {
     "esoterico": ("#C2A8EE", "#46326F", "#251E37"),
     "estudio":   ("#E6C068", "#5D4719", "#30281A"),
     "sitios":    ("#7DD3C7", "#1F504A", "#16302D"),
+    "propuestas": ("#EDA57E", "#673620", "#36231A"),
 }
 
 
