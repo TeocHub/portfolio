@@ -453,7 +453,8 @@
       area: "propuestas", titulo: "Propuestas",
       intro: "Ideas que me quedan grandes para hacerlas solo. Las dejo aquí, con números y un plan, para quien quiera verlas, entusiasmarse o sumarse.",
       grupos: [{ titulo: "Proyectos para construir con otros", items: [
-        { t: "Nuevo Mundo Mágico", d: "Un parque con el Chile actual en miniatura y dioramas de su historia, gratis o casi gratis para colegios y familias.", url: "propuestas/mundo-magico/", tipo: "Propuesta" }
+        { t: "Nuevo Mundo Mágico", d: "Un parque con el Chile actual en miniatura y dioramas de su historia, gratis o casi gratis para colegios y familias.", url: "propuestas/mundo-magico/", tipo: "Propuesta" },
+        { t: "Mundo Mágico Miniatura Escolar", d: "Para docentes: un ABP de cuatro semanas en que un 6.º básico construye y abre su propio museo de Chile en miniatura.", url: "propuestas/mundo-magico/docentes/", tipo: "Material docente" }
       ]}]
     }
   };
@@ -577,6 +578,9 @@
         migas.push('<span class="tc-actual" aria-current="page">' + esc(nombre) + "</span>");
       } else if (hub) {
         migas.push('<a href="' + enlace(acumulado + "/") + '">' + esc(hub.titulo) + "</a>");
+      } else if (buscarItem(acumulado)) {
+        /* Páginas con subpáginas propias (una propuesta y su material docente) */
+        migas.push('<a href="' + enlace(acumulado + "/") + '">' + esc(buscarItem(acumulado).t) + "</a>");
       } else if (acumulado === "digital-monster") {
         migas.push('<a href="' + enlace("digital-monster/") + '">Digital Monster</a>');
       }

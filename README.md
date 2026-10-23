@@ -39,6 +39,7 @@ esoterico/            Esotérico (XVIII, La Luna): índice
 digital-monster/      Digital Monster (0, El Loco): sitio con marca propia
 sitios/               Sitios web (VII, El Carro): Mar y Ola, SmartFit, SindicatoLegal
 propuestas/           Propuestas (XVII, La Estrella): proyectos para construir con otros
+  mundo-magico/docentes/  ABP para docentes: guía del proyecto, una planificación por asignatura, guías del estudiante y sus PDF
 ```
 
 Digital Monster, Mar y Ola, SmartFit, SindicatoLegal e Innovatech conservan su propia estética.
@@ -141,6 +142,12 @@ Un segundo toque lo abre. El centro tira la rueda al azar. La página recuerda e
 - El ícono sale del `tipo` (`ICONO_TIPO` en `site.js`), del ramo (`ICONO_HUB`) o del título (`ICONO_TITULO`). Si agregas un tipo nuevo, dale un ícono ahí.
 - Las historias de Letras (`estante`) se muestran con su portada.
 - Con menos de seis trabajos, la rueda deja huecos punteados para los que vengan.
+
+## Imprimir y PDF
+
+Todas las subpáginas tienen estilos de impresión: sin barra ni escena, en hoja blanca, y cada `.bloque.clase` y cada `.guia` empiezan en hoja nueva.
+Para regenerar un PDF, abre la página en el navegador, imprime y elige «Guardar como PDF» (tamaño Carta).
+Los PDF de `propuestas/mundo-magico/docentes/pdf/` se hicieron así: si editas una planificación, vuelve a guardar su PDF.
 
 ## Cambiar un color
 
