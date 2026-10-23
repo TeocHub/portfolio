@@ -535,3 +535,83 @@ body.proyeccion .cuerpo { font-size: 1.15rem; }
 .logo-pixel svg { width: min(100%, 420px); height: auto; color: var(--tinta); }
 .figura-disco { text-align: center; }
 .figura-disco svg { width: min(100%, 300px); height: auto; }
+
+/* ---------- Planificaciones de clase ----------
+   .plan-datos     Ficha de datos de la clase (dl en cuadrícula)
+   .momentos       Inicio, desarrollo y cierre (.momento con .momento-cab)
+   ---------------------------------------------------------- */
+.plan-datos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin: 8px 0 18px;
+  background: var(--superficie);
+  border: var(--borde);
+  border-radius: var(--radio-sm);
+  box-shadow: var(--pegatina-sm);
+  overflow: hidden;
+}
+.plan-datos > div { padding: 12px 16px; border-bottom: 1px solid var(--linea); }
+.plan-datos > div.ancho { grid-column: 1 / -1; }
+.plan-datos dt { font-size: .82rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--acento); }
+.plan-datos dd { margin: 2px 0 0; }
+.plan-datos > div.objetivo { background: var(--acento-suave); }
+.plan-datos > div.objetivo dd { font-weight: 700; }
+:root[data-baraja="sombra"] .plan-datos { background: none; border: 1px solid var(--linea); box-shadow: none; }
+:root[data-baraja="sombra"] .plan-datos dt { color: var(--resalte); font-weight: 400; font-style: italic; text-transform: none; letter-spacing: 0; font-size: .9rem; }
+
+.momentos { display: grid; gap: 14px; margin: 8px 0 18px; max-width: 50rem; }
+.momento { padding: 14px 18px 4px; border-left: 6px solid var(--acento-relleno); background: var(--superficie); border-radius: 0 var(--radio-sm) var(--radio-sm) 0; }
+.momento-cab { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 0 0 8px; }
+.momento-cab b { font-family: var(--display); font-variation-settings: var(--display-fvs); font-size: 1.15rem; }
+.momento-cab span { font-size: .9rem; font-weight: 700; color: var(--tinta-2); white-space: nowrap; }
+.momento ol, .momento ul { margin: 0 0 12px; padding-left: 1.2rem; }
+.momento li { margin-bottom: 6px; }
+.momento p { margin: 0 0 12px; }
+.momento .di { display: block; margin-top: 4px; padding: 6px 10px; background: var(--fondo-2); border-radius: 8px; font-size: .95rem; }
+.momento .di::before { content: "Puedes decir: "; font-weight: 700; }
+:root[data-baraja="sombra"] .momento { background: none; border-left: 1px solid var(--resalte); }
+:root[data-baraja="sombra"] .momento-cab b { color: var(--resalte); font-weight: 500; font-style: italic; }
+
+/* ---------- Guías imprimibles para estudiantes ----------
+   .guia            Una guía (se imprime en hoja propia)
+   .encabezado-guia Nombre, curso, equipo, fecha
+   .lineas          Renglones para escribir (--n = cantidad)
+   .recuadro        Espacio en blanco para dibujar (--alto)
+   .cuadricula      Papel cuadriculado de 1 cm (--alto)
+   ---------------------------------------------------------- */
+.guia { margin: 8px 0 26px; padding: 22px 22px 8px; background: var(--superficie); border: var(--borde); border-radius: var(--radio-sm); box-shadow: var(--pegatina-sm); }
+.guia > h3:first-child { margin-top: 0; }
+.encabezado-guia { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 10px 18px; margin: 0 0 18px; padding: 0; list-style: none; }
+.encabezado-guia li { border-bottom: 1.5px solid var(--tinta-3); padding-bottom: 4px; font-size: .9rem; color: var(--tinta-2); }
+.lineas { --n: 3; display: block; height: calc(var(--n) * 2.1em); margin: 4px 0 14px; background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(2.1em - 1px), var(--tinta-3) calc(2.1em - 1px), var(--tinta-3) 2.1em); }
+.recuadro { --alto: 8rem; display: block; height: var(--alto); margin: 4px 0 14px; border: 1.5px dashed var(--tinta-3); border-radius: 8px; }
+.cuadricula { --alto: 12cm; display: block; height: var(--alto); margin: 4px 0 14px; border: 1.5px solid var(--tinta-3); background-image: linear-gradient(var(--linea) 1px, transparent 1px), linear-gradient(90deg, var(--linea) 1px, transparent 1px); background-size: 1cm 1cm; }
+.guia table td.vacia { height: 2.6em; }
+:root[data-baraja="sombra"] .guia { background: none; border: 1px solid var(--linea); box-shadow: none; }
+
+/* ---------- Impresión y PDF ----------
+   Hoja blanca, sin barra ni escena; cada .guia y cada clase empiezan limpias. */
+@media print {
+  @page { size: letter; margin: 16mm 14mm; }
+  :root { --fondo-rgb: 255 255 255; --superficie-rgb: 255 255 255; }
+  html, body { background: #fff !important; color: #111 !important; }
+  html { font-size: 13px; }
+  .tc-barra, .tc-pie, .indice, .escena, .botones, .acciones, .pie-ficha .boton { display: none !important; }
+  .cielo, .cabecera-pagina { background: none !important; border: 0 !important; }
+  .cabecera-pagina .tc-contenedor { padding: 0 0 12px !important; }
+  .cabecera-pagina h1 { font-size: 26pt; }
+  .lectura { display: block !important; padding-top: 0 !important; }
+  .tc-contenedor { max-width: none !important; padding: 0 !important; }
+  .bloque { padding: 0 0 14px !important; border-top: 0 !important; }
+  .bloque.clase, .guia { break-before: page; }
+  .bloque-guia > h2, .bloque-guia > .bajada { display: none !important; }
+  .ficha, .plan-datos, .nota, tr, li, .guia h3, .guia h4 { break-inside: avoid; }
+  h2, h3, h4, .momento-cab, .bajada { break-after: avoid; }
+  .guia table td.vacia { height: 3.4em; }
+  .ficha, .plan-datos, .tabla, .guia, .dato, .nota { box-shadow: none !important; }
+  .guia { border: 0 !important; padding: 0 !important; margin: 0 !important; }
+  a { color: inherit !important; text-decoration: none !important; }
+  .desplegable { border: 0 !important; box-shadow: none !important; }
+  .desplegable > summary::after { content: none !important; }
+}
