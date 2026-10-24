@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es" data-area="propuestas">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planificador · Mundo Mágico Miniatura Escolar | Tomás Cabrolier</title>
+  <meta name="description" content="Planificador del Mundo Mágico Miniatura Escolar: arma el calendario de tu curso según tus semanas y los minutos de cada ramo.">
+  <link rel="icon" href="../../../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../../assets/css/site.css">
+  <link rel="stylesheet" href="../../../../assets/css/paginas.css">
+  <script src="../../../../assets/js/site.js"></script>
+</head>
+<body class="tc pagina">
+  <header class="cielo cabecera-pagina">
+    <div class="escena"></div>
+    <div class="tc-contenedor">
+      <p class="carta">Mundo Mágico Miniatura Escolar · Para docentes</p>
+      <h1>Planificador</h1>
+      <p class="intro">Elige tu nivel, cuántas semanas tienes y cuántos minutos da cada ramo. El calendario se arma solo y cada clase trae su planificación completa.</p>
+      <ul class="meta"><li><b>Niveles</b>1.° a 8.° básico</li><li><b>Semanas</b>4 a 8</li></ul>
+    </div>
+  </header>
+
+  <div class="tc-contenedor lectura sin-indice">
+    <main class="cuerpo">
+
+      <section class="bloque" id="armar">
+        <h2 data-corto="Tu horario">Tu curso y tu horario</h2>
+        <div class="planificador" data-planificador>
+          <div class="control">
+            <p class="control-rotulo">Nivel</p>
+            <div class="niveles" data-niveles></div>
+          </div>
+          <div class="control control-fila">
+            <p class="control-rotulo">Semanas del proyecto</p>
+            <div class="segmentos" data-semanas></div>
+          </div>
+          <div class="control">
+            <p class="control-rotulo">Minutos semanales que cada ramo dedica al proyecto <small>Usa los de tu colegio; «No» si el ramo no participa.</small></p>
+            <div class="minutos" data-minutos></div>
+          </div>
+        </div>
+      </section>
+      <section class="bloque" id="calendario">
+        <h2 data-corto="Calendario">El calendario</h2>
+        <div class="resumen" data-resumen aria-live="polite"></div>
+        <div class="calendario" data-calendario></div>
+        <div class="por-semana" data-por-semana></div>
+        <p class="pie-grafico">Toca una clase para ver su planificación completa. Un borde punteado indica que la clase quedó después de su fase.</p>
+      </section>
+      <section class="bloque" id="imprimir">
+        <h2 data-corto="Imprimir">Imprimir o guardar en PDF</h2>
+        <p>Elige un ramo y se imprime su planificación con las semanas de tu calendario: una clase por hoja, con objetivo, inicio, desarrollo, cierre, recursos y evaluación. Para un PDF, elige «Guardar como PDF» en la ventana de impresión.</p>
+        <div class="imprimir-fila">
+          <select data-imprimir-ramo aria-label="Ramo para imprimir"></select>
+          <button type="button" class="boton" data-imprimir>Imprimir planificación</button>
+        </div>
+        <p>Las guías de los estudiantes están en <a href="../guias/">el cuadernillo de guías</a>.</p>
+      </section>
+      <dialog class="clase-dialogo" data-clase aria-labelledby="clase-titulo">
+        <div class="clase-cab">
+          <div><p class="clase-sub" data-clase-sub></p><h2 id="clase-titulo" data-clase-titulo></h2></div>
+          <button type="button" class="cerrar" data-clase-cerrar aria-label="Cerrar">×</button>
+        </div>
+        <div class="clase-cuerpo" data-clase-cuerpo></div>
+        <div class="clase-pie">
+          <button type="button" class="boton secundario chico" data-clase-ant>← Clase anterior</button>
+          <button type="button" class="boton secundario chico" data-clase-sig>Clase siguiente →</button>
+        </div>
+      </dialog>
+      <div class="impreso" data-impreso></div>
+    </main>
+  </div>
+  <script src="../datos.js"></script>
+  <script src="../museo.js"></script>
+</body>
+</html>

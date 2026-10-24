@@ -455,7 +455,7 @@
       intro: "Ideas que me quedan grandes para hacerlas solo. Las dejo aquí, con números y un plan, para quien quiera verlas, entusiasmarse o sumarse.",
       grupos: [{ titulo: "Proyectos para construir con otros", items: [
         { t: "Nuevo Mundo Mágico", d: "Un parque con el Chile actual en miniatura y dioramas de su historia, gratis o casi gratis para colegios y familias.", url: "propuestas/mundo-magico/", tipo: "Propuesta" },
-        { t: "Mundo Mágico Miniatura Escolar", d: "Para docentes: un ABP de cuatro semanas en que un 6.º básico construye y abre su propio museo de Chile en miniatura.", url: "propuestas/mundo-magico/docentes/", tipo: "Material docente" }
+        { t: "Mundo Mágico Miniatura Escolar", d: "Para docentes: un museo de Chile hecho por todo el colegio; cada curso, de 1.° a 8.° básico, construye una sala.", url: "propuestas/mundo-magico/docentes/", tipo: "Material docente" }
       ]}]
     }
   };
