@@ -696,3 +696,193 @@ body.proyeccion .cuerpo { font-size: 1.15rem; }
 :root[data-baraja] .boton.relleno { background: transparent; color: var(--tinta); border-color: rgb(var(--tinta-rgb) / .35); }
 :root[data-baraja="sombra"] .boton.relleno { color: var(--resalte); border-color: rgb(var(--trazo-rgb) / .6); }
 :root[data-baraja] .tabla { position: relative; }   /* contiene el texto .sr de las celdas dentro del desplazamiento */
+
+/* ==========================================================
+   Museo escolar (Mundo Mágico Miniatura Escolar)
+   .plano-museo     Plano de salas en SVG (.sala con data-sala)
+   .sala-panel      Lectura de la sala elegida
+   .matriz          Tabla de puntos (lleno / medio / vacío)
+   .placas          Textos breves tipo cédula de museo
+   .regla           Hitos en una línea horizontal
+   .programa        Horario de un día (dl)
+   .accesos         Dos o tres enlaces grandes
+   .planificador    Controles del calendario; .calendario y .por-semana
+   ========================================================== */
+.lectura.sin-indice.ancha { max-width: var(--ancho); }
+.museo-explorar { display: grid; gap: 28px; align-items: start; }
+@media (min-width: 1000px) { .museo-explorar { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); } }
+.plano-museo { display: block; width: 100%; height: auto; font-family: var(--display); }
+.plano-museo .muro { fill: none; stroke: var(--tinta); stroke-width: 2.2; }
+.plano-museo .sala-fondo { fill: var(--fondo); stroke: var(--tinta-2); stroke-width: 1; transition: fill .2s; }
+.plano-museo .sala { cursor: pointer; outline: none; }
+.plano-museo .sala:hover .sala-fondo { fill: var(--fondo-2); }
+.plano-museo .sala:focus-visible .sala-fondo { stroke: var(--acento); stroke-width: 2.5; }
+.plano-museo .sala.activa .sala-fondo { fill: var(--acento-suave); }
+.plano-museo text { text-anchor: middle; fill: var(--tinta); }
+.plano-museo .sala-n { font-style: italic; font-size: 15px; fill: var(--tinta-2); }
+.plano-museo .sala-t { font-size: 20px; font-weight: 500; }
+.plano-museo .sala.activa .sala-t { fill: var(--acento); }
+.plano-museo .sala-c { font-family: var(--texto); font-size: 13px; fill: var(--tinta-2); letter-spacing: .02em; }
+.plano-museo .plano-nota { font-family: var(--texto); font-size: 12px; fill: var(--tinta-3); }
+.plano-museo text.izq { text-anchor: start; }
+.salas-chips { display: none; }
+@media (max-width: 700px) {
+  .salas-chips { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 4px; margin-top: 10px; }
+  .salas-chips button { padding: 8px 0; background: none; border: 1px solid var(--linea); border-radius: var(--radio-sm); color: inherit; font: inherit; font-family: var(--display); font-size: 1.05rem; }
+  .salas-chips button[aria-pressed="true"] { border-color: var(--acento); color: var(--acento); background: var(--acento-suave); }
+}
+.plano-museo .mesa { fill: none; stroke: var(--tinta); stroke-width: 1.2; }
+.plano-museo .mesa-div { stroke: var(--tinta-2); stroke-width: 1; }
+.plano-museo .escenario { fill: none; stroke: var(--tinta-2); stroke-width: 1; stroke-dasharray: 2 3; }
+.plano-museo .puerta { stroke: var(--fondo); stroke-width: 5; }
+.plano-museo .entrada { fill: none; stroke: var(--acento); stroke-width: 1.5; }
+.plano-museo .flecha { fill: var(--acento); }
+
+.sala-panel { padding: 4px 0 0; border-top: 1px solid var(--trazo); outline: none; }
+@media (min-width: 1000px) { .sala-panel { border-top: 0; border-left: 1px solid var(--linea); padding: 0 0 0 26px; min-height: 30rem; } }
+.sala-panel .sala-num { margin: 10px 0 2px; font-family: var(--display); font-style: italic; color: var(--tinta-2); }
+.sala-panel h3 { margin: 0; font-size: clamp(1.7rem, 3vw, 2.2rem); }
+.sala-panel .sala-periodo { margin: 2px 0 12px; color: var(--acento); font-size: .95rem; }
+.sala-panel .sala-pregunta { margin: 0 0 16px; font-family: var(--display); font-style: italic; font-size: 1.2rem; line-height: 1.4; }
+.sala-datos { margin: 0 0 18px; }
+.sala-datos > div { padding: 10px 0; border-top: 1px solid var(--linea); }
+.sala-datos dt { font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; color: var(--tinta-2); }
+.sala-datos dd { margin: 3px 0 0; line-height: 1.5; }
+.sala-datos .sala-oa { font-size: .92rem; color: var(--tinta-2); }
+
+.matriz { overflow-x: auto; margin: 8px 0 18px; }
+.matriz table { border-collapse: collapse; min-width: 520px; width: 100%; max-width: 46rem; }
+.matriz th, .matriz td { padding: 9px 6px; border-bottom: 1px solid var(--linea); text-align: center; }
+.matriz tbody th { text-align: left; font-weight: 500; white-space: nowrap; padding-right: 18px; }
+.matriz thead th { font-family: var(--display); font-weight: 500; font-size: 1.1rem; border-bottom: 1px solid var(--trazo); }
+.punto { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 1.3px solid var(--tinta); vertical-align: middle; }
+.punto.lleno { background: var(--tinta); }
+.punto.medio { background: linear-gradient(90deg, var(--tinta) 50%, transparent 50%); }
+.punto.vacio { border-color: var(--tinta-3); border-style: dotted; }
+.matriz-ley { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: .9rem; color: var(--tinta-2); margin-top: 10px; }
+.matriz-ley .punto { margin-left: 8px; }
+
+.placas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 0 34px; }
+.placa { padding: 16px 0 18px; border-top: 1px solid var(--trazo); }
+.placa h3 { margin: 0 0 6px; font-size: 1.22rem; }
+.placa p { margin: 0; color: var(--tinta-2); line-height: 1.55; }
+
+.regla { list-style: none; margin: 18px 0 26px; padding: 0; display: grid; gap: 0; position: relative; }
+.regla > li { position: relative; padding: 0 0 20px 26px; border-left: 1px solid var(--trazo); }
+.regla > li::before { content: ""; position: absolute; left: -5px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: var(--fondo); border: 1.3px solid var(--acento); }
+.regla .cuando { display: block; font-size: .85rem; letter-spacing: .05em; text-transform: uppercase; color: var(--acento); }
+.regla h3 { margin: 2px 0 4px; font-size: 1.2rem; }
+.regla p { margin: 0; color: var(--tinta-2); line-height: 1.5; }
+@media (min-width: 900px) {
+  .regla { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 22px; padding-top: 22px; border-top: 1px solid var(--trazo); }
+  .regla > li { border-left: 0; padding: 0; }
+  .regla > li::before { left: 0; top: -27px; }
+}
+.programa { display: grid; gap: 0; max-width: 44rem; margin: 8px 0 18px; }
+.programa > div { display: grid; grid-template-columns: 5.5rem 1fr; gap: 14px; padding: 9px 0; border-top: 1px solid var(--linea); }
+.programa dt { font-family: var(--display); font-size: 1.15rem; }
+.programa dd { margin: 0; }
+
+.accesos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 18px; margin: 8px 0 18px; }
+.acceso { display: grid; gap: 6px; padding: 20px 22px; border: 1px solid var(--trazo); border-radius: var(--radio); color: inherit; text-decoration: none; transition: background .2s; }
+.acceso:hover { background: var(--acento-suave); }
+.acceso .acceso-k { font-family: var(--display); font-style: italic; color: var(--acento); }
+.acceso b { font-family: var(--display); font-weight: 500; font-size: 1.45rem; line-height: 1.15; }
+.acceso span:last-child { color: var(--tinta-2); line-height: 1.5; }
+
+/* Planificador */
+.planificador { display: grid; gap: 22px; }
+.control-rotulo { margin: 0 0 8px; font-weight: 600; }
+.control-rotulo small { display: block; font-weight: 400; color: var(--tinta-2); font-size: .88rem; }
+.niveles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+@media (min-width: 900px) { .niveles { grid-template-columns: repeat(8, minmax(0, 1fr)); } }
+.nivel { display: grid; gap: 2px; padding: 10px 12px; text-align: left; background: none; border: 1px solid var(--linea); border-radius: var(--radio-sm); color: inherit; font: inherit; cursor: pointer; }
+.nivel b { font-family: var(--display); font-weight: 500; font-size: 1.5rem; line-height: 1; }
+.nivel span { font-size: .82rem; color: var(--tinta-2); line-height: 1.25; }
+.nivel:hover { border-color: var(--trazo); }
+.nivel[aria-pressed="true"] { border-color: var(--acento); background: var(--acento-suave); }
+.nivel[aria-pressed="true"] b { color: var(--acento); }
+.segmentos { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--trazo); border-radius: var(--radio-sm); overflow: hidden; }
+.segmentos button { min-width: 2.9rem; padding: 7px 10px; background: none; border: 0; border-left: 1px solid var(--linea); color: inherit; font: inherit; font-size: .92rem; cursor: pointer; }
+.segmentos button:first-child { border-left: 0; }
+.segmentos button:hover { background: var(--fondo-2); }
+.segmentos button[aria-pressed="true"] { background: var(--tinta); color: var(--fondo); }
+.minutos { display: grid; gap: 0 40px; }
+@media (min-width: 900px) { .minutos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.ramo-min { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 16px; padding: 6px 0; border-top: 1px solid var(--linea); max-width: 40rem; }
+.ramo-nombre { font-weight: 500; }
+
+.resumen { margin: 0 0 14px; }
+.resumen-sala { margin: 0; font-family: var(--display); font-size: 1.15rem; color: var(--tinta-2); }
+.resumen-sala b { color: var(--tinta); font-weight: 500; }
+.resumen-frase { margin: 4px 0 12px; font-family: var(--display); font-size: clamp(1.4rem, 2.6vw, 1.8rem); line-height: 1.25; }
+.resumen .nota { margin: 8px 0; max-width: 50rem; }
+.resumen-holgura { color: var(--tinta-2); font-size: .92rem; }
+
+.calendario-tabla { overflow-x: auto; }
+.calendario table { width: 100%; border-collapse: collapse; table-layout: fixed; min-width: 640px; }
+.calendario th, .calendario td { vertical-align: top; padding: 8px 6px; border-left: 1px solid var(--linea); }
+.calendario td:first-child, .calendario th:first-child { border-left: 0; }
+.calendario thead th { font-weight: 500; font-size: .9rem; text-align: left; border-bottom: 1px solid var(--trazo); }
+.calendario thead th small { display: block; color: var(--acento); font-size: .8rem; }
+.calendario thead tr:first-child th { border-bottom: 0; font-family: var(--display); font-style: italic; font-size: 1rem; color: var(--tinta-2); padding-bottom: 2px; }
+.calendario thead tr:first-child th.fase { border-top: 2px solid var(--linea); }
+.calendario thead tr:first-child th.f4 { border-top-color: var(--acento); color: var(--acento); }
+.calendario tbody th { width: 9.5rem; text-align: left; font-weight: 600; font-size: .95rem; border-bottom: 1px solid var(--linea); }
+.calendario tbody th small { display: block; font-weight: 400; color: var(--tinta-2); font-size: .8rem; }
+.calendario tbody td { border-bottom: 1px solid var(--linea); }
+.calendario td.ultima { background: var(--acento-suave); }
+.clase-chip { display: block; width: 100%; margin: 0 0 6px; padding: 7px 8px; text-align: left; background: var(--fondo); border: 1px solid var(--trazo); border-radius: var(--radio-sm); color: inherit; font: inherit; cursor: pointer; line-height: 1.25; }
+.clase-chip span { display: block; font-size: .86rem; }
+.clase-chip small { display: block; margin-top: 3px; font-size: .75rem; color: var(--tinta-2); }
+.clase-chip:hover { border-color: var(--acento); }
+.clase-chip.tarde { border-style: dashed; }
+.clase-chip.movida small::after { content: " · otro ramo"; color: var(--acento); }
+.por-semana { display: none; }
+.semana { padding: 12px 0; border-top: 1px solid var(--trazo); }
+.semana h3 { margin: 0 0 8px; font-size: 1.25rem; }
+.semana h3 small { font-family: var(--texto); font-size: .82rem; font-style: normal; color: var(--acento); margin-left: 6px; }
+.semana-clases { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.semana-clases li { display: grid; grid-template-columns: 5.6rem 1fr; gap: 8px; align-items: start; }
+.ramo-mini { font-size: .8rem; color: var(--tinta-2); padding-top: 8px; }
+.semana .vacia { color: var(--tinta-3); margin: 0; font-size: .9rem; }
+@media (max-width: 760px) {
+  .calendario { display: none; }
+  .por-semana { display: block; }
+}
+.imprimir-fila { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 8px 0 18px; }
+.imprimir-fila select { width: auto !important; min-width: 16rem; max-width: 100%; }
+
+.clase-dialogo { width: min(52rem, calc(100vw - 24px)); max-height: calc(100vh - 32px); padding: 0; border: 1px solid var(--trazo); border-radius: var(--radio); background: var(--fondo); color: var(--tinta); }
+.clase-dialogo::backdrop { background: rgb(0 0 0 / .35); }
+.clase-dialogo[open] { display: flex; flex-direction: column; }
+.clase-cab { display: flex; justify-content: space-between; align-items: start; gap: 14px; padding: 18px 22px 12px; border-bottom: 1px solid var(--linea); }
+.clase-cab h2 { margin: 0; font-size: clamp(1.4rem, 3vw, 1.9rem); }
+.clase-sub { margin: 0 0 2px; font-family: var(--display); font-style: italic; color: var(--acento); }
+.cerrar { background: none; border: 0; font-size: 1.8rem; line-height: 1; color: var(--tinta-2); cursor: pointer; padding: 0 4px; }
+.clase-cuerpo { padding: 16px 22px; overflow: auto; }
+.clase-cuerpo h4 { margin: 18px 0 6px; }
+.clase-pie { display: flex; justify-content: space-between; gap: 10px; padding: 10px 22px 14px; border-top: 1px solid var(--linea); }
+.clase-pie .boton:disabled { opacity: .4; cursor: default; }
+.impreso { display: none; }
+.solucion { font-size: .9rem; color: var(--tinta-2); border-top: 1px dashed var(--linea); padding-top: 8px; }
+
+@media print {
+  .imprimiendo body > *:not(.lectura) { display: none !important; }
+  .imprimiendo .lectura .cuerpo > *:not(.impreso) { display: none !important; }
+  .imprimiendo .impreso { display: block !important; }
+  .impreso-ramo { break-before: page; }
+  .impreso-ramo:first-child { break-before: auto; }
+  .impreso-ramo > h2 { font-size: 22pt; margin: 0 0 4px; }
+  .impreso-meta { margin: 0 0 4px; color: #444; }
+  .impreso-clase { break-before: page; }
+  .impreso-clase:first-of-type { break-before: auto; margin-top: 16px; }
+  .impreso-clase h3 { font-size: 15pt; margin: 0 0 8px; }
+  .impreso .momento, .impreso .plan-datos { break-inside: avoid; }
+  .pestanas [role="tablist"], .botones { display: none !important; }
+  .clase-dialogo { display: none !important; }
+  .guias-imprimibles .cabecera-pagina, .guias-imprimibles #guias > h2, .guias-imprimibles [role="tabpanel"] > .bajada { display: none !important; }
+  .guias-imprimibles [role="tabpanel"] > .bloque-guia:first-of-type .guia { break-before: auto; }
+  .guia, .impreso .plan-datos, .impreso .momento { background: #fff !important; }
+  .guia thead th, .impreso thead th { background: none !important; border-bottom: 1.5px solid #222 !important; }
+}

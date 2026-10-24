@@ -31,6 +31,7 @@ assets/
   img/                Favicon, foto y logos
 herramientas/
   barajas.py          Genera barajas.css y revisa el contraste de cada par de colores
+  museo-escolar/      Genera las clases, el planificador y las guías del Mundo Mágico Miniatura Escolar
 pedagogia/            Pedagogía (V, El Hierofante)
   etica/ lenguaje/ historia/ tics/ matematicas/ fisica-quimica/
   practica/           Intervenciones en aula y textos de estudio
@@ -42,7 +43,8 @@ esoterico/            Esotérico (XVIII, La Luna): índice
 digital-monster/      Digital Monster (0, El Loco): sitio con marca propia
 sitios/               Sitios web (VII, El Carro): Mar y Ola, SmartFit, SindicatoLegal
 propuestas/           Propuestas (XVII, La Estrella): proyectos para construir con otros
-  mundo-magico/docentes/  ABP para docentes: guía del proyecto, una planificación por asignatura, guías del estudiante y sus PDF
+  mundo-magico/docentes/  Museo escolar de 1.° a 8.°: plano de salas, lineamientos, planificador y guías por ciclo
+                          (datos.js y las páginas salen de herramientas/museo-escolar/; museo.js arma el plano y el calendario)
 ```
 
 Digital Monster, Mar y Ola, SmartFit, SindicatoLegal e Innovatech conservan su propia estética.
@@ -151,7 +153,7 @@ Un segundo toque lo abre. El centro tira la rueda al azar. La página recuerda e
 
 Todas las subpáginas tienen estilos de impresión: sin barra ni escena, en hoja blanca, y cada `.bloque.clase` y cada `.guia` empiezan en hoja nueva.
 Para regenerar un PDF, abre la página en el navegador, imprime y elige «Guardar como PDF» (tamaño Carta).
-Los PDF de `propuestas/mundo-magico/docentes/pdf/` se hicieron así: si editas una planificación, vuelve a guardar su PDF.
+Los PDF de `propuestas/mundo-magico/docentes/pdf/` son las guías del estudiante por ciclo; si editas una guía, vuelve a guardar su PDF. Las planificaciones no tienen PDF fijo: se imprimen desde el planificador con el horario de cada colegio.
 
 ## Cambiar un color
 
