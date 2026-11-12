@@ -336,6 +336,7 @@
           { t: "Roblox: guía de seguridad", d: "Riesgos de la plataforma y medidas concretas para docentes y apoderados.", url: "pedagogia/tics/roblox/", tipo: "Interactivo con podcast" }
         ]},
         { titulo: "Páginas para estudiantes", items: [
+          { t: "Hojas de cálculo de Google", d: "Guía de consulta, de crear una hoja a AppSheet, con una hoja de pruebas para ensayar fórmulas.", url: "pedagogia/tics/hojas-de-calculo/", tipo: "Guía" },
           { t: "Mi cuerpo saludable", d: "Guía de vida saludable para estudiantes de 14 años.", url: "pedagogia/tics/saludable/", tipo: "Página web" },
           { t: "Reporteros de la democracia", d: "Una misión de periodismo para explicar cómo Chile resuelve sus problemas.", url: "pedagogia/tics/historia/", tipo: "Actividad" },
           { t: "Innovatech", d: "Sitio de un congreso ficticio de ciberseguridad, hecho como ejercicio de diseño web.", url: "pedagogia/tics/innovatech/", tipo: "Página web" }
@@ -752,7 +753,7 @@
     "Marco para la Buena Enseñanza 2021": "Marco para la Buena Enseñanza", "El amor como principio educativo": "El amor como principio",
     "Desarrollo de la comprensión lectora": "Comprensión lectora", "Glosario de lectoescritura": "Glosario",
     "Pensar la historia, enseñar la historia": "Pensar la historia", "Redes sociales y autoestima juvenil": "Redes y autoestima",
-    "Roblox: guía de seguridad": "Roblox", "Código 4D: panel de la sala": "Panel de Código 4D",
+    "Roblox: guía de seguridad": "Roblox", "Hojas de cálculo de Google": "Hojas de cálculo", "Código 4D: panel de la sala": "Panel de Código 4D",
     "Generador de haikus escolares": "Generador de haikus", "Haikus del 7° del Pablo Neruda": "Haikus del Neruda",
     "El acceso al entorno de aprendizaje II": "Acceso al aprendizaje", "Escritura creativa en Chile": "Escritura creativa",
     "Modelo de escritura Didactext": "Didactext", "Generador de líneas aleatorias": "Líneas aleatorias",

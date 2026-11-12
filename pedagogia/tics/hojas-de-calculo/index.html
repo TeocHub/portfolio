@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="es" data-area="pedagogia">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hojas de cálculo de Google | Tomás Cabrolier</title>
+  <meta name="description" content="Guía de consulta para estudiantes: Hojas de cálculo de Google desde crear una hoja hasta funciones, logaritmos, gráficos, tablas dinámicas y AppSheet. Con una hoja de pruebas para ensayar cada fórmula.">
+  <link rel="icon" href="../../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../assets/css/site.css">
+  <link rel="stylesheet" href="../../../assets/css/paginas.css">
+  <script src="../../../assets/js/site.js"></script>
+  <script src="hojas.js" defer></script>
+</head>
+<body class="tc pagina">
+  <header class="cielo cabecera-pagina">
+    <div class="escena"></div>
+    <div class="tc-contenedor">
+      <p class="carta">Guía de consulta · Tecnología</p>
+      <h1>Hojas de cálculo de Google</h1>
+      <p class="intro">Todo lo que necesitas para trabajar con números, fórmulas y gráficos en una herramienta gratuita: desde abrir tu primera hoja hasta convertirla en una app. No se lee de corrido; vuelve cada vez que necesites algo.</p>
+      <ul class="meta">
+        <li><b>Para</b>estudiantes de 5.° básico en adelante</li>
+        <li><b>Necesitas</b>una cuenta de Google</li>
+        <li><b>Costo</b>gratis</li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="tc-contenedor lectura">
+    <nav class="indice" data-indice-pagina aria-label="En esta página"></nav>
+    <main class="cuerpo">
+
+      <!-- ================= MAPA ================= -->
+      <section class="bloque" id="mapa">
+        <h2 data-corto="Encuentra lo que buscas">Encuentra lo que buscas</h2>
+        <p class="bajada">Esta guía está ordenada como una hoja de cálculo. Escribe en la barra de fórmulas el nombre de una función o lo que quieres hacer, o toca una celda del mapa: el primer toque te dice qué hay ahí, el segundo te lleva.</p>
+
+        <div class="hc-mapa" data-mapa>
+          <div class="hc-barra">
+            <output class="hc-nombre" data-mapa-nombre aria-live="polite">A1</output>
+            <label class="hc-fx">
+              <span class="hc-fx-signo" aria-hidden="true">fx</span>
+              <span class="sr">Buscar en la guía</span>
+              <input type="search" data-mapa-buscar placeholder="Escribe =PROM, gráfico, logaritmo, compartir…" autocomplete="off" spellcheck="false" aria-autocomplete="list" aria-controls="hc-sugerencias" aria-expanded="false">
+            </label>
+            <div class="hc-sugerencias" id="hc-sugerencias" role="listbox" hidden></div>
+          </div>
+          <div class="hc-rejilla-mapa" role="grid" aria-label="Mapa de la guía">
+            <div class="hc-esquina" aria-hidden="true"></div>
+            <div class="hc-col" role="columnheader"><b>A</b>Lo básico</div>
+            <div class="hc-col" role="columnheader"><b>B</b>Leer mejor</div>
+            <div class="hc-col" role="columnheader"><b>C</b>Calcular</div>
+            <div class="hc-col" role="columnheader"><b>D</b>Matemática</div>
+            <div class="hc-col" role="columnheader"><b>E</b>Decidir</div>
+            <div class="hc-col" role="columnheader"><b>F</b>Mostrar</div>
+            <div class="hc-col" role="columnheader"><b>G</b>Más allá</div>
+
+            <div class="hc-fila" role="rowheader">1</div>
+            <button class="hc-celda" data-ref="A1" data-ir="#empezar" data-que="Qué es, cómo crear una hoja y cómo abrirla en el celular.">Antes de empezar</button>
+            <button class="hc-celda" data-ref="B1" data-ir="#formato" data-que="Formato de números, colores condicionales, listas desplegables y casillas.">Formato</button>
+            <button class="hc-celda" data-ref="C1" data-ir="#formulas" data-que="El signo igual, las operaciones, el orden en que se calculan y los errores.">Fórmulas</button>
+            <button class="hc-celda" data-ref="D1" data-ir="#matematica" data-que="Potencias, raíces, logaritmos, porcentajes y redondeo.">Potencias y logaritmos</button>
+            <button class="hc-celda" data-ref="E1" data-ir="#logica" data-que="SI, Y, O, CONTAR.SI, SUMAR.SI y BUSCARV: que la hoja decida por ti.">Decisiones y búsquedas</button>
+            <button class="hc-celda" data-ref="F1" data-ir="#graficos" data-que="Qué gráfico elegir según lo que quieres mostrar, cómo crearlo y editarlo.">Gráficos</button>
+            <button class="hc-celda" data-ref="G1" data-ir="#compartir" data-que="Compartir, comentar, ver versiones anteriores y proteger celdas.">Trabajar con otros</button>
+
+            <div class="hc-fila" role="rowheader">2</div>
+            <button class="hc-celda" data-ref="A2" data-ir="#interfaz" data-que="Las partes de la pantalla: celda, fila, columna, barra de fórmulas, pestañas.">La hoja por dentro</button>
+            <button class="hc-celda" data-ref="B2" data-ir="#atajos" data-que="Combinaciones de teclas para trabajar más rápido.">Atajos</button>
+            <button class="hc-celda" data-ref="C2" data-ir="#referencias" data-que="Por qué A1 cambia al copiar y $A$1 no. La parte que más confunde.">Referencias</button>
+            <button class="hc-celda" data-ref="D2" data-ir="#estadistica" data-que="Promedio, mediana, moda, desviación estándar y cuándo usar cada una.">Estadística</button>
+            <button class="hc-celda" data-ref="E2" data-ir="#texto-fechas" data-que="Unir textos, mayúsculas, contar letras, la fecha de hoy y días entre fechas.">Texto y fechas</button>
+            <button class="hc-celda" data-ref="F2" data-ir="#analizar" data-que="Tablas dinámicas, FILTER, SORT, UNIQUE y QUERY para muchos datos.">Analizar muchos datos</button>
+            <button class="hc-celda" data-ref="G2" data-ir="#automatizar" data-que="Macros y Apps Script: que la hoja haga sola lo que repites.">Automatizar</button>
+
+            <div class="hc-fila" role="rowheader">3</div>
+            <button class="hc-celda" data-ref="A3" data-ir="#datos" data-que="Escribir, rellenar, ordenar y filtrar. La regla de oro de una tabla.">Escribir y ordenar datos</button>
+            <span class="hc-celda vacia" aria-hidden="true"></span>
+            <button class="hc-celda" data-ref="C3" data-ir="#funciones" data-que="SUMA, PROMEDIO, MIN, MAX, CONTAR y REDONDEAR, con ejemplos para probar.">Funciones esenciales</button>
+            <span class="hc-celda vacia" aria-hidden="true"></span>
+            <span class="hc-celda vacia" aria-hidden="true"></span>
+            <span class="hc-celda vacia" aria-hidden="true"></span>
+            <button class="hc-celda" data-ref="G3" data-ir="#appsheet" data-que="Convertir tu hoja en una app para el celular, sin programar.">AppSheet</button>
+
+            <div class="hc-fila" role="rowheader">4</div>
+            <span class="hc-celda vacia" aria-hidden="true"></span>
+            <span class="hc-celda vacia" aria-hidden="true"></span>
+            <button class="hc-celda" data-ref="C4" data-ir="#hoja-pruebas" data-que="Una hoja de verdad dentro de esta página para ensayar cualquier fórmula." data-abre-mesa>Hoja de pruebas</button>
+            <span class="hc-celda vacia" aria-hidden="true"></span>
+            <span class="hc-celda vacia" aria-hidden="true"></span>
+            <span class="hc-celda vacia" aria-hidden="true"></span>
+            <span class="hc-celda vacia" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="nota idea" id="hoja-pruebas">
+          <span class="titulo-nota">La hoja de pruebas</span>
+          <p>Abajo a la derecha tienes una hoja pequeña que funciona como la de Google, con los mismos nombres de funciones. Cada vez que veas el botón <b>Probar</b>, el ejemplo se carga ahí y puedes cambiar los números para ver qué pasa. Ensayar es la forma más rápida de entender una fórmula.</p>
+        </div>
+      </section>
+
+      <!-- ================= EMPEZAR ================= -->
+      <section class="bloque" id="empezar">
+        <h2>Antes de empezar</h2>
+        <p>Una hoja de cálculo es una cuadrícula donde cada casilla puede guardar un dato o un cálculo. Lo valioso no es que haga cuentas, sino que <strong>las rehace solas</strong>: si cambias un número, todo lo que dependía de él se actualiza. Por eso sirve para notas, presupuestos, encuestas, experimentos de ciencias o el registro de un club.</p>
+        <p>Microsoft Excel es la más conocida, pero para usarla completa necesitas una licencia pagada. <strong>Hojas de cálculo de Google</strong> (en inglés, <i>Google Sheets</i>) hace casi todo lo mismo, es gratis con cualquier cuenta de Google, funciona en el navegador y en el celular, y guarda solo. Lo que aprendas aquí te sirve también en Excel: la mayoría de las funciones se llaman igual.</p>
+
+        <h3>Crear una hoja nueva</h3>
+        <div class="pestanas" data-pestanas>
+          <div role="tablist" aria-label="Dónde crear la hoja">
+            <button role="tab" aria-selected="true">En el computador</button>
+            <button role="tab">En el celular</button>
+            <button role="tab">El atajo</button>
+          </div>
+          <div role="tabpanel">
+            <ol class="pasos">
+              <li><b>Entra a Google Drive</b>Abre <a href="https://drive.google.com" target="_blank" rel="noopener">drive.google.com</a> e inicia sesión con tu cuenta (la del colegio o la personal).</li>
+              <li><b>Toca «Nuevo»</b>Es el botón de arriba a la izquierda. Elige <b>Hojas de cálculo de Google</b> y luego <b>Hoja de cálculo en blanco</b>.</li>
+              <li><b>Ponle nombre</b>Arriba a la izquierda dice «Hoja de cálculo sin título». Haz clic ahí y escribe un nombre que diga qué es, por ejemplo «Notas Ciencias 7B». Sin nombre, en un mes no la vas a encontrar.</li>
+            </ol>
+          </div>
+          <div role="tabpanel">
+            <ol class="pasos">
+              <li><b>Instala la app</b>Busca <b>Hojas de cálculo de Google</b> en Play Store o App Store. Es gratis.</li>
+              <li><b>Toca el +</b>Está abajo a la derecha. Elige <b>Nueva hoja de cálculo</b>.</li>
+              <li><b>Edita con dos toques</b>Toca una celda para elegirla y tócala de nuevo para escribir. En el celular todo funciona, pero las fórmulas largas y los gráficos son más cómodos en un computador.</li>
+            </ol>
+          </div>
+          <div role="tabpanel">
+            <p>Escribe <code class="hc-codigo">sheets.new</code> en la barra de direcciones del navegador y presiona Enter. Se abre una hoja en blanco al instante, guardada en tu Drive.</p>
+            <p>También sirve para abrir archivos de Excel: súbelos a Drive y ábrelos con doble clic. Para devolverlos en ese formato, usa <b>Archivo › Descargar › Microsoft Excel (.xlsx)</b>.</p>
+          </div>
+        </div>
+
+        <h3>Tres cosas que conviene saber desde el principio</h3>
+        <ul class="fichas">
+          <li class="ficha">
+            <h4>No hay botón Guardar</h4>
+            <p>Cada cambio se guarda en tu Drive mientras escribes. Arriba aparece un ícono de nube cuando terminó de guardar.</p>
+          </li>
+          <li class="ficha">
+            <h4>Puedes volver atrás</h4>
+            <p><b>Archivo › Historial de versiones</b> guarda cómo estaba la hoja en cada momento. Si borras algo importante, se puede recuperar.</p>
+          </li>
+          <li class="ficha">
+            <h4>Sin internet también</h4>
+            <p>En <b>Archivo › Hacer que esté disponible sin conexión</b> puedes seguir trabajando sin señal; se sincroniza al volver.</p>
+          </li>
+        </ul>
+
+        <div class="nota aviso">
+          <span class="titulo-nota">Revisa la configuración regional</span>
+          <p>En Chile los decimales se escriben con coma (<b>4,5</b>) y los miles con punto (<b>1.000</b>). Para que la hoja lo entienda así, entra a <b>Archivo › Configuración</b> y en <b>Configuración regional</b> elige <b>Chile</b>. Con eso, las funciones separan sus partes con <b>punto y coma</b>: <code class="hc-codigo">=SUMA(A1;A2)</code>. Si ves ejemplos en internet con comas, como <code class="hc-codigo">=SUM(A1,A2)</code>, son de hojas configuradas en inglés: cambia las comas por punto y coma.</p>
+        </div>
+      </section>
+
+      <!-- ================= INTERFAZ ================= -->
+      <section class="bloque" id="interfaz">
+        <h2>La hoja por dentro</h2>
+        <p class="bajada">Toca cada parte de la pantalla para saber qué es y para qué sirve.</p>
+
+        <div class="hc-anatomia" data-anatomia>
+          <div class="hc-pantalla" aria-label="Pantalla de una hoja de cálculo">
+            <button class="hc-zona z-titulo" data-parte="titulo"><span class="hc-marca">1</span><span class="hc-doc">Notas Ciencias 7B</span></button>
+            <button class="hc-zona z-menu" data-parte="menu"><span class="hc-marca">2</span>Archivo · Editar · Ver · Insertar · Formato · Datos · Herramientas · Extensiones · Ayuda</button>
+            <button class="hc-zona z-herramientas" data-parte="herramientas"><span class="hc-marca">3</span><span class="hc-iconos" aria-hidden="true">↶ ↷ &nbsp;│&nbsp; $ % .0 .00 123 &nbsp;│&nbsp; <b>B</b> <i>I</i> <s>S</s> A &nbsp;│&nbsp; ▦ ≡</span></button>
+            <div class="hc-fila-fx">
+              <button class="hc-zona z-nombre" data-parte="nombre"><span class="hc-marca">4</span>B3</button>
+              <button class="hc-zona z-fx" data-parte="fx"><span class="hc-marca">5</span><i>fx</i>&nbsp; =PROMEDIO(B2:C2)</button>
+            </div>
+            <div class="hc-mini-rejilla">
+              <span class="hc-e"></span>
+              <button class="hc-zona z-columna hc-h" data-parte="columna"><span class="hc-marca">6</span>A</button><span class="hc-h">B</span><span class="hc-h">C</span>
+              <button class="hc-zona z-fila hc-h" data-parte="fila"><span class="hc-marca">7</span>1</button><span>Estudiante</span><span>Prueba 1</span><span>Prueba 2</span>
+              <span class="hc-h">2</span><span>Amanda</span><span class="n">5,8</span><span class="n">6,4</span>
+              <span class="hc-h">3</span><span>Benjamín</span><button class="hc-zona z-celda n" data-parte="celda"><span class="hc-marca">8</span>4,9</button><span class="n">5,5</span>
+              <span class="hc-h">4</span><span>Catalina</span><span class="n">6,7</span><span class="n">7,0</span>
+            </div>
+            <div class="hc-pie-pantalla">
+              <button class="hc-zona z-pestanas" data-parte="pestanas"><span class="hc-marca">9</span>+ &nbsp;≡ &nbsp;<b>Hoja 1</b>&nbsp; Hoja 2</button>
+              <button class="hc-zona z-resumen" data-parte="resumen"><span class="hc-marca">10</span>Suma: 4,9</button>
+            </div>
+          </div>
+          <div class="hc-explica" aria-live="polite">
+            <div data-explica="inicio"><p class="hc-explica-t">Elige una parte</p><p>Cada número marca una zona. Al tocarla, aquí aparece qué es y cuándo la vas a usar.</p></div>
+            <div data-explica="titulo" hidden><p class="hc-explica-t">1 · Nombre del archivo</p><p>El nombre con que aparece en Drive. Haz clic para cambiarlo. A su lado está la estrella (marcar como importante) y la carpeta (moverlo).</p></div>
+            <div data-explica="menu" hidden><p class="hc-explica-t">2 · Menús</p><p>Aquí está todo. Los que más usarás: <b>Insertar</b> (gráficos, casillas, desplegables), <b>Formato</b> (números, formato condicional, tablas), <b>Datos</b> (ordenar, filtrar, validar) y <b>Extensiones</b> (macros, Apps Script, AppSheet).</p></div>
+            <div data-explica="herramientas" hidden><p class="hc-explica-t">3 · Barra de herramientas</p><p>Atajos a lo más común: deshacer, formato de moneda <b>$</b> y porcentaje <b>%</b>, quitar o agregar decimales, negrita, color, bordes y alineación.</p></div>
+            <div data-explica="nombre" hidden><p class="hc-explica-t">4 · Cuadro de nombre</p><p>Dice qué celda tienes elegida. También sirve para ir a una: escribe <b>F120</b> y presiona Enter.</p></div>
+            <div data-explica="fx" hidden><p class="hc-explica-t">5 · Barra de fórmulas</p><p>Muestra lo que <b>de verdad</b> hay en la celda. La celda puede mostrar 5,5, pero aquí ves que es <b>=PROMEDIO(B2:C2)</b>. Cuando algo no cuadra, mira aquí primero.</p></div>
+            <div data-explica="columna" hidden><p class="hc-explica-t">6 · Columnas</p><p>Van de arriba abajo y se nombran con letras: A, B, C… después de la Z sigue AA, AB. Toca la letra para elegir la columna entera; arrastra su borde para ensancharla.</p></div>
+            <div data-explica="fila" hidden><p class="hc-explica-t">7 · Filas</p><p>Van de izquierda a derecha y se nombran con números. Una buena costumbre: la fila 1 para los títulos y cada fila siguiente para un caso (un estudiante, un producto, un día).</p></div>
+            <div data-explica="celda" hidden><p class="hc-explica-t">8 · Celda</p><p>El cruce de una columna y una fila. Su nombre es la letra más el número: esta es <b>B3</b>. Ese nombre se llama <b>referencia</b> y es lo que usarás en las fórmulas. Un grupo de celdas es un <b>rango</b>: <b>B2:C4</b> va desde B2 hasta C4.</p></div>
+            <div data-explica="pestanas" hidden><p class="hc-explica-t">9 · Pestañas de hojas</p><p>Un archivo puede tener varias hojas, como un cuaderno. Con <b>+</b> agregas otra. Útil para separar, por ejemplo, una hoja por semestre o una para datos y otra para gráficos.</p></div>
+            <div data-explica="resumen" hidden><p class="hc-explica-t">10 · Resumen rápido</p><p>Elige varias celdas con números y abajo a la derecha verás su suma. Al tocarla puedes cambiar a promedio, mínimo, máximo o cantidad, sin escribir ninguna fórmula.</p></div>
+          </div>
+        </div>
+
+        <h3>Palabras que se repiten</h3>
+        <dl class="glosario">
+          <div class="termino"><dt>Libro y hoja</dt><dd>El archivo completo se llama <b>libro</b> u hoja de cálculo; cada pestaña de abajo es una <b>hoja</b>.</dd></div>
+          <div class="termino"><dt>Celda activa</dt><dd>La que está marcada con un borde grueso. Lo que escribas va ahí.</dd></div>
+          <div class="termino"><dt>Rango</dt><dd>Un rectángulo de celdas, escrito como esquina superior izquierda, dos puntos, esquina inferior derecha: <b>A1:D10</b>. Una columna entera es <b>B:B</b>.</dd></div>
+          <div class="termino"><dt>Fórmula y función</dt><dd>Una <b>fórmula</b> es cualquier cálculo que empieza con <b>=</b>. Una <b>función</b> es un cálculo que ya viene hecho y tiene nombre, como SUMA. Las fórmulas pueden usar funciones.</dd></div>
+          <div class="termino"><dt>Argumento</dt><dd>Lo que va dentro de los paréntesis de una función, separado por punto y coma. En <b>=REDONDEAR(A1;2)</b> los argumentos son A1 y 2.</dd></div>
+        </dl>
+      </section>
+
+      <!-- ================= DATOS ================= -->
+      <section class="bloque" id="datos">
+        <h2 data-corto="Escribir y ordenar">Escribir y ordenar datos</h2>
+        <p>Para escribir, elige una celda y teclea. <b>Enter</b> baja a la siguiente, <b>Tab</b> avanza a la derecha. Para corregir sin borrar todo, haz doble clic en la celda o presiona <b>F2</b>.</p>
+
+        <h3>Cada dato tiene un tipo</h3>
+        <p>La hoja decide qué escribiste mirando la forma, y lo alinea distinto. Esa alineación es una pista útil: si un número aparece a la izquierda, la hoja lo está leyendo como texto y no va a poder sumarlo.</p>
+        <div class="tabla">
+          <table>
+            <thead><tr><th>Escribes</th><th>La hoja entiende</th><th>Se alinea</th></tr></thead>
+            <tbody>
+              <tr><td><code class="hc-codigo">6,5</code></td><td>Número</td><td>A la derecha</td></tr>
+              <tr><td><code class="hc-codigo">Catalina</code></td><td>Texto</td><td>A la izquierda</td></tr>
+              <tr><td><code class="hc-codigo">12/11/2026</code></td><td>Fecha (un número de días que se muestra como fecha)</td><td>A la derecha</td></tr>
+              <tr><td><code class="hc-codigo">19%</code></td><td>Número 0,19 con formato de porcentaje</td><td>A la derecha</td></tr>
+              <tr><td><code class="hc-codigo">6.5</code></td><td>Con configuración de Chile, <b>texto</b> o una fecha, no 6,5</td><td>Depende: revisa</td></tr>
+              <tr><td><code class="hc-codigo">VERDADERO</code></td><td>Valor lógico (verdadero o falso)</td><td>Al centro</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Rellenar sin escribir todo</h3>
+        <p>La celda elegida tiene un cuadradito en su esquina inferior derecha. Si lo arrastras hacia abajo, la hoja <strong>continúa el patrón</strong>: escribe 1 y 2, elige ambas y arrastra, y aparecen 3, 4, 5… Funciona con días de la semana, meses, fechas y fórmulas. Con doble clic en el cuadradito, rellena hasta donde haya datos al lado.</p>
+
+        <h3>La regla de oro de una tabla</h3>
+        <p>Ordenar, filtrar, hacer gráficos, tablas dinámicas o una app con AppSheet solo funciona bien si los datos están ordenados de una manera. Vale la pena aprenderla desde el principio:</p>
+        <ul class="fichas dos">
+          <li class="ficha acento">
+            <h4>Así sí</h4>
+            <p>Una sola fila de títulos arriba. Cada fila es un caso. Cada columna guarda un solo tipo de dato. Sin filas vacías en medio.</p>
+            <div class="hc-ejemplo-tabla" aria-hidden="true"><span>Estudiante</span><span>Curso</span><span>Nota</span><span>Amanda</span><span>7B</span><span>5,8</span><span>Diego</span><span>7A</span><span>4,1</span></div>
+          </li>
+          <li class="ficha">
+            <h4>Así no</h4>
+            <p>Celdas combinadas, títulos en medio de los datos, una columna que mezcla «5,8» con «no vino», o totales pegados a la tabla. Todo eso confunde a los filtros y gráficos.</p>
+            <div class="hc-ejemplo-tabla mal" aria-hidden="true"><span class="ancha">NOTAS 7B (1er sem.)</span><span>Amanda</span><span>5,8</span><span></span><span>Diego</span><span>no vino</span><span></span></div>
+          </li>
+        </ul>
+
+        <h3>Ordenar, filtrar y no perder los títulos</h3>
+        <div class="desplegables">
+          <details class="desplegable" data-buscar="ordenar orden alfabetico mayor menor">
+            <summary><span>Ordenar<small>De la A a la Z o de mayor a menor</small></span></summary>
+            <div class="contenido">
+              <p>Elige toda la tabla (con títulos) y usa <b>Datos › Ordenar rango › Opciones avanzadas</b>. Marca <b>Los datos tienen una fila de encabezado</b> y elige la columna. Si eliges solo una columna para ordenar, el resto de la fila no se mueve con ella y los datos quedan mezclados: es el error más común.</p>
+            </div>
+          </details>
+          <details class="desplegable" data-buscar="filtro filtrar mostrar solo">
+            <summary><span>Filtrar<small>Ver solo las filas que cumplen algo</small></span></summary>
+            <div class="contenido">
+              <p>Con una celda de la tabla elegida, usa <b>Datos › Crear un filtro</b>. Aparece un embudo en cada título: ahí eliges qué valores ver o una condición, como «mayor que 4». Las filas que no cumplen se esconden, no se borran. Si trabajas con otras personas, <b>Vistas de filtro</b> te deja filtrar sin cambiar lo que ven los demás.</p>
+            </div>
+          </details>
+          <details class="desplegable" data-buscar="inmovilizar congelar fijar fila titulos">
+            <summary><span>Inmovilizar la fila de títulos<small>Que no desaparezca al bajar</small></span></summary>
+            <div class="contenido">
+              <p><b>Ver › Inmovilizar › 1 fila</b>. Al bajar por una tabla larga, los títulos se quedan arriba. También puedes inmovilizar la primera columna para que el nombre de cada fila siga a la vista.</p>
+            </div>
+          </details>
+          <details class="desplegable" data-buscar="buscar reemplazar duplicados quitar dividir texto columnas">
+            <summary><span>Buscar, reemplazar y limpiar<small>Duplicados, espacios y texto dividido</small></span></summary>
+            <div class="contenido">
+              <p><b>Ctrl + H</b> abre buscar y reemplazar en toda la hoja. En <b>Datos › Limpieza de datos</b> están <b>Quitar duplicados</b> y <b>Recortar espacios en blanco</b>. Si una columna tiene «Pérez, Ana», <b>Datos › Dividir texto en columnas</b> lo separa en dos.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- ================= FORMATO ================= -->
+      <section class="bloque" id="formato">
+        <h2 data-corto="Formato">Formato que ayuda a leer</h2>
+        <p>El formato <strong>cambia cómo se ve un dato, no lo que vale</strong>. Si una celda tiene 0,1666 y le pones dos decimales, se verá 0,17, pero los cálculos seguirán usando 0,1666. Esto explica muchos «errores» de redondeo que no son errores.</p>
+
+        <h3>Formato de números</h3>
+        <div class="tabla comparar">
+          <table>
+            <thead><tr><th>Formato</th><th>El valor 1234,5 se ve</th><th>Dónde</th></tr></thead>
+            <tbody>
+              <tr><th>Número</th><td>1.234,50</td><td>Formato › Número › Número</td></tr>
+              <tr><th>Moneda</th><td>$1.235 (en pesos chilenos, sin decimales)</td><td>Botón <b>$</b> o Formato › Número › Moneda</td></tr>
+              <tr><th>Porcentaje</th><td>123.450 % (multiplica por 100)</td><td>Botón <b>%</b></td></tr>
+              <tr><th>Científico</th><td>1,23E+03 (1,23 × 10³)</td><td>Formato › Número › Científico</td></tr>
+              <tr><th>Texto sin formato</th><td>1234,5 tal cual, sin calcular</td><td>Formato › Número › Texto sin formato</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Los botones <b>.0</b> y <b>.00</b> de la barra quitan o agregan decimales visibles.</p>
+
+        <h3>Que la hoja te avise</h3>
+        <ul class="fichas">
+          <li class="ficha" data-buscar="formato condicional color rojo verde reglas">
+            <h4>Formato condicional</h4>
+            <p>Pinta una celda según su valor. Por ejemplo, notas bajo 4,0 en rojo. <b>Formato › Formato condicional</b>, elige el rango, la regla «Menor que» y el valor 4. También tiene <b>escala de colores</b>, que pinta de claro a oscuro según el tamaño.</p>
+          </li>
+          <li class="ficha" data-buscar="validacion validar lista desplegable menu opciones">
+            <h4>Menú desplegable</h4>
+            <p>Para que en una columna solo se pueda elegir entre opciones fijas («Presente», «Ausente», «Atrasado»): <b>Insertar › Menú desplegable</b>. Evita que cada persona escriba distinto y después nada se pueda contar.</p>
+          </li>
+          <li class="ficha" data-buscar="casilla verificacion check checkbox tarea">
+            <h4>Casillas de verificación</h4>
+            <p><b>Insertar › Casilla de verificación</b>. Marcada vale VERDADERO y vacía vale FALSO, así que puedes contarlas: <code class="hc-codigo">=CONTAR.SI(C2:C30;VERDADERO)</code>.</p>
+          </li>
+          <li class="ficha" data-buscar="validacion de datos rechazar entrada numero entre">
+            <h4>Validación de datos</h4>
+            <p><b>Datos › Validación de datos</b> rechaza lo que no corresponde, como una nota que no esté entre 1 y 7. Puedes mostrar una advertencia o impedir que se escriba.</p>
+          </li>
+          <li class="ficha" data-buscar="tabla convertir en tabla colores alternos">
+            <h4>Convertir en tabla</h4>
+            <p><b>Formato › Convertir en tabla</b> le da a tus datos títulos fijos, filas alternas y un tipo por columna (número, fecha, desplegable). Así la regla de oro se cuida sola.</p>
+          </li>
+          <li class="ficha" data-buscar="combinar celdas ajustar texto alinear bordes">
+            <h4>Combinar y ajustar</h4>
+            <p>Combinar celdas sirve para un título decorativo, nunca dentro de una tabla de datos. Si el texto no cabe, mejor usa <b>Ajuste de texto › Ajustar</b> para que baje a la línea siguiente.</p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ================= FORMULAS ================= -->
+      <section class="bloque" id="formulas">
+        <h2>Fórmulas</h2>
+        <p>Todo cálculo empieza con el signo <strong>=</strong>. Sin él, la hoja guarda lo que escribiste como texto. Después del igual puedes poner números, referencias a otras celdas, operaciones y funciones.</p>
+        <p>La gracia está en las referencias: <code class="hc-codigo">=5,8+6,4</code> siempre da 12,2, pero <code class="hc-codigo">=B2+C2</code> suma lo que haya en esas celdas, y si cambian, el resultado cambia.</p>
+
+        <h3>Las operaciones</h3>
+        <div class="hc-operadores">
+          <div><span class="hc-op">+</span><b>Sumar</b><code class="hc-codigo">=B2+C2</code></div>
+          <div><span class="hc-op">−</span><b>Restar</b><code class="hc-codigo">=B2-C2</code></div>
+          <div><span class="hc-op">*</span><b>Multiplicar</b><code class="hc-codigo">=B2*3</code></div>
+          <div><span class="hc-op">/</span><b>Dividir</b><code class="hc-codigo">=B2/2</code></div>
+          <div><span class="hc-op">^</span><b>Potencia</b><code class="hc-codigo">=2^10</code></div>
+          <div><span class="hc-op">&amp;</span><b>Unir texto</b><code class="hc-codigo">=A2&amp;" aprobó"</code></div>
+          <div><span class="hc-op">%</span><b>Porcentaje</b><code class="hc-codigo">=200*19%</code></div>
+          <div><span class="hc-op">&gt; &lt; =</span><b>Comparar</b><code class="hc-codigo">=B2&gt;=4</code></div>
+        </div>
+
+        <h3>El orden importa: PAPOMUDAS</h3>
+        <p>La hoja calcula en el mismo orden que en matemática: <b>Pa</b>réntesis, <b>Po</b>tencias, <b>Mu</b>ltiplicaciones y <b>D</b>ivisiones, <b>A</b>diciones y <b>S</b>ustracciones. Por eso estas dos fórmulas no dan lo mismo:</p>
+        <div class="columnas">
+          <div class="ficha">
+            <p><code class="hc-codigo">=5,8+6,4/2</code></p>
+            <p>Primero divide 6,4 entre 2 y después suma: <b>9</b>. No es el promedio.</p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="orden-mal">Probar</button></div>
+          </div>
+          <div class="ficha acento">
+            <p><code class="hc-codigo">=(5,8+6,4)/2</code></p>
+            <p>El paréntesis obliga a sumar primero: <b>6,1</b>. Este sí es el promedio.</p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="orden-bien">Probar</button></div>
+          </div>
+        </div>
+
+        <h3>Cuando aparece un error</h3>
+        <p>Un error no rompe nada: la hoja te está diciendo qué no pudo hacer. Pasa el cursor sobre la celda para ver un mensaje más largo.</p>
+        <dl class="glosario hc-errores">
+          <div class="termino" data-buscar="error div 0 dividir por cero"><dt><code class="hc-codigo">#¡DIV/0!</code></dt><dd>Dividiste por cero o por una celda vacía. Pasa mucho al calcular un promedio antes de tener datos. Se arregla con <b>SI.ERROR</b>.</dd></div>
+          <div class="termino" data-buscar="error nombre funcion mal escrita"><dt><code class="hc-codigo">#¿NOMBRE?</code></dt><dd>La hoja no conoce esa función. Casi siempre es un nombre mal escrito (<i>PROMEDO</i>) o un texto sin comillas.</dd></div>
+          <div class="termino" data-buscar="error valor tipo texto numero"><dt><code class="hc-codigo">#¡VALOR!</code></dt><dd>Intentaste operar con algo del tipo equivocado, como sumar un número con la palabra «ausente».</dd></div>
+          <div class="termino" data-buscar="error ref referencia borrada circular"><dt><code class="hc-codigo">#¡REF!</code></dt><dd>La fórmula apunta a una celda que ya no existe (borraste la columna) o a sí misma (referencia circular).</dd></div>
+          <div class="termino" data-buscar="error na no encontrado buscarv"><dt><code class="hc-codigo">#N/A</code></dt><dd>Una búsqueda no encontró lo que buscaba. Típico de BUSCARV cuando el nombre está escrito distinto.</dd></div>
+          <div class="termino" data-buscar="error num raiz negativa"><dt><code class="hc-codigo">#¡NUM!</code></dt><dd>El cálculo no tiene resultado, como la raíz de un número negativo o el logaritmo de cero.</dd></div>
+          <div class="termino" data-buscar="error analisis parentesis punto coma"><dt><code class="hc-codigo">#ERROR!</code></dt><dd>La hoja no pudo leer la fórmula: falta un paréntesis, sobra un signo, o usaste coma donde iba punto y coma.</dd></div>
+        </dl>
+        <div class="botones"><button class="boton chico secundario" data-probar="errores">Ver errores en la hoja de pruebas</button></div>
+      </section>
+
+      <!-- ================= REFERENCIAS ================= -->
+      <section class="bloque" id="referencias">
+        <h2 data-corto="Referencias">Referencias: A1 y $A$1</h2>
+        <p>Cuando copias una fórmula a otra celda, la hoja <strong>no copia las direcciones tal cual: copia el camino</strong>. Si en D2 escribiste <code class="hc-codigo">=B2*C2</code>, para la hoja eso significa «multiplica lo que está dos columnas a la izquierda por lo que está una a la izquierda». Al copiarla en D3, el camino es el mismo y la fórmula pasa a ser <code class="hc-codigo">=B3*C3</code>. Por eso puedes escribir una fórmula una vez y arrastrarla para cien filas.</p>
+        <p>A veces no quieres eso. Si todos los productos usan el mismo IVA guardado en <b>F2</b>, esa dirección no debe moverse. Para fijarla se pone un <b>$</b> delante de lo que no debe cambiar:</p>
+        <div class="tabla comparar">
+          <table>
+            <thead><tr><th>Escribes</th><th>Al copiar hacia abajo</th><th>Al copiar a la derecha</th></tr></thead>
+            <tbody>
+              <tr><th><code class="hc-codigo">F2</code></th><td>cambia la fila: F3, F4…</td><td>cambia la columna: G2, H2…</td></tr>
+              <tr><th><code class="hc-codigo">$F$2</code></th><td>se queda en $F$2</td><td>se queda en $F$2</td></tr>
+              <tr><th><code class="hc-codigo">F$2</code></th><td>se queda en la fila 2</td><td>cambia la columna</td></tr>
+              <tr><th><code class="hc-codigo">$F2</code></th><td>cambia la fila</td><td>se queda en la columna F</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Mientras escribes una fórmula, pon el cursor sobre una referencia y presiona <b>F4</b>: va rotando entre las cuatro formas.</p>
+        <div class="nota idea">
+          <span class="titulo-nota">Pruébalo con el kiosco</span>
+          <p>En la hoja de pruebas hay precios y cantidades. D2 calcula el total con IVA usando <code class="hc-codigo">=B2*C2*(1+$F$2)</code>. Usa <b>Copiar hacia abajo</b> y mira cómo B2 y C2 avanzan, pero $F$2 no. Después quítale los $ y copia otra vez: el IVA se pierde.</p>
+          <div class="botones"><button class="boton chico" data-probar="kiosco">Abrir el kiosco</button></div>
+        </div>
+      </section>
+
+      <!-- ================= FUNCIONES ================= -->
+      <section class="bloque" id="funciones">
+        <h2>Funciones esenciales</h2>
+        <p>Una función siempre tiene la misma forma: <b>=NOMBRE(</b>argumentos separados por punto y coma<b>)</b>. Al escribir <b>=</b> y las primeras letras, la hoja te sugiere funciones y te muestra qué va en cada argumento; toca la sugerencia en vez de escribirla entera.</p>
+        <p class="hc-anatomia-fx" aria-label="Partes de una función"><span class="p-igual">=</span><span class="p-nombre">REDONDEAR</span><span class="p-par">(</span><span class="p-arg">B2</span><span class="p-sep">;</span><span class="p-arg">1</span><span class="p-par">)</span></p>
+        <p class="hc-anatomia-leyenda"><span class="p-igual">igual</span> · <span class="p-nombre">nombre</span> · <span class="p-par">paréntesis</span> · <span class="p-arg">argumentos</span> · <span class="p-sep">separador</span></p>
+
+        <ul class="fichas dos hc-funciones">
+          <li class="ficha" id="f-suma" data-fn="SUMA" data-buscar="sumar total sum">
+            <h3><code>SUMA</code></h3>
+            <p class="hc-sintaxis">=SUMA(<i>valores</i>)</p>
+            <p>Suma todos los números del rango. Ignora el texto y las celdas vacías.</p>
+            <p class="hc-ej"><code>=SUMA(B2:B6)</code><span>→ 27,4</span></p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="suma">Probar</button></div>
+          </li>
+          <li class="ficha" id="f-promedio" data-fn="PROMEDIO" data-buscar="media aritmetica average promediar">
+            <h3><code>PROMEDIO</code></h3>
+            <p class="hc-sintaxis">=PROMEDIO(<i>valores</i>)</p>
+            <p>Suma y divide por la cantidad de números. Las celdas vacías no cuentan, pero un 0 sí.</p>
+            <p class="hc-ej"><code>=PROMEDIO(B2:B6)</code><span>→ 5,48</span></p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="promedio">Probar</button></div>
+          </li>
+          <li class="ficha" id="f-max" data-fn="MAX MIN" data-buscar="maximo minimo mayor menor nota mas alta baja">
+            <h3><code>MAX</code> y <code>MIN</code></h3>
+            <p class="hc-sintaxis">=MAX(<i>valores</i>) · =MIN(<i>valores</i>)</p>
+            <p>El número más grande y el más chico del rango. Juntos te dan el rango de los datos: <code class="hc-codigo">=MAX(B2:B6)-MIN(B2:B6)</code>.</p>
+            <p class="hc-ej"><code>=MAX(B2:B6)</code><span>→ 6,7</span></p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="max">Probar</button></div>
+          </li>
+          <li class="ficha" id="f-contar" data-fn="CONTAR CONTARA CONTAR.BLANCO" data-buscar="contar cuantos cantidad count counta vacias">
+            <h3><code>CONTAR</code> y <code>CONTARA</code></h3>
+            <p class="hc-sintaxis">=CONTAR(<i>rango</i>) · =CONTARA(<i>rango</i>)</p>
+            <p><b>CONTAR</b> cuenta cuántas celdas tienen números. <b>CONTARA</b> cuenta las que tienen cualquier cosa. <b>CONTAR.BLANCO</b> cuenta las vacías.</p>
+            <p class="hc-ej"><code>=CONTARA(A2:A6)</code><span>→ 5</span></p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="contar">Probar</button></div>
+          </li>
+          <li class="ficha" id="f-redondear" data-fn="REDONDEAR REDONDEAR.MAS REDONDEAR.MENOS" data-buscar="redondear decimales aproximar round">
+            <h3><code>REDONDEAR</code></h3>
+            <p class="hc-sintaxis">=REDONDEAR(<i>número</i>; <i>decimales</i>)</p>
+            <p>Cambia el valor de verdad, no solo cómo se ve. <b>REDONDEAR.MAS</b> siempre sube y <b>REDONDEAR.MENOS</b> siempre baja.</p>
+            <p class="hc-ej"><code>=REDONDEAR(5,48;1)</code><span>→ 5,5</span></p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="redondear">Probar</button></div>
+          </li>
+          <li class="ficha resalte">
+            <h3>¿Cómo se llama en inglés?</h3>
+            <p>Si ves un tutorial en inglés: SUM es SUMA, AVERAGE es PROMEDIO, COUNT es CONTAR, ROUND es REDONDEAR, IF es SI, VLOOKUP es BUSCARV. La hoja en español también acepta el nombre en inglés y lo traduce sola.</p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ================= MATEMATICA ================= -->
+      <section class="bloque" id="matematica">
+        <h2 data-corto="Potencias y logaritmos">Potencias, raíces y logaritmos</h2>
+
+        <h3>Porcentajes</h3>
+        <p>Un porcentaje es una fracción de 100: 19 % es 0,19. Por eso, para sacar el 19 % de 2.000 multiplicas <code class="hc-codigo">=2000*19%</code> (o <code class="hc-codigo">=2000*0,19</code>). Para sumarle el 19 %, multiplicas por 1,19: <code class="hc-codigo">=2000*(1+19%)</code>. Y para saber qué porcentaje es una parte del total, divides: <code class="hc-codigo">=B2/B10</code> y le pones formato de porcentaje.</p>
+
+        <ul class="fichas dos hc-funciones">
+          <li class="ficha" id="f-potencia" data-fn="POTENCIA" data-buscar="potencia elevar exponente cuadrado cubo power">
+            <h3><code>POTENCIA</code> y <code>^</code></h3>
+            <p class="hc-sintaxis">=POTENCIA(<i>base</i>; <i>exponente</i>) · =<i>base</i>^<i>exponente</i></p>
+            <p>Multiplica la base por sí misma tantas veces como diga el exponente. Las dos formas dan lo mismo.</p>
+            <p class="hc-ej"><code>=2^10</code><span>→ 1.024</span></p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="potencia">Probar</button></div>
+          </li>
+          <li class="ficha" id="f-raiz" data-fn="RAIZ" data-buscar="raiz cuadrada cubica sqrt">
+            <h3><code>RAIZ</code></h3>
+            <p class="hc-sintaxis">=RAIZ(<i>número</i>)</p>
+            <p>La raíz cuadrada: el número que multiplicado por sí mismo da el original. Para otras raíces usa una potencia fraccionaria: la raíz cúbica de 27 es <code class="hc-codigo">=27^(1/3)</code>.</p>
+            <p class="hc-ej"><code>=RAIZ(144)</code><span>→ 12</span></p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="raiz">Probar</button></div>
+          </li>
+        </ul>
+
+        <h3 id="logaritmos">Logaritmos</h3>
+        <p>Un logaritmo responde una sola pregunta: <strong>¿cuántas veces tengo que multiplicar la base para llegar a este número?</strong> 10 × 10 × 10 = 1.000, así que el logaritmo en base 10 de 1.000 es 3. Es la operación inversa de la potencia, igual que la resta es la inversa de la suma.</p>
+        <div class="herramienta hc-log" data-log>
+          <div class="campos">
+            <div class="campo">
+              <label for="log-base">Base</label>
+              <select id="log-base">
+                <option value="10">10</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="e">e (2,718…)</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="log-num">Número</label>
+              <input id="log-num" type="number" value="1000" min="0.0001" step="any" inputmode="decimal">
+            </div>
+          </div>
+          <div class="resultado hc-log-res" aria-live="polite"></div>
+        </div>
+        <ul class="fichas dos hc-funciones">
+          <li class="ficha" id="f-log" data-fn="LOG LOG10 LN EXP" data-buscar="logaritmo log natural neperiano exponencial e">
+            <h3><code>LOG</code>, <code>LOG10</code>, <code>LN</code></h3>
+            <p class="hc-sintaxis">=LOG(<i>número</i>; <i>base</i>) · =LOG10(<i>número</i>) · =LN(<i>número</i>)</p>
+            <p><b>LOG</b> sin base usa 10. <b>LN</b> usa el número <i>e</i> (logaritmo natural, el de las ciencias). <b>EXP</b> hace lo contrario de LN: <code class="hc-codigo">=EXP(1)</code> es <i>e</i>.</p>
+            <p class="hc-ej"><code>=LOG(8;2)</code><span>→ 3</span></p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="log">Probar</button></div>
+          </li>
+          <li class="ficha resalte">
+            <h3>¿Para qué sirven?</h3>
+            <p>Para comparar cosas de tamaños muy distintos. La escala de los sismos y el pH son logarítmicos: un sismo de magnitud 7 libera unas 32 veces más energía que uno de 6. En un gráfico con datos que van de 10 a 1.000.000, activa <b>Personalizar › Eje vertical › Escala logarítmica</b> y verás todos los puntos, no solo el más grande.</p>
+          </li>
+        </ul>
+
+        <h3>Otras de matemática</h3>
+        <div class="tabla">
+          <table>
+            <thead><tr><th>Función</th><th>Qué hace</th><th>Ejemplo</th></tr></thead>
+            <tbody>
+              <tr data-buscar="absoluto abs distancia"><td><code class="hc-codigo">ABS</code></td><td>Valor absoluto: quita el signo negativo</td><td><code class="hc-codigo">=ABS(-7)</code> → 7</td></tr>
+              <tr data-buscar="entero parte entera truncar"><td><code class="hc-codigo">ENTERO</code></td><td>Redondea hacia abajo al entero</td><td><code class="hc-codigo">=ENTERO(5,9)</code> → 5</td></tr>
+              <tr data-buscar="residuo resto division par impar mod"><td><code class="hc-codigo">RESIDUO</code></td><td>El resto de una división. Si el resto entre 2 es 0, el número es par</td><td><code class="hc-codigo">=RESIDUO(17;5)</code> → 2</td></tr>
+              <tr data-buscar="pi circulo area perimetro"><td><code class="hc-codigo">PI</code></td><td>El número π, sin argumentos</td><td><code class="hc-codigo">=PI()*3^2</code> → 28,27</td></tr>
+              <tr data-buscar="aleatorio azar dado sorteo random"><td><code class="hc-codigo">ALEATORIO.ENTRE</code></td><td>Un entero al azar; cambia cada vez que la hoja se recalcula</td><td><code class="hc-codigo">=ALEATORIO.ENTRE(1;6)</code> → un dado</td></tr>
+              <tr data-buscar="multiplo redondear a multiplo mas cercano"><td><code class="hc-codigo">REDOND.MULT</code></td><td>Redondea al múltiplo más cercano, útil con precios</td><td><code class="hc-codigo">=REDOND.MULT(1234;10)</code> → 1.230</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="botones"><button class="boton chico secundario" data-probar="matematica">Probar estas funciones</button></div>
+      </section>
+
+      <!-- ================= ESTADISTICA ================= -->
+      <section class="bloque" id="estadistica">
+        <h2>Estadística</h2>
+        <p>El promedio es la medida más usada, pero no siempre la que mejor describe a un grupo. Si cuatro compañeros tienen $1.000 de mesada y uno tiene $100.000, el promedio dice $20.800, y nadie tiene eso. Por eso hay otras medidas:</p>
+        <ul class="fichas dos hc-funciones">
+          <li class="ficha" id="f-mediana" data-fn="MEDIANA" data-buscar="mediana centro valor del medio median">
+            <h3><code>MEDIANA</code></h3>
+            <p class="hc-sintaxis">=MEDIANA(<i>valores</i>)</p>
+            <p>El valor del medio cuando ordenas los datos. No le afectan los casos extremos: en el ejemplo de la mesada, la mediana es $1.000.</p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="mesada">Probar con la mesada</button></div>
+          </li>
+          <li class="ficha" id="f-moda" data-fn="MODA" data-buscar="moda mas repetido frecuente mode">
+            <h3><code>MODA</code></h3>
+            <p class="hc-sintaxis">=MODA(<i>valores</i>)</p>
+            <p>El valor que más se repite. Sirve para saber, por ejemplo, la talla de polera que más se pidió.</p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="mesada">Probar</button></div>
+          </li>
+          <li class="ficha" id="f-desvest" data-fn="DESVEST" data-buscar="desviacion estandar dispersion variabilidad stdev">
+            <h3><code>DESVEST</code></h3>
+            <p class="hc-sintaxis">=DESVEST(<i>valores</i>)</p>
+            <p>Cuánto se alejan los datos de su promedio, en promedio. Dos cursos pueden tener promedio 5,5: uno con todas las notas cerca de 5,5 (desviación baja) y otro con muchos 7 y muchos 3 (desviación alta).</p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="desvest">Probar</button></div>
+          </li>
+          <li class="ficha" id="f-promedio-si" data-fn="PROMEDIO.SI" data-buscar="promedio si condicion promedio de un grupo averageif">
+            <h3><code>PROMEDIO.SI</code></h3>
+            <p class="hc-sintaxis">=PROMEDIO.SI(<i>rango</i>; <i>condición</i>; <i>rango a promediar</i>)</p>
+            <p>El promedio solo de las filas que cumplen algo, como el promedio de las notas del 7A.</p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="promedio-si">Probar</button></div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ================= LOGICA ================= -->
+      <section class="bloque" id="logica">
+        <h2>Decisiones y búsquedas</h2>
+        <p>Estas funciones hacen que la hoja tome decisiones: escribir «Aprobado» o «Reprobado», contar solo lo que cumple una condición o ir a buscar un dato a otra tabla.</p>
+
+        <h3>Escribir una condición</h3>
+        <p>Una condición es una pregunta que se responde con VERDADERO o FALSO. Se arma con una comparación: <code class="hc-codigo">B2&gt;=4</code> («¿B2 es mayor o igual a 4?»), <code class="hc-codigo">A2="7A"</code> («¿A2 dice 7A?») o <code class="hc-codigo">B2&lt;&gt;0</code> («¿B2 es distinto de 0?»). Los textos siempre van entre comillas.</p>
+
+        <ul class="fichas dos hc-funciones">
+          <li class="ficha" id="f-si" data-fn="SI" data-buscar="si condicional if aprobado reprobado decidir">
+            <h3><code>SI</code></h3>
+            <p class="hc-sintaxis">=SI(<i>condición</i>; <i>si es verdad</i>; <i>si es falso</i>)</p>
+            <p>Mira la condición y devuelve una cosa u otra. Se lee como una oración: «si B2 es mayor o igual a 4, escribe Aprobado; si no, Reprobado».</p>
+            <p class="hc-ej"><code>=SI(D2&gt;=4;"Aprobado";"Reprobado")</code></p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="si">Probar</button></div>
+          </li>
+          <li class="ficha" id="f-y" data-fn="Y O NO" data-buscar="y o no and or not varias condiciones">
+            <h3><code>Y</code>, <code>O</code>, <code>NO</code></h3>
+            <p class="hc-sintaxis">=Y(<i>cond1</i>; <i>cond2</i>) · =O(<i>cond1</i>; <i>cond2</i>)</p>
+            <p><b>Y</b> es verdad solo si se cumplen todas. <b>O</b> es verdad si se cumple al menos una. Se usan dentro de SI: aprobar si ambas pruebas son 4 o más.</p>
+            <p class="hc-ej"><code>=SI(Y(B2&gt;=4;C2&gt;=4);"Sí";"No")</code></p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="y">Probar</button></div>
+          </li>
+          <li class="ficha" id="f-si-conjunto" data-fn="SI.CONJUNTO" data-buscar="si conjunto varias opciones escala ifs anidado">
+            <h3><code>SI.CONJUNTO</code></h3>
+            <p class="hc-sintaxis">=SI.CONJUNTO(<i>cond1</i>; <i>valor1</i>; <i>cond2</i>; <i>valor2</i>; …)</p>
+            <p>Para más de dos caminos sin meter un SI dentro de otro. Revisa las condiciones en orden y se queda con la primera verdadera.</p>
+            <p class="hc-ej"><code>=SI.CONJUNTO(D2&gt;=6;"Muy bien";D2&gt;=4;"Suficiente";VERDADERO;"Insuficiente")</code></p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="si-conjunto">Probar</button></div>
+          </li>
+          <li class="ficha" id="f-si-error" data-fn="SI.ERROR" data-buscar="si error iferror ocultar error">
+            <h3><code>SI.ERROR</code></h3>
+            <p class="hc-sintaxis">=SI.ERROR(<i>fórmula</i>; <i>qué mostrar si falla</i>)</p>
+            <p>Si la fórmula da error, muestra otra cosa. Úsala cuando el error es esperable (un promedio todavía sin notas), no para esconder errores que no entiendes.</p>
+            <p class="hc-ej"><code>=SI.ERROR(B2/C2;"—")</code></p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="si-error">Probar</button></div>
+          </li>
+          <li class="ficha" id="f-contar-si" data-fn="CONTAR.SI CONTAR.SI.CONJUNTO" data-buscar="contar si cuantos cumplen countif">
+            <h3><code>CONTAR.SI</code></h3>
+            <p class="hc-sintaxis">=CONTAR.SI(<i>rango</i>; <i>condición</i>)</p>
+            <p>Cuántas celdas cumplen algo. La condición va entre comillas cuando tiene un signo: <code class="hc-codigo">"&gt;=4"</code>. Para varias condiciones a la vez, <b>CONTAR.SI.CONJUNTO</b>.</p>
+            <p class="hc-ej"><code>=CONTAR.SI(D2:D6;"&gt;=4")</code></p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="contar-si">Probar</button></div>
+          </li>
+          <li class="ficha" id="f-sumar-si" data-fn="SUMAR.SI SUMAR.SI.CONJUNTO" data-buscar="sumar si sumif suma con condicion">
+            <h3><code>SUMAR.SI</code></h3>
+            <p class="hc-sintaxis">=SUMAR.SI(<i>rango</i>; <i>condición</i>; <i>rango a sumar</i>)</p>
+            <p>Suma solo las filas que cumplen. Mira la condición en una columna y suma otra: cuánto se gastó en la categoría «Colación».</p>
+            <p class="hc-ej"><code>=SUMAR.SI(B2:B7;"Colación";C2:C7)</code></p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="sumar-si">Probar</button></div>
+          </li>
+          <li class="ficha" id="f-buscarv" data-fn="BUSCARV" data-buscar="buscarv buscar vlookup tabla encontrar dato">
+            <h3><code>BUSCARV</code></h3>
+            <p class="hc-sintaxis">=BUSCARV(<i>qué buscas</i>; <i>tabla</i>; <i>columna</i>; FALSO)</p>
+            <p>Busca un valor en la <b>primera columna</b> de una tabla y te trae lo que hay en otra columna de esa fila. El último argumento casi siempre es <b>FALSO</b>: busca exactamente ese valor.</p>
+            <p class="hc-ej"><code>=BUSCARV("Diego";A2:D6;4;FALSO)</code></p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="buscarv">Probar</button></div>
+          </li>
+          <li class="ficha" id="f-buscarx" data-fn="BUSCARX" data-buscar="buscarx xlookup buscar">
+            <h3><code>BUSCARX</code></h3>
+            <p class="hc-sintaxis">=BUSCARX(<i>qué buscas</i>; <i>dónde buscar</i>; <i>qué devolver</i>)</p>
+            <p>La versión nueva y más fácil: le dices la columna donde buscar y la columna que quieres de vuelta, en cualquier orden. Si la tienes disponible, prefiérela.</p>
+            <p class="hc-ej"><code>=BUSCARX("Diego";A2:A6;D2:D6)</code></p>
+            <div class="pie-ficha"><button class="boton chico secundario" data-probar="buscarx">Probar</button></div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ================= TEXTO Y FECHAS ================= -->
+      <section class="bloque" id="texto-fechas">
+        <h2>Texto y fechas</h2>
+        <div class="columnas">
+          <div>
+            <h3>Texto</h3>
+            <div class="tabla">
+              <table>
+                <tbody>
+                  <tr data-buscar="unir concatenar juntar texto ampersand"><td><code class="hc-codigo">&amp;</code> o <code class="hc-codigo">CONCATENAR</code></td><td>Une textos. <code class="hc-codigo">=A2&amp;" "&amp;B2</code> junta nombre y apellido con un espacio.</td></tr>
+                  <tr data-buscar="mayusculas minusculas nompropio"><td><code class="hc-codigo">MAYUSC</code>, <code class="hc-codigo">MINUSC</code>, <code class="hc-codigo">NOMPROPIO</code></td><td>Todo en mayúsculas, todo en minúsculas, o la primera letra de cada palabra en mayúscula.</td></tr>
+                  <tr data-buscar="largo contar letras caracteres len"><td><code class="hc-codigo">LARGO</code></td><td>Cuántos caracteres tiene, contando espacios.</td></tr>
+                  <tr data-buscar="espacios limpiar trim"><td><code class="hc-codigo">ESPACIOS</code></td><td>Quita espacios sobrantes al principio, al final y dobles.</td></tr>
+                  <tr data-buscar="izquierda derecha extraer letras"><td><code class="hc-codigo">IZQUIERDA</code>, <code class="hc-codigo">DERECHA</code></td><td>Los primeros o últimos caracteres. <code class="hc-codigo">=IZQUIERDA(A2;1)</code> da la inicial.</td></tr>
+                  <tr data-buscar="traducir traductor idioma googletranslate"><td><code class="hc-codigo">GOOGLETRANSLATE</code></td><td>Traduce. <code class="hc-codigo">=GOOGLETRANSLATE(A2;"es";"en")</code>.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="botones"><button class="boton chico secundario" data-probar="texto">Probar funciones de texto</button></div>
+          </div>
+          <div>
+            <h3>Fechas</h3>
+            <p>Para la hoja, una fecha es un número: la cantidad de días desde el 30 de diciembre de 1899. Por eso puedes restar dos fechas y obtener los días entre ellas, o sumarle 7 a una fecha para saber qué día cae una semana después.</p>
+            <div class="tabla">
+              <table>
+                <tbody>
+                  <tr data-buscar="hoy fecha actual today"><td><code class="hc-codigo">HOY</code></td><td>La fecha de hoy. Se actualiza cada día.</td></tr>
+                  <tr data-buscar="ahora hora now"><td><code class="hc-codigo">AHORA</code></td><td>Fecha y hora actuales.</td></tr>
+                  <tr data-buscar="dias entre fechas restar fechas datedif edad"><td><code class="hc-codigo">DATEDIF</code></td><td>Tiempo entre dos fechas en días, meses o años. La edad: <code class="hc-codigo">=DATEDIF(B2;HOY();"Y")</code>.</td></tr>
+                  <tr data-buscar="dia semana lunes"><td><code class="hc-codigo">DIASEM</code></td><td>Qué día de la semana es (1 es domingo).</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="botones"><button class="boton chico secundario" data-probar="fechas">Probar fechas</button></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= GRAFICOS ================= -->
+      <section class="bloque" id="graficos">
+        <h2>Gráficos</h2>
+        <p>Para crear uno, elige la tabla con sus títulos y usa <b>Insertar › Gráfico</b>. La hoja propone un tipo; en el panel de la derecha, en <b>Configuración › Tipo de gráfico</b>, puedes cambiarlo. En la pestaña <b>Personalizar</b> están el título, los colores, los ejes y las leyendas. Si cambias los datos, el gráfico se actualiza solo.</p>
+        <p>Lo difícil no es hacerlo, sino elegir el tipo. Empieza por preguntarte <strong>qué quieres que se entienda</strong>:</p>
+
+        <div class="pestanas hc-elige-grafico" data-pestanas>
+          <div role="tablist" aria-label="Qué quieres mostrar">
+            <button role="tab" aria-selected="true">Comparar cantidades</button>
+            <button role="tab">Cambio en el tiempo</button>
+            <button role="tab">Partes de un todo</button>
+            <button role="tab">Relación entre dos datos</button>
+            <button role="tab">Cómo se reparten</button>
+          </div>
+          <div role="tabpanel">
+            <div class="hc-grafico">
+              <svg viewBox="0 0 320 190" role="img" aria-label="Gráfico de columnas: votos por actividad del día del alumno">
+                <g class="eje"><line x1="40" y1="160" x2="310" y2="160"/><line x1="40" y1="20" x2="40" y2="160"/></g>
+                <g class="marca"><rect x="58" y="60" width="38" height="100"/><rect x="118" y="90" width="38" height="70"/><rect x="178" y="40" width="38" height="120" class="fuerte"/><rect x="238" y="120" width="38" height="40"/></g>
+                <g class="rotulo"><text x="77" y="177">Cine</text><text x="137" y="177">Baile</text><text x="197" y="177">Deporte</text><text x="257" y="177">Karaoke</text><text x="34" y="44" text-anchor="end">12</text><text x="34" y="164" text-anchor="end">0</text></g>
+              </svg>
+              <div>
+                <p class="hc-explica-t">Columnas o barras</p>
+                <p>Para comparar cuánto hay de cada cosa. El ojo compara bien largos que parten de la misma línea. Si los nombres son largos o son muchos, usa <b>barras</b> (horizontales): se leen mejor.</p>
+                <p class="hc-cuidado">Cuidado: el eje debe partir en 0. Si parte en 8, una diferencia chica parece enorme.</p>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel">
+            <div class="hc-grafico">
+              <svg viewBox="0 0 320 190" role="img" aria-label="Gráfico de líneas: temperatura de lunes a viernes">
+                <g class="eje"><line x1="40" y1="160" x2="310" y2="160"/><line x1="40" y1="20" x2="40" y2="160"/></g>
+                <polyline class="linea" points="60,120 120,95 180,105 240,60 300,45"/>
+                <g class="punto"><circle cx="60" cy="120" r="4"/><circle cx="120" cy="95" r="4"/><circle cx="180" cy="105" r="4"/><circle cx="240" cy="60" r="4"/><circle cx="300" cy="45" r="4"/></g>
+                <g class="rotulo"><text x="60" y="177">Lu</text><text x="120" y="177">Ma</text><text x="180" y="177">Mi</text><text x="240" y="177">Ju</text><text x="300" y="177">Vi</text><text x="34" y="44" text-anchor="end">24°</text><text x="34" y="164" text-anchor="end">10°</text></g>
+              </svg>
+              <div>
+                <p class="hc-explica-t">Líneas</p>
+                <p>Para ver cómo algo sube o baja a lo largo del tiempo: temperatura por día, asistencia por mes, altura de una planta por semana. La línea une puntos que van en orden, así que el eje horizontal debe ser tiempo.</p>
+                <p class="hc-cuidado">Cuidado: no la uses para categorías sin orden (cursos, colores). Una línea entre «7A» y «7B» no significa nada.</p>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel">
+            <div class="hc-grafico">
+              <svg viewBox="0 0 320 190" role="img" aria-label="Gráfico circular: cómo llegan los estudiantes al colegio">
+                <g transform="translate(110 95)" class="torta">
+                  <path d="M0 0 L0 -75 A75 75 0 0 1 71.3 23.2 Z" class="fuerte"/>
+                  <path d="M0 0 L71.3 23.2 A75 75 0 0 1 -44.1 60.7 Z"/>
+                  <path d="M0 0 L-44.1 60.7 A75 75 0 0 1 0 -75 Z" class="suave"/>
+                </g>
+                <g class="rotulo izq"><text x="210" y="70">■ Caminando 45 %</text><text x="210" y="95">■ Micro 30 %</text><text x="210" y="120">■ Auto 25 %</text></g>
+              </svg>
+              <div>
+                <p class="hc-explica-t">Circular</p>
+                <p>Solo para mostrar cómo se reparte un total que suma 100 %, y con pocas partes (hasta cuatro o cinco). Cómo llegan los estudiantes al colegio es un buen caso.</p>
+                <p class="hc-cuidado">Cuidado: comparar ángulos es difícil. Si dos partes son parecidas, o si son muchas, una barra se lee mejor.</p>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel">
+            <div class="hc-grafico">
+              <svg viewBox="0 0 320 190" role="img" aria-label="Gráfico de dispersión: horas de estudio y nota">
+                <g class="eje"><line x1="40" y1="160" x2="310" y2="160"/><line x1="40" y1="20" x2="40" y2="160"/></g>
+                <line class="tendencia" x1="55" y1="140" x2="300" y2="40"/>
+                <g class="punto"><circle cx="60" cy="135" r="4"/><circle cx="85" cy="120" r="4"/><circle cx="110" cy="128" r="4"/><circle cx="140" cy="100" r="4"/><circle cx="170" cy="105" r="4"/><circle cx="195" cy="80" r="4"/><circle cx="225" cy="72" r="4"/><circle cx="250" cy="58" r="4"/><circle cx="285" cy="50" r="4"/><circle cx="160" cy="70" r="4"/></g>
+                <g class="rotulo"><text x="175" y="182">Horas de estudio</text><text x="16" y="95" transform="rotate(-90 16 95)">Nota</text></g>
+              </svg>
+              <div>
+                <p class="hc-explica-t">Dispersión</p>
+                <p>Cada punto es un caso con dos números (horas de estudio y nota de un estudiante). Sirve para ver si cuando uno sube, el otro también. En <b>Personalizar › Serie</b> puedes agregar una <b>línea de tendencia</b>.</p>
+                <p class="hc-cuidado">Cuidado: que dos cosas suban juntas no prueba que una cause la otra.</p>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel">
+            <div class="hc-grafico">
+              <svg viewBox="0 0 320 190" role="img" aria-label="Histograma de estaturas">
+                <g class="eje"><line x1="40" y1="160" x2="310" y2="160"/><line x1="40" y1="20" x2="40" y2="160"/></g>
+                <g class="marca junto"><rect x="50" y="140" width="40" height="20"/><rect x="90" y="110" width="40" height="50"/><rect x="130" y="60" width="40" height="100" class="fuerte"/><rect x="170" y="45" width="40" height="115" class="fuerte"/><rect x="210" y="95" width="40" height="65"/><rect x="250" y="135" width="40" height="25"/></g>
+                <g class="rotulo"><text x="50" y="177">140</text><text x="130" y="177">150</text><text x="210" y="177">160</text><text x="290" y="177">170 cm</text></g>
+              </svg>
+              <div>
+                <p class="hc-explica-t">Histograma</p>
+                <p>Agrupa muchos números en tramos y cuenta cuántos caen en cada uno: cuántos miden entre 150 y 155 cm. Muestra la forma de los datos: dónde se juntan y si hay casos raros.</p>
+                <p class="hc-cuidado">En Sheets: Tipo de gráfico › Histograma. Elige solo la columna de números.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Gráficos dentro de una celda</h3>
+        <p><b>SPARKLINE</b> dibuja un gráfico diminuto dentro de una celda, al lado de los datos. Sirve para ver de un vistazo cómo le fue a cada estudiante a lo largo del semestre: <code class="hc-codigo">=SPARKLINE(B2:G2)</code> hace una línea y <code class="hc-codigo">=SPARKLINE(B2:G2;{"charttype"\"column"})</code> hace columnas. La parte entre llaves usa barra invertida porque en Chile la coma es decimal.</p>
+
+        <h3>Un buen gráfico, en cinco revisiones</h3>
+        <ul class="fichas">
+          <li class="ficha"><h4>Título que diga algo</h4><p>No «Gráfico 1», sino lo que se ve: «El deporte fue la actividad más votada».</p></li>
+          <li class="ficha"><h4>Ejes con unidades</h4><p>¿Son personas, pesos, grados? Escríbelo en el título del eje.</p></li>
+          <li class="ficha"><h4>Un color con sentido</h4><p>Un solo color para todo, y uno distinto solo para lo que quieres destacar.</p></li>
+          <li class="ficha"><h4>Sin 3D ni adornos</h4><p>El efecto 3D deforma los tamaños y hace que la comparación sea injusta.</p></li>
+          <li class="ficha"><h4>Fuente de los datos</h4><p>Debajo o en el título: de dónde salieron y cuándo.</p></li>
+        </ul>
+      </section>
+
+      <!-- ================= ANALIZAR ================= -->
+      <section class="bloque" id="analizar">
+        <h2>Analizar muchos datos</h2>
+        <p>Cuando la tabla tiene cientos de filas, como las respuestas de una encuesta, estas herramientas resumen y separan sin que tengas que copiar nada a mano.</p>
+
+        <h3 id="tablas-dinamicas">Tablas dinámicas</h3>
+        <p>Una tabla dinámica resume una tabla grande respondiendo preguntas como «¿cuántas respuestas hay por curso?» o «¿cuánto se gastó por categoría y por mes?». No escribes fórmulas: eliges qué va en filas, qué en columnas y qué se calcula.</p>
+        <ol class="pasos">
+          <li><b>Elige la tabla completa</b>Con su fila de títulos. Aquí la regla de oro se vuelve obligatoria.</li>
+          <li><b>Insertar › Tabla dinámica</b>Acepta crearla en una hoja nueva.</li>
+          <li><b>Arma la pregunta en el panel</b>En <b>Filas</b>, lo que quieres agrupar (Curso). En <b>Valores</b>, lo que quieres calcular (Nota, resumida por PROMEDIO o por CONTARA). En <b>Columnas</b>, una segunda forma de separar si la necesitas (Semestre).</li>
+          <li><b>Cambia y vuelve a mirar</b>Arrastra los campos a otro lugar para hacer otra pregunta. Los datos originales no se tocan.</li>
+        </ol>
+
+        <h3>Funciones que devuelven tablas</h3>
+        <p>Estas funciones no dan un solo valor: escriben una tabla entera a partir de la celda donde las pones, así que deja espacio libre abajo y a la derecha. Sus nombres quedan en inglés incluso con la hoja en español.</p>
+        <ul class="fichas dos hc-funciones">
+          <li class="ficha" id="f-filter" data-fn="FILTER" data-buscar="filter filtrar filas que cumplen">
+            <h3><code>FILTER</code></h3>
+            <p class="hc-sintaxis">=FILTER(<i>rango</i>; <i>condición</i>)</p>
+            <p>Copia solo las filas que cumplen. A diferencia del filtro del menú, el resultado queda en otro lugar y se actualiza solo.</p>
+            <p class="hc-ej"><code>=FILTER(A2:D6;D2:D6&lt;4)</code></p>
+          </li>
+          <li class="ficha" id="f-sort" data-fn="SORT" data-buscar="sort ordenar funcion">
+            <h3><code>SORT</code></h3>
+            <p class="hc-sintaxis">=SORT(<i>rango</i>; <i>columna</i>; <i>ascendente</i>)</p>
+            <p>Devuelve la tabla ordenada sin tocar la original. <code class="hc-codigo">FALSO</code> como tercer argumento ordena de mayor a menor.</p>
+            <p class="hc-ej"><code>=SORT(A2:D6;4;FALSO)</code></p>
+          </li>
+          <li class="ficha" id="f-unique" data-fn="UNIQUE" data-buscar="unique unicos sin repetir distintos">
+            <h3><code>UNIQUE</code></h3>
+            <p class="hc-sintaxis">=UNIQUE(<i>rango</i>)</p>
+            <p>La lista de valores distintos, sin repetir. Para saber qué cursos respondieron una encuesta, por ejemplo.</p>
+          </li>
+          <li class="ficha" id="f-query" data-fn="QUERY" data-buscar="query consulta sql seleccionar">
+            <h3><code>QUERY</code></h3>
+            <p class="hc-sintaxis">=QUERY(<i>rango</i>; "<i>consulta</i>")</p>
+            <p>Hace preguntas a la tabla en un lenguaje parecido al inglés, el mismo que usan las bases de datos. Es avanzado, pero muy potente:</p>
+            <p class="hc-ej"><code>=QUERY(A1:D30;"select B, avg(D) group by B")</code></p>
+          </li>
+          <li class="ficha" id="f-importrange" data-fn="IMPORTRANGE" data-buscar="importrange traer datos de otra hoja otro archivo">
+            <h3><code>IMPORTRANGE</code></h3>
+            <p class="hc-sintaxis">=IMPORTRANGE("<i>enlace</i>"; "<i>Hoja1!A1:D30</i>")</p>
+            <p>Trae datos de otro archivo. La primera vez te pide permiso para conectarlos.</p>
+          </li>
+          <li class="ficha" id="f-arrayformula" data-fn="ARRAYFORMULA" data-buscar="arrayformula formula para toda la columna">
+            <h3><code>ARRAYFORMULA</code></h3>
+            <p class="hc-sintaxis">=ARRAYFORMULA(<i>fórmula con rangos</i>)</p>
+            <p>Aplica una fórmula a una columna entera de una vez, en vez de arrastrarla: <code class="hc-codigo">=ARRAYFORMULA(B2:B30*C2:C30)</code>. Útil con respuestas de formularios, que agregan filas solas.</p>
+          </li>
+        </ul>
+
+        <div class="nota">
+          <span class="titulo-nota">Formularios de Google + Hojas de cálculo</span>
+          <p>Si haces una encuesta en Formularios de Google, en la pestaña <b>Respuestas</b> está el botón <b>Vincular con Hojas de cálculo</b>. Cada respuesta llega como una fila nueva, ordenada según la regla de oro y lista para gráficos y tablas dinámicas.</p>
+        </div>
+      </section>
+
+      <!-- ================= COMPARTIR ================= -->
+      <section class="bloque" id="compartir">
+        <h2>Trabajar con otros</h2>
+        <p>El botón <b>Compartir</b> está arriba a la derecha. Puedes invitar a personas por su correo o crear un enlace. En los dos casos eliges qué pueden hacer:</p>
+        <div class="tabla comparar">
+          <table>
+            <thead><tr><th>Permiso</th><th>Puede</th><th>Úsalo para</th></tr></thead>
+            <tbody>
+              <tr><th>Lector</th><td>Ver y copiar</td><td>Publicar resultados para el curso</td></tr>
+              <tr><th>Comentarista</th><td>Ver y dejar comentarios, sin cambiar datos</td><td>Pedir que revisen tu trabajo</td></tr>
+              <tr><th>Editor</th><td>Cambiar todo, incluso compartir con otros</td><td>Tu equipo de trabajo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="fichas">
+          <li class="ficha" data-buscar="comentarios mencionar arroba asignar"><h4>Comentarios</h4><p>Clic derecho sobre una celda › <b>Comentario</b>. Si escribes <b>@</b> y el correo de alguien, le llega un aviso; puedes incluso asignarle la tarea.</p></li>
+          <li class="ficha" data-buscar="historial versiones recuperar quien cambio"><h4>Historial de versiones</h4><p><b>Archivo › Historial de versiones</b> muestra quién cambió qué y cuándo, con colores por persona. Puedes restaurar cualquier versión anterior.</p></li>
+          <li class="ficha" data-buscar="proteger rango bloquear celdas permisos"><h4>Proteger celdas</h4><p><b>Datos › Hojas y rangos protegidos</b> impide que otros editen las fórmulas o los títulos, aunque puedan escribir en el resto.</p></li>
+          <li class="ficha" data-buscar="descargar excel pdf csv exportar imprimir"><h4>Descargar e imprimir</h4><p><b>Archivo › Descargar</b> la guarda como Excel, PDF o CSV. Para imprimir, <b>Archivo › Imprimir</b> deja ajustar el tamaño para que quepa en una hoja.</p></li>
+        </ul>
+        <div class="nota aviso">
+          <span class="titulo-nota">Cuida los datos de otros</span>
+          <p>Antes de compartir con «Cualquier persona con el enlace», revisa que no haya nombres completos, RUT, teléfonos o notas de otras personas. Un enlace puede reenviarse sin que lo sepas.</p>
+        </div>
+      </section>
+
+      <!-- ================= AUTOMATIZAR ================= -->
+      <section class="bloque" id="automatizar">
+        <h2 data-corto="Automatizar y AppSheet">Automatizar: macros, Apps Script y AppSheet</h2>
+        <p>Cuando haces lo mismo todas las semanas, la hoja puede hacerlo por ti. Hay tres caminos, de más fácil a más poderoso:</p>
+
+        <div class="hc-escalera">
+          <div class="hc-peldano">
+            <span class="hc-peldano-n">1</span>
+            <h3>Macros</h3>
+            <p>Grabas lo que haces y la hoja lo repite. <b>Extensiones › Macros › Grabar macro</b>, haz los pasos (por ejemplo, dar formato a una tabla nueva), y guarda. Después la ejecutas desde el mismo menú o con un atajo de teclado. No necesitas programar.</p>
+          </div>
+          <div class="hc-peldano">
+            <span class="hc-peldano-n">2</span>
+            <h3>Apps Script</h3>
+            <p>Un lenguaje de programación (JavaScript) que vive dentro de la hoja. Puedes crear tus propias funciones. En <b>Extensiones › Apps Script</b> escribe:</p>
+            <pre class="hc-pre"><code>function IVA(precio) {
+  return precio * 1.19;
+}</code></pre>
+            <p>Guarda, vuelve a la hoja y escribe <code class="hc-codigo">=IVA(B2)</code>. Acabas de inventar una función. Con Apps Script también puedes enviar correos o crear menús propios.</p>
+          </div>
+          <div class="hc-peldano" id="appsheet">
+            <span class="hc-peldano-n">3</span>
+            <h3>AppSheet</h3>
+            <p>Convierte tu hoja en una <b>aplicación para el celular</b> sin escribir código. AppSheet lee tu tabla y arma pantallas para ver la lista, buscar, agregar y editar registros. Cada cosa que alguien hace en la app se guarda en tu hoja.</p>
+          </div>
+        </div>
+
+        <h3>Tu primera app con AppSheet</h3>
+        <p>Un ejemplo que funciona bien: una app para la <b>biblioteca de aula</b>, donde el curso registra qué libro se llevó cada uno.</p>
+        <ol class="pasos">
+          <li><b>Prepara la hoja</b>Columnas: <i>Libro</i>, <i>Autor</i>, <i>Prestado a</i>, <i>Fecha</i>, <i>Devuelto</i> (casilla). Una fila de títulos y un libro por fila. La regla de oro es lo que AppSheet usa para entender tus datos.</li>
+          <li><b>Extensiones › AppSheet › Crear una app</b>AppSheet se abre en otra pestaña y lee tu tabla. Puede pedirte que inicies sesión y aceptes permisos.</li>
+          <li><b>Revisa las columnas</b>En <b>Data</b> verás cada columna con un tipo: Fecha como <i>Date</i>, Devuelto como <i>Yes/No</i>. Si algo quedó mal, cámbialo ahí.</li>
+          <li><b>Mira la vista previa</b>A la derecha aparece la app en un celular simulado. Prueba agregar un préstamo y revisa que aparezca en tu hoja.</li>
+          <li><b>Compártela</b>Con el botón de compartir invitas por correo a quienes la van a usar. Ellos la abren desde el enlace o instalando AppSheet.</li>
+        </ol>
+        <div class="nota aviso">
+          <span class="titulo-nota">Lo que hay que saber antes</span>
+          <p>Según la ayuda de Google, AppSheet es gratis para hacer prototipos y probarlos con hasta 10 personas (contándote), y para uso personal. Algunas funciones, como enviar correos automáticos, requieren pagar. Si tu cuenta es la del colegio, puede que el administrador lo tenga desactivado: pregunta a tu profesor o profesora.</p>
+        </div>
+      </section>
+
+      <!-- ================= ATAJOS ================= -->
+      <section class="bloque" id="atajos">
+        <h2 data-corto="Atajos de teclado">Atajos de teclado</h2>
+        <p>En Mac, cambia <b>Ctrl</b> por <b>⌘</b>. Con <b>Ctrl + /</b> la hoja te muestra todos sus atajos.</p>
+        <div class="hc-teclas">
+          <div><kbd>Ctrl</kbd><kbd>Z</kbd><span>Deshacer</span></div>
+          <div><kbd>Ctrl</kbd><kbd>Y</kbd><span>Rehacer</span></div>
+          <div><kbd>Ctrl</kbd><kbd>C</kbd> · <kbd>V</kbd><span>Copiar y pegar</span></div>
+          <div><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>V</kbd><span>Pegar solo valores, sin formato ni fórmulas</span></div>
+          <div><kbd>Ctrl</kbd><kbd>D</kbd><span>Rellenar hacia abajo lo de la primera celda</span></div>
+          <div><kbd>Ctrl</kbd><kbd>Enter</kbd><span>Nueva línea dentro de una celda</span></div>
+          <div><kbd>F2</kbd><span>Editar la celda sin borrar lo que tiene</span></div>
+          <div><kbd>F4</kbd><span>Cambiar entre A1, $A$1, A$1 y $A1</span></div>
+          <div><kbd>Ctrl</kbd><kbd>F</kbd><span>Buscar</span></div>
+          <div><kbd>Ctrl</kbd><kbd>H</kbd><span>Buscar y reemplazar</span></div>
+          <div><kbd>Ctrl</kbd><kbd>→</kbd><span>Saltar al final de los datos</span></div>
+          <div><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>↓</kbd><span>Elegir hasta el final de la columna</span></div>
+          <div><kbd>Ctrl</kbd><kbd>B</kbd><span>Negrita</span></div>
+          <div><kbd>Ctrl</kbd><kbd>K</kbd><span>Insertar enlace</span></div>
+          <div><kbd>Ctrl</kbd><kbd>;</kbd><span>Escribir la fecha de hoy (fija)</span></div>
+          <div><kbd>Ctrl</kbd><kbd>/</kbd><span>Ver todos los atajos</span></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ================= HOJA DE PRUEBAS ================= -->
+  <button type="button" class="hc-abrir-mesa" data-abrir-mesa aria-controls="hc-mesa" aria-expanded="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="1"/><path d="M3.5 9.5h17M3.5 14.5h17M9 4.5v15M14.5 4.5v15"/></svg>
+    <span>Hoja de pruebas</span>
+  </button>
+  <aside class="hc-mesa" id="hc-mesa" aria-label="Hoja de pruebas" hidden>
+    <div class="hc-mesa-cab">
+      <p class="hc-mesa-t">Hoja de pruebas</p>
+      <p class="hc-mesa-nota" data-mesa-nota aria-live="polite">Escribe un dato o una fórmula. Mientras escribes una fórmula, toca otra celda para agregar su referencia.</p>
+      <button type="button" class="hc-cerrar" data-cerrar-mesa aria-label="Cerrar la hoja de pruebas">×</button>
+    </div>
+    <div class="hc-barra">
+      <output class="hc-nombre" data-mesa-nombre>A1</output>
+      <label class="hc-fx">
+        <span class="hc-fx-signo" aria-hidden="true">fx</span>
+        <span class="sr">Contenido de la celda</span>
+        <input type="text" data-mesa-fx autocomplete="off" spellcheck="false">
+      </label>
+    </div>
+    <div class="hc-rejilla-mesa" data-mesa-rejilla role="grid" aria-label="Celdas de la hoja de pruebas" tabindex="0"></div>
+    <div class="hc-mesa-pie">
+      <button type="button" class="boton chico secundario" data-mesa="abajo">Copiar hacia abajo</button>
+      <button type="button" class="boton chico secundario" data-mesa="derecha">Copiar a la derecha</button>
+      <button type="button" class="boton chico secundario" data-mesa="borrar">Borrar celda</button>
+      <button type="button" class="boton chico secundario" data-mesa="reiniciar">Volver al ejemplo</button>
+    </div>
+  </aside>
+</body>
+</html>

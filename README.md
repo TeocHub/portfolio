@@ -23,6 +23,7 @@ assets/
   css/barajas.css     Colores de las dos barajas (generado por herramientas/barajas.py)
   css/site.css        Barra, pie, arcanos, portada e índices
   css/paginas.css     Plantilla común de las subpáginas: cabecera, índice lateral y componentes
+                      (al final, las piezas .hc-* de la guía de Hojas de cálculo)
   css/areas.css       La rueda de las páginas de área, como un volvelle
   css/armonia.css     Capa de compatibilidad para el panel de Código 4D (app de proyección)
   js/site.js          Baraja activa, catálogo, barra, índice de la página, pestañas y recorridos
@@ -34,6 +35,8 @@ herramientas/
   museo-escolar/      Genera las clases, el planificador y las guías del Mundo Mágico Miniatura Escolar
 pedagogia/            Pedagogía (V, El Hierofante)
   etica/ lenguaje/ historia/ tics/ matematicas/ fisica-quimica/
+  tics/hojas-de-calculo/  Guía de Hojas de cálculo de Google; hojas.js trae el motor de fórmulas en español
+                          de la hoja de pruebas y los ejemplos de cada botón «Probar» (objeto EJEMPLOS)
   practica/           Intervenciones en aula y textos de estudio
   tesis/
   recursos/           Bases curriculares y guía PAES
