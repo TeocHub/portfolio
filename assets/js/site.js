@@ -148,7 +148,7 @@
       nota: "Programas, juegos y herramientas que he construido." },
     esoterico: { nombre: "Esotérico", carta: "La Luna", num: "XVIII", url: "esoterico/",
       nota: "Lecturas de tarot y velas de cera de abeja hechas a mano." },
-    estudio: { nombre: "Digital Monster", carta: "El Loco", num: "0", url: "digital-monster/",
+    estudio: { nombre: "Digital Monster", carta: "El Loco", num: "0", url: "https://digitalmonster.cl",
       nota: "El estudio indie que formé con Francisco: cómics, series y juegos." },
     sitios: { nombre: "Sitios web", carta: "El Carro", num: "VII", url: "sitios/",
       nota: "Páginas que diseñé y programé para negocios y organizaciones." },
@@ -448,7 +448,7 @@
         { t: "Mar y Ola", d: "Tienda de velas, home spray y talleres de candelería en Barrio Italia, Ñuñoa.", url: "sitios/mar-y-ola/", tipo: "Sitio web" },
         { t: "SindicatoLegal", d: "Prototipo rápido de la base de una plataforma para sindicatos, con portal de socios y panel de directiva.", url: "sitios/sindicato/", tipo: "Prototipo" },
         { t: "Reglamentos SmartFit", d: "Mi primer sitio, hecho rápido: contratos y reglamentos de SmartFit resumidos. Ya no refleja sus políticas actuales.", url: "sitios/smartfit/", tipo: "Archivo" },
-        { t: "Digital Monster", d: "El sitio de nuestro estudio indie.", url: "digital-monster/", tipo: "Sitio web" }
+        { t: "Digital Monster", d: "La primera versión del sitio de nuestro estudio indie. El sitio oficial actual está en digitalmonster.cl.", url: "digital-monster/", tipo: "Archivo" }
       ]}]
     },
     "propuestas": {
